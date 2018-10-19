@@ -16,6 +16,7 @@ public class VstRecibido extends javax.swing.JFrame {
      */
     public VstRecibido() {
         initComponents();
+        btnEliminar.setVisible(false);
     }
 
     /**
@@ -47,6 +48,7 @@ public class VstRecibido extends javax.swing.JFrame {
         jLabel1.setText("Mensaje:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
+        txtMensaje.setEditable(false);
         txtMensaje.setColumns(20);
         txtMensaje.setRows(5);
         jScrollPane1.setViewportView(txtMensaje);

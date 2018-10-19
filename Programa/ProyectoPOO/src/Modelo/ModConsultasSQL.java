@@ -5,9 +5,8 @@
  */
 package Modelo;
 
-import Modelo.Mensajes.Mensajes;
 import Vista.Administrador.VstEmpleados;
-import Vista.Administrador.VstQuizzes;
+import Vista.Administrador.VstPreguntas;
 import Vista.Mensajes.VstEnviados;
 import Vista.Mensajes.VstRecibido;
 import java.net.InetAddress;
@@ -1109,7 +1108,7 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Usuarios:");
         modelo.addColumn("Tipo:");
 
-        Mensajes mens = new Mensajes();
+        Listas mens = new Listas();
         ArrayList<ModVariablesReg> list = mens.listaE();
 
         if (list.size() > 0) {
@@ -1140,7 +1139,7 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Fecha:");
         modelo.addColumn("Status:");
 
-        Mensajes mens = new Mensajes();
+        Listas mens = new Listas();
         ArrayList<ModVariablesMensaje> list = mens.listaMR();
 
         if (list.size() > 0) {
@@ -1180,7 +1179,7 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Fecha:");
         modelo.addColumn("Status:");
 
-        Mensajes mens = new Mensajes();
+        Listas mens = new Listas();
         ArrayList<ModVariablesMensaje> list = mens.listaMR();
 
         if (list.size() > 0) {
@@ -1282,7 +1281,7 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Para:");
         modelo.addColumn("Asunto:");
 
-        Mensajes mens = new Mensajes();
+        Listas mens = new Listas();
         ArrayList<ModVariablesMensaje> list = mens.listaMR();
 
         if (list.size() > 0) {
@@ -1301,7 +1300,7 @@ public class ModConsultasSQL extends ModConexion {
         }
     }
     //**************************************************************************
-    
+
     public static void mensaje(String a, VstEnviados ve, ModVariablesMensaje var) {
         try {
             //a: id, b: status.
@@ -1333,4 +1332,141 @@ public class ModConsultasSQL extends ModConexion {
         ve.id.setText(var.getId() + "");
     }
     //**************************************************************************
+
+    public static void DocsAct(JTable tablaADocumentos, ModVariablesDoc var) {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //Bloquea la edision.
+            }
+        };
+        tablaADocumentos.setModel(modelo);
+
+        modelo.addColumn("Nombre:");
+
+        Listas mens = new Listas();
+
+        ArrayList<ModVariablesDoc> list = mens.listaDocs();
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Object fila[] = new Object[3];
+                var = list.get(i);
+
+                if (var.getStatus().equals("Habilitado")) {
+                    fila[0] = var.getNombre();
+
+                    modelo.addRow(fila);
+                }
+            }
+        }
+    }
+    //**************************************************************************
+
+    public static void QuizzAct(JTable tablaAQuizzes, ModVariablesQuizzes var) {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //Bloquea la edision.
+            }
+        };
+        tablaAQuizzes.setModel(modelo);
+
+        modelo.addColumn("Nombre:");
+        modelo.addColumn("FActivo:");
+
+        Listas mens = new Listas();
+
+        ArrayList<ModVariablesQuizzes> list = mens.listaQuizz();
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Object fila[] = new Object[3];
+                var = list.get(i);
+
+                if (var.getStatus().equals("Habilitado")) {
+                    fila[0] = var.getNombre();
+                    fila[1] = var.getF_activacion();
+
+                    modelo.addRow(fila);
+                }
+            }
+        }
+    }
+    //**************************************************************************
+    
+    public boolean rPreguntas(ModvariablesPreguntas var) {
+
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+
+        String sql = "INSERT INTO preguntas (quizz, pregunta, tipo, num_resp, puntuacion_total, op1, p1, "
+                + "op2, p2, op3, p3, op4, p4) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, var.getQuizz());
+            ps.setString(2, var.getPregunta());
+            ps.setString(3, var.getTipo());
+            ps.setString(4, var.getNum_resp());
+            ps.setString(5, var.getPuntuacion_total());
+            ps.setString(6, var.getOp1());
+            ps.setString(7, var.getP1());
+            ps.setString(8, var.getOp2());
+            ps.setString(9, var.getP2());
+            ps.setString(10, var.getOp3());
+            ps.setString(11, var.getP3());
+            ps.setString(12, var.getOp4());
+            ps.setString(13, var.getP4());
+            ps.execute();
+            
+            
+
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
+            return false;
+        }
+
+    }
+    //**************************************************************************
+    
+    public boolean mPreguntas(ModvariablesPreguntas var, VstPreguntas vp) {
+
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+
+        String sql = "UPDATE preguntas SET quizz=?, pregunta=?, tipo=?, num_resp=?, puntuacion_total=?, op1=?, p1=?, "
+                + "op2=?, p2=?, op3=?, p3=?, op4=?, p4=? WHERE quizz = '" + vp.id.getText() + "'";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, var.getQuizz());
+            ps.setString(2, var.getPregunta());
+            ps.setString(3, var.getTipo());
+            ps.setString(4, var.getNum_resp());
+            ps.setString(5, var.getPuntuacion_total());
+            ps.setString(6, var.getOp1());
+            ps.setString(7, var.getP1());
+            ps.setString(8, var.getOp2());
+            ps.setString(9, var.getP2());
+            ps.setString(10, var.getOp3());
+            ps.setString(11, var.getP3());
+            ps.setString(12, var.getOp4());
+            ps.setString(13, var.getP4());
+            ps.execute();
+            
+            
+
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
+            return false;
+        }
+
+    }
 }

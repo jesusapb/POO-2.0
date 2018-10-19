@@ -62,26 +62,30 @@ public class CtrlEnviar implements ActionListener {
                 variables();
             } else {
                 if (e.getSource() == ve.btnEnviar) {
-                    varM.setDe_mat(var.getMatricula());
-                    varM.setDe_nom(var.getNombre_completo());
-
-                    String mat = ve.txtPara.getText();
-                    String[] part = mat.split("/");
-                    String part1 = part[0];
-                    varM.setPara_mat(part1);
-                    String par2 = part[1];
-                    varM.setPara_nom(par2);
-
-                    varM.setFecha(fechaDate.format(date) + " " + horaDate.format(date));
-                    varM.setAsunto(ve.txtAsunto.getText());
-                    varM.setMensaje(ve.txtMensaje.getText());
-                    varM.setStatus("NO VISTO");
-
-                    if (con.enviar(varM)) {
-                        JOptionPane.showMessageDialog(null, "Se ha enviado un mensaje a: " + varM.getPara_nom());
-                        limpiar();
+                    if (ve.txtAsunto.getText().equals("") || ve.txtMensaje.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Complete todos los campos de escritura.");
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo enviado un mensaje a: " + varM.getPara_nom());
+                        varM.setDe_mat(var.getMatricula());
+                        varM.setDe_nom(var.getNombre_completo());
+
+                        String mat = ve.txtPara.getText();
+                        String[] part = mat.split("/");
+                        String part1 = part[0];
+                        varM.setPara_mat(part1);
+                        String par2 = part[1];
+                        varM.setPara_nom(par2);
+
+                        varM.setFecha(fechaDate.format(date) + " " + horaDate.format(date));
+                        varM.setAsunto(ve.txtAsunto.getText());
+                        varM.setMensaje(ve.txtMensaje.getText());
+                        varM.setStatus("NO VISTO");
+
+                        if (con.enviar(varM)) {
+                            JOptionPane.showMessageDialog(null, "Se ha enviado un mensaje a: " + varM.getPara_nom());
+                            limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo enviado un mensaje a: " + varM.getPara_nom());
+                        }
                     }
                 }
             }

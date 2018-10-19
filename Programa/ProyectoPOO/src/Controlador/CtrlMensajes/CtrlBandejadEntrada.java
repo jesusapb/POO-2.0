@@ -81,7 +81,7 @@ public class CtrlBandejadEntrada implements ActionListener {
                 if (e.getSource() == vbe.btnEnviados) {
                     VstEnviados ve = new VstEnviados();
                     ModVariablesMensaje varM = new ModVariablesMensaje();
-                    CtrlEnviados ctrlE = new CtrlEnviados(cons, var, varM, ve);
+                    CtrlEnviados ctrlE = new CtrlEnviados(cons, var, varM, ve, vbe);
                     ctrlE.iniciar();
                     ve.setVisible(true);
                 }

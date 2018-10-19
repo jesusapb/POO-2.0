@@ -9,6 +9,8 @@ import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesUsr;
+import Modelo.ModvariablesPreguntas;
+import Vista.Administrador.VstPreguntas;
 import Vista.Administrador.VstQuizzes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,7 +98,7 @@ public class CtrlQuizzes implements ActionListener {
                                 var.setTiempo(vq.comboLimHoras.getSelectedItem().toString() + ":" + vq.comboLimMinutos.getSelectedItem().toString() + ":00");
 
                                 var.setF_registro(fechaDate.format(date));
-                                var.setF_activacion("null");
+                                var.setF_activacion("nuevo");
 
                                 if (con.Rquizzes(var)) {
                                     JOptionPane.showMessageDialog(null, "Quizz guardado exitosamente.");
@@ -243,6 +245,14 @@ public class CtrlQuizzes implements ActionListener {
                     vq.setVisible(false);
                     variables();
                 } else {
+                    VstPreguntas vp = new VstPreguntas();
+                    ModvariablesPreguntas varp = new ModvariablesPreguntas();
+                    CtrlPreguntas ctrlP = new CtrlPreguntas(con, varp, var, varU, vp, vq);
+                    ctrlP.iniciar();
+                    vp.setVisible(true);
+                    vp.txtNombre.setText(vq.txtNombre.getText());
+                    vp.id.setText(vq.id.getText());
+                    vp.actual.setText(vq.actual.getText());
                 }
             }
             
@@ -262,12 +272,13 @@ public class CtrlQuizzes implements ActionListener {
         vq.comboLimHoras.setSelectedItem("Horas:");
         vq.comboLimMinutos.setSelectedItem("Minutos:");
         
-        vq.txtNombre.setEnabled(true);
+        vq.txtNombre.setEditable(true);
         vq.checkCamName.setVisible(false);
         vq.checkActivar.setVisible(false);
         vq.btnGuardar.setVisible(true);
         vq.btnModificar.setVisible(false);
         vq.btnEliminar.setVisible(false);
+        vq.btnAgrPreg.setVisible(false);
 
 //        vq.txtNombre.setEnabled(false);
 //        vq.txtDescripcion.setEnabled(false);

@@ -7,6 +7,10 @@ package Vista.Mensajes;
 
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesMensaje;
+import Modelo.ModVariablesUsr;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,6 +23,9 @@ public class VstEnviados extends javax.swing.JFrame {
      */
     public VstEnviados() {
         initComponents();
+        checkEditar.setVisible(false);
+        t = new Timer(10, acciones);
+        t.start();
     }
 
     /**
@@ -45,6 +52,9 @@ public class VstEnviados extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtAsunto = new javax.swing.JTextPane();
+        checkEditar = new javax.swing.JCheckBox();
+        matricula = new javax.swing.JTextField();
+        cronometro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -95,7 +105,7 @@ public class VstEnviados extends javax.swing.JFrame {
         txtMensaje.setEditable(false);
         jScrollPane2.setViewportView(txtMensaje);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 200, 110));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 200, 110));
 
         btnReenviar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReenviar.setText("Reenviar mensaje");
@@ -127,6 +137,22 @@ public class VstEnviados extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 200, 50));
 
+        checkEditar.setText("Editar mensaje");
+        checkEditar.setContentAreaFilled(false);
+        checkEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
+
+        matricula.setEditable(false);
+        matricula.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 130, -1));
+
+        cronometro.setText("00:00:00");
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 60, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
         pack();
@@ -135,6 +161,7 @@ public class VstEnviados extends javax.swing.JFrame {
     private void tablaEnviadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEnviadosMouseClicked
         int row = evt.getY() / tablaEnviados.getRowHeight();
         String ident = "" + tablaEnviados.getValueAt(row, 0);
+        id.setText(ident);
         String para = "" + tablaEnviados.getValueAt(row, 1);
         txtPara.setText(para);
         String asunto = "" + tablaEnviados.getValueAt(row, 2);
@@ -142,12 +169,55 @@ public class VstEnviados extends javax.swing.JFrame {
         ModVariablesMensaje var = new ModVariablesMensaje();
         ModConsultasSQL.mensaje(ident, this, var);
         btnReenviar.setVisible(true);
-        btnEliminar.setVisible(true);
+        //btnEliminar.setVisible(true);
+        checkEditar.setVisible(true);
     }//GEN-LAST:event_tablaEnviadosMouseClicked
+
+    private void checkEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEditarActionPerformed
+        if (checkEditar.isSelected() == false) {
+            txtMensaje.setEditable(false);
+        } else {
+            txtMensaje.setEditable(true);
+        }
+    }//GEN-LAST:event_checkEditarActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    private Timer t;
+    private int h, m, s, cs;
+
+    private ActionListener acciones = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 5 == 0)) {
+                ModVariablesMensaje varM = new ModVariablesMensaje();
+                ModVariablesUsr var = new ModVariablesUsr();
+                var.setMatricula(matricula.getText());
+                ModConsultasSQL.enviados(tablaEnviados, varM, var);
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+            actualizarLabel();
+        }
+    };
+
+    private void actualizarLabel() {
+        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
+        cronometro.setText(tiempo);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -183,6 +253,8 @@ public class VstEnviados extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnReenviar;
+    private javax.swing.JCheckBox checkEditar;
+    private javax.swing.JLabel cronometro;
     public javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -192,6 +264,7 @@ public class VstEnviados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JTextField matricula;
     public javax.swing.JTable tablaEnviados;
     public javax.swing.JTextPane txtAsunto;
     public javax.swing.JTextPane txtMensaje;

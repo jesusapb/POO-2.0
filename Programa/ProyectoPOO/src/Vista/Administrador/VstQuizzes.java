@@ -15,6 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -38,7 +41,8 @@ public class VstQuizzes extends javax.swing.JFrame {
         checkCamName.setVisible(false);
         btnModificar.setVisible(false);
         btnEliminar.setVisible(false);
-        id.setVisible(false);
+        btnAgrPreg.setVisible(false);
+        //id.setVisible(false);
 
         t = new Timer(10, acciones);
         t.start();
@@ -80,6 +84,7 @@ public class VstQuizzes extends javax.swing.JFrame {
         checkCamName = new javax.swing.JCheckBox();
         btnNuevo = new javax.swing.JButton();
         btnAgrPreg = new javax.swing.JButton();
+        actual = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -216,10 +221,14 @@ public class VstQuizzes extends javax.swing.JFrame {
         jPanel1.add(checkCamName, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, -1));
 
         btnNuevo.setText("Nuevo Quizz");
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 110, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 120, -1));
 
         btnAgrPreg.setText("Agregar preguntas");
-        jPanel1.add(btnAgrPreg, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 140, -1));
+        jPanel1.add(btnAgrPreg, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 170, -1));
+
+        actual.setEditable(false);
+        actual.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 70, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 570));
 
@@ -255,13 +264,14 @@ public class VstQuizzes extends javax.swing.JFrame {
                 txtDescripcion.setText(rs.getString("descripcion"));
                 varQ.setDescripcion(rs.getString("descripcion"));
                 comboNumPreg.setSelectedItem(rs.getString("p_totales"));
-                
+
                 varQ.setP_totales(rs.getString("p_totales"));
                 varQ.setP_actuales(rs.getString("p_actuales"));
+                actual.setText(rs.getString("p_actuales"));
                 varQ.setActuales(rs.getInt("p_actuales"));
                 varQ.setTotales(rs.getInt("p_totales"));
                 varQ.setStatus(rs.getString("status"));
-                
+
                 comboIntentos.setSelectedItem(rs.getString("intentos"));
                 varQ.setIntentos(rs.getString("intentos"));
                 comboModCalf.setSelectedItem(rs.getString("mod_calif"));
@@ -288,10 +298,11 @@ public class VstQuizzes extends javax.swing.JFrame {
 
                 checkCamName.setVisible(true);
                 checkCamName.setSelected(false);
-                txtNombre.setEnabled(false);
+                txtNombre.setEditable(false);
                 btnModificar.setVisible(true);
                 btnEliminar.setVisible(true);
                 btnGuardar.setVisible(false);
+                btnAgrPreg.setVisible(true);
             }
         } catch (SQLException ex) {
             Logger.getLogger(VstEmpleados.class.getName()).log(Level.SEVERE, null, ex);
@@ -300,19 +311,23 @@ public class VstQuizzes extends javax.swing.JFrame {
 
     private void checkActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActivarActionPerformed
         if (checkActivar.isSelected() == true) {
-            if (varQ.getActuales() < varQ.getTotales()) {
+            if (Integer.parseInt(actual.getText()) < varQ.getTotales()) {
                 JOptionPane.showMessageDialog(null, "No se puede activar este Quizz debido \na que no tiene las preguntas minimas.");
                 checkActivar.setSelected(false);
             } else {
-                PreparedStatement ps = null;
+                PreparedStatement ps = null, ps1 = null;
                 try {
                     ModConexion objCon = new ModConexion();
                     Connection con = objCon.getConexion();
-                    ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE nombre = '" + txtNombre.getText() + "'");
-
+                    ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE id = '" + id.getText() + "'");
                     ps.setString(1, "Habilitado");
-
                     ps.execute();
+
+                    Date date = new Date();
+                    DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
+                    ps1 = con.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
+                    ps1.setString(1, fechaDate.format(date));
+                    ps1.execute();
 
                     ModConsultasSQL.tablaQuizz(tablaQuizzes);
                     JOptionPane.showMessageDialog(null, "Activacion del Quizz completa.");
@@ -322,15 +337,17 @@ public class VstQuizzes extends javax.swing.JFrame {
                 }
             }
         } else {
-            PreparedStatement ps = null;
+            PreparedStatement ps = null, ps1 = null;
             try {
                 ModConexion objCon = new ModConexion();
                 Connection con = objCon.getConexion();
                 ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE nombre = '" + txtNombre.getText() + "'");
-
                 ps.setString(1, "Deshabilitado");
-
                 ps.execute();
+
+                ps1 = con.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
+                ps1.setString(1, "no activo");
+                ps1.execute();
 
                 ModConsultasSQL.tablaQuizz(tablaQuizzes);
                 JOptionPane.showMessageDialog(null, "Desactivacion del Quizz completa.");
@@ -343,9 +360,9 @@ public class VstQuizzes extends javax.swing.JFrame {
 
     private void checkCamNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCamNameActionPerformed
         if (checkCamName.isSelected() == false) {
-            txtNombre.setEnabled(false);
+            txtNombre.setEditable(false);
         } else {
-            txtNombre.setEnabled(true);
+            txtNombre.setEditable(true);
         }
     }//GEN-LAST:event_checkCamNameActionPerformed
 
@@ -416,6 +433,7 @@ public class VstQuizzes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField actual;
     public javax.swing.JButton btnAgrPreg;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;

@@ -6,6 +6,8 @@
 package Vista;
 
 import Modelo.ModConsultasSQL;
+import Modelo.ModVariablesDoc;
+import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesUsr;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,6 +60,18 @@ public class VstAdministrador extends javax.swing.JFrame {
         tablaConectados = new javax.swing.JTable();
         btnMensajes = new javax.swing.JButton();
         cronometro = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaAQuizzes = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaADocumentos = new javax.swing.JTable();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnDDesactivar = new javax.swing.JButton();
+        btnQDesactivar = new javax.swing.JButton();
+        docs = new javax.swing.JTextField();
+        quizz = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -66,6 +80,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Tipo de usuario:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -73,33 +88,35 @@ public class VstAdministrador extends javax.swing.JFrame {
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 300, 20));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 300, 20));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Nombre:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
         txtTipo.setEditable(false);
         txtTipo.setBackground(new java.awt.Color(255, 255, 255));
         txtTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTipo.setBorder(null);
-        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 20));
+        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 20));
 
         txtMatricula.setEditable(false);
         txtMatricula.setBackground(new java.awt.Color(255, 255, 255));
         txtMatricula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtMatricula.setBorder(null);
-        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 170, 20));
+        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 170, 20));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Matrícula:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 800, 10));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 900, 10));
 
         btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Import_20px_1.png"))); // NOI18N
         btnCerrarSesion.setText("Cerrar sesión.");
         btnCerrarSesion.setBorder(null);
         btnCerrarSesion.setContentAreaFilled(false);
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
         btnEmpleados.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_People_64px_1.png"))); // NOI18N
@@ -107,7 +124,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnEmpleados.setBorder(null);
         btnEmpleados.setContentAreaFilled(false);
         btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel1.add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         btnDocumentos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDocumentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_PDF_64px.png"))); // NOI18N
@@ -115,7 +132,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnDocumentos.setBorder(null);
         btnDocumentos.setContentAreaFilled(false);
         btnDocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnDocumentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+        jPanel1.add(btnDocumentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         btnQuizz.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnQuizz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Questionnaire_64px_1.png"))); // NOI18N
@@ -123,7 +140,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnQuizz.setBorder(null);
         btnQuizz.setContentAreaFilled(false);
         btnQuizz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnQuizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel1.add(btnQuizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, -1, -1));
 
         btnPerfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_User_64px.png"))); // NOI18N
@@ -131,11 +148,11 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnPerfil.setBorder(null);
         btnPerfil.setContentAreaFilled(false);
         btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+        jPanel1.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Usuarios conectados:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
+        jLabel2.setText("Quizzes activos:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -168,20 +185,135 @@ public class VstAdministrador extends javax.swing.JFrame {
         tablaConectados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tablaConectados);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 360, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 670, 140));
 
         btnMensajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Envelope_20px.png"))); // NOI18N
         btnMensajes.setText("Mensajes.");
         btnMensajes.setBorder(null);
         btnMensajes.setContentAreaFilled(false);
         btnMensajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, -1, -1));
-        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 110, 20));
+        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 270));
+        cronometro.setText("00:00:00");
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 110, 20));
+
+        tablaAQuizzes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre:", "FAcvtivo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaAQuizzes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAQuizzesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaAQuizzes);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 280, 200));
+
+        tablaADocumentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nombre:"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaADocumentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaADocumentosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablaADocumentos);
+        if (tablaADocumentos.getColumnModel().getColumnCount() > 0) {
+            tablaADocumentos.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 250, 200));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 900, 10));
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 30, 270));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Usuarios conectados:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Documentos activos:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+
+        btnDDesactivar.setText("Desactivar Documento");
+        jPanel1.add(btnDDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+
+        btnQDesactivar.setText("Desactivar Quizz");
+        jPanel1.add(btnQDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, -1, -1));
+
+        docs.setEditable(false);
+        docs.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(docs, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 140, -1));
+
+        quizz.setEditable(false);
+        quizz.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(quizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 140, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaADocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaADocumentosMouseClicked
+        int row = evt.getY() / tablaADocumentos.getRowHeight();
+        String ident = "" + tablaADocumentos.getValueAt(row, 0);
+        docs.setText(ident);
+        btnDDesactivar.setVisible(true);
+    }//GEN-LAST:event_tablaADocumentosMouseClicked
+
+    private void tablaAQuizzesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAQuizzesMouseClicked
+        int row = evt.getY() / tablaAQuizzes.getRowHeight();
+        String ident = "" + tablaAQuizzes.getValueAt(row, 0);
+        quizz.setText(ident);
+        btnQDesactivar.setVisible(true);
+    }//GEN-LAST:event_tablaAQuizzesMouseClicked
 
     private Timer t;
     private int h, m, s, cs;
@@ -190,6 +322,8 @@ public class VstAdministrador extends javax.swing.JFrame {
 
         public void actionPerformed(ActionEvent ae) {
             ModVariablesUsr var = new ModVariablesUsr();
+            ModVariablesQuizzes varQ = new ModVariablesQuizzes();
+            ModVariablesDoc varD = new ModVariablesDoc();
             Date date = new Date();
             DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
             DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -206,6 +340,8 @@ public class VstAdministrador extends javax.swing.JFrame {
             if (cs == 0 && (s % 2 == 0)) {
                 ModConsultasSQL.tablaConectados(tablaConectados);
                 ModConsultasSQL.recarga(var);
+                ModConsultasSQL.DocsAct(tablaADocumentos, varD);
+                ModConsultasSQL.QuizzAct(tablaAQuizzes, varQ);
             }
             if (s == 60) {
                 s = 0;
@@ -261,19 +397,31 @@ public class VstAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCerrarSesion;
+    public javax.swing.JButton btnDDesactivar;
     public javax.swing.JButton btnDocumentos;
     public javax.swing.JButton btnEmpleados;
     public javax.swing.JButton btnMensajes;
     public javax.swing.JButton btnPerfil;
+    public javax.swing.JButton btnQDesactivar;
     public javax.swing.JButton btnQuizz;
     private javax.swing.JLabel cronometro;
+    public javax.swing.JTextField docs;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    public javax.swing.JTextField quizz;
+    public javax.swing.JTable tablaADocumentos;
+    public javax.swing.JTable tablaAQuizzes;
     public javax.swing.JTable tablaConectados;
     public javax.swing.JTextField txtMatricula;
     public javax.swing.JTextField txtNombre;

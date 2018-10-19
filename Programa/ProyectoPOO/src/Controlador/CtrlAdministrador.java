@@ -8,7 +8,9 @@ package Controlador;
 import Controlador.Administrador.CtrlEmpleados;
 import Controlador.Administrador.CtrlQuizzes;
 import Controlador.CtrlMensajes.CtrlBandejadEntrada;
+import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModVariablesDoc;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesReg;
 import Modelo.ModVariablesUsr;
@@ -21,6 +23,9 @@ import Vista.VstLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +54,8 @@ public class CtrlAdministrador implements ActionListener {
         this.va.btnDocumentos.addActionListener(this);
         this.va.btnQuizz.addActionListener(this);
         this.va.btnPerfil.addActionListener(this);
+        this.va.btnDDesactivar.addActionListener(this);
+        this.va.btnQDesactivar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -58,6 +65,12 @@ public class CtrlAdministrador implements ActionListener {
         va.txtTipo.setText(var.getTipo());
         va.setLocationRelativeTo(null);
         ModConsultasSQL.tablaConectados(va.tablaConectados);
+        ModVariablesQuizzes varQ = new ModVariablesQuizzes();
+        ModVariablesDoc varD = new ModVariablesDoc();
+        ModConsultasSQL.DocsAct(va.tablaADocumentos, varD);
+        ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
+        va.btnQDesactivar.setVisible(false);
+        va.btnDDesactivar.setVisible(false);
     }
 
     @Override
@@ -213,6 +226,82 @@ public class CtrlAdministrador implements ActionListener {
                     vl.setVisible(true);
                 } else {
 
+                }
+            }
+
+            if (e.getSource() == va.btnDDesactivar) {
+                if ("Permanente".equals(var.getStatus())) {
+                    JOptionPane.showMessageDialog(null, "Se le ha negado el acceso a las funciones administrativas."
+                            + "\nse le sugiere ponerse en contacto a traves del correo electrónico:"
+                            + "\npoo.acompanamiento@gmail.com");
+                    va.setVisible(false);
+                    variables();
+                    VstLogin vl = new VstLogin();
+                    CtrlLogin ctrlL = new CtrlLogin(cons, var, vl);
+                    try {
+                        ctrlL.iniciar();
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(CtrlAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    vl.setVisible(true);
+                } else {
+                    try {
+                        PreparedStatement ps = null;
+                        ModConexion objCon = new ModConexion();
+                        Connection con = objCon.getConexion();
+                        ps = con.prepareStatement("UPDATE documentos SET status = ? WHERE nombre = '" + va.docs.getText() + "'");
+
+                        ps.setString(1, "Deshabilitado");
+                        ps.execute();
+
+                        ModVariablesDoc varD = new ModVariablesDoc();
+                        ModConsultasSQL.DocsAct(va.tablaADocumentos, varD);
+                        va.btnDDesactivar.setVisible(false);
+
+                        JOptionPane.showMessageDialog(null, "El documento ya no es visible para los empleados.");
+
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null, "No pudo ser cambiado el estado del documento.");
+                        Logger.getLogger(CtrlAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+            if (e.getSource() == va.btnQDesactivar) {
+                if ("Permanente".equals(var.getStatus())) {
+                    JOptionPane.showMessageDialog(null, "Se le ha negado el acceso a las funciones administrativas."
+                            + "\nse le sugiere ponerse en contacto a traves del correo electrónico:"
+                            + "\npoo.acompanamiento@gmail.com");
+                    va.setVisible(false);
+                    variables();
+                    VstLogin vl = new VstLogin();
+                    CtrlLogin ctrlL = new CtrlLogin(cons, var, vl);
+                    try {
+                        ctrlL.iniciar();
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(CtrlAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    vl.setVisible(true);
+                } else {
+                    try {
+                        PreparedStatement ps = null;
+                        ModConexion objCon = new ModConexion();
+                        Connection con = objCon.getConexion();
+                        ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE nombre = '" + va.quizz.getText() + "'");
+
+                        ps.setString(1, "Deshabilitado");
+                        ps.execute();
+
+                        ModVariablesQuizzes varQ = new ModVariablesQuizzes();
+                        ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
+                        va.btnQDesactivar.setVisible(false);
+
+                        JOptionPane.showMessageDialog(null, "El Quizz ya no es visible para los empleados.");
+
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null, "No pudo ser cambiado el estado del Quizz.");
+                        Logger.getLogger(CtrlAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         } else {
