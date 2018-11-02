@@ -44,7 +44,7 @@ CREATE TABLE `quizzes` (
 
 LOCK TABLES `quizzes` WRITE;
 /*!40000 ALTER TABLE `quizzes` DISABLE KEYS */;
-INSERT INTO `quizzes` VALUES (3,'prueba','prueba',2,1,'Deshabilitado',3,'Promedio de calificaciones','04:05:00','13/10/2018','null'),(4,'esto es una prueba','prueba de eliminación y de comportamiento de la interfaz.',1,0,'Deshabilitado',3,'Último intento','04:03:00','14/10/2018','null');
+INSERT INTO `quizzes` VALUES (3,'prueba','prueba',2,2,'Habilitado',3,'Promedio de calificaciones','00:01:00','13/10/2018','22/10/2018');
 /*!40000 ALTER TABLE `quizzes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15  1:21:32
+-- Dump completed on 2018-11-02 16:10:46
