@@ -33,7 +33,7 @@ CREATE TABLE `mensajes` (
   `mensaje` text NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `mensajes` (
 
 LOCK TABLES `mensajes` WRITE;
 /*!40000 ALTER TABLE `mensajes` DISABLE KEYS */;
-INSERT INTO `mensajes` VALUES (2,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 22:16:18','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(3,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 23:42:16','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(4,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 23:44:06','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(18,'A14000516','ANTONIO CETZAL PATRON','A14000516','ANTONIO CETZAL PATRON','15/10/2018 00:56:55','jnsdkja','asd','VISTO'),(19,'A14000516','ANTONIO CETZAL PATRON','A14000516','ANTONIO CETZAL PATRON','15/10/2018 01:05:31','hola','prueba\r\n2\r\n2\r\n2\r\n2\r\n2','VISTO'),(20,'A14000516','ANTONIO CETZAL PATRON','A14000516','ANTONIO CETZAL PATRON','15/10/2018 01:07:43','chido','wqwqw','VISTO');
+INSERT INTO `mensajes` VALUES (2,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 22:16:18','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(3,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 23:42:16','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(4,'A14000516','ANTONIO CETZAL PATRON','PAP123456','POO ACOMPAÑAMIENTO PROYECTO','14/10/2018 23:44:06','esto es una prueba','probando el sistema de envio de mensajes.\r\nespero que funcione.','NO VISTO'),(21,'JGB342917','JESSICA GONZÁLEZ BAUTISTA','A14000516','ANTONIO CETZAL PATRON','19/10/2018 14:26:59','rfgfrrgr','rggr','VISTO'),(22,'JGB342917','JESSICA GONZÁLEZ BAUTISTA','JGB342917','JESSICA GONZÁLEZ BAUTISTA','19/10/2018 14:27:55','efce','cfec','VISTO'),(23,'A14000516','ANTONIO CETZAL PATRON','A14000516','ANTONIO CETZAL PATRON','20/10/2018 14:35:27','hola','hola, que tal?','VISTO'),(25,'A14000516','ANTONIO CETZAL PATRON','A14000516','ANTONIO CETZAL PATRON','20/10/2018 14:36:38','contestar','bien y tu?','NO VISTO');
 /*!40000 ALTER TABLE `mensajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15  1:21:34
+-- Dump completed on 2018-11-02 16:10:43
