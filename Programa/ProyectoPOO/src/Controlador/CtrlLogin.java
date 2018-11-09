@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesUsr;
 import Vista.VstAdministrador;
+import Vista.VstEmpleado;
 import Vista.VstLogin;
 import Vista.VstOlvido;
 import java.awt.event.ActionEvent;
@@ -73,7 +74,11 @@ public class CtrlLogin implements ActionListener {
 
                     } else if ("Empleado".equals(var.getTipo())) {
                         JOptionPane.showMessageDialog(null, "Bienvenido Empleado:\n " + var.getNombre_completo() + ".");
-
+                        vl.setVisible(false);
+                        VstEmpleado ve = new VstEmpleado();
+                        CtrlEmpleado ctrlE = new CtrlEmpleado(cons, var, ve);
+                        ctrlE.iniciar();
+                        ve.setVisible(true);
                     }
                 } else if (cons.loginCor(var)) {
                     if ("Administrador".equals(var.getTipo())) {
@@ -86,6 +91,11 @@ public class CtrlLogin implements ActionListener {
 
                     } else if ("Empleado".equals(var.getTipo())) {
                         JOptionPane.showMessageDialog(null, "Bienvenido Empleado:\n " + var.getNombre_completo() + ".");
+                        vl.setVisible(false);
+                        VstEmpleado ve = new VstEmpleado();
+                        CtrlEmpleado ctrlE = new CtrlEmpleado(cons, var, ve);
+                        ctrlE.iniciar();
+                        ve.setVisible(true);
 
                     }
                 } else if ("Detección de cambio de contraseña.".equals(var.getMensaje()) || "Detección de nuevo usuario.".equals(var.getMensaje())); else if ("Permanente".equals(var.getStatus()) || "Conectado".equals(var.getStatus())); else {
@@ -137,6 +147,11 @@ public class CtrlLogin implements ActionListener {
 
                     } else if ("Empleado".equals(var.getTipo())) {
                         JOptionPane.showMessageDialog(null, "Bienvenido Empleado:\n " + var.getNombre_completo() + ".");
+                        vl.setVisible(false);
+                        VstEmpleado ve = new VstEmpleado();
+                        CtrlEmpleado ctrlE = new CtrlEmpleado(cons, var, ve);
+                        ctrlE.iniciar();
+                        ve.setVisible(true);
 
                     }
                 } else {
@@ -152,6 +167,11 @@ public class CtrlLogin implements ActionListener {
 
                         } else if ("Empleado".equals(var.getTipo())) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Empleado:\n " + var.getNombre_completo() + ".");
+                            vl.setVisible(false);
+                            VstEmpleado ve = new VstEmpleado();
+                            CtrlEmpleado ctrlE = new CtrlEmpleado(cons, var, ve);
+                            ctrlE.iniciar();
+                            ve.setVisible(true);
 
                         }
                     }

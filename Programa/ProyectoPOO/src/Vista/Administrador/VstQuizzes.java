@@ -9,6 +9,8 @@ import Controlador.Administrador.CtrlQuizzes;
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesQuizzes;
+import Modelo.ModVariablesReg;
+import Modelo.ModVariablesUsr;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -85,6 +87,7 @@ public class VstQuizzes extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnAgrPreg = new javax.swing.JButton();
         actual = new javax.swing.JTextField();
+        matricula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -230,6 +233,10 @@ public class VstQuizzes extends javax.swing.JFrame {
         actual.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 70, -1));
 
+        matricula.setEditable(false);
+        matricula.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 100, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 570));
 
         pack();
@@ -310,6 +317,18 @@ public class VstQuizzes extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaQuizzesMouseClicked
 
     private void checkActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActivarActionPerformed
+        Date date = new Date();
+        DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
+        DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
+        ModVariablesUsr varU = new ModVariablesUsr();
+        ModConsultasSQL con = new ModConsultasSQL();
+
+        varU.setMatricula(matricula.getText());
+        varU.setDia(fechaDate.format(date));
+        varU.setHora(horaDate.format(date));
+        ModConsultasSQL.recarga(varU);
+        ModConsultasSQL.status(varU);
+
         if (checkActivar.isSelected() == true) {
             if (Integer.parseInt(actual.getText()) < varQ.getTotales()) {
                 JOptionPane.showMessageDialog(null, "No se puede activar este Quizz debido \na que no tiene las preguntas minimas.");
@@ -318,19 +337,32 @@ public class VstQuizzes extends javax.swing.JFrame {
                 PreparedStatement ps = null, ps1 = null;
                 try {
                     ModConexion objCon = new ModConexion();
-                    Connection con = objCon.getConexion();
-                    ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE id = '" + id.getText() + "'");
+                    Connection conn = objCon.getConexion();
+                    ps = conn.prepareStatement("UPDATE quizzes SET status = ? WHERE id = '" + id.getText() + "'");
                     ps.setString(1, "Habilitado");
                     ps.execute();
 
-                    Date date = new Date();
-                    DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
-                    ps1 = con.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
+                    ps1 = conn.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
                     ps1.setString(1, fechaDate.format(date));
                     ps1.execute();
 
                     ModConsultasSQL.tablaQuizz(tablaQuizzes);
                     JOptionPane.showMessageDialog(null, "Activacion del Quizz completa.");
+
+                    ModVariablesReg varR = new ModVariablesReg();
+                    String tipo = "Administrador";
+                    String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                    String que = "Se activó el Quizz: " + txtNombre.getText();
+                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                    String comp = varU.getMatricula();
+                    if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
+                    String tipo2 = "Empleado";
+                    String quien2 = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                    String que2 = "Se activó el Quizz: " + txtNombre.getText();
+                    String cuando2 = fechaDate.format(date) + " " + horaDate.format(date);
+                    String comp2 = varU.getMatricula();
+                    if (con.avisoAA(varR, tipo2, quien2, que2, cuando2, comp2));
 
                 } catch (SQLException ex) {
                     Logger.getLogger(VstQuizzes.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,17 +372,32 @@ public class VstQuizzes extends javax.swing.JFrame {
             PreparedStatement ps = null, ps1 = null;
             try {
                 ModConexion objCon = new ModConexion();
-                Connection con = objCon.getConexion();
-                ps = con.prepareStatement("UPDATE quizzes SET status = ? WHERE nombre = '" + txtNombre.getText() + "'");
+                Connection conn = objCon.getConexion();
+                ps = conn.prepareStatement("UPDATE quizzes SET status = ? WHERE nombre = '" + txtNombre.getText() + "'");
                 ps.setString(1, "Deshabilitado");
                 ps.execute();
 
-                ps1 = con.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
+                ps1 = conn.prepareStatement("UPDATE quizzes SET f_activacion = ? WHERE id = '" + id.getText() + "'");
                 ps1.setString(1, "no activo");
                 ps1.execute();
 
                 ModConsultasSQL.tablaQuizz(tablaQuizzes);
                 JOptionPane.showMessageDialog(null, "Desactivacion del Quizz completa.");
+
+                ModVariablesReg varR = new ModVariablesReg();
+                String tipo = "Administrador";
+                String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                String que = "Se desactivó el Quizz: " + txtNombre.getText();
+                String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                String comp = varU.getMatricula();
+                if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
+                String tipo2 = "Empleado";
+                String quien2 = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                String que2 = "Se desactivó el Quizz: " + txtNombre.getText();
+                String cuando2 = fechaDate.format(date) + " " + horaDate.format(date);
+                String comp2 = varU.getMatricula();
+                if (con.avisoAA(varR, tipo2, quien2, que2, cuando2, comp2));
 
             } catch (SQLException ex) {
                 Logger.getLogger(VstQuizzes.class.getName()).log(Level.SEVERE, null, ex);
@@ -458,6 +505,7 @@ public class VstQuizzes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTextField matricula;
     public javax.swing.JTable tablaQuizzes;
     public javax.swing.JTextPane txtDescripcion;
     public javax.swing.JTextField txtNombre;

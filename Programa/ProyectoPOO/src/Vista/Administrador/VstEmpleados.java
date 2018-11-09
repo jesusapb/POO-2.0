@@ -32,7 +32,7 @@ public class VstEmpleados extends javax.swing.JFrame {
         btnEliminar.setVisible(false);
         btnQuitar.setVisible(false);
         btnDar.setVisible(false);
-        btnUpdate.setVisible(false);
+        btnReestablecer.setVisible(false);
         btnAvances.setVisible(false);
         checkCorreo.setVisible(false);
         email.setVisible(false);
@@ -71,13 +71,13 @@ public class VstEmpleados extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
+        btnReestablecer = new javax.swing.JButton();
         cronometro = new javax.swing.JLabel();
         btnAvances = new javax.swing.JButton();
         checkCorreo = new javax.swing.JCheckBox();
         email = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -202,21 +202,14 @@ public class VstEmpleados extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("@gmail.com");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, -1, -1));
-
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Add_User_Male_30px.png"))); // NOI18N
-        btnAgregar.setText("Agregar nuevo empleado");
-        btnAgregar.setBorder(null);
-        btnAgregar.setContentAreaFilled(false);
-        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 200, -1));
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Change_User_30px.png"))); // NOI18N
-        btnUpdate.setText("<html>Modificar registro del empleado");
-        btnUpdate.setBorder(null);
-        btnUpdate.setContentAreaFilled(false);
-        btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 150, -1));
+        btnReestablecer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Change_User_30px.png"))); // NOI18N
+        btnReestablecer.setText("<html>Reestablecer");
+        btnReestablecer.setBorder(null);
+        btnReestablecer.setContentAreaFilled(false);
+        btnReestablecer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnReestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 150, -1));
         jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 100, 20));
 
         btnAvances.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Advance_30px.png"))); // NOI18N
@@ -238,6 +231,13 @@ public class VstEmpleados extends javax.swing.JFrame {
         email.setEditable(false);
         email.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 150, -1));
+
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Add_User_Male_30px.png"))); // NOI18N
+        btnAgregar.setText("Agregar nuevo empleado");
+        btnAgregar.setBorder(null);
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 300));
 
@@ -284,6 +284,7 @@ public class VstEmpleados extends javax.swing.JFrame {
                 //btnUpdate.setVisible(true);
                 btnAgregar.setVisible(false);
                 btnGenerar.setVisible(false);
+                btnReestablecer.setVisible(true);
 
                 String string = rs.getString("correo");
                 String[] parts = string.split("@");
@@ -380,7 +381,7 @@ public class VstEmpleados extends javax.swing.JFrame {
     public javax.swing.JButton btnGenerar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnQuitar;
-    public javax.swing.JButton btnUpdate;
+    public javax.swing.JButton btnReestablecer;
     public javax.swing.JCheckBox checkCorreo;
     public javax.swing.JLabel cronometro;
     public javax.swing.JTextField email;

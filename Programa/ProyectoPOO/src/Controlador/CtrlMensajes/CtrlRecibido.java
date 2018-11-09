@@ -90,7 +90,6 @@ public class CtrlRecibido implements ActionListener {
                         ps.execute();
 
                         JOptionPane.showMessageDialog(null, "Mensaje eliminado.");
-                        ModConsultasSQL.todos(vbe.tablaTodos, varM, var);
                         vr.setVisible(false);
 
                     } catch (SQLException ex) {

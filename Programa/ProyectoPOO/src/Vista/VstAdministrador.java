@@ -5,12 +5,16 @@
  */
 package Vista;
 
+import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModVariablesAvisos;
 import Modelo.ModVariablesDoc;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesUsr;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +32,7 @@ public class VstAdministrador extends javax.swing.JFrame {
     public VstAdministrador() {
         initComponents();
         //setDefaultCloseOperation(0);
+        btnLTodo.setVisible(false);
 
         t = new Timer(10, acciones);
         t.start();
@@ -72,6 +77,13 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnQDesactivar = new javax.swing.JButton();
         docs = new javax.swing.JTextField();
         quizz = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaAvisos = new javax.swing.JTable();
+        btnLTodo = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtAviso = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -81,8 +93,8 @@ public class VstAdministrador extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Tipo de usuario:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLabel1.setText("Avisos:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, -1));
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
@@ -195,7 +207,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, -1, -1));
 
         cronometro.setText("00:00:00");
-        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 110, 20));
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 110, 20));
 
         tablaAQuizzes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,7 +284,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 900, 10));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 30, 270));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 30, 550));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Usuarios conectados:");
@@ -296,7 +308,60 @@ public class VstAdministrador extends javax.swing.JFrame {
         quizz.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(quizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 140, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 30, 270));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Tipo de usuario:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        tablaAvisos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaAvisos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAvisosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tablaAvisos);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 33, 230, 330));
+
+        btnLTodo.setText("Leer todo");
+        btnLTodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnLTodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 510, -1, -1));
+
+        txtAviso.setEditable(false);
+        txtAviso.setBorder(null);
+        txtAviso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane6.setViewportView(txtAviso);
+
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 230, 120));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -314,6 +379,29 @@ public class VstAdministrador extends javax.swing.JFrame {
         quizz.setText(ident);
         btnQDesactivar.setVisible(true);
     }//GEN-LAST:event_tablaAQuizzesMouseClicked
+
+    private void tablaAvisosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAvisosMouseClicked
+        int row = evt.getY() / tablaAvisos.getRowHeight();
+        String aviso = "" + tablaAvisos.getValueAt(row, 0);
+        String[] part = aviso.split("/");
+        String id = part[0];
+        txtAviso.setText(aviso);
+        
+        ModConexion con = new ModConexion();
+        String sql = "UPDATE avisos SET status = ? WHERE id = '" + id + "'";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.getConexion().prepareStatement(sql);
+            ps.setString(1, "visto");
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_tablaAvisosMouseClicked
 
     private Timer t;
     private int h, m, s, cs;
@@ -342,6 +430,9 @@ public class VstAdministrador extends javax.swing.JFrame {
                 ModConsultasSQL.recarga(var);
                 ModConsultasSQL.DocsAct(tablaADocumentos, varD);
                 ModConsultasSQL.QuizzAct(tablaAQuizzes, varQ);
+
+                ModVariablesAvisos varA = new ModVariablesAvisos();
+                ModConsultasSQL.tablaAvisos(tablaAvisos, varA, var.getMatricula());
             }
             if (s == 60) {
                 s = 0;
@@ -400,6 +491,7 @@ public class VstAdministrador extends javax.swing.JFrame {
     public javax.swing.JButton btnDDesactivar;
     public javax.swing.JButton btnDocumentos;
     public javax.swing.JButton btnEmpleados;
+    public javax.swing.JButton btnLTodo;
     public javax.swing.JButton btnMensajes;
     public javax.swing.JButton btnPerfil;
     public javax.swing.JButton btnQDesactivar;
@@ -412,17 +504,23 @@ public class VstAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     public javax.swing.JTextField quizz;
     public javax.swing.JTable tablaADocumentos;
     public javax.swing.JTable tablaAQuizzes;
+    public javax.swing.JTable tablaAvisos;
     public javax.swing.JTable tablaConectados;
+    public javax.swing.JTextPane txtAviso;
     public javax.swing.JTextField txtMatricula;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtTipo;

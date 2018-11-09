@@ -47,7 +47,6 @@ public class CtrlBandejadEntrada implements ActionListener {
         ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR);
         ModVariablesMensaje varM = new ModVariablesMensaje();
         ModConsultasSQL.recibidos(vbe.tablaBandejaEntrada, varM, var);
-        ModConsultasSQL.todos(vbe.tablaTodos, varM, var);
         vbe.btnNuevo.setVisible(false);
     }
 

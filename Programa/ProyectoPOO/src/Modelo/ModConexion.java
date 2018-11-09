@@ -14,28 +14,21 @@ import javax.swing.JOptionPane;
  * @author Antonio
  */
 public class ModConexion {
-    
-    public static final String url = "jdbc:mysql://localhost:3306/crear_examen";
-    public static final String username = "root";
-    public static final String password = "Rfmb5851";
+    public static final String urlLocal = "jdbc:mysql://localhost:3306/crear_examen";
+    public static final String usernameLocal = "root";
+    public static final String passwordLocal = "Rfmb5851";
+    public static final String urlWEB = "jdbc:mysql://sql10.freesqldatabase.com:3306/sql10264550";
+    public static final String usernameWEB = "sql10264550";
+    public static final String passwordWEB = "tt1DMlZ5ra";
     private Connection con = null;
-    
     public Connection getConexion() {
-        
         try {
-            
             Class.forName("com.mysql.jdbc.Driver");
-            
-            con = (Connection) DriverManager.getConnection(url, username, password);
-            
+            con = (Connection) DriverManager.getConnection(urlLocal, usernameLocal, passwordLocal);
         } catch (Exception e) {
-            
             System.err.println(e);       
             JOptionPane.showMessageDialog(null, "Sin conexión.");
-            
         }
-        
         return con;
     }
-    
 }

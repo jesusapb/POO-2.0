@@ -5,9 +5,7 @@
  */
 package Vista.Administrador;
 
-import Modelo.Documentos.PDF;
-import Modelo.Documentos.sql;
-import Modelo.Documentos.tablaPDF;
+import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesDoc;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -31,27 +29,27 @@ public class VstDocumentos extends javax.swing.JFrame {
     /**
      * Creates new form VstDocumentos
      */
-    tablaPDF tpdf = new tablaPDF();
+    ModConsultasSQL tpdf = new ModConsultasSQL();
     String ruta_archivo = "";
     int id = -1;
 
     public VstDocumentos() {
         initComponents();
-        setTitle("Documentos.");
-        setLocationRelativeTo(null);
-        tpdf.visualizar(tablaDocumentos);
-        activar_boton(false, false, false, false);
-        txtNombre.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        btnSi.setVisible(false);
-        btnNo.setVisible(false);
+//        setTitle("Documentos.");
+//        setLocationRelativeTo(null);
+//        tpdf.visualizar(tablaDocumentos);
+//        activar_boton(false, false, false, false);
+//        txtNombre.setEnabled(false);
+//        txtDescripcion.setEnabled(false);
+//        btnSi.setVisible(false);
+//        btnNo.setVisible(false);
 
         t = new Timer(10, acciones);
         t.start();
     }
 
     public void guardarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
-        PDF pdf = new PDF();
+        ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
         var.setId(codigo);
         var.setNombre(nombre);
@@ -65,11 +63,11 @@ public class VstDocumentos extends javax.swing.JFrame {
         } catch (IOException ex) {
             var.setArchivo(null);
         }
-        pdf.agregar(var);
+        pdf.agregarD(var);
     }
 
     public void modificarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
-        PDF pdf = new PDF();
+        ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
         var.setId(codigo);
         var.setNombre(nombre);
@@ -83,22 +81,22 @@ public class VstDocumentos extends javax.swing.JFrame {
         } catch (IOException ex) {
             var.setArchivo(null);
         }
-        pdf.modificar(var);
+        pdf.modificarD(var);
     }
 
     public void modificarPDF(int codigo, String nombre) {
-        PDF pdf = new PDF();
+        ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
         var.setId(codigo);
         var.setNombre(nombre);
-        pdf.modificarNom(var);
+        pdf.modificarNomD(var);
     }
 
     public void eliminarPDF(int codigo) {
-        PDF pdf = new PDF();
+        ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
         var.setId(codigo);
-        pdf.eliminar(var);
+        pdf.eliminarD(var);
     }
 
     public void seleccionarPDF() {
@@ -151,6 +149,10 @@ public class VstDocumentos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         cronometro = new javax.swing.JLabel();
+        matricula = new javax.swing.JTextField();
+        cambio = new javax.swing.JCheckBox();
+        ident = new javax.swing.JTextField();
+        stat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -276,81 +278,102 @@ public class VstDocumentos extends javax.swing.JFrame {
         cronometro.setText("00:00:00");
         jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 110, -1));
 
+        matricula.setEditable(false);
+        matricula.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
+
+        cambio.setText("Cambiar archivo");
+        cambio.setContentAreaFilled(false);
+        cambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        ident.setEditable(false);
+        ident.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(ident, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 40, -1));
+
+        stat.setEditable(false);
+        stat.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(stat, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 40, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        seleccionarPDF();
+//        seleccionarPDF();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        activar_boton(true, false, false, true);
-        txtNombre.setEnabled(true);
-        txtDescripcion.setEnabled(true);
-        btnSi.setVisible(false);
-        btnNo.setVisible(false);
-        ruta_archivo = "";
+//        activar_boton(true, false, false, true);
+//        txtNombre.setEnabled(true);
+//        txtDescripcion.setEnabled(true);
+//        btnSi.setVisible(false);
+//        btnNo.setVisible(false);
+//        ruta_archivo = "";
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText();
-        String descripcion = txtDescripcion.getText();
-        sql s = new sql();
-        int codigo = s.auto_incremento("SELECT MAX(id) FROM documentos");
-        File ruta = new File(ruta_archivo);
-        if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
-            guardarPDF(codigo, nombre, "Habilitado", descripcion, ruta);
-            tpdf.visualizar(tablaDocumentos);
-            ruta_archivo = "";
-            activar_boton(false, false, false, false);
-            txtNombre.setEnabled(false);
-            txtDescripcion.setEnabled(false);
-            btnSi.setVisible(false);
-            btnNo.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "Completa etodos los campos.");
-        }
+//        String nombre = txtNombre.getText();
+//        String descripcion = txtDescripcion.getText();
+//        sql s = new sql();
+//        int codigo = s.auto_incremento("SELECT MAX(id) FROM documentos");
+//        File ruta = new File(ruta_archivo);
+//        if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0) {
+//            guardarPDF(codigo, nombre, "Habilitado", descripcion, ruta);
+//            tpdf.visualizar(tablaDocumentos);
+//            ruta_archivo = "";
+//            activar_boton(false, false, false, false);
+//            txtNombre.setEnabled(false);
+//            txtDescripcion.setEnabled(false);
+//            btnSi.setVisible(false);
+//            btnNo.setVisible(false);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Completa etodos los campos.");
+//        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        String nombre = txtNombre.getText();
-        String descripcion = txtDescripcion.getText();
-        File ruta = new File(ruta_archivo);
-        if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0 && descripcion.equals("")) {
-            modificarPDF(id, nombre, "Habilitado", descripcion, ruta);
-            tpdf.visualizar(tablaDocumentos);
-        } else if (ruta_archivo.trim().length() == 0) {
-            modificarPDF(id, nombre);
-            tpdf.visualizar(tablaDocumentos);
-        }
-        ruta_archivo = "";
-        activar_boton(false, false, false, false);
-        txtNombre.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        btnSi.setVisible(false);
-        btnNo.setVisible(false);
+//        String nombre = txtNombre.getText();
+//        String descripcion = txtDescripcion.getText();
+//        File ruta = new File(ruta_archivo);
+//        if (nombre.trim().length() != 0 && ruta_archivo.trim().length() != 0 && descripcion.equals("")) {
+//            modificarPDF(id, nombre, "Habilitado", descripcion, ruta);
+//            tpdf.visualizar(tablaDocumentos);
+//        } else if (ruta_archivo.trim().length() == 0) {
+//            modificarPDF(id, nombre);
+//            tpdf.visualizar(tablaDocumentos);
+//        }
+//        ruta_archivo = "";
+//        activar_boton(false, false, false, false);
+//        txtNombre.setEnabled(false);
+//        txtDescripcion.setEnabled(false);
+//        btnSi.setVisible(false);
+//        btnNo.setVisible(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarPDF(id);
-        tpdf.visualizar(tablaDocumentos);
-        activar_boton(false, false, false, false);
-        txtNombre.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        btnSi.setVisible(false);
-        btnNo.setVisible(false);
-        ruta_archivo = "";
+//        eliminarPDF(id);
+//        tpdf.visualizar(tablaDocumentos);
+//        activar_boton(false, false, false, false);
+//        txtNombre.setEnabled(false);
+//        txtDescripcion.setEnabled(false);
+//        btnSi.setVisible(false);
+//        btnNo.setVisible(false);
+//        ruta_archivo = "";
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        activar_boton(false, false, false, false);
-        ruta_archivo = "";
-        txtNombre.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-        btnSi.setVisible(false);
-        btnNo.setVisible(false);
+//        activar_boton(false, false, false, false);
+//        ruta_archivo = "";
+//        txtNombre.setEnabled(false);
+//        txtDescripcion.setEnabled(false);
+//        btnSi.setVisible(false);
+//        btnNo.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tablaDocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDocumentosMouseClicked
@@ -360,9 +383,12 @@ public class VstDocumentos extends javax.swing.JFrame {
         activar_boton(false, true, true, true);
         txtNombre.setEnabled(true);
         txtDescripcion.setEnabled(true);
+        cambio.setVisible(true);
+        btnSeleccionar.setEnabled(false);
         if (row < tablaDocumentos.getRowCount() && row >= 0 && column < tablaDocumentos.getColumnCount() && column >= 0) {
 
             id = (int) tablaDocumentos.getValueAt(row, 0);
+            ident.setText(tablaDocumentos.getValueAt(row, 0) + "");
             Object value = tablaDocumentos.getValueAt(row, column);
             if (value instanceof JButton) {
                 ((JButton) value).doClick();
@@ -371,8 +397,8 @@ public class VstDocumentos extends javax.swing.JFrame {
                 if (boton.getText().equals("Vacio")) {
                     JOptionPane.showMessageDialog(null, "No hay archivo");
                 } else {
-                    PDF pdf = new PDF();
-                    pdf.abrir(id);
+                    ModConsultasSQL pdf = new ModConsultasSQL();
+                    pdf.abrirD(id);
                     try {
                         Desktop.getDesktop().open(new File("new.pdf"));
                     } catch (Exception ex) {
@@ -384,6 +410,7 @@ public class VstDocumentos extends javax.swing.JFrame {
                 String desc = "" + tablaDocumentos.getValueAt(row, 3);
                 txtDescripcion.setText(desc);
                 String status = "" + tablaDocumentos.getValueAt(row, 2);
+                stat.setText(status);
 
                 if ("Habilitado".equals(status)) {
                     btnNo.setVisible(true);
@@ -395,6 +422,14 @@ public class VstDocumentos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tablaDocumentosMouseClicked
+
+    private void cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioActionPerformed
+        if (cambio.isSelected() == false) {
+            btnSeleccionar.setEnabled(false);
+        } else {
+            btnSeleccionar.setEnabled(true);
+        }
+    }//GEN-LAST:event_cambioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,7 +506,9 @@ public class VstDocumentos extends javax.swing.JFrame {
     public javax.swing.JButton btnNuevo;
     public javax.swing.JButton btnSeleccionar;
     public javax.swing.JButton btnSi;
+    public javax.swing.JCheckBox cambio;
     private javax.swing.JLabel cronometro;
+    public javax.swing.JTextField ident;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -479,6 +516,8 @@ public class VstDocumentos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    public javax.swing.JTextField matricula;
+    public javax.swing.JTextField stat;
     public javax.swing.JTable tablaDocumentos;
     public javax.swing.JTextArea txtDescripcion;
     public javax.swing.JTextField txtNombre;

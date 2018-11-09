@@ -6,7 +6,18 @@
 package Vista.Administrador;
 
 import Controlador.Administrador.CtrlPreguntas;
-import javax.swing.JOptionPane;
+import Modelo.ModConexion;
+import Modelo.ModConsultasSQL;
+import Modelo.ModvariablesPreguntas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -21,10 +32,19 @@ public class VstPreguntas extends javax.swing.JFrame {
         initComponents();
 //        SpinnerNumberModel ptt = new SpinnerNumberModel(000.00, 000.00, 100.00, 000.01);
 //        spinnerPuntos.setModel(ptt);
+        btnReestablecer.setVisible(false);
         btnEliminar.setVisible(false);
         btnModificar.setVisible(false);
+        matricula.setVisible(false);
+        idP.setVisible(false);
+        id.setVisible(false);
+        actual.setVisible(false);
+        cronometro.setVisible(false);
+        modPre.setVisible(false);
 
-        CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+        t = new Timer(10, acciones);
+        t.start();
     }
 
     /**
@@ -43,7 +63,6 @@ public class VstPreguntas extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtR4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,10 +77,9 @@ public class VstPreguntas extends javax.swing.JFrame {
         txtD1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        btnTodos = new javax.swing.JButton();
+        btnReestablecer = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         r4 = new javax.swing.JCheckBox();
@@ -76,12 +94,16 @@ public class VstPreguntas extends javax.swing.JFrame {
         R1 = new javax.swing.JTextField();
         R2 = new javax.swing.JTextField();
         R3 = new javax.swing.JTextField();
-        D1 = new javax.swing.JTextField();
-        D2 = new javax.swing.JTextField();
-        D3 = new javax.swing.JTextField();
+        txtD4 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaPreguntas = new javax.swing.JTable();
+        idP = new javax.swing.JTextField();
+        cronometro = new javax.swing.JLabel();
+        matricula = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        modPre = new javax.swing.JCheckBox();
+        pregunt = new javax.swing.JTextField();
         puntos = new javax.swing.JTextField();
-        QPR = new javax.swing.JButton();
-        QPD = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -97,7 +119,7 @@ public class VstPreguntas extends javax.swing.JFrame {
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 520, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 680, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("<html>Puntuacion de esta pregunta:");
@@ -107,70 +129,62 @@ public class VstPreguntas extends javax.swing.JFrame {
         jLabel3.setText("Pregunta:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Tipo de respuesta:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Respuestas:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         txtR4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 160, -1));
+        jPanel1.add(txtR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 300, -1));
 
         jScrollPane1.setViewportView(txtPreguntas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 520, 60));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 680, 60));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 50, 200));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 700, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 50, 200));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 850, 20));
 
         txtR1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 160, -1));
+        jPanel1.add(txtR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 300, -1));
 
         txtR2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 160, -1));
+        jPanel1.add(txtR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 300, -1));
 
         txtR3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 160, -1));
+        jPanel1.add(txtR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 300, -1));
 
         txtD3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, 160, -1));
+        jPanel1.add(txtD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, 300, -1));
 
         txtD2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 160, -1));
+        jPanel1.add(txtD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, 300, -1));
 
         txtD1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 160, -1));
+        jPanel1.add(txtD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 300, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Distractores:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("<html>Cantidad de Respuestas:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Puntos:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 120, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Puntos:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, -1, -1));
 
         btnGuardar.setText("Guardar");
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, -1, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 310, -1, -1));
 
-        btnTodos.setText("Todas las preguntas del Quizz");
-        jPanel1.add(btnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+        btnReestablecer.setText("Reestablecer");
+        jPanel1.add(btnReestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         btnEliminar.setText("Eliminar");
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
 
         btnModificar.setText("Modificar");
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, -1, -1));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
 
         buttonGroup2.add(r4);
         r4.setText("4");
@@ -180,7 +194,7 @@ public class VstPreguntas extends javax.swing.JFrame {
                 r4ActionPerformed(evt);
             }
         });
-        jPanel1.add(r4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        jPanel1.add(r4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
         buttonGroup1.add(unico);
         unico.setText("Única");
@@ -190,7 +204,7 @@ public class VstPreguntas extends javax.swing.JFrame {
                 unicoActionPerformed(evt);
             }
         });
-        jPanel1.add(unico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+        jPanel1.add(unico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
         buttonGroup1.add(multiple);
         multiple.setText("Múltiple");
@@ -200,7 +214,7 @@ public class VstPreguntas extends javax.swing.JFrame {
                 multipleActionPerformed(evt);
             }
         });
-        jPanel1.add(multiple, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+        jPanel1.add(multiple, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
 
         buttonGroup2.add(r2);
         r2.setText("2");
@@ -210,7 +224,7 @@ public class VstPreguntas extends javax.swing.JFrame {
                 r2ActionPerformed(evt);
             }
         });
-        jPanel1.add(r2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
+        jPanel1.add(r2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
 
         buttonGroup2.add(r3);
         r3.setText("3");
@@ -220,7 +234,7 @@ public class VstPreguntas extends javax.swing.JFrame {
                 r3ActionPerformed(evt);
             }
         });
-        jPanel1.add(r3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        jPanel1.add(r3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, -1));
 
         buttonGroup1.add(abierto);
         abierto.setText("Abierto");
@@ -230,88 +244,306 @@ public class VstPreguntas extends javax.swing.JFrame {
                 abiertoActionPerformed(evt);
             }
         });
-        jPanel1.add(abierto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+        jPanel1.add(abierto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
 
         id.setEditable(false);
         id.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 90, -1));
+        id.setBorder(null);
+        jPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 90, -1));
 
         actual.setEditable(false);
         actual.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 90, -1));
-        jPanel1.add(R4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 120, -1));
-        jPanel1.add(R1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 120, -1));
-        jPanel1.add(R2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 120, -1));
-        jPanel1.add(R3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 120, -1));
-        jPanel1.add(D1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 120, -1));
-        jPanel1.add(D2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 120, -1));
-        jPanel1.add(D3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 470, 120, -1));
+        actual.setBorder(null);
+        jPanel1.add(actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 90, -1));
+        jPanel1.add(R4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 510, 120, -1));
+        jPanel1.add(R1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 120, -1));
+        jPanel1.add(R2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 120, -1));
+        jPanel1.add(R3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 120, -1));
+
+        txtD4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 510, 300, -1));
+
+        tablaPreguntas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Pregunta", "Tipo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaPreguntas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaPreguntasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaPreguntas);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 430, 160));
+
+        idP.setEditable(false);
+        idP.setBackground(new java.awt.Color(255, 255, 255));
+        idP.setBorder(null);
+        jPanel1.add(idP, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 90, -1));
+
+        cronometro.setText("00:00:00");
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 100, -1));
+
+        matricula.setEditable(false);
+        matricula.setBackground(new java.awt.Color(255, 255, 255));
+        matricula.setBorder(null);
+        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 100, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Tipo de respuesta:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        modPre.setText("Modificar pregunta");
+        modPre.setContentAreaFilled(false);
+        modPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modPreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(modPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        pregunt.setEditable(false);
+        pregunt.setBackground(new java.awt.Color(255, 255, 255));
+        pregunt.setBorder(null);
+        jPanel1.add(pregunt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 50, -1));
         jPanel1.add(puntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 120, -1));
 
-        QPR.setText("?");
-        QPR.setBorder(null);
-        QPR.setContentAreaFilled(false);
-        QPR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        QPR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QPRActionPerformed(evt);
-            }
-        });
-        jPanel1.add(QPR, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 20, -1));
-
-        QPD.setText("?");
-        QPD.setBorder(null);
-        QPD.setContentAreaFilled(false);
-        QPD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        QPD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QPDActionPerformed(evt);
-            }
-        });
-        jPanel1.add(QPD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 20, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void unicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unicoActionPerformed
-        CtrlPreguntas.unico(unico, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.unico(unico, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
     }//GEN-LAST:event_unicoActionPerformed
 
     private void multipleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multipleActionPerformed
-        CtrlPreguntas.multiple(multiple, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.multiple(multiple, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
     }//GEN-LAST:event_multipleActionPerformed
 
     private void r2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2ActionPerformed
-        CtrlPreguntas.r2(r2, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.r2(r2, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
     }//GEN-LAST:event_r2ActionPerformed
 
     private void r3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3ActionPerformed
-        CtrlPreguntas.r3(r3, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.r3(r3, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
     }//GEN-LAST:event_r3ActionPerformed
 
     private void r4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r4ActionPerformed
-        CtrlPreguntas.r4(r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+        CtrlPreguntas.r4(r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
     }//GEN-LAST:event_r4ActionPerformed
 
     private void abiertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abiertoActionPerformed
         if (abierto.isSelected() == true) {
-            CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, D1, D2, D3);
+            CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
         }
     }//GEN-LAST:event_abiertoActionPerformed
 
-    private void QPRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QPRActionPerformed
-        JOptionPane.showMessageDialog(null, "Valores positivos (sin signo).");
-    }//GEN-LAST:event_QPRActionPerformed
+    ModvariablesPreguntas var = new ModvariablesPreguntas();
 
-    private void QPDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QPDActionPerformed
-        JOptionPane.showMessageDialog(null, "Valores negaritos (sin signo).");
-    }//GEN-LAST:event_QPDActionPerformed
+    private void tablaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPreguntasMouseClicked
+        int row = evt.getY() / tablaPreguntas.getRowHeight();
+        //String id = "" + tablaPreguntas.getValueAt(row, 0);
+        idP.setText("" + tablaPreguntas.getValueAt(row, 0));
+
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            ModConexion objCon = new ModConexion();
+            Connection con = objCon.getConexion();
+
+            int Fila = tablaPreguntas.getSelectedRow();
+            String codigo = tablaPreguntas.getValueAt(Fila, 0).toString();
+
+            ps = con.prepareStatement("SELECT * FROM preguntas WHERE id = ?");
+            ps.setString(1, codigo);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getString(4).equals("abierto")) {
+                    CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                    abierto.setSelected(true);
+                    idP.setText(rs.getString(1));
+                    id.setText(rs.getString(2));
+                    txtPreguntas.setText(rs.getString(3));
+                    pregunt.setText(rs.getString(3));
+                    puntos.setText(rs.getString(6));
+
+                } else if (rs.getString(4).equals("unico")) {
+                    CtrlPreguntas.unico(unico, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                    unico.setSelected(true);
+                    idP.setText(rs.getString(1));
+                    id.setText(rs.getString(2));
+                    txtPreguntas.setText(rs.getString(3));
+                    pregunt.setText(rs.getString(3));
+                    puntos.setText(rs.getString(6));
+
+                    txtR1.setText(rs.getString(7));
+                    txtD1.setText(rs.getString(15));
+                    
+                    if (rs.getString(16).equals("*/null/*")); else {
+                        txtD2.setText(rs.getString(16));
+                    }
+                    if (rs.getString(17).equals("*/null/*")); else {
+                        txtD3.setText(rs.getString(17));
+                    }
+                    if (rs.getString(18).equals("*/null/*")); else {
+                        txtD4.setText(rs.getString(18));
+                    }
+
+                } else if (rs.getString(4).equals("multiple")) {
+                    CtrlPreguntas.multiple(multiple, r2, r3, r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                    multiple.setSelected(true);
+                    idP.setText(rs.getString(1));
+                    id.setText(rs.getString(2));
+                    txtPreguntas.setText(rs.getString(3));
+                    pregunt.setText(rs.getString(3));
+                    puntos.setText(rs.getString(6));
+
+                    if (rs.getString(5).equals("2")) {
+                        CtrlPreguntas.r2(r2, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                        r2.setSelected(true);
+
+                        txtR1.setText(rs.getString(7));
+                        R1.setText(rs.getString(8));
+                        txtR2.setText(rs.getString(9));
+                        R2.setText(rs.getString(10));
+
+                        if (rs.getString(15).equals("*/null/*")); else {
+                            txtD1.setText(rs.getString(15));
+                        }
+                        if (rs.getString(16).equals("*/null/*")); else {
+                            txtD2.setText(rs.getString(16));
+                        }
+
+                    } else if (rs.getString(5).equals("3")) {
+                        CtrlPreguntas.r3(r3, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                        r3.setSelected(true);
+
+                        txtR1.setText(rs.getString(7));
+                        R1.setText(rs.getString(8));
+                        txtR2.setText(rs.getString(9));
+                        R2.setText(rs.getString(10));
+                        txtR3.setText(rs.getString(11));
+                        R3.setText(rs.getString(12));
+
+                        if (rs.getString(15).equals("*/null/*")); else {
+                            txtD1.setText(rs.getString(15));
+                        }
+                        if (rs.getString(16).equals("*/null/*")); else {
+                            txtD2.setText(rs.getString(16));
+                        }
+                        if (rs.getString(17).equals("*/null/*")); else {
+                            txtD3.setText(rs.getString(17));
+                        }
+
+                    } else if (rs.getString(5).equals("4")) {
+                        CtrlPreguntas.r4(r4, false, true, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
+                        r4.setSelected(true);
+
+                        txtR1.setText(rs.getString(7));
+                        R1.setText(rs.getString(8));
+                        txtR2.setText(rs.getString(9));
+                        R2.setText(rs.getString(10));
+                        txtR3.setText(rs.getString(11));
+                        R3.setText(rs.getString(12));
+                        txtR4.setText(rs.getString(13));
+                        R4.setText(rs.getString(14));
+
+                        if (rs.getString(15).equals("*/null/*")); else {
+                            txtD1.setText(rs.getString(15));
+                        }
+                        if (rs.getString(16).equals("*/null/*")); else {
+                            txtD2.setText(rs.getString(16));
+                        }
+                        if (rs.getString(17).equals("*/null/*")); else {
+                            txtD3.setText(rs.getString(17));
+                        }
+                        if (rs.getString(18).equals("*/null/*")); else {
+                            txtD4.setText(rs.getString(18));
+                        }
+
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VstPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        btnReestablecer.setVisible(true);
+        btnEliminar.setVisible(true);
+        btnModificar.setVisible(true);
+        btnGuardar.setVisible(false);
+        modPre.setVisible(true);
+        txtPreguntas.setEditable(false);
+    }//GEN-LAST:event_tablaPreguntasMouseClicked
+
+    private void modPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modPreActionPerformed
+        if (modPre.isSelected() == true) {
+            txtPreguntas.setEditable(true);
+        } else {
+            txtPreguntas.setEditable(false);
+        }
+    }//GEN-LAST:event_modPreActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    private Timer t;
+    private int h, m, s, cs;
+
+    private ActionListener acciones = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 5 == 0)) {
+                ModvariablesPreguntas var = new ModvariablesPreguntas();
+                ModConsultasSQL.tablaPreg(tablaPreguntas, var, id.getText());
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+            actualizarLabel();
+        }
+    };
+
+    private void actualizarLabel() {
+        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
+        cronometro.setText(tiempo);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -345,11 +577,6 @@ public class VstPreguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField D1;
-    public javax.swing.JTextField D2;
-    public javax.swing.JTextField D3;
-    public javax.swing.JButton QPD;
-    public javax.swing.JButton QPR;
     public javax.swing.JTextField R1;
     public javax.swing.JTextField R2;
     public javax.swing.JTextField R3;
@@ -359,31 +586,38 @@ public class VstPreguntas extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JButton btnTodos;
+    public javax.swing.JButton btnReestablecer;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel cronometro;
     public javax.swing.JTextField id;
+    public javax.swing.JTextField idP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JTextField matricula;
+    public javax.swing.JCheckBox modPre;
     public javax.swing.JCheckBox multiple;
+    public javax.swing.JTextField pregunt;
     public javax.swing.JTextField puntos;
     public javax.swing.JCheckBox r2;
     public javax.swing.JCheckBox r3;
     public javax.swing.JCheckBox r4;
+    public javax.swing.JTable tablaPreguntas;
     public javax.swing.JTextField txtD1;
     public javax.swing.JTextField txtD2;
     public javax.swing.JTextField txtD3;
+    public javax.swing.JTextField txtD4;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextPane txtPreguntas;
     public javax.swing.JTextField txtR1;

@@ -8,6 +8,7 @@ package Controlador.Administrador;
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesQuizzes;
+import Modelo.ModVariablesReg;
 import Modelo.ModVariablesUsr;
 import Modelo.ModvariablesPreguntas;
 import Vista.Administrador.VstPreguntas;
@@ -16,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,6 +56,7 @@ public class CtrlQuizzes implements ActionListener {
         vq.setTitle("Quizzes");
         ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
         vq.setLocationRelativeTo(null);
+        vq.matricula.setText(varU.getMatricula());
         limpiar();
     }
 
@@ -67,6 +71,7 @@ public class CtrlQuizzes implements ActionListener {
         varU.setHora(horaDate.format(date));
         ModConsultasSQL.recarga(varU);
         ModConsultasSQL.status(varU);
+        //vq.matricula.setText(varU.getMatricula());
 
         if (con.existeUsr(varU.getMatricula()) == 1) {
             if (e.getSource() == vq.btnGuardar) {
@@ -103,6 +108,15 @@ public class CtrlQuizzes implements ActionListener {
                                 if (con.Rquizzes(var)) {
                                     JOptionPane.showMessageDialog(null, "Quizz guardado exitosamente.");
                                     ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
+
+                                    ModVariablesReg varR = new ModVariablesReg();
+                                    String tipo = "Administrador";
+                                    String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                    String que = "Se agregó un nuevo Quizz: " + vq.txtNombre.getText();
+                                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                    String comp = varU.getMatricula();
+                                    if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
                                     limpiar();
                                 } else {
                                     JOptionPane.showMessageDialog(null, "No se pudo guardar el Quizz.");
@@ -136,8 +150,8 @@ public class CtrlQuizzes implements ActionListener {
                                     try {
 
                                         ModConexion objCon = new ModConexion();
-                                        Connection con = objCon.getConexion();
-                                        ps = con.prepareStatement("UPDATE quizzes SET nombre = ?, descripcion = ?, p_totales = ?, intentos = ?, "
+                                        Connection conn = objCon.getConexion();
+                                        ps = conn.prepareStatement("UPDATE quizzes SET nombre = ?, descripcion = ?, p_totales = ?, intentos = ?, "
                                                 + "mod_calif = ?, tiempo = ? WHERE id = '" + vq.id.getText() + "'");
 
                                         ps.setString(1, vq.txtNombre.getText());
@@ -158,6 +172,16 @@ public class CtrlQuizzes implements ActionListener {
                                         JOptionPane.showMessageDialog(null, "Modificación completa.");
                                         ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
 
+                                        ModVariablesReg varR = new ModVariablesReg();
+                                        String tipo = "Administrador";
+                                        String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                        String que = "Se modificó el Quizz: " + vq.txtNombre.getText();
+                                        String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                        String comp = varU.getMatricula();
+                                        if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
+                                        limpiar();
+
                                     } catch (SQLException ex) {
                                         JOptionPane.showMessageDialog(null, "No se pudo realizar la modificación.");
                                         Logger.getLogger(CtrlQuizzes.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,8 +193,8 @@ public class CtrlQuizzes implements ActionListener {
                                         try {
 
                                             ModConexion objCon = new ModConexion();
-                                            Connection con = objCon.getConexion();
-                                            ps = con.prepareStatement("UPDATE quizzes SET nombre = ?, descripcion = ?, p_totales = ?, intentos = ?, "
+                                            Connection conn = objCon.getConexion();
+                                            ps = conn.prepareStatement("UPDATE quizzes SET nombre = ?, descripcion = ?, p_totales = ?, intentos = ?, "
                                                     + "mod_calif = ?, tiempo = ? WHERE id = '" + vq.id.getText() + "'");
 
                                             ps.setString(1, vq.txtNombre.getText());
@@ -188,6 +212,16 @@ public class CtrlQuizzes implements ActionListener {
 
                                             JOptionPane.showMessageDialog(null, "Modificación completa.");
                                             ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
+
+                                            ModVariablesReg varR = new ModVariablesReg();
+                                            String tipo = "Administrador";
+                                            String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                            String que = "Se modificó el Quizz: " + vq.txtNombre.getText();
+                                            String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                            String comp = varU.getMatricula();
+                                            if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
+                                            limpiar();
 
                                         } catch (SQLException ex) {
                                             JOptionPane.showMessageDialog(null, "No se pudo realizar la modificación.");
@@ -209,19 +243,46 @@ public class CtrlQuizzes implements ActionListener {
                     vq.setVisible(false);
                     variables();
                 } else {
-                    PreparedStatement ps = null;
-                    
+                    PreparedStatement ps = null, ps1 = null;
+                    ResultSet rs = null;
+
                     try {
                         ModConexion objCon = new ModConexion();
-                        Connection con = objCon.getConexion();
+                        Connection conn = objCon.getConexion();
 
-                        ps = con.prepareStatement("DELETE FROM quizzes WHERE id = ?");
+                        ps = conn.prepareStatement("DELETE FROM quizzes WHERE id = ?");
                         ps.setString(1, vq.id.getText());
                         ps.execute();
-                        
+
+                        ps1 = conn.prepareStatement("SELECT * FROM preguntas");
+                        rs = ps1.executeQuery();
+
+                        ResultSetMetaData rsMd = rs.getMetaData();
+                        int cantidadColumnas = rsMd.getColumnCount();
+
+                        while (rs.next()) {
+                            for (int i = 0; i < cantidadColumnas; i++) {
+                                String sql1 = "DELETE FROM preguntas WHERE quizz = ?";
+
+                                ps = conn.prepareStatement(sql1);
+                                ps.setString(1, vq.id.getText());
+                                ps.execute();
+                            }
+                        }
+
                         JOptionPane.showMessageDialog(null, "Quizz eliminado.");
                         ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
+
+                        ModVariablesReg varR = new ModVariablesReg();
+                        String tipo = "Administrador";
+                        String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                        String que = "Se eliminó el Quizz: " + vq.txtNombre.getText();
+                        String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                        String comp = varU.getMatricula();
+                        if (con.avisoAA(varR, tipo, quien, que, cuando, comp));
+
                         limpiar();
+
                     } catch (SQLException ex) {
                         JOptionPane.showMessageDialog(null, "El Quizz no pudo ser eliminado.");
                         Logger.getLogger(CtrlQuizzes.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,24 +299,29 @@ public class CtrlQuizzes implements ActionListener {
                     limpiar();
                 }
             }
-            
+
             if (e.getSource() == vq.btnAgrPreg) {
                 if ("Permanente".equals(varU.getStatus())) {
                     JOptionPane.showMessageDialog(null, "Acceso denegado.");
                     vq.setVisible(false);
                     variables();
                 } else {
-                    VstPreguntas vp = new VstPreguntas();
-                    ModvariablesPreguntas varp = new ModvariablesPreguntas();
-                    CtrlPreguntas ctrlP = new CtrlPreguntas(con, varp, var, varU, vp, vq);
-                    ctrlP.iniciar();
-                    vp.setVisible(true);
-                    vp.txtNombre.setText(vq.txtNombre.getText());
-                    vp.id.setText(vq.id.getText());
-                    vp.actual.setText(vq.actual.getText());
+                    if (vq.checkActivar.isSelected() == true) {
+                        JOptionPane.showMessageDialog(null, "Para agregar una pregunta, modificarla o eliminarla,\n"
+                                + "debe de desactivar el Quizz para los empleados.");
+                    } else {
+                        VstPreguntas vp = new VstPreguntas();
+                        ModvariablesPreguntas varp = new ModvariablesPreguntas();
+                        CtrlPreguntas ctrlP = new CtrlPreguntas(con, varp, var, varU, vp, vq);
+                        ctrlP.iniciar();
+                        vp.setVisible(true);
+                        vp.txtNombre.setText(vq.txtNombre.getText());
+                        vp.id.setText(vq.id.getText());
+                        vp.actual.setText(vq.actual.getText());
+                    }
                 }
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
             vq.setVisible(false);
@@ -271,7 +337,7 @@ public class CtrlQuizzes implements ActionListener {
         vq.comboModCalf.setSelectedItem(null);
         vq.comboLimHoras.setSelectedItem("Horas:");
         vq.comboLimMinutos.setSelectedItem("Minutos:");
-        
+
         vq.txtNombre.setEditable(true);
         vq.checkCamName.setVisible(false);
         vq.checkActivar.setVisible(false);
@@ -297,6 +363,7 @@ public class CtrlQuizzes implements ActionListener {
     public static void tiempo(JComboBox ComboLimTimeAgrQuizz, JComboBox ComboTimeAgrQuizz) {
         ComboLimTimeAgrQuizz.removeAllItems();
         ComboLimTimeAgrQuizz.addItem("Horas:");
+        ComboLimTimeAgrQuizz.addItem("00");
         ComboLimTimeAgrQuizz.addItem("01");
         ComboLimTimeAgrQuizz.addItem("02");
         ComboLimTimeAgrQuizz.addItem("03");
@@ -570,8 +637,6 @@ public class CtrlQuizzes implements ActionListener {
         } else {
             comboModCalf.addItem("Calificacion más alta");
             comboModCalf.addItem("Promedio de calificaciones");
-            comboModCalf.addItem("Primer intento");
-            comboModCalf.addItem("Último intento");
             comboModCalf.setEnabled(true);
         }
     }
@@ -582,11 +647,6 @@ public class CtrlQuizzes implements ActionListener {
         comboIntentos.addItem("3");
         comboIntentos.addItem("4");
         comboIntentos.addItem("5");
-        comboIntentos.addItem("6");
-        comboIntentos.addItem("7");
-        comboIntentos.addItem("8");
-        comboIntentos.addItem("9");
-        comboIntentos.addItem("10");
     }
 
     public void variables() {

@@ -26,6 +26,7 @@ public class ModVariablesReg {
     private String comando;
     private String codigo;
     private String nombre_completo;
+    private String avisos;
 
     public int getId() {
         return id;
@@ -154,5 +155,14 @@ public class ModVariablesReg {
     public void setNombre_completo(String nombre_completo) {
         this.nombre_completo = nombre_completo;
     }
+
+    public String getAvisos() {
+        return avisos;
+    }
+
+    public void setAvisos(String avisos) {
+        this.avisos = avisos;
+    }
+    
 }
 

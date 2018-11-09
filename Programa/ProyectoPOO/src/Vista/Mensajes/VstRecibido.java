@@ -36,6 +36,7 @@ public class VstRecibido extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         id = new javax.swing.JTextField();
         ident = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -45,15 +46,15 @@ public class VstRecibido extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Mensaje:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jLabel1.setText("De:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtMensaje.setEditable(false);
         txtMensaje.setColumns(20);
         txtMensaje.setRows(5);
         jScrollPane1.setViewportView(txtMensaje);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 460, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 460, 210));
 
         btnContestar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnContestar.setText("Contestar mensaje");
@@ -65,11 +66,15 @@ public class VstRecibido extends javax.swing.JFrame {
 
         id.setEditable(false);
         id.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 100, -1));
+        jPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 100, -1));
 
         ident.setEditable(false);
         ident.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(ident, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 230, -1));
+        jPanel1.add(ident, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 420, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Mensaje:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 350));
 
@@ -117,6 +122,7 @@ public class VstRecibido extends javax.swing.JFrame {
     public javax.swing.JTextField id;
     public javax.swing.JTextField ident;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextArea txtMensaje;

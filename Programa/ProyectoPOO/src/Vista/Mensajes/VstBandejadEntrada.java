@@ -47,11 +47,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         btnEnviados = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         txtMatricula = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaTodos = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         cronometro = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
 
@@ -105,7 +101,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
             tablaBandejaEntrada.getColumnModel().getColumn(3).setPreferredWidth(110);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 630, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 630, 540));
 
         tablaTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,56 +157,16 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         txtMatricula.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 140, -1));
 
-        tablaTodos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "De:", "Asunto:", "Fecha:"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tablaTodos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaTodosMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tablaTodos);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 630, 230));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Mensajes leídos:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Mensajes sin leer:");
+        jLabel2.setText("Mensajes:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 660, 20));
 
         cronometro.setText("00:00:00");
-        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 100, 20));
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 100, 20));
 
         matricula.setEditable(false);
         matricula.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 160, -1));
+        jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 160, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -247,26 +203,9 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         CtrlRecibido ctrlR = new CtrlRecibido(con, varU, varM, vr, this);
         ctrlR.iniciar();
         ModConsultasSQL.leer(id, status, vr, var);
-        ModConsultasSQL.todos(tablaTodos, var, varU);
         vr.ident.setText(ident);
+        ModConsultasSQL.recibidos(tablaBandejaEntrada, var, varU);
     }//GEN-LAST:event_tablaBandejaEntradaMouseClicked
-
-    private void tablaTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTodosMouseClicked
-        int row = evt.getY() / tablaTodos.getRowHeight();
-        String id = "" + tablaTodos.getValueAt(row, 0);
-        String status = "" + tablaTodos.getValueAt(row, 4);
-        String ident = "" + tablaTodos.getValueAt(row, 1);
-
-        VstRecibido vr = new VstRecibido();
-        ModConsultasSQL con = new ModConsultasSQL();
-        ModVariablesUsr var = new ModVariablesUsr();
-        var.setMatricula(matricula.getText());
-        ModVariablesMensaje varM = new ModVariablesMensaje();
-        CtrlRecibido ctrlR = new CtrlRecibido(con, var, varM, vr, this);
-        ctrlR.iniciar();
-        ModConsultasSQL.leer(id, status, vr, varM);
-        vr.ident.setText(ident);
-    }//GEN-LAST:event_tablaTodosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -287,7 +226,6 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
                 ModVariablesUsr var = new ModVariablesUsr();
                 var.setMatricula(matricula.getText());
                 ModConsultasSQL.recibidos(tablaBandejaEntrada, varM, var);
-                ModConsultasSQL.todos(tablaTodos, varM, var);
             }
             if (s == 60) {
                 s = 0;
@@ -342,18 +280,14 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     public javax.swing.JButton btnEnviados;
     public javax.swing.JButton btnNuevo;
     private javax.swing.JLabel cronometro;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTextField matricula;
     public javax.swing.JTable tablaBandejaEntrada;
     public javax.swing.JTable tablaTUsuarios;
-    public javax.swing.JTable tablaTodos;
     public javax.swing.JTextField txtMatricula;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

@@ -46,7 +46,7 @@ public class CtrlEmpleados implements ActionListener {
         this.ve.btnGenerar.addActionListener(this);
         this.ve.btnQuitar.addActionListener(this);
         this.ve.btnDar.addActionListener(this);
-        this.ve.btnUpdate.addActionListener(this);
+        this.ve.btnReestablecer.addActionListener(this);
         this.ve.btnAvances.addActionListener(this);
     }
 
@@ -134,6 +134,14 @@ public class CtrlEmpleados implements ActionListener {
 
                                     JOptionPane.showMessageDialog(null, "Registro exitoso.");
                                     ModConsultasSQL.tablaEmp(ve.tablaRegistrados);
+
+                                    String tipo = "Administrador";
+                                    String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                    String que = "Se agregó un nuevo empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                    String comp = varU.getMatricula();
+                                    if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
+
                                     limpiar();
                                     if (cons.email(varU, var)) {
                                         JOptionPane.showMessageDialog(null, "Se le ha enviado un mensaje al correo electrónico:\n" + var.getCorreo()
@@ -210,6 +218,14 @@ public class CtrlEmpleados implements ActionListener {
 
                                 JOptionPane.showMessageDialog(null, "Modificación completa.");
                                 ModConsultasSQL.tablaEmp(ve.tablaRegistrados);
+
+                                String tipo = "Administrador";
+                                String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                String que = "Se modificó a un empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                                String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                String comp = varU.getMatricula();
+                                if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
+
                                 limpiar();
                                 if (cons.email(varU, var)) {
                                     JOptionPane.showMessageDialog(null, "Se le ha enviado un mensaje al correo electrónico:\n" + var.getCorreo()
@@ -279,6 +295,14 @@ public class CtrlEmpleados implements ActionListener {
 
                                     JOptionPane.showMessageDialog(null, "Modificación completa.");
                                     ModConsultasSQL.tablaEmp(ve.tablaRegistrados);
+
+                                    String tipo = "Administrador";
+                                    String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                    String que = "Se modificó a un empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                    String comp = varU.getMatricula();
+                                    if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
+
                                     if (cons.email(varU, var)) {
                                         JOptionPane.showMessageDialog(null, "Se le ha enviado un mensaje al correo electrónico:\n" + var.getCorreo()
                                                 + ".\n Con la nueva informacion de su cuenta.");
@@ -336,6 +360,13 @@ public class CtrlEmpleados implements ActionListener {
 
                         JOptionPane.showMessageDialog(null, "Registro del empleado eliminado.");
                         ModConsultasSQL.tablaEmp(ve.tablaRegistrados);
+
+                        String tipo = "Administrador";
+                        String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                        String que = "Se eliminó a un empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                        String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                        String comp = varU.getMatricula();
+                        if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
 
                         var.setCorreo(ve.email.getText() + "@gmail.com");
                         varU.setAsunto("ELIMINACION DE CUENTA.");
@@ -396,7 +427,7 @@ public class CtrlEmpleados implements ActionListener {
                     ve.setVisible(false);
                     variables();
                 } else {
-
+                    
                 }
             }
 
@@ -416,6 +447,13 @@ public class CtrlEmpleados implements ActionListener {
                         ps.setString(1, ve.txtMatricula.getText());
                         ps.setString(2, "Permanente");
                         ps.execute();
+                        
+                        String tipo = "Administrador";
+                        String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                        String que = "Se le negó el acceso a un empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                        String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                        String comp = varU.getMatricula();
+                        if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
 
                         JOptionPane.showMessageDialog(null, "Se ha negado el acceso al usuario:\n"
                                 + ve.txtNombre.getText() + " " + ve.txtApPat.getText() + " " + ve.txtApMat.getText() + ".");
@@ -457,6 +495,13 @@ public class CtrlEmpleados implements ActionListener {
                         ps.setString(1, ve.txtMatricula.getText());
                         ps.setString(2, "Desconectado");
                         ps.execute();
+                        
+                        String tipo = "Administrador";
+                        String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                        String que = "Se le dió el acceso a un empleado: " + var.getMatricula() +"/ "+ var.getNombre_completo();
+                        String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                        String comp = varU.getMatricula();
+                        if (cons.avisoAA(var, tipo, quien, que, cuando, comp));
 
                         JOptionPane.showMessageDialog(null, "Se ha concedido el acceso al usuario:\n"
                                 + ve.txtNombre.getText() + " " + ve.txtApPat.getText() + " " + ve.txtApMat.getText() + ".");
@@ -480,6 +525,11 @@ public class CtrlEmpleados implements ActionListener {
                     }
                 }
             }
+
+            if (e.getSource() == ve.btnReestablecer) {
+                limpiar();
+            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
             ve.setVisible(false);
@@ -499,7 +549,7 @@ public class CtrlEmpleados implements ActionListener {
         ve.btnAgregar.setVisible(true);
         ve.btnGenerar.setVisible(true);
         ve.btnAvances.setVisible(false);
-        ve.btnUpdate.setVisible(false);
+        ve.btnReestablecer.setVisible(false);
         ve.btnModificar.setVisible(false);
         ve.btnEliminar.setVisible(false);
         ve.btnQuitar.setVisible(false);

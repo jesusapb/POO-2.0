@@ -42,7 +42,7 @@ CREATE TABLE `preguntas` (
   `dis3` varchar(40) NOT NULL,
   `dis4` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `preguntas` (
 
 LOCK TABLES `preguntas` WRITE;
 /*!40000 ALTER TABLE `preguntas` DISABLE KEYS */;
-INSERT INTO `preguntas` VALUES (1,'3','hola2','noabierto','*/null/*','80.00','1','20.00','2','20.00','3','20.00','4','20.00','5','6','7','8'),(20,'3','daasdas','abierto','*/null/*','1.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*');
+INSERT INTO `preguntas` VALUES (1,'3','numeracion','unico','1','80.0','1','80.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','2','3','4','5'),(20,'3','consecutivo','multiple','4','40.0','1','10.0','2','10.0','3','10.0','4','10.0','5','6','7','8'),(21,'3','multiplos de 2','unico','1','60.0','2','60.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','1','*/null/*','*/null/*','*/null/*'),(22,'6','primera letra del abc-dario','unico','1','10.0','a','10.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','c','w','x','f'),(23,'6','ultima letra del abc-dario','unico','1','10.0','z','10.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','x','y','w','a'),(24,'3','triple de 3','unico','1','15.0','18','15.0','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','*/null/*','24','17','9','6');
 /*!40000 ALTER TABLE `preguntas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-02 16:10:42
+-- Dump completed on 2018-11-09 12:39:16

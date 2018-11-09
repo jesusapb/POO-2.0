@@ -79,33 +79,27 @@ public class CtrlEnviados implements ActionListener {
                         JOptionPane.showMessageDialog(null, "No ha escrito el mensaje.");
                     } else {
                         ModConsultasSQL.enviados(ve.tablaEnviados, varM, var);
-                        String id = varM.getId() + "";
-                        if (id.equals(ve.id.getText())) {
-                            varM.setDe_mat(var.getMatricula());
-                            varM.setDe_nom(var.getNombre_completo());
+                        varM.setDe_mat(var.getMatricula());
+                        varM.setDe_nom(var.getNombre_completo());
 
-                            String mat = ve.txtPara.getText();
-                            String[] part = mat.split("/");
-                            String part1 = part[0];
-                            varM.setPara_mat(part1);
-                            String par2 = part[1];
-                            varM.setPara_nom(par2);
+                        String mat = ve.txtPara.getText();
+                        String[] part = mat.split("/");
+                        String part1 = part[0];
+                        varM.setPara_mat(part1);
+                        String par2 = part[1];
+                        varM.setPara_nom(par2);
 
-                            varM.setFecha(fechaDate.format(date) + " " + horaDate.format(date));
-                            varM.setAsunto(ve.txtAsunto.getText());
-                            varM.setMensaje(ve.txtMensaje.getText());
-                            varM.setStatus("NO VISTO");
+                        varM.setFecha(fechaDate.format(date) + " " + horaDate.format(date));
+                        varM.setAsunto(ve.txtAsunto.getText());
+                        varM.setMensaje(ve.txtMensaje.getText());
+                        varM.setStatus("NO VISTO");
 
-                            if (con.enviar(varM)) {
-                                JOptionPane.showMessageDialog(null, "Se ha reenviado el mensaje a: " + varM.getPara_nom());
-                                ModConsultasSQL.enviados(ve.tablaEnviados, varM, var);
-                                limpiar();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "No se pudo reenviado el mensaje a: " + varM.getPara_nom());
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Ya no existe éste mensaje");
+                        if (con.enviar(varM)) {
+                            JOptionPane.showMessageDialog(null, "Se ha reenviado el mensaje a: " + varM.getPara_nom());
+                            ModConsultasSQL.enviados(ve.tablaEnviados, varM, var);
                             limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo reenviado el mensaje a: " + varM.getPara_nom());
                         }
                     }
                 }
