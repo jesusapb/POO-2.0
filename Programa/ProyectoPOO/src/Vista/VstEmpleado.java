@@ -111,14 +111,14 @@ public class VstEmpleado extends javax.swing.JFrame {
         btnCerrarSesion.setBorder(null);
         btnCerrarSesion.setContentAreaFilled(false);
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
         btnMensajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Envelope_20px.png"))); // NOI18N
         btnMensajes.setText("Mensajes.");
         btnMensajes.setBorder(null);
         btnMensajes.setContentAreaFilled(false);
         btnMensajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 500, 20));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -161,14 +161,14 @@ public class VstEmpleado extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tablaAvisos);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 230, 330));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 240, 330));
 
         txtAviso.setEditable(false);
         txtAviso.setBorder(null);
         txtAviso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane6.setViewportView(txtAviso);
 
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 230, 120));
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 240, 120));
 
         btnLTodo.setText("Leer todo");
         btnLTodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

@@ -86,22 +86,25 @@ public class ModConsultasSQL extends ModConexion {
                 } else if ("Habilitado".equals(rs.getString(10))) {
                     if (var.getContraseña().equals(rs.getString(11))) {
                         JOptionPane.showMessageDialog(null, "Hola " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + ".\n"
-                                + "Se há detectado que solicitó el cambio de su contraseña\n"
-                                + "por medio de la funsión *¿Olvidaste tu contraseña?*, por"
+                                + "Se ha detectado que solicitó el cambio de su contraseña\n"
+                                + "por medio de la función *¿Olvidaste tu contraseña?*, por\n"
                                 + "este medio, se va a habilitar únicamente el campo de\n "
-                                + "ingreso de la contraseña, ahí debera de ingresar su\n"
+                                + "ingreso de la contraseña, ahí deberá de ingresar su\n"
                                 + "nueva contraseña y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
                         var.setMensaje("Detección de cambio de contraseña.");
                         /*vl.txtMat.setEditable(false);
                         vl.txtPass.setText(null);
                         vl.btnAcceder.setVisible(false);
                         vl.btnValidar.setVisible(true);*/
-                        return true;
+                        return false;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Código de seguridad incorrecto,\n favor de verificarlo.");
+                        var.setMensaje("nada.");
                     }
 
                 } else if ("@NUEVO".equals(s)) {
                     JOptionPane.showMessageDialog(null, "Hola " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + ".\n"
-                            + "Se há detectado que es tu primer inicio de sesión, por\n"
+                            + "Se ha detectado que es tu primer inicio de sesión, por\n"
                             + "lo tanto, se le pide el inmediato cambio de contraseña.\n"
                             + "Se le habilitara únicamente el campo de ingreso de la\n "
                             + "contraseña, ahi deberá de ingresar su nueva contraseña\n"
@@ -111,7 +114,7 @@ public class ModConsultasSQL extends ModConexion {
                     vl.txtPass.setText(null);
                     vl.btnAcceder.setVisible(false);
                     vl.btnValidar.setVisible(true);*/
-                    return true;
+                    return false;
 
                 } else if (var.getContraseña().equals(pass)) {
                     String update = "UPDATE usuarios SET dia = ?, hora = ?, status = ?, ip = ?, equipo = ? WHERE id = ?";
@@ -187,10 +190,10 @@ public class ModConsultasSQL extends ModConexion {
                 } else if ("Habilitado".equals(rs.getString(10))) {
                     if (var.getContraseña().equals(rs.getString(11))) {
                         JOptionPane.showMessageDialog(null, "Hola " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + ".\n"
-                                + "Se há detectado que solicitó el cambio de su contraseña\n"
-                                + "por medio de la funsión *¿Olvidaste tu contraseña?*, por"
+                                + "Se ha detectado que solicitó el cambio de su contraseña\n"
+                                + "por medio de la función *¿Olvidaste tu contraseña?*, por\n"
                                 + "este medio, se va a habilitar únicamente el campo de\n "
-                                + "ingreso de la contraseña, ahí debera de ingresar su\n"
+                                + "ingreso de la contraseña, ahí deberá de ingresar su\n"
                                 + "nueva contraseña y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
                         var.setMensaje("Detección de cambio de contraseña.");
                         /*vl.txtMat.setEditable(false);
@@ -198,12 +201,14 @@ public class ModConsultasSQL extends ModConexion {
                         vl.btnAcceder.setVisible(false);
                         vl.btnValidar.setVisible(true);*/
                         return false;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Código de seguridad incorrecto,\n favor de verificarlo.");
+                        var.setMensaje("nada.");
                     }
-                    JOptionPane.showMessageDialog(null, "Código de seguridad incorrecto,\n favor de verificarlo.");
                     return false;
                 } else if ("@NUEVO".equals(s)) {
                     JOptionPane.showMessageDialog(null, "Hola " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + ".\n"
-                            + "Se há detectado que es tu primer inicio de sesión, por\n"
+                            + "Se ha detectado que es tu primer inicio de sesión, por\n"
                             + "lo tanto, se le pide el inmediato cambio de contraseña.\n"
                             + "Se le habilitara únicamente el campo de ingreso de la\n "
                             + "contraseña, ahi deberá de ingresar su nueva contraseña\n"
@@ -1939,7 +1944,7 @@ public class ModConsultasSQL extends ModConexion {
 
     }
     //**************************************************************************
-    
+
     public static void tablaRegistro(JTable tablaRegistro, ModVariablesPresentados var, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override

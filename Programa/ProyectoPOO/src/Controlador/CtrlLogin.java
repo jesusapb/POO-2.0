@@ -98,10 +98,10 @@ public class CtrlLogin implements ActionListener {
                         ve.setVisible(true);
 
                     }
-                } else if ("Detección de cambio de contraseña.".equals(var.getMensaje()) || "Detección de nuevo usuario.".equals(var.getMensaje())); else if ("Permanente".equals(var.getStatus()) || "Conectado".equals(var.getStatus())); else {
+                } else if ("Detección de cambio de contraseña.".equals(var.getMensaje()) || "Detección de nuevo usuario.".equals(var.getMensaje())); else if ("nada.".equals(var.getMensaje()) || "nada.".equals(var.getMensaje())); else if ("Permanente".equals(var.getStatus()) || "Conectado".equals(var.getStatus())); else {
                     JOptionPane.showMessageDialog(null, "Matrícula/Correo o contraseña incorrecta.");
                 }
-
+                System.out.println(var.getMensaje());
                 if ("Detección de cambio de contraseña.".equals(var.getMensaje())) {
                     vl.txtMat.setEditable(false);
                     vl.txtPass.setText(null);
