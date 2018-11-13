@@ -19,6 +19,7 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
         setDefaultCloseOperation(0);
         NomQuizz.setVisible(false);
         nump.setVisible(false);
+        nump_resp.setVisible(false);
         puntosT.setVisible(false);
         puntos.setVisible(false);
         ab.setVisible(false);
@@ -73,6 +74,7 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
         nump = new javax.swing.JTextField();
         abrt = new javax.swing.JTextField();
         puntos = new javax.swing.JTextField();
+        nump_resp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -222,6 +224,11 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
         puntos.setBorder(null);
         jPanel1.add(puntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 110, -1));
 
+        nump_resp.setEditable(false);
+        nump_resp.setBackground(new java.awt.Color(255, 255, 255));
+        nump_resp.setBorder(null);
+        jPanel1.add(nump_resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 590));
 
         pack();
@@ -283,6 +290,7 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     public javax.swing.JTextField nump;
+    public javax.swing.JTextField nump_resp;
     public javax.swing.JTextField puntos;
     public javax.swing.JTextField puntosT;
     public javax.swing.JCheckBox r_a;

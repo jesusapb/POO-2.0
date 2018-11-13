@@ -48,6 +48,7 @@ public class VstQuizzes extends javax.swing.JFrame {
         id.setVisible(false);
         actual.setVisible(false);
         matricula.setVisible(false);
+        p_totales.setVisible(false);
         //id.setVisible(false);
 
         t = new Timer(10, acciones);

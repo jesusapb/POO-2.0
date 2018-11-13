@@ -192,7 +192,7 @@ public class Listas {
         String sql = "SELECT * FROM preguntas";
         ResultSet rs = null;
         PreparedStatement ps = null;
-        int a = 1;
+        int a = 0;
 
         try {
             ps = con.getConexion().prepareStatement(sql);
@@ -224,7 +224,7 @@ public class Listas {
                     list.add(var);
                 }
             }
-
+            System.out.println("A desde raíz: " + a);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
@@ -431,6 +431,39 @@ public class Listas {
                         var.setAbrt(rs.getString(8));
                         list.add(var);
                     }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<ModVariablesPresentados> listaReg(String matricula) {
+        ArrayList<ModVariablesPresentados> list = new ArrayList<ModVariablesPresentados>();
+        ModConexion con = new ModConexion();
+        String sql = "SELECT * FROM presentados";
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.getConexion().prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ModVariablesPresentados var = new ModVariablesPresentados();
+                if (rs.getString(2).equals(matricula)) {
+                    var.setId(rs.getInt(1));
+                    var.setIdent(rs.getString(2));
+                    var.setQuizz(rs.getString(3));
+                    var.setIntento(rs.getString(4));
+                    var.setP_totales(rs.getString(5));
+                    var.setCalificacion(rs.getString(6));
+                    var.setStatus(rs.getString(7));
+                    var.setAbrt(rs.getString(8));
+                    list.add(var);
                 }
             }
         } catch (SQLException ex) {

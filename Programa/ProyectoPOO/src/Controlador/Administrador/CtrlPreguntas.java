@@ -122,8 +122,13 @@ public class CtrlPreguntas implements ActionListener {
 
                                                 JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
                                                 int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
-                                                vp.p_totales.setText(acum + "");
-                                                vq.p_totales.setText(acum + "");
+                                                if (acum < 1) {
+                                                    vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                                    vq.p_totales.setText(acum + "");
+                                                } else {
+                                                    vp.p_totales.setText(acum + "");
+                                                    vq.p_totales.setText(acum + "");
+                                                }
                                                 vp.actual.setText(num + "");
                                                 vq.actual.setText(num + "");
                                                 ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
@@ -194,8 +199,13 @@ public class CtrlPreguntas implements ActionListener {
 
                                                     JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
                                                     int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
-                                                    vp.p_totales.setText(acum + "");
-                                                    vq.p_totales.setText(acum + "");
+                                                    if (acum < 1) {
+                                                        vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                                        vq.p_totales.setText(acum + "");
+                                                    } else {
+                                                        vp.p_totales.setText(acum + "");
+                                                        vq.p_totales.setText(acum + "");
+                                                    }
                                                     vp.actual.setText(num + "");
                                                     vq.actual.setText(num + "");
                                                     ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
@@ -281,8 +291,13 @@ public class CtrlPreguntas implements ActionListener {
 
                                                                         JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
                                                                         int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
-                                                                        vp.p_totales.setText(acum + "");
-                                                                        vq.p_totales.setText(acum + "");
+                                                                        if (acum < 1) {
+                                                                            vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                                                            vq.p_totales.setText(acum + "");
+                                                                        } else {
+                                                                            vp.p_totales.setText(acum + "");
+                                                                            vq.p_totales.setText(acum + "");
+                                                                        }
                                                                         vp.actual.setText(num + "");
                                                                         vq.actual.setText(num + "");
                                                                         ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
@@ -381,8 +396,13 @@ public class CtrlPreguntas implements ActionListener {
 
                                                                             JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
                                                                             int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
-                                                                            vp.p_totales.setText(acum + "");
-                                                                            vq.p_totales.setText(acum + "");
+                                                                            if (acum < 1) {
+                                                                                vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                                                                vq.p_totales.setText(acum + "");
+                                                                            } else {
+                                                                                vp.p_totales.setText(acum + "");
+                                                                                vq.p_totales.setText(acum + "");
+                                                                            }
                                                                             vp.actual.setText(num + "");
                                                                             vq.actual.setText(num + "");
                                                                             ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
@@ -487,8 +507,13 @@ public class CtrlPreguntas implements ActionListener {
 
                                                                                 JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
                                                                                 int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
-                                                                                vp.p_totales.setText(acum + "");
-                                                                                vq.p_totales.setText(acum + "");
+                                                                                if (acum < 1) {
+                                                                                    vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                                                                    vq.p_totales.setText(acum + "");
+                                                                                } else {
+                                                                                    vp.p_totales.setText(acum + "");
+                                                                                    vq.p_totales.setText(acum + "");
+                                                                                }
                                                                                 vp.actual.setText(num + "");
                                                                                 vq.actual.setText(num + "");
                                                                                 ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);

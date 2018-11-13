@@ -72,7 +72,7 @@ public class VstPerfil extends javax.swing.JFrame {
         btnInfo.setText("?");
         btnInfo.setBorder(null);
         btnInfo.setContentAreaFilled(false);
-        jPanel1.add(btnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 50, -1));
+        jPanel1.add(btnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 50, -1));
 
         buttonGroup1.add(ed_nombre);
         ed_nombre.setActionCommand("Editar");

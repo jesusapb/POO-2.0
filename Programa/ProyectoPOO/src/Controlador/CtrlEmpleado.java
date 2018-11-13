@@ -7,13 +7,16 @@ package Controlador;
 
 import Controlador.CtrlMensajes.CtrlBandejadEntrada;
 import Controlador.Empleado.CtrlLeerDocs;
+import Controlador.Empleado.CtrlPerfil;
 import Controlador.Empleado.CtrlSelectQuizz;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;
+import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesUsr;
 import Modelo.ModvariablesPreguntas;
 import Vista.Empleado.VstLeerDocs;
+import Vista.Empleado.VstPerfil;
 import Vista.Empleado.VstSelectQuizz;
 import Vista.Mensajes.VstBandejadEntrada;
 import Vista.VstEmpleado;
@@ -120,7 +123,11 @@ public class CtrlEmpleado implements ActionListener {
                 }
                 
                 if (e.getSource() == ve.btnPerfil) {
-                    
+                    VstPerfil vp = new VstPerfil();
+                    ModVariablesPresentados varP = new ModVariablesPresentados();
+                    CtrlPerfil ctrlP = new CtrlPerfil(cons, var, vp, ve, varP);
+                    ctrlP.iniciar();
+                    vp.setVisible(true);
                 }
                 
                 if (e.getSource() == ve.btnRealizarQuizz) {

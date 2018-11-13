@@ -37,6 +37,7 @@ public class CtrlPresentarQuizz implements ActionListener {
     private ModVariablesPresentados varPre;
     private VstPresentarQuizz vpq;
     private Timer t;
+    private int contad = 0;
 
     public CtrlPresentarQuizz(ModConsultasSQL cons, ModVariablesUsr varU, ModVariablesQuizzes varQ, ModvariablesPreguntas varP, ModVariablesPresentados varPre, VstPresentarQuizz vpq) {
         this.cons = cons;
@@ -81,6 +82,7 @@ public class CtrlPresentarQuizz implements ActionListener {
             //int verificar = Integer.parseInt(cons.verificador(vpq.nump.getText()));
             int b = 0;
             ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
+            vpq.nump_resp.setText(varP.getNum_resp());
             Listas mens = new Listas();
             String[] lista = new String[8];
             String[] temp = mens.listaResp(varP.getId(), varQ.getId());
@@ -133,16 +135,14 @@ public class CtrlPresentarQuizz implements ActionListener {
 
                 if (e.getSource() == vpq.btnSigTerm) {
                     boolean a = true;
-                    System.out.println("Nump1: " + vpq.nump.getText());//1
-                    int b = 0;
-                    ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
+                    int b = Integer.parseInt(vpq.contador.getText());
+                    //ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
                     if (varP.getTipo().equals("abierto")) {
 
                         ModVariablesRespuestas varRe = new ModVariablesRespuestas();
                         varRe.setIdent(varU.getMatricula());
                         varRe.setPuntuacion(varP.getPuntuacion_total());
                         varRe.setQuizz(varP.getQuizz());
-                        System.out.println(varP.getQuizz());
                         varRe.setPregunta(vpq.txtPregunta.getText());
                         varRe.setRespuesta(vpq.txtRespuesta.getText());
                         varRe.setStatus("Por calificar");
@@ -176,38 +176,46 @@ public class CtrlPresentarQuizz implements ActionListener {
                         if (!varP.getTipo().equals("abierto")) {
                             if (vpq.r_a.isSelected()) {
                                 ra = Double.parseDouble(vpq.r_a.getName());
-                                System.out.println("Se tocó a.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_b.isSelected()) {
                                 rb = Double.parseDouble(vpq.r_b.getName());
-                                System.out.println("Se tocó b.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_c.isSelected()) {
                                 rc = Double.parseDouble(vpq.r_c.getName());
-                                System.out.println("Se tocó c.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_d.isSelected()) {
                                 rd = Double.parseDouble(vpq.r_d.getName());
-                                System.out.println("Se tocó d.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_e.isSelected()) {
                                 re = Double.parseDouble(vpq.r_e.getName());
-                                System.out.println("Se tocó e.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_f.isSelected()) {
                                 rf = Double.parseDouble(vpq.r_f.getName());
-                                System.out.println("Se tocó f.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_g.isSelected()) {
                                 rg = Double.parseDouble(vpq.r_g.getName());
-                                System.out.println("Se tocó g.");
+                                contad = contad + 1;
                             }
                             if (vpq.r_h.isSelected()) {
                                 rh = Double.parseDouble(vpq.r_h.getName());
-                                System.out.println("Se tocó h.");
+                                contad = contad + 1;
                             }
 
-                            acum = ra + rb + rc + rd + re + rf + rg + rh + puntos;
+                            //System.out.println("Contad: " + contad + " Puntos: " + puntos);
+                            int nump_resp = Integer.parseInt(varP.getNum_resp());
+                            if (contad > nump_resp) {
+                                acum = puntos;
+                            } else {
+                                acum = ra + rb + rc + rd + re + rf + rg + rh + puntos;
+                            }
+                            contad = 0;
+                            //System.out.println("Acum: " + acum);
                             vpq.puntos.setText(acum + "");
                         }
 
@@ -215,9 +223,7 @@ public class CtrlPresentarQuizz implements ActionListener {
                         int com = Integer.parseInt(varPre.getTotales());
 
                         if (conta <= com) {
-                            System.out.println("Nump2: " + vpq.nump.getText());//2
                             ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
-                            System.out.println("GetId(): " + varP.getId());//GetId()
                             Listas mens = new Listas();
                             String[] lista = new String[8];
                             String[] temp = mens.listaResp(varP.getId(), varQ.getId());
@@ -227,7 +233,6 @@ public class CtrlPresentarQuizz implements ActionListener {
                             }
                             vpq.txtPregunta.setText(varP.getPregunta());
                             vpq.nump.setText(vpq.nump.getText() + "~" + varP.getId());
-                            System.out.println("Nump3: " + vpq.nump.getText());//3
                             vpq.contador.setText(conta + "");
                             double puntosT = Double.parseDouble(vpq.puntosT.getText());
                             puntosT += Double.parseDouble(varP.getPuntuacion_total());
@@ -272,11 +277,9 @@ public class CtrlPresentarQuizz implements ActionListener {
                                         String parte = part[0];
                                         if (parte.equals("*/null/*")); else {
                                             lista[cont] = temp[i];
-//                                JOptionPane.showMessageDialog(null, lista[cont]);
                                             cont++;
                                         }
                                     }
-//                        JOptionPane.showMessageDialog(null, cont);
                                     insertarPreg(cont, lista);
                                 }
                             }
@@ -320,22 +323,21 @@ public class CtrlPresentarQuizz implements ActionListener {
                             DecimalFormat op = new DecimalFormat("#.00");
                             String bd = op.format((puntosT / (conta - 1)));
                             double fin = Double.parseDouble(bd);
-                            varPre.setP_totales(fin + "");
 
                             DecimalFormat op1 = new DecimalFormat("#.00");
                             String bd1 = op1.format((puntos / (conta - 1)));
                             double fin1 = Double.parseDouble(bd1);
-                            varPre.setCalificacion(fin1 + "");
                             String que;
+                            double fin2 = 0;
 
                             if (!vpq.ab.getText().equals("")) {
                                 varPre.setStatus("Por calificar");
-                                que = "Terminó de presentar el Quizz: '" + parte[0] + ", se necesita la revision y calificación de la(s) pregunta(s) abierta(s).";
+                                que = "Terminó de presentar el Quizz: ''" + parte[0] + "'', se necesita la revision y calificación de la(s) pregunta(s) abierta(s)";
                                 varPre.setAbrt(vpq.abrt.getText());
                             } else {
                                 DecimalFormat op2 = new DecimalFormat("#.00");
                                 String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
-                                double fin2 = Double.parseDouble(bd2);
+                                fin2 = Double.parseDouble(bd2);
                                 if (fin2 < 70) {
                                     que = "Terminó de presentar el Quizz: '" + parte[0] + "' con una puntuación de: " + fin2 + " (Reprobaado).";
                                     varPre.setStatus("Reprobado");
@@ -345,11 +347,15 @@ public class CtrlPresentarQuizz implements ActionListener {
                                 }
                                 varPre.setAbrt("nada");
                             }
+                            
+                            
+                            varPre.setP_totales(fin + "~100");
+                            varPre.setCalificacion(fin1 + "~" + fin2);
 
                             if (cons.rPresentados(varPre)) {
                                 DecimalFormat op2 = new DecimalFormat("#.00");
                                 String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
-                                double fin2 = Double.parseDouble(bd2);
+                                fin2 = Double.parseDouble(bd2);
 
                                 ModVariablesReg varReg = new ModVariablesReg();
                                 String tipo = "Administrador";

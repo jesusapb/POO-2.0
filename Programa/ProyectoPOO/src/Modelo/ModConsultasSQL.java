@@ -1746,78 +1746,82 @@ public class ModConsultasSQL extends ModConexion {
     //**************************************************************************
 
     public static void obtenerPreg(ModvariablesPreguntas varP, int quizz, String todos, int contador) {
-        System.out.println("Todos: " + todos);//*
         ModvariablesPreguntas var;
         Listas mens = new Listas();
         ArrayList<ModvariablesPreguntas> list = mens.listaPregMod(quizz);
-        int a = (int) (Math.random() * list.size()) + 1;
+        int a = (int) (Math.random() * list.size());
         String sub = "";
-        
+
         if (contador == 0) {
             for (int i = 0; i < list.size(); i++) {
                 var = list.get(i);
                 if (var.getIncremento() == a) {
-                    
+                    varP.setId(var.getId());
+                    varP.setQuizz(var.getQuizz());
+                    varP.setPregunta(var.getPregunta());
+                    varP.setTipo(var.getTipo());
+                    varP.setNum_resp(var.getNum_resp());
+                    varP.setPuntuacion_total(var.getPuntuacion_total());
+                    varP.setResp1(var.getResp1());
+                    varP.setR1(var.getR1());
+                    varP.setResp2(var.getResp2());
+                    varP.setR2(var.getR2());
+                    varP.setResp3(var.getResp3());
+                    varP.setR3(var.getR3());
+                    varP.setResp4(var.getResp4());
+                    varP.setR4(var.getR4());
+                    varP.setDis1(var.getDis1());
+                    varP.setDis2(var.getDis2());
+                    varP.setDis3(var.getDis3());
+                    varP.setDis4(var.getDis4());
                 }
             }
-        }
-        
-        int acum = 0;
-
-        for (int j = 0; j < list.size(); j++) {
-            String[] partir = todos.split("~");
-            var = list.get(j);
-
-            System.out.println("GetIncremento: " + var.getIncremento() + " A: " + a);//*
-            if (var.getIncremento() == a) {
-                System.out.println("** GetIncremento: " + var.getIncremento() + " A: " + a);//*
-                System.out.println("GetId(): " + var.getId() + " Sub: " + sub);//*
-
-                if (todos.equals("")) {
-                    sub = "0";
-                } else {
-                    sub = partir[acum];
-                    System.out.println("Sub: " + sub);//*
-                }
-                if (var.getId() != Integer.parseInt(sub)) {
-                    System.out.println("** GetId(): " + var.getId() + " Sub: " + sub);//*
-                    acum = acum + 1;
-                    if (partir[acum + 1].equals("")) {
-                        sub = "0";
-                    } else {
-                        sub = partir[acum];
+        } else {
+            boolean band = true;
+            while (band == true) {
+                for (int i = 0; i < list.size(); i++) {
+                    var = list.get(i);
+                    if (var.getIncremento() == a) {
+                        for (int j = 0; j < contador; j++) {
+                            String[] partir = todos.split("~");
+                            sub = partir[j];
+                            if (var.getId() == Integer.parseInt(sub)) {
+                                a = (int) (Math.random() * list.size());
+                                j = contador - 1;
+                                i = list.size() - 1;
+                            } else {
+                                if (j == contador - 1) {
+                                    i = list.size() - 1;
+                                    band = false;
+                                }
+                            }
+                        }
                     }
-                    System.out.println(acum);
-                } else {
-                    a = (int) (Math.random() * list.size()) + 1;
-                    acum = 0;
-                    j = 0;
                 }
             }
-        }
 
-        for (int i = 0; i < list.size(); i++) {
-            var = list.get(i);
-            if (var.getIncremento() == a) {
-                System.out.println("**** GetIncremento: " + var.getIncremento() + " A: " + a);//*
-                varP.setId(var.getId());
-                varP.setQuizz(var.getQuizz());
-                varP.setPregunta(var.getPregunta());
-                varP.setTipo(var.getTipo());
-                varP.setNum_resp(var.getNum_resp());
-                varP.setPuntuacion_total(var.getPuntuacion_total());
-                varP.setResp1(var.getResp1());
-                varP.setR1(var.getR1());
-                varP.setResp2(var.getResp2());
-                varP.setR2(var.getR2());
-                varP.setResp3(var.getResp3());
-                varP.setR3(var.getR3());
-                varP.setResp4(var.getResp4());
-                varP.setR4(var.getR4());
-                varP.setDis1(var.getDis1());
-                varP.setDis2(var.getDis2());
-                varP.setDis3(var.getDis3());
-                varP.setDis4(var.getDis4());
+            for (int i = 0; i < list.size(); i++) {
+                var = list.get(i);
+                if (var.getIncremento() == a) {
+                    varP.setId(var.getId());
+                    varP.setQuizz(var.getQuizz());
+                    varP.setPregunta(var.getPregunta());
+                    varP.setTipo(var.getTipo());
+                    varP.setNum_resp(var.getNum_resp());
+                    varP.setPuntuacion_total(var.getPuntuacion_total());
+                    varP.setResp1(var.getResp1());
+                    varP.setR1(var.getR1());
+                    varP.setResp2(var.getResp2());
+                    varP.setR2(var.getR2());
+                    varP.setResp3(var.getResp3());
+                    varP.setR3(var.getR3());
+                    varP.setResp4(var.getResp4());
+                    varP.setR4(var.getR4());
+                    varP.setDis1(var.getDis1());
+                    varP.setDis2(var.getDis2());
+                    varP.setDis3(var.getDis3());
+                    varP.setDis4(var.getDis4());
+                }
             }
         }
     }
@@ -1935,4 +1939,40 @@ public class ModConsultasSQL extends ModConexion {
 
     }
     //**************************************************************************
+    
+    public static void tablaRegistro(JTable tablaRegistro, ModVariablesPresentados var, String matricula) {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //Bloquea la edision.
+            }
+        };
+        tablaRegistro.setModel(modelo);
+
+        modelo.addColumn("Quizzes");
+        modelo.addColumn("Intentos");
+        modelo.addColumn("Calificaciónes");
+        modelo.addColumn("Status");
+
+        Listas mens = new Listas();
+        ArrayList<ModVariablesPresentados> list = mens.listaReg(matricula);
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Object fila[] = new Object[4];
+                var = list.get(i);
+
+                fila[0] = var.getQuizz();
+                fila[1] = var.getIntento();
+                String calificacion = var.getCalificacion();
+                String[] partir = calificacion.split("~");
+                fila[2] = partir[1];
+                fila[3] = var.getStatus();
+
+                modelo.addRow(fila);
+            }
+        }
+    }
+    //**************************************************************************
+
 }

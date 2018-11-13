@@ -10,7 +10,6 @@ import Controlador.Administrador.CtrlEmpleados;
 import Controlador.Administrador.CtrlPerfil;
 import Controlador.Administrador.CtrlQuizzes;
 import Controlador.CtrlMensajes.CtrlBandejadEntrada;
-import Modelo.Listas;
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;

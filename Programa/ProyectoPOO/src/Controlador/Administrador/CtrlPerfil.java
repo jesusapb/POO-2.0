@@ -91,7 +91,7 @@ public class CtrlPerfil implements ActionListener {
                             + "su matrícula y su contraseña y seleccionar\n"
                             + "'Validar', si los datos esta bien, deberá\n"
                             + "de seleccionar 'Guardar' y asi concluir.\n"
-                            + "Par hacer el cambio de contraseña:\n"
+                            + "\nPar hacer el cambio de contraseña:\n"
                             + "1.- Debe de seleccionar 'Cambiar de contraseña',\n"
                             + "con esto se abirán los campos correspondientes.\n"
                             + "2.- Debe de ingresar su matrícula y la contraseña\n"
