@@ -330,7 +330,7 @@ public class VstPreguntas extends javax.swing.JFrame {
         p_totales.setEditable(false);
         p_totales.setBackground(new java.awt.Color(255, 255, 255));
         p_totales.setBorder(null);
-        jPanel1.add(p_totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, 20));
+        jPanel1.add(p_totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 220, 20));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Tipo de respuesta:");

@@ -61,6 +61,15 @@ public class CtrlPreguntas implements ActionListener {
         String id = vq.id.getText();
         vp.matricula.setText(varU.getMatricula());
         ModConsultasSQL.tablaPreg(vp.tablaPreguntas, var, id);
+
+        int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
+        if (acum < 1) {
+            vp.p_totales.setText("Mínimo de preguntas cumplido.");
+            vq.p_totales.setText(acum + "");
+        } else {
+            vp.p_totales.setText(acum + "");
+            vq.p_totales.setText(acum + "");
+        }
     }
 
     @Override

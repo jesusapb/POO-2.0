@@ -313,12 +313,12 @@ public class CtrlQuizzes implements ActionListener {
                         VstPreguntas vp = new VstPreguntas();
                         ModvariablesPreguntas varp = new ModvariablesPreguntas();
                         CtrlPreguntas ctrlP = new CtrlPreguntas(con, varp, var, varU, vp, vq);
-                        ctrlP.iniciar();
-                        vp.setVisible(true);
                         vp.txtNombre.setText(vq.txtNombre.getText());
                         vp.id.setText(vq.id.getText());
                         vp.actual.setText(vq.actual.getText());
                         vp.p_totales.setText(vq.p_totales.getText());
+                        ctrlP.iniciar();
+                        vp.setVisible(true);
                     }
                 }
             }
