@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
  * @author Antonio
  */
 public class ModConexion {
-    public static final String urlLocal = "jdbc:mysql://localhost:3306/crear_examen";
+    public static final String urlLocal = "jdbc:mysql://localhost:3306/poo";
     public static final String usernameLocal = "root";
-    public static final String passwordLocal = "Rfmb5851";
+    public static final String passwordLocal = "160798";
     public static final String urlWEB = "jdbc:mysql://sql10.freesqldatabase.com:3306/sql10264550";
     public static final String usernameWEB = "sql10264550";
     public static final String passwordWEB = "tt1DMlZ5ra";
