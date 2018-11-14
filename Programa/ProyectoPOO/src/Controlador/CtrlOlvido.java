@@ -37,10 +37,6 @@ public class CtrlOlvido implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() == vfc.btnCerrar) {
-//            vfc.setVisible(false);
-//        }
-        
         if (e.getSource() == vfc.botonValidar) {
             String busm = "";
             String busc = "";
@@ -52,6 +48,7 @@ public class CtrlOlvido implements ActionListener {
 
                 if (cons.emailMatricula(var)) {
                     vfc.txtMatriculaCorreo.setText(null);
+                    vfc.setVisible(false);
                 } else {
                     if ("Conectado".equals(var.getStatus()) || "Permanente".equals(var.getStatus())); else if ("Nuevo".equals(var.getMensaje())); else {
                         busm = "null";
@@ -60,6 +57,7 @@ public class CtrlOlvido implements ActionListener {
 
                 if (cons.emailCorreo(var)) {
                     vfc.txtMatriculaCorreo.setText(null);
+                    vfc.setVisible(false);
                 } else {
                     if ("Conectado".equals(var.getStatus()) || "Permanente".equals(var.getStatus())); else if ("Nuevo".equals(var.getMensaje())); else {
                         busc = "null";

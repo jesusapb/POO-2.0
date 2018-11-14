@@ -9,9 +9,6 @@ import Controlador.CtrlMensajes.CtrlRecibido;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesMensaje;
 import Modelo.ModVariablesUsr;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 /**
  *
@@ -25,8 +22,6 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     public VstBandejadEntrada() {
         initComponents();
         matricula.setVisible(false);
-        t = new Timer(10, acciones);
-        t.start();
     }
 
     /**
@@ -208,34 +203,6 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private Timer t;
-    private int h, m, s, cs;
-
-    private ActionListener acciones = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            cs++;
-            if (cs == 100) {
-                cs = 0;
-                ++s;
-            }
-            if (cs == 0 && (s % 5 == 0)) {
-                ModVariablesMensaje varM = new ModVariablesMensaje();
-                ModVariablesUsr var = new ModVariablesUsr();
-                var.setMatricula(matricula.getText());
-                ModConsultasSQL.recibidos(tablaBandejaEntrada, varM, var);
-            }
-            if (s == 60) {
-                s = 0;
-                ++m;
-            }
-            if (m == 60) {
-                m = 0;
-                ++h;
-            }
-//            actualizarLabel();
-        }
-    };
 
 //    private void actualizarLabel() {
 //        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;

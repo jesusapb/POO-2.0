@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -28,6 +29,7 @@ public class CtrlBandejadEntrada implements ActionListener {
     private ModConsultasSQL cons;
     private ModVariablesUsr var;
     private VstBandejadEntrada vbe;
+    private Timer t;
 
     public CtrlBandejadEntrada(ModConsultasSQL cons, ModVariablesUsr var, VstBandejadEntrada vbe) {
         this.cons = cons;
@@ -41,7 +43,8 @@ public class CtrlBandejadEntrada implements ActionListener {
     public void iniciar() {
         vbe.setTitle("Mensajes recibidos.");
         vbe.setLocationRelativeTo(null);
-
+        t = new Timer(10, acciones);
+        t.start();
         vbe.matricula.setText(var.getMatricula());
         ModVariablesReg varR = new ModVariablesReg();
         ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR);
@@ -103,4 +106,32 @@ public class CtrlBandejadEntrada implements ActionListener {
         var.setStatus(null);
         var.setCorreo(null);
     }
+
+    private int h, m, s, cs;
+
+    private ActionListener acciones = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 5 == 0)) {
+                ModVariablesReg varR = new ModVariablesReg();
+                ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR);
+                ModVariablesMensaje varM = new ModVariablesMensaje();
+                ModConsultasSQL.recibidos(vbe.tablaBandejaEntrada, varM, var);
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+//            actualizarLabel();
+        }
+    };
 }

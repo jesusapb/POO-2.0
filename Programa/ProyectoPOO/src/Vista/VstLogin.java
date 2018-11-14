@@ -39,6 +39,7 @@ public class VstLogin extends javax.swing.JFrame {
         btnOlvido = new javax.swing.JButton();
         checkContraseña = new javax.swing.JCheckBox();
         btnValidar = new javax.swing.JButton();
+        btnConfiguración = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -105,6 +106,17 @@ public class VstLogin extends javax.swing.JFrame {
         btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
+        btnConfiguración.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Settings_20px.png"))); // NOI18N
+        btnConfiguración.setToolTipText("Configuración");
+        btnConfiguración.setActionCommand("Configuración");
+        btnConfiguración.setBorder(null);
+        btnConfiguración.setContentAreaFilled(false);
+        btnConfiguración.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfiguración.setLabel("");
+        jPanel1.add(btnConfiguración, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+        btnConfiguración.getAccessibleContext().setAccessibleName("Configuración");
+        btnConfiguración.getAccessibleContext().setAccessibleDescription("Configuración");
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 350));
 
         pack();
@@ -157,6 +169,7 @@ public class VstLogin extends javax.swing.JFrame {
     public javax.swing.JLabel ImgPswdLg;
     public javax.swing.JLabel ImgUsrLg;
     public javax.swing.JButton btnAcceder;
+    public javax.swing.JButton btnConfiguración;
     public javax.swing.JButton btnOlvido;
     public javax.swing.JButton btnValidar;
     public javax.swing.JCheckBox checkContraseña;
