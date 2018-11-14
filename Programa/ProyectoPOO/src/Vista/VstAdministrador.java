@@ -6,19 +6,8 @@
 package Vista;
 
 import Modelo.ModConexion;
-import Modelo.ModConsultasSQL;
-import Modelo.ModVariablesAvisos;
-import Modelo.ModVariablesDoc;
-import Modelo.ModVariablesQuizzes;
-import Modelo.ModVariablesUsr;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.Timer;
 
 /**
  *
@@ -31,12 +20,8 @@ public class VstAdministrador extends javax.swing.JFrame {
      */
     public VstAdministrador() {
         initComponents();
-        //setDefaultCloseOperation(0);
+        setDefaultCloseOperation(0);
         btnLTodo.setVisible(false);
-        docs.setVisible(false);
-        quizz.setVisible(false);
-        t = new Timer(10, acciones);
-        t.start();
     }
 
     /**
@@ -84,8 +69,11 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnLTodo = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtAviso = new javax.swing.JTextPane();
+        btnCerrar = new javax.swing.JButton();
+        btnMini = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -128,7 +116,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnCerrarSesion.setBorder(null);
         btnCerrarSesion.setContentAreaFilled(false);
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 40, -1, -1));
 
         btnEmpleados.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_People_64px_1.png"))); // NOI18N
@@ -204,7 +192,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnMensajes.setBorder(null);
         btnMensajes.setContentAreaFilled(false);
         btnMensajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, -1, -1));
+        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, -1, -1));
 
         tablaAQuizzes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -360,6 +348,24 @@ public class VstAdministrador extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 230, 120));
 
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Close_Window_20px.png"))); // NOI18N
+        btnCerrar.setToolTipText("Cerrar");
+        btnCerrar.setActionCommand("Cerrar");
+        btnCerrar.setBorder(null);
+        btnCerrar.setContentAreaFilled(false);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
+        btnCerrar.getAccessibleContext().setAccessibleName("Cerrar");
+        btnCerrar.getAccessibleContext().setAccessibleDescription("Cerrar");
+
+        btnMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Minimize_Window_20px.png"))); // NOI18N
+        btnMini.setToolTipText("Minimizar");
+        btnMini.setActionCommand("Minimizar");
+        btnMini.setBorder(null);
+        btnMini.setContentAreaFilled(false);
+        btnMini.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 550));
 
         pack();
@@ -402,48 +408,6 @@ public class VstAdministrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tablaAvisosMouseClicked
 
-    private Timer t;
-    private int h, m, s, cs;
-    private ActionListener acciones = new ActionListener() {
-        @Override
-
-        public void actionPerformed(ActionEvent ae) {
-            ModVariablesUsr var = new ModVariablesUsr();
-            ModVariablesQuizzes varQ = new ModVariablesQuizzes();
-            ModVariablesDoc varD = new ModVariablesDoc();
-            Date date = new Date();
-            DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
-            DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
-
-            var.setMatricula(txtMatricula.getText());
-            var.setDia(fechaDate.format(date));
-            var.setHora(horaDate.format(date));
-
-            cs++;
-            if (cs == 100) {
-                cs = 0;
-                ++s;
-            }
-            if (cs == 0 && (s % 2 == 0)) {
-                ModConsultasSQL.tablaConectados(tablaConectados);
-                ModConsultasSQL.recarga(var);
-                ModConsultasSQL.DocsAct(tablaADocumentos, varD);
-                ModConsultasSQL.QuizzAct(tablaAQuizzes, varQ);
-
-                ModVariablesAvisos varA = new ModVariablesAvisos();
-                ModConsultasSQL.tablaAvisos(tablaAvisos, varA, var.getMatricula());
-            }
-            if (s == 60) {
-                s = 0;
-                ++m;
-            }
-            if (m == 60) {
-                m = 0;
-                ++h;
-            }
-            //actualizarLabel();
-        }
-    };
 
  /*   private void actualizarLabel() {
         String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
@@ -486,12 +450,14 @@ public class VstAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnCerrarSesion;
     public javax.swing.JButton btnDDesactivar;
     public javax.swing.JButton btnDocumentos;
     public javax.swing.JButton btnEmpleados;
     public javax.swing.JButton btnLTodo;
     public javax.swing.JButton btnMensajes;
+    public javax.swing.JButton btnMini;
     public javax.swing.JButton btnPerfil;
     public javax.swing.JButton btnQDesactivar;
     public javax.swing.JButton btnQuizz;

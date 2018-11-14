@@ -11,6 +11,7 @@ import Controlador.Empleado.CtrlPerfil;
 import Controlador.Empleado.CtrlSelectQuizz;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;
+import Modelo.ModVariablesMensaje;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesUsr;
@@ -29,7 +30,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -40,6 +43,7 @@ public class CtrlEmpleado implements ActionListener {
     private ModConsultasSQL cons;
     private ModVariablesUsr var;
     private VstEmpleado ve;
+    private Timer t;
 
     public CtrlEmpleado(ModConsultasSQL cons, ModVariablesUsr var, VstEmpleado ve) {
         this.cons = cons;
@@ -47,6 +51,8 @@ public class CtrlEmpleado implements ActionListener {
         this.ve = ve;
 
         this.ve.btnCerrarSesion.addActionListener(this);
+        this.ve.btnCerrar.addActionListener(this);
+        this.ve.btnMini.addActionListener(this);
         this.ve.btnMensajes.addActionListener(this);
         this.ve.btnLTodo.addActionListener(this);
         this.ve.btnLeerDocs.addActionListener(this);
@@ -56,6 +62,19 @@ public class CtrlEmpleado implements ActionListener {
 
     public void iniciar() {
         ve.setTitle("Empleado.");
+        ve.setLocationRelativeTo(null);
+
+        ImageIcon icono = null;
+        if (cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png") != null) {
+            icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png"));
+        }
+        ModVariablesMensaje varM = new ModVariablesMensaje();
+        if (cons.ENVisto(varM, var.getMatricula()) == 1) {
+            ve.btnMensajes.setIcon(icono);
+        }
+
+        t = new Timer(10, acciones);
+        t.start();
         ve.setLocationRelativeTo(null);
         ve.txtNombre.setText(var.getNombre_completo());
         ve.txtMatricula.setText(var.getMatricula());
@@ -107,21 +126,34 @@ public class CtrlEmpleado implements ActionListener {
                     }
                     vl.setVisible(true);
                 }
-                
+
+                if (e.getSource() == ve.btnCerrar) {
+                    int preg = JOptionPane.showConfirmDialog(null, "¿Desea salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                    if (preg == 0) {
+                        t.stop();
+                        ve.setVisible(false);
+                    }
+                }
+
+                if (e.getSource() == ve.btnMini) {
+                    ve.setState(VstEmpleado.ICONIFIED);
+                }
+
                 if (e.getSource() == ve.btnMensajes) {
                     VstBandejadEntrada vbe = new VstBandejadEntrada();
                     CtrlBandejadEntrada ctrlBE = new CtrlBandejadEntrada(cons, var, vbe);
                     ctrlBE.iniciar();
                     vbe.setVisible(true);
                 }
-                
+
                 if (e.getSource() == ve.btnLeerDocs) {
                     VstLeerDocs vld = new VstLeerDocs();
                     CtrlLeerDocs ctrlLD = new CtrlLeerDocs(cons, var, vld);
                     ctrlLD.iniciar();
                     vld.setVisible(true);
                 }
-                
+
                 if (e.getSource() == ve.btnPerfil) {
                     VstPerfil vp = new VstPerfil();
                     ModVariablesPresentados varP = new ModVariablesPresentados();
@@ -129,7 +161,7 @@ public class CtrlEmpleado implements ActionListener {
                     ctrlP.iniciar();
                     vp.setVisible(true);
                 }
-                
+
                 if (e.getSource() == ve.btnRealizarQuizz) {
                     ModVariablesQuizzes varQ = new ModVariablesQuizzes();
                     ModvariablesPreguntas varP = new ModvariablesPreguntas();
@@ -165,4 +197,53 @@ public class CtrlEmpleado implements ActionListener {
         var.setCorreo(null);
         var.setEquipo(null);
     }
+
+    private int h, m, s, cs;
+    private ActionListener acciones = new ActionListener() {
+        @Override
+
+        public void actionPerformed(ActionEvent ae) {
+            ImageIcon icono = null;
+            if (cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png") != null) {
+                icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png"));
+            }
+
+            Date date = new Date();
+            DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
+            DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
+
+            var.setDia(fechaDate.format(date));
+            var.setHora(horaDate.format(date));
+
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 2 == 0)) {
+                ModConsultasSQL.tablaConectados(ve.tablaConectados);
+                ModConsultasSQL.recarga(var);
+
+                ModVariablesAvisos varA = new ModVariablesAvisos();
+                ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
+
+                ModVariablesMensaje varM = new ModVariablesMensaje();
+                if (cons.ENVisto(varM, var.getMatricula()) == 1) {
+                    ve.btnMensajes.setIcon(icono);
+                } else {
+                    icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px.png"));
+                    ve.btnMensajes.setIcon(icono);
+                }
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+//            actualizarLabel();
+        }
+    };
 }

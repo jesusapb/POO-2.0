@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesUsr;
 import Vista.VstAdministrador;
+import Vista.VstConfiguracion;
 import Vista.VstEmpleado;
 import Vista.VstLogin;
 import Vista.VstOlvido;
@@ -37,6 +38,7 @@ public class CtrlLogin implements ActionListener {
         vl.btnAcceder.addActionListener(this);
         vl.btnOlvido.addActionListener(this);
         vl.btnValidar.addActionListener(this);
+        vl.btnConfiguración.addActionListener(this);
     }
 
     public void iniciar() throws UnknownHostException {
@@ -184,6 +186,11 @@ public class CtrlLogin implements ActionListener {
             CtrlOlvido ctrlO = new CtrlOlvido(cons, var, vo);
             ctrlO.iniciar();
             vo.setVisible(true);
+        }
+        
+        if (e.getSource() == vl.btnConfiguración) {
+            VstConfiguracion vc = new VstConfiguracion();
+            vc.setVisible(true);
         }
     }
 }

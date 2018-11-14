@@ -8,11 +8,17 @@ package Modelo;
 import Vista.Administrador.VstEmpleados;
 import Vista.Mensajes.VstEnviados;
 import Vista.Mensajes.VstRecibido;
+import Vista.VstConfiguracion;
+import Vista.VstConfiguracion.Texto;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -38,6 +44,12 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -1109,6 +1121,24 @@ public class ModConsultasSQL extends ModConexion {
     }
     //**************************************************************************
 
+    public int ENVisto(ModVariablesMensaje var, String matricula) {
+        Listas mens = new Listas();
+        ArrayList<ModVariablesMensaje> list = mens.listaMR();
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                var = list.get(i);
+                if (var.getPara_mat().equals(matricula)) {
+                    if (var.getStatus().equals("NO VISTO")) {
+                        return 1;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+    //**************************************************************************
+
     public static void leer(String a, String b, VstRecibido vr, ModVariablesMensaje var) {
         try {
             //a: id, b: status.
@@ -1980,4 +2010,88 @@ public class ModConsultasSQL extends ModConexion {
     }
     //**************************************************************************
 
+    public static String Encriptar(String texto) {
+
+        String secretKey = "qualityinfosolutions"; //llave para encriptar datos
+        String base64EncryptedString = "";
+
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+            Cipher cipher = Cipher.getInstance("DESede");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+            byte[] plainTextBytes = texto.getBytes("utf-8");
+            byte[] buf = cipher.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            base64EncryptedString = new String(base64Bytes);
+
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
+    }
+    //**************************************************************************
+
+    public static String Desencriptar(String textoEncriptado) throws Exception {
+
+        String secretKey = "qualityinfosolutions"; //llave para encriptar datos
+        String base64EncryptedString = "";
+
+        try {
+            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+
+            byte[] plainText = decipher.doFinal(message);
+
+            base64EncryptedString = new String(plainText, "UTF-8");
+
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
+    }
+    //**************************************************************************
+    
+    File archivo = new File("texto.txt");
+    public void Enc() {
+        crearArchivo();
+    }
+    void crearArchivo() {
+        try {
+            if (archivo.exists()) {
+                
+            } else {
+                archivo.createNewFile();
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void encriptar(Vista.VstConfiguracion.Texto texto) {
+        try {
+            ObjectOutputStream escribir = new ObjectOutputStream(new FileOutputStream(archivo));
+            escribir.writeObject(texto);
+            escribir.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public Texto desencriptar() {
+        try {
+            ObjectInputStream leer = new ObjectInputStream(new FileInputStream(archivo));
+            Texto oTexto = (Texto) leer.readObject();
+            leer.close();
+            return oTexto;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

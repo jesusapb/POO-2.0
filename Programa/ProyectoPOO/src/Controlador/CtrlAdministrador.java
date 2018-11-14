@@ -14,6 +14,7 @@ import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;
 import Modelo.ModVariablesDoc;
+import Modelo.ModVariablesMensaje;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesReg;
 import Modelo.ModVariablesUsr;
@@ -36,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -47,6 +50,7 @@ public class CtrlAdministrador implements ActionListener {
     private ModConsultasSQL cons;
     private ModVariablesUsr var;
     private VstAdministrador va;
+    private Timer t;
 
     public CtrlAdministrador(ModConsultasSQL cons, ModVariablesUsr var, VstAdministrador va) {
         this.cons = cons;
@@ -54,6 +58,8 @@ public class CtrlAdministrador implements ActionListener {
         this.va = va;
 
         this.va.btnCerrarSesion.addActionListener(this);
+        this.va.btnCerrar.addActionListener(this);
+        this.va.btnMini.addActionListener(this);
         this.va.btnMensajes.addActionListener(this);
         this.va.btnEmpleados.addActionListener(this);
         this.va.btnDocumentos.addActionListener(this);
@@ -66,6 +72,19 @@ public class CtrlAdministrador implements ActionListener {
 
     public void iniciar() {
         va.setTitle("Administrador.");
+        va.setLocale(null);
+
+        ImageIcon icono = null;
+        if (cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png") != null) {
+            icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png"));
+        }
+        ModVariablesMensaje varM = new ModVariablesMensaje();
+        if (cons.ENVisto(varM, var.getMatricula()) == 1) {
+            va.btnMensajes.setIcon(icono);
+        }
+
+        t = new Timer(10, acciones);
+        t.start();
         va.txtNombre.setText(var.getNombre_completo());
         va.txtMatricula.setText(var.getMatricula());
         va.txtTipo.setText(var.getTipo());
@@ -79,6 +98,8 @@ public class CtrlAdministrador implements ActionListener {
         ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
         va.btnQDesactivar.setVisible(false);
         va.btnDDesactivar.setVisible(false);
+        va.docs.setVisible(false);
+        va.quizz.setVisible(false);
     }
 
     @Override
@@ -122,6 +143,19 @@ public class CtrlAdministrador implements ActionListener {
                         Logger.getLogger(CtrlAdministrador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     vl.setVisible(true);
+                }
+
+                if (e.getSource() == va.btnCerrar) {
+                    int preg = JOptionPane.showConfirmDialog(null, "¿Desea salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                    if (preg == 0) {
+                        t.stop();
+                        System.exit(0);
+                    }
+                }
+
+                if (e.getSource() == va.btnMini) {
+                    va.setState(VstAdministrador.ICONIFIED);
                 }
 
                 if (e.getSource() == va.btnMensajes) {
@@ -185,7 +219,7 @@ public class CtrlAdministrador implements ActionListener {
                         String cuando = fechaDate.format(date) + " " + horaDate.format(date);
                         String comp = var.getMatricula();
                         if (cons.avisoAA(varR, tipo, quien, que, cuando, comp));
-                        
+
                         String tipo2 = "Empleado";
                         String quien2 = var.getMatricula() + "/ " + var.getNombre_completo();
                         String que2 = "Se desactivó el Documento: " + va.docs.getText();
@@ -222,7 +256,7 @@ public class CtrlAdministrador implements ActionListener {
                         String cuando = fechaDate.format(date) + " " + horaDate.format(date);
                         String comp = var.getMatricula();
                         if (cons.avisoAA(varR, tipo, quien, que, cuando, comp));
-                        
+
                         String tipo2 = "Empleado";
                         String quien2 = var.getMatricula() + "/ " + var.getNombre_completo();
                         String que2 = "Se desactivó el Quizz: " + va.quizz.getText();
@@ -273,4 +307,58 @@ public class CtrlAdministrador implements ActionListener {
         var.setCorreo(null);
         var.setEquipo(null);
     }
+
+    private int h, m, s, cs;
+    private ActionListener acciones = new ActionListener() {
+        @Override
+
+        public void actionPerformed(ActionEvent ae) {
+
+            ImageIcon icono = null;
+            if (cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png") != null) {
+                icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px_1.png"));
+            }
+
+            ModVariablesQuizzes varQ = new ModVariablesQuizzes();
+            ModVariablesDoc varD = new ModVariablesDoc();
+            Date date = new Date();
+            DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
+            DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
+
+            var.setDia(fechaDate.format(date));
+            var.setHora(horaDate.format(date));
+
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 2 == 0)) {
+                ModConsultasSQL.tablaConectados(va.tablaConectados);
+                ModConsultasSQL.recarga(var);
+                ModConsultasSQL.DocsAct(va.tablaADocumentos, varD);
+                ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
+
+                ModVariablesAvisos varA = new ModVariablesAvisos();
+                ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
+
+                ModVariablesMensaje varM = new ModVariablesMensaje();
+                if (cons.ENVisto(varM, var.getMatricula()) == 1) {
+                    va.btnMensajes.setIcon(icono);
+                } else {
+                    icono = new ImageIcon(cons.get_Image("/Imagenes/icons8_Envelope_20px.png"));
+                    va.btnMensajes.setIcon(icono);
+                }
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+            //actualizarLabel();
+        }
+    };
 }
