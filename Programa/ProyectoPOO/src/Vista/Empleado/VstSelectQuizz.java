@@ -94,7 +94,7 @@ public class VstSelectQuizz extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 430, 250));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Sellecione el Quizz que desea presentar:");
+        jLabel1.setText("Seleccione el Quizz que desea presentar:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         Quizz.setEditable(false);

@@ -130,7 +130,7 @@ public class CtrlPreguntas implements ActionListener {
                                                 ps.execute();
 
                                                 JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
-                                                int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
+                                                int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
                                                 if (acum < 1) {
                                                     vp.p_totales.setText("Mínimo de preguntas cumplido.");
                                                     vq.p_totales.setText(acum + "");
@@ -207,7 +207,7 @@ public class CtrlPreguntas implements ActionListener {
                                                     ps.execute();
 
                                                     JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
-                                                    int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
+                                                    int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
                                                     if (acum < 1) {
                                                         vp.p_totales.setText("Mínimo de preguntas cumplido.");
                                                         vq.p_totales.setText(acum + "");
@@ -255,8 +255,8 @@ public class CtrlPreguntas implements ActionListener {
                                                             if (r1 + r2 == pts) {
                                                                 var.setQuizz(vp.id.getText());
                                                                 var.setPregunta(vp.txtPreguntas.getText());
-                                                                var.setTipo("unico");
-                                                                var.setNum_resp("1");
+                                                                var.setTipo("multiple");
+                                                                var.setNum_resp("2");
                                                                 var.setPuntuacion_total(pts + "");
                                                                 var.setResp1(vp.txtR1.getText());
                                                                 var.setR1(r1 + "");
@@ -299,7 +299,7 @@ public class CtrlPreguntas implements ActionListener {
                                                                         ps.execute();
 
                                                                         JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
-                                                                        int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
+                                                                        int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
                                                                         if (acum < 1) {
                                                                             vp.p_totales.setText("Mínimo de preguntas cumplido.");
                                                                             vq.p_totales.setText(acum + "");
@@ -360,8 +360,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                 if (r1 + r2 + r3 == pts) {
                                                                     var.setQuizz(vp.id.getText());
                                                                     var.setPregunta(vp.txtPreguntas.getText());
-                                                                    var.setTipo("unico");
-                                                                    var.setNum_resp("1");
+                                                                    var.setTipo("multiple");
+                                                                    var.setNum_resp("3");
                                                                     var.setPuntuacion_total(pts + "");
                                                                     var.setResp1(vp.txtR1.getText());
                                                                     var.setR1(r1 + "");
@@ -404,7 +404,7 @@ public class CtrlPreguntas implements ActionListener {
                                                                             ps.execute();
 
                                                                             JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
-                                                                            int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
+                                                                            int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
                                                                             if (acum < 1) {
                                                                                 vp.p_totales.setText("Mínimo de preguntas cumplido.");
                                                                                 vq.p_totales.setText(acum + "");
@@ -471,8 +471,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                     if (r1 + r2 + r3 + r4 == pts) {
                                                                         var.setQuizz(vp.id.getText());
                                                                         var.setPregunta(vp.txtPreguntas.getText());
-                                                                        var.setTipo("unico");
-                                                                        var.setNum_resp("1");
+                                                                        var.setTipo("multiple");
+                                                                        var.setNum_resp("4");
                                                                         var.setPuntuacion_total(pts + "");
                                                                         var.setResp1(vp.txtR1.getText());
                                                                         var.setR1(r1 + "");
@@ -515,7 +515,7 @@ public class CtrlPreguntas implements ActionListener {
                                                                                 ps.execute();
 
                                                                                 JOptionPane.showMessageDialog(null, "Se agregó exitosamente la pregunta.");
-                                                                                int acum = Integer.parseInt(vp.p_totales.getText()) - 1;
+                                                                                int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
                                                                                 if (acum < 1) {
                                                                                     vp.p_totales.setText("Mínimo de preguntas cumplido.");
                                                                                     vq.p_totales.setText(acum + "");
@@ -703,8 +703,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                     var.setId(Integer.parseInt(vp.idP.getText()));
                                                                     var.setQuizz(vp.id.getText());
                                                                     var.setPregunta(vp.txtPreguntas.getText());
-                                                                    var.setTipo("unico");
-                                                                    var.setNum_resp("1");
+                                                                    var.setTipo("multiple");
+                                                                    var.setNum_resp("2");
                                                                     var.setPuntuacion_total(pts + "");
                                                                     var.setResp1(vp.txtR1.getText());
                                                                     var.setR1(r1 + "");
@@ -785,8 +785,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                         var.setId(Integer.parseInt(vp.idP.getText()));
                                                                         var.setQuizz(vp.id.getText());
                                                                         var.setPregunta(vp.txtPreguntas.getText());
-                                                                        var.setTipo("unico");
-                                                                        var.setNum_resp("1");
+                                                                        var.setTipo("multiple");
+                                                                        var.setNum_resp("3");
                                                                         var.setPuntuacion_total(pts + "");
                                                                         var.setResp1(vp.txtR1.getText());
                                                                         var.setR1(r1 + "");
@@ -873,8 +873,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                             var.setId(Integer.parseInt(vp.idP.getText()));
                                                                             var.setQuizz(vp.id.getText());
                                                                             var.setPregunta(vp.txtPreguntas.getText());
-                                                                            var.setTipo("unico");
-                                                                            var.setNum_resp("1");
+                                                                            var.setTipo("multiple");
+                                                                            var.setNum_resp("4");
                                                                             var.setPuntuacion_total(pts + "");
                                                                             var.setResp1(vp.txtR1.getText());
                                                                             var.setR1(r1 + "");
@@ -1069,8 +1069,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                 var.setId(Integer.parseInt(vp.idP.getText()));
                                                                 var.setQuizz(vp.id.getText());
                                                                 var.setPregunta(vp.pregunt.getText());
-                                                                var.setTipo("unico");
-                                                                var.setNum_resp("1");
+                                                                var.setTipo("multiple");
+                                                                var.setNum_resp("2");
                                                                 var.setPuntuacion_total(pts + "");
                                                                 var.setResp1(vp.txtR1.getText());
                                                                 var.setR1(r1 + "");
@@ -1151,8 +1151,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                     var.setId(Integer.parseInt(vp.idP.getText()));
                                                                     var.setQuizz(vp.id.getText());
                                                                     var.setPregunta(vp.pregunt.getText());
-                                                                    var.setTipo("unico");
-                                                                    var.setNum_resp("1");
+                                                                    var.setTipo("multiple");
+                                                                    var.setNum_resp("3");
                                                                     var.setPuntuacion_total(pts + "");
                                                                     var.setResp1(vp.txtR1.getText());
                                                                     var.setR1(r1 + "");
@@ -1239,8 +1239,8 @@ public class CtrlPreguntas implements ActionListener {
                                                                         var.setId(Integer.parseInt(vp.idP.getText()));
                                                                         var.setQuizz(vp.id.getText());
                                                                         var.setPregunta(vp.pregunt.getText());
-                                                                        var.setTipo("unico");
-                                                                        var.setNum_resp("1");
+                                                                        var.setTipo("multiple");
+                                                                        var.setNum_resp("4");
                                                                         var.setPuntuacion_total(pts + "");
                                                                         var.setResp1(vp.txtR1.getText());
                                                                         var.setR1(r1 + "");
@@ -1376,6 +1376,7 @@ public class CtrlPreguntas implements ActionListener {
                     vp.btnEliminar.setVisible(false);
                     vp.btnModificar.setVisible(false);
                     vp.btnGuardar.setVisible(true);
+                    vp.txtPreguntas.setEditable(true);
                     limpiar();
                 }
             }
