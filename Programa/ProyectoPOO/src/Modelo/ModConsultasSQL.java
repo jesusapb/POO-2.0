@@ -5,7 +5,9 @@
  */
 package Modelo;
 
+import Vista.Administrador.VstAvances;
 import Vista.Administrador.VstEmpleados;
+import Vista.Empleado.VstPerfil;
 import Vista.Mensajes.VstEnviados;
 import Vista.Mensajes.VstRecibido;
 import Vista.VstConfiguracion;
@@ -845,7 +847,7 @@ public class ModConsultasSQL extends ModConexion {
             ModConexion mod = new ModConexion();
             Connection con = mod.getConexion();
 
-            String sql = "SELECT matricula, nombre, ap_pat, ap_mat, correo, tipo FROM usuarios WHERE tipo = 'Empleado' ";
+            String sql = "SELECT matricula, nombre, ap_pat, ap_mat, correo, tipo FROM usuarios WHERE tipo = 'Empleado' order by ap_pat";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -873,7 +875,7 @@ public class ModConsultasSQL extends ModConexion {
     }
     //**************************************************************************
 
-    public static void tablaConectados(JTable tablaConectados) {
+    public static void tablaConectados(JTable tablaConectados, String matricula) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
@@ -905,10 +907,11 @@ public class ModConsultasSQL extends ModConexion {
                 Object[] filas = new Object[cantidadColumnas];
 
                 for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
+                    if (rs.getObject(1).equals(matricula)); else {
+                        filas[i] = rs.getObject(i + 1);
+                        modelo.addRow(filas);
+                    }
                 }
-
-                modelo.addRow(filas);
             }
 
         } catch (SQLException e) {
@@ -1025,7 +1028,7 @@ public class ModConsultasSQL extends ModConexion {
             ModConexion mod = new ModConexion();
             Connection con = mod.getConexion();
 
-            String sql = "SELECT nombre, descripcion, status, p_totales, p_actuales, f_registro, f_activacion FROM quizzes";
+            String sql = "SELECT nombre, descripcion, status, p_totales, p_actuales, f_registro, f_activacion FROM quizzes order by nombre";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -1055,8 +1058,50 @@ public class ModConsultasSQL extends ModConexion {
         }
     }
     //**************************************************************************
+    
+    public static void tablaDocs(JTable tablaDocs) {
+        try {
+            DefaultTableModel modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; //Bloquea la edision.
+                }
+            };
+            tablaDocs.setModel(modelo);
 
-    public static void tablaTEmp(JTable tablaTUsuarios, ModVariablesReg var) {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ModConexion mod = new ModConexion();
+            Connection con = mod.getConexion();
+
+            String sql = "SELECT nombre, status, descripcion FROM documentos order by nombre";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Status");
+            modelo.addColumn("Descripción");
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        }
+    }
+    //**************************************************************************
+
+    public static void tablaTEmp(JTable tablaTUsuarios, ModVariablesReg var, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -1075,10 +1120,12 @@ public class ModConsultasSQL extends ModConexion {
             for (int i = 0; i < list.size(); i++) {
                 Object fila[] = new Object[2];
                 var = list.get(i);
-                fila[0] = var.getNombre_completo();
-                fila[1] = var.getTipo();
+                if (var.getMatricula().equals(matricula)); else {
+                    fila[0] = var.getNombre_completo();
+                    fila[1] = var.getTipo();
 
-                modelo.addRow(fila);
+                    modelo.addRow(fila);
+                }
             }
         }
     }
@@ -1280,7 +1327,6 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Nombre:");
 
         Listas mens = new Listas();
-
         ArrayList<ModVariablesDoc> list = mens.listaDocs();
 
         if (list.size() > 0) {
@@ -1492,6 +1538,30 @@ public class ModConsultasSQL extends ModConexion {
     }
     //**************************************************************************
 
+    public boolean aviso(ModVariablesReg var,String quien, String que, String cuando, String para) {
+
+        try {
+            PreparedStatement ps = null;
+            Connection con = getConexion();
+
+            String sql = "INSERT INTO avisos (para, quien, que, cuando, status) VALUES(?,?,?,?,?)";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, para);
+            ps.setString(2, quien);
+            ps.setString(3, que);
+            ps.setString(4, cuando);
+            ps.setString(5, "no visto");
+            ps.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+    //**************************************************************************
+
     public void agregarD(ModVariablesDoc var) {
         ModConexion con = new ModConexion();
         String sql = "INSERT INTO documentos (id, nombre, status, descripcion, archivo) VALUES(?,?,?,?,?)";
@@ -1663,6 +1733,50 @@ public class ModConsultasSQL extends ModConexion {
         }
     }
     //**************************************************************************
+    
+    public void visualizarMod(JTable tabla, String nombre) {
+        tabla.setDefaultRenderer(Object.class, new tabla());
+        DefaultTableModel dt = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //Bloquea la edision.
+            }
+        };
+        dt.addColumn("ID");
+        dt.addColumn("Nombre");
+        dt.addColumn("Status");
+        dt.addColumn("Descripción");
+        dt.addColumn("Archivo");
+
+        ImageIcon icono = null;
+        if (get_Image("/Imagenes/icons8_PDF_32px.png") != null) {
+            icono = new ImageIcon(get_Image("/Imagenes/icons8_PDF_32px.png"));
+        }
+
+        Listas pdf = new Listas();
+        ModVariablesDoc var = new ModVariablesDoc();
+        ArrayList<ModVariablesDoc> list = pdf.Listar_PdfMod(nombre);
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Object fila[] = new Object[5];
+                var = list.get(i);
+                fila[0] = var.getId();
+                fila[1] = var.getNombre();
+                fila[2] = var.getStatus();
+                fila[3] = var.getDescripcion();
+                if (var.getArchivo() != null) {
+                    fila[4] = new JButton(icono);
+                } else {
+                    fila[4] = new JButton("Vacio");
+                }
+                dt.addRow(fila);
+            }
+            tabla.setModel(dt);
+            tabla.setRowHeight(32); //Da el tamaño a la tabla (Cada celda)
+        }
+    }
+    //**************************************************************************
 
     public void visualizarPE(JTable tabla) {
         tabla.setDefaultRenderer(Object.class, new tabla());
@@ -1746,6 +1860,32 @@ public class ModConsultasSQL extends ModConexion {
         }
     }
     //**************************************************************************
+
+    public static void LeerTodo(ModVariablesAvisos var, String matricula) {
+        Listas mens = new Listas();
+        ArrayList<ModVariablesAvisos> list = mens.listaAv(matricula);
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                var = list.get(i);
+                try {
+                    PreparedStatement ps = null;
+
+                    ModConexion objCon = new ModConexion();
+                    Connection con = objCon.getConexion();
+
+                    String update = "UPDATE avisos SET status = ? WHERE id = ?";
+                    ps = con.prepareStatement(update);
+                    ps.setString(1, "visto");
+                    ps.setInt(2, var.getId());
+                    ps.execute();
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 
     public static void tablaSelectQuiz(JTable tablaSelectQuizz, ModVariablesQuizzes var) {
         DefaultTableModel modelo = new DefaultTableModel() {
@@ -1915,13 +2055,13 @@ public class ModConsultasSQL extends ModConexion {
     }
     //**************************************************************************
 
-    public boolean rPresentados(ModVariablesPresentados var) {
+    public boolean rPresentados(ModVariablesPresentados var, int num, int tot, String mod_calif, String marca) {
 
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO presentados (ident, quizz, intento, p_totales, calificacion, status, abrt) "
-                + "VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO presentados (ident, quizz, intento, p_totales, calificacion, status, abrtNum, abrtTot, abrt, mod_calif, marca) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
@@ -1931,7 +2071,11 @@ public class ModConsultasSQL extends ModConexion {
             ps.setString(4, var.getP_totales());
             ps.setString(5, var.getCalificacion());
             ps.setString(6, var.getStatus());
-            ps.setString(7, var.getAbrt());
+            ps.setInt(7, num);
+            ps.setInt(8, tot);
+            ps.setString(9, var.getAbrt());
+            ps.setString(10, mod_calif);
+            ps.setString(11, marca);
             ps.execute();
 
             return true;
@@ -1950,8 +2094,8 @@ public class ModConsultasSQL extends ModConexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO abierto (ident, puntuacion, quizz, pregunta, respuesta, status, p_asignada) "
-                + "VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO abierto (ident, puntuacion, quizz, pregunta, respuesta, status, p_asignada, retro) "
+                + "VALUES(?,?,?,?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
@@ -1962,6 +2106,7 @@ public class ModConsultasSQL extends ModConexion {
             ps.setString(5, var.getRespuesta());
             ps.setString(6, var.getStatus());
             ps.setString(7, var.getP_asignada());
+            ps.setString(8, "/*null*/");
             ps.execute();
 
             return true;
@@ -1972,6 +2117,55 @@ public class ModConsultasSQL extends ModConexion {
             return false;
         }
 
+    }
+    //**************************************************************************
+
+    public boolean rPAbiertaMod(String matricula, String quizz, String pregunta, String respDef) {
+
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+
+        String sql = "UPDATE abierto SET respuesta = ? WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' "
+                + "AND pregunta = '" + pregunta + "' AND status = 'Por calificar')";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, respDef);
+            ps.execute();
+
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
+            return false;
+        }
+
+    }
+    //**************************************************************************
+
+    public int existeRP(String matricula, String quizz, String pregunta) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+
+        String sql = "SELECT count(id) FROM abierto WHERE (ident = ? AND quizz = ? AND pregunta = ? AND status = ?)";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, matricula);
+            ps.setString(2, quizz);
+            ps.setString(3, pregunta);
+            ps.setString(4, "Por calificar");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return 1;
+        }
     }
     //**************************************************************************
 
@@ -1988,13 +2182,14 @@ public class ModConsultasSQL extends ModConexion {
         modelo.addColumn("Intentos");
         modelo.addColumn("Calificaciónes");
         modelo.addColumn("Status");
+        modelo.addColumn("Preg. abiertas");
 
         Listas mens = new Listas();
         ArrayList<ModVariablesPresentados> list = mens.listaReg(matricula);
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                Object fila[] = new Object[4];
+                Object fila[] = new Object[5];
                 var = list.get(i);
 
                 fila[0] = var.getQuizz();
@@ -2003,6 +2198,7 @@ public class ModConsultasSQL extends ModConexion {
                 String[] partir = calificacion.split("~");
                 fila[2] = partir[1];
                 fila[3] = var.getStatus();
+                fila[4] = var.getAbrtNum();
 
                 modelo.addRow(fila);
             }
@@ -2060,21 +2256,26 @@ public class ModConsultasSQL extends ModConexion {
         return base64EncryptedString;
     }
     //**************************************************************************
-    
+
     File archivo = new File("texto.txt");
+
     public void Enc() {
         crearArchivo();
     }
+    //**************************************************************************
+
     void crearArchivo() {
         try {
             if (archivo.exists()) {
-                
+
             } else {
                 archivo.createNewFile();
             }
         } catch (Exception e) {
         }
     }
+    //**************************************************************************
+
     public void encriptar(Vista.VstConfiguracion.Texto texto) {
         try {
             ObjectOutputStream escribir = new ObjectOutputStream(new FileOutputStream(archivo));
@@ -2083,7 +2284,8 @@ public class ModConsultasSQL extends ModConexion {
         } catch (Exception e) {
         }
     }
-    
+    //**************************************************************************
+
     public Texto desencriptar() {
         try {
             ObjectInputStream leer = new ObjectInputStream(new FileInputStream(archivo));
@@ -2094,4 +2296,132 @@ public class ModConsultasSQL extends ModConexion {
             return null;
         }
     }
+    //**************************************************************************
+
+    public static void obtenerResp(ModVariablesPresentados var, String matricula, String intento, String quizz) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ModConexion mod = new ModConexion();
+        Connection con = mod.getConexion();
+
+        String sql = "SELECT * FROM presentados WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND intento = '" + intento + "')";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                var.setId(rs.getInt(1));
+                var.setIdent(rs.getString(2));
+                var.setQuizz(rs.getString(3));
+                var.setIntento(rs.getString(4));
+                var.setP_totales(rs.getString(5));
+                var.setCalificacion(rs.getString(6));
+                var.setStatus(rs.getString(7));
+                var.setTotales(rs.getString(8));
+                var.setAbrtTot(rs.getString(9));
+                var.setAbrt(rs.getString(10));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //**************************************************************************
+
+    public static void llenarResp(VstAvances va, ModVariablesAbierto var, String matricula, String quizz, String pregunta) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ModConexion mod = new ModConexion();
+        Connection con = mod.getConexion();
+
+        String sql = "SELECT * FROM abierto WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND pregunta = '" + pregunta + "')";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                var.setId(rs.getInt(1));
+                var.setIdent(rs.getString(2));
+                var.setPuntuacion(rs.getString(3));
+                var.setQuizz(rs.getString(4));
+                var.setPregunta(rs.getString(5));
+                var.setRespuesta(rs.getString(6));
+                var.setStatus(rs.getString(7));
+                var.setP_asignada(rs.getString(8));
+
+                if (rs.getString(9).equals("/*null*/")) {
+                    va.txtComentario.setText(null);
+                } else {
+                    va.txtComentario.setText(rs.getString(9));
+                }
+
+                va.txtPregunta.setText(var.getPregunta());
+                va.txtRespuesta.setText(var.getRespuesta());
+                va.txtPuntuacion.setText(var.getPuntuacion());
+                va.txtCalificacion.setText(var.getP_asignada());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //**************************************************************************
+
+    public static void llenarRespMod(VstPerfil vp, ModVariablesAbierto var, String matricula, String quizz, String pregunta) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ModConexion mod = new ModConexion();
+        Connection con = mod.getConexion();
+
+        String sql = "SELECT * FROM abierto WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND pregunta = '" + pregunta + "')";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                var.setId(rs.getInt(1));
+                var.setIdent(rs.getString(2));
+                var.setPuntuacion(rs.getString(3));
+                var.setQuizz(rs.getString(4));
+                var.setPregunta(rs.getString(5));
+                var.setRespuesta(rs.getString(6));
+                var.setStatus(rs.getString(7));
+                var.setP_asignada(rs.getString(8));
+
+                if (rs.getString(9).equals("/*null*/")) {
+                    vp.txtComentario.setText("SIN COMENTARIO O RETROALIMANTECIÓN.");
+                } else {
+                    vp.txtComentario.setText(rs.getString(9));
+                }
+
+                vp.txtPregunta.setText(var.getPregunta());
+                vp.txtRespuesta.setText(var.getRespuesta());
+                vp.txtPuntuacion.setText(var.getPuntuacion());
+                vp.txtCalificacion.setText(var.getP_asignada());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //**************************************************************************
+
+    public void calificar(String matricula, String intento, String quizz, String puntos, String comentario) {
+        ModConexion con = new ModConexion();
+        String sql = "UPDATE abierto SET status = ?, p_asignada = ?, retro = ? WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND pregunta = '" + intento + "')";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.getConexion().prepareStatement(sql);
+            ps.setString(1, "Calificado");
+            ps.setString(2, puntos);
+            ps.setString(3, comentario);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    //**************************************************************************
 }

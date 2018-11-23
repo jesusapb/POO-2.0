@@ -21,7 +21,6 @@ public class VstEmpleado extends javax.swing.JFrame {
     public VstEmpleado() {
         initComponents();
         setDefaultCloseOperation(0);
-        btnLTodo.setVisible(false);
     }
 
     /**

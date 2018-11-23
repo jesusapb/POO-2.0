@@ -34,7 +34,6 @@ public class ModConexion {
         String texto = "";
         try {
             texto = "" + ModConsultasSQL.Desencriptar(cons.desencriptar().getPalabra());
-//            System.out.println(texto);
         } catch (Exception ex) {
             Logger.getLogger(ModConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,10 +41,9 @@ public class ModConexion {
         databases = partir[0];
         hostname = partir[1];
         port = partir[2];
-        url = "jdbc:mysql://" + hostname + ":" + port + "/" + databases;
+        url = "jdbc:mysql://" + hostname + ":" + port + "/" + databases + "?autoReconnect=true&useSSL=false";
         username = partir[3];
         password = partir[4];
-//        System.out.println(url + " " + username + " " + password);
         
         try {
             Class.forName("com.mysql.jdbc.Driver");

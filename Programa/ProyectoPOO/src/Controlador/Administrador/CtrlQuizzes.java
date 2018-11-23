@@ -296,6 +296,7 @@ public class CtrlQuizzes implements ActionListener {
                     vq.setVisible(false);
                     variables();
                 } else {
+                    vq.p_totales.setText("0");
                     limpiar();
                 }
             }

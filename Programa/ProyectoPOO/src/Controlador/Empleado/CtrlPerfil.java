@@ -7,6 +7,7 @@ package Controlador.Empleado;
 
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModVariablesAbierto;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesUsr;
 import Vista.Empleado.VstPerfil;
@@ -36,6 +37,10 @@ public class CtrlPerfil implements ActionListener {
     private VstPerfil vp;
     private VstEmpleado ve;
     private Timer t;
+    private String[] preg = {};
+    private String temp[] = new String[10];
+    private int cont = 0;
+    private int acum = 0;
 
     public CtrlPerfil(ModConsultasSQL cons, ModVariablesUsr var, VstPerfil vp, VstEmpleado ve, ModVariablesPresentados varP) {
         this.cons = cons;
@@ -48,6 +53,11 @@ public class CtrlPerfil implements ActionListener {
         this.vp.btnvalidar.addActionListener(this);
         this.vp.btncancelar.addActionListener(this);
         this.vp.btnguardar.addActionListener(this);
+
+        this.vp.btnVer.addActionListener(this);
+        this.vp.btnSiguiente.addActionListener(this);
+        this.vp.btnAtras.addActionListener(this);
+        this.vp.btnCerrar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -59,6 +69,9 @@ public class CtrlPerfil implements ActionListener {
         vp.matricula.setText(var.getMatricula());
         vp.correo.setText(var.getCorreo());
         vp.cambio.setVisible(false);
+        vp.ver.setVisible(false);
+        vp.btnVer.setVisible(false);
+        vp.btnAtras.setVisible(false);
         vp.btnguardar.setEnabled(false);
         vp.contraN.setEnabled(false);
         vp.contraConfN.setEnabled(false);
@@ -79,12 +92,81 @@ public class CtrlPerfil implements ActionListener {
         var.setHora(horaDate.format(date));
         ModConsultasSQL.recarga(var);
         ModConsultasSQL.status(var);
+        ModConsultasSQL.obtenerResp(varP, var.getMatricula(), vp.txtIntento.getText(), vp.nomQuizz.getText());
+        preg = varP.getAbrt().split("~");
 
         if (cons.existeUsr(var.getMatricula()) == 1) {
             if ("Permanente".equals(var.getStatus())) {
                 JOptionPane.showMessageDialog(null, "Acceso denegado.");
                 vp.setVisible(false);
             } else {
+                if (e.getSource() == vp.btnVer) {
+                    t.stop();
+                    cont = 0;
+                    acum = 0;
+                    ModVariablesAbierto varA = new ModVariablesAbierto();
+                    ModConsultasSQL.llenarRespMod(vp, varA, var.getMatricula(), vp.nomQuizz.getText(), preg[cont]);
+                    cont = cont + 1;
+                    acum = acum + 1;
+                    vp.ver.setVisible(true);
+                }
+                if (e.getSource() == vp.btnCerrar) {
+                    t.start();
+                    vp.ver.setVisible(false);
+                    vp.txtPregunta.setText(null);
+                    vp.txtRespuesta.setText(null);
+                    vp.txtCalificacion.setText(null);
+                    vp.txtPuntuacion.setText(null);
+                    vp.txtComentario.setText(null);
+                }
+                if (e.getSource() == vp.btnAtras) {
+                    int retro = - 1;
+                    int arr = acum + retro;
+                    String[] partir = temp[arr].split("~");
+                    vp.txtPregunta.setText(partir[0]);
+                    vp.txtRespuesta.setText(partir[1]);
+                    vp.txtPuntuacion.setText(partir[2]);
+                    vp.txtCalificacion.setText(partir[3]);
+                    if (partir[4].equals("/*null*/")) {
+                        vp.txtComentario.setText("SIN COMENTARIOS O RETROALIMENTACIÓN.");
+                    } else {
+                        vp.txtComentario.setText(partir[4]);
+                    }
+                    acum = acum - 1;
+                    cont = cont - 1;
+                    if (acum == 1) {
+                        vp.btnAtras.setVisible(false);
+                    }
+                }
+                if (e.getSource() == vp.btnSiguiente) {
+                    String todo = vp.txtPregunta.getText() + "~" + vp.txtRespuesta.getText() + "~" + vp.txtPuntuacion.getText() + "~" + vp.txtCalificacion.getText() + "~" + vp.txtComentario.getText();
+                    temp[acum] = todo;
+                    ModVariablesAbierto varA = new ModVariablesAbierto();
+                    if (cont == Integer.parseInt(varP.getTotales()) || acum == Integer.parseInt(varP.getTotales())); else {
+                        ModConsultasSQL.llenarRespMod(vp, varA, var.getMatricula(), vp.nomQuizz.getText(), preg[cont]);
+                    }
+                    if (cont + 1 == Integer.parseInt(varP.getTotales())) {
+                        vp.btnSiguiente.setText("Terminar");
+                        cont = cont + 1;
+                        acum = acum + 1;
+                    } else {
+                        vp.btnSiguiente.setText("Siguiente");
+                        cont = cont + 1;
+                        acum = acum + 1;
+                    }
+                    if (cont > Integer.parseInt(varP.getTotales())) {
+                        t.start();
+                        vp.ver.setVisible(false);
+                        vp.txtPregunta.setText(null);
+                        vp.txtRespuesta.setText(null);
+                        vp.txtCalificacion.setText(null);
+                        vp.txtPuntuacion.setText(null);
+                        vp.txtComentario.setText(null);
+                    }
+                    if (acum > 1) {
+                        vp.btnAtras.setVisible(true);
+                    }
+                }
                 if (e.getSource() == vp.btncambioContr) {
                     limpiar();
                     t.stop();
@@ -178,6 +260,8 @@ public class CtrlPerfil implements ActionListener {
         vp.contraConfN.setEnabled(false);
         vp.contra.setEnabled(true);
         vp.contraConf.setEnabled(true);
+        vp.btnvalidar.setEnabled(true);
+        vp.btnguardar.setEnabled(false);
         t.start();
     }
 

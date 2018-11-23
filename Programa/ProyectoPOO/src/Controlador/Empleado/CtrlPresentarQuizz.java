@@ -38,6 +38,10 @@ public class CtrlPresentarQuizz implements ActionListener {
     private VstPresentarQuizz vpq;
     private Timer t;
     private int contad = 0;
+    private String guard[] = new String[10];
+    private int Vcontador = 0;
+    private int moment = 0;
+    private String idsTem = "";
 
     public CtrlPresentarQuizz(ModConsultasSQL cons, ModVariablesUsr varU, ModVariablesQuizzes varQ, ModvariablesPreguntas varP, ModVariablesPresentados varPre, VstPresentarQuizz vpq) {
         this.cons = cons;
@@ -48,6 +52,7 @@ public class CtrlPresentarQuizz implements ActionListener {
         this.vpq = vpq;
 
         this.vpq.btnSigTerm.addActionListener(this);
+        this.vpq.btnRegresar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -67,10 +72,8 @@ public class CtrlPresentarQuizz implements ActionListener {
         vpq.r_f.setVisible(false);
         vpq.r_g.setVisible(false);
         vpq.r_h.setVisible(false);
+        vpq.btnRegresar.setVisible(false);
 
-        /*JOptionPane.showMessageDialog(null, varPre.getHora() + varPre.getMinuto());
-        JOptionPane.showMessageDialog(null, varQ.getId() + "En presentar");*/
-        //JOptionPane.showMessageDialog(null, vpq.nump.getText());
         if (varPre.getHora().equals("00") && varPre.getMinuto().equals("00")) {
             vpq.cronometro.setVisible(false);
             t = new Timer(10, acciones);
@@ -78,11 +81,8 @@ public class CtrlPresentarQuizz implements ActionListener {
         } else {
             t = new Timer(10, acciones);
             t.start();
-            //int a = cons.randomPre(varQ.getId());
-            //int verificar = Integer.parseInt(cons.verificador(vpq.nump.getText()));
             int b = 0;
             ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
-            vpq.nump_resp.setText(varP.getNum_resp());
             Listas mens = new Listas();
             String[] lista = new String[8];
             String[] temp = mens.listaResp(varP.getId(), varQ.getId());
@@ -90,17 +90,22 @@ public class CtrlPresentarQuizz implements ActionListener {
             vpq.txtPregunta.setText(varP.getPregunta());
             vpq.nump.setText(varP.getId() + "");
             vpq.contador.setText("1");
+            moment = moment + 1;
             vpq.puntosT.setText(varP.getPuntuacion_total());
 
             int cont = 0;
 
             if (varP.getTipo().equals("abierto")) {
-                vpq.ab.setText("1");
-                vpq.abrt.setText("" + varP.getPregunta());
-                vpq.abierto.setVisible(true);
+                vpq.nump_resp.setText("0");
+                ocultar();
             } else {
                 if (varP.getTipo().equals("unico") || varP.getTipo().equals("multiple")) {
+                    vpq.nump_resp.setText(varP.getNum_resp());
                     vpq.abierto.setVisible(false);
+                    vpq.txtR1.setVisible(true);
+                    vpq.txtR2.setVisible(true);
+                    vpq.r_a.setVisible(true);
+                    vpq.r_b.setVisible(true);
                     for (int i = 0; i < 8; i++) {
                         String[] part = temp[i].split("~");
                         String parte = part[0];
@@ -132,30 +137,266 @@ public class CtrlPresentarQuizz implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Acceso denegado.");
                 vpq.setVisible(false);
             } else {
+                if (e.getSource() == vpq.btnRegresar) {
+                    moment = moment - 1;
+                    int conta = Integer.parseInt(vpq.contador.getText()) - 1;
+                    vpq.contador.setText(conta + "");
+                    String[] partir = guard[moment].split("~");
+                    if (partir[0].equals("abierto")) {
+                        ocultar();
+                        vpq.txtPregunta.setText(partir[2]);
+                        if (partir[3].equals("/*null*/")) {
+                            vpq.txtRespuesta.setText(null);
+                        } else {
+                            vpq.txtRespuesta.setText(partir[3]);
+                        }
+
+                        String[] div = guard[moment].split("¬");
+                        if (partir[7].equals("/*null*/")) {
+                            vpq.ab.setText(null);
+                            vpq.abrt.setText(null);
+                        } else {
+                            vpq.ab.setText(null);
+                            vpq.abrt.setText(null);
+                            vpq.ab.setText(partir[7]);
+                            vpq.abrt.setText(div[1]);
+                        }
+                        vpq.puntosT.setText(null);
+                        vpq.puntos.setText(null);
+                        vpq.nump_resp.setText(null);
+                        vpq.puntosT.setText(partir[4]);
+                        vpq.puntos.setText(partir[5]);
+                        vpq.nump_resp.setText(partir[6]);
+                        vpq.nump.setText(null);
+                        vpq.nump.setText(div[3]);
+                        vpq.btnSigTerm.setText("Siguiente");
+
+                        if (conta > 1) {
+                            vpq.btnRegresar.setVisible(true);
+                        } else {
+                            vpq.btnRegresar.setVisible(false);
+                        }
+
+                    } else {
+                        ocultar();
+                        vpq.abierto.setVisible(false);
+                        vpq.txtR1.setVisible(true);
+                        vpq.txtR2.setVisible(true);
+                        vpq.r_a.setVisible(true);
+                        vpq.r_b.setVisible(true);
+                        vpq.txtPregunta.setText(partir[2]);
+                        if (partir[3].equals("a")) {
+                            vpq.r_a.setSelected(true);
+                        } else {
+                            vpq.r_a.setSelected(false);
+                        }
+                        vpq.r_a.setName(partir[4]);
+                        vpq.txtR1.setText(partir[5]);
+                        if (partir[6].equals("b")) {
+                            vpq.r_b.setSelected(true);
+                        } else {
+                            vpq.r_b.setSelected(false);
+                        }
+                        vpq.r_b.setName(partir[7]);
+                        vpq.txtR2.setText(partir[8]);
+                        if (partir[9].equals("nada")) {
+                            vpq.r_c.setVisible(false);
+                            vpq.txtR3.setVisible(false);
+                        } else {
+                            vpq.r_c.setVisible(true);
+                            vpq.txtR3.setVisible(true);
+                            if (partir[9].equals("c")) {
+                                vpq.r_c.setSelected(true);
+                            } else {
+                                vpq.r_c.setSelected(false);
+                            }
+                            vpq.r_c.setName(partir[10]);
+                            vpq.txtR3.setText(partir[11]);
+                        }
+                        if (partir[12].equals("nada")) {
+                            vpq.r_d.setVisible(false);
+                            vpq.txtR4.setVisible(false);
+                        } else {
+                            vpq.r_d.setVisible(true);
+                            vpq.txtR4.setVisible(true);
+                            if (partir[12].equals("d")) {
+                                vpq.r_d.setSelected(true);
+                            } else {
+                                vpq.r_d.setSelected(false);
+                            }
+                            vpq.r_d.setName(partir[13]);
+                            vpq.txtR4.setText(partir[14]);
+                        }
+                        if (partir[15].equals("nada")) {
+                            vpq.r_e.setVisible(false);
+                            vpq.txtR5.setVisible(false);
+                        } else {
+                            vpq.r_e.setVisible(true);
+                            vpq.txtR5.setVisible(true);
+                            if (partir[15].equals("e")) {
+                                vpq.r_e.setSelected(true);
+                            } else {
+                                vpq.r_e.setSelected(false);
+                            }
+                            vpq.r_e.setName(partir[16]);
+                            vpq.txtR5.setText(partir[17]);
+                        }
+                        if (partir[18].equals("nada")) {
+                            vpq.r_f.setVisible(false);
+                            vpq.txtR6.setVisible(false);
+                        } else {
+                            vpq.r_f.setVisible(true);
+                            vpq.txtR6.setVisible(true);
+                            if (partir[18].equals("f")) {
+                                vpq.r_f.setSelected(true);
+                            } else {
+                                vpq.r_f.setSelected(false);
+                            }
+                            vpq.r_f.setName(partir[19]);
+                            vpq.txtR6.setText(partir[20]);
+                        }
+                        if (partir[21].equals("nada")) {
+                            vpq.r_g.setVisible(false);
+                            vpq.txtR7.setVisible(false);
+                        } else {
+                            vpq.r_g.setVisible(true);
+                            vpq.txtR7.setVisible(true);
+                            if (partir[21].equals("g")) {
+                                vpq.r_g.setSelected(true);
+                            } else {
+                                vpq.r_g.setSelected(false);
+                            }
+                            vpq.r_g.setName(partir[22]);
+                            vpq.txtR7.setText(partir[23]);
+                        }
+                        if (partir[24].equals("nada")) {
+                            vpq.r_h.setVisible(false);
+                            vpq.txtR8.setVisible(false);
+                        } else {
+                            vpq.r_h.setVisible(true);
+                            vpq.txtR8.setVisible(true);
+                            if (partir[24].equals("h")) {
+                                vpq.r_h.setSelected(true);
+                            } else {
+                                vpq.r_h.setSelected(false);
+                            }
+                            vpq.r_h.setName(partir[25]);
+                            vpq.txtR8.setText(partir[26]);
+                        }
+                        vpq.puntosT.setText(null);
+                        vpq.puntos.setText(null);
+                        vpq.puntosT.setText(partir[27]);
+                        vpq.puntos.setText(partir[28]);
+                        vpq.nump_resp.setText(null);
+                        vpq.nump_resp.setText(partir[29]);
+
+                        String[] div = guard[moment].split("¬");
+                        if (partir[30].equals("/*null*/")) {
+                            vpq.ab.setText(null);
+                            vpq.abrt.setText(null);
+                        } else {
+                            vpq.ab.setText(null);
+                            vpq.abrt.setText(null);
+                            vpq.ab.setText(partir[30]);
+                            vpq.abrt.setText(div[1]);
+                        }
+                        vpq.nump.setText(null);
+                        vpq.nump.setText(div[3]);
+                        vpq.btnSigTerm.setText("Siguiente");
+
+                        if (conta > 1) {
+                            vpq.btnRegresar.setVisible(true);
+                        } else {
+                            vpq.btnRegresar.setVisible(false);
+                        }
+                    }
+                }
 
                 if (e.getSource() == vpq.btnSigTerm) {
                     boolean a = true;
                     int b = Integer.parseInt(vpq.contador.getText());
-                    //ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
+                    if (guard[moment] != null) {
+                        String[] partir = guard[moment].split("~");
+                        varP.setTipo(partir[0]);
+                    }
                     if (varP.getTipo().equals("abierto")) {
-
                         ModVariablesRespuestas varRe = new ModVariablesRespuestas();
                         varRe.setIdent(varU.getMatricula());
                         varRe.setPuntuacion(varP.getPuntuacion_total());
-                        varRe.setQuizz(varP.getQuizz());
+                        String partir = vpq.NomQuizz.getText();
+                        String[] parte = partir.split("/");
+                        varRe.setQuizz(parte[0]);
                         varRe.setPregunta(vpq.txtPregunta.getText());
-                        varRe.setRespuesta(vpq.txtRespuesta.getText());
                         varRe.setStatus("Por calificar");
                         varRe.setP_asignada("0");
 
-                        if (cons.rPAbierta(varRe)) {
-                            System.out.println("Respuesta guardada.");
+                        double puntosT = Double.parseDouble(vpq.puntosT.getText());
+                        double puntos;
+                        if (vpq.puntos.getText().equals("")) {
+                            puntos = 0;
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error en la conexión.");
-                            a = false;
+                            puntos = Double.parseDouble(vpq.puntos.getText());
+                        }
+
+                        int contAb = 0;
+                        if (vpq.ab.getText().equals("")) {
+                            contAb = 0;
+                        } else {
+                            contAb = Integer.parseInt(vpq.ab.getText());
+                        }
+                        vpq.ab.setText((contAb + 1) + "");
+                        if (vpq.abrt.getText().equals("")) {
+                            vpq.abrt.setText(varP.getPregunta());
+                        } else {
+                            vpq.abrt.setText(vpq.abrt.getText() + "~" + varP.getPregunta());
+                        }
+                        if (guard[moment] != null) {
+                            String[] cambio = guard[moment].split("~");
+                            String[] div = guard[moment].split("¬");
+                            vpq.ab.setText(cambio[7]);
+                            vpq.abrt.setText(div[1]);
+                        }
+
+                        String todo = null;
+                        if (vpq.txtRespuesta.getText().equals("")) {
+                            varRe.setRespuesta(vpq.txtRespuesta.getText());
+                            if (vpq.ab.getText().equals("")) {
+                                todo = varP.getTipo() + "~" + vpq.contador.getText() + "~" + vpq.txtPregunta.getText() + "~/*null*/" + "~" + puntosT + "~" + puntos + "~" + vpq.nump_resp.getText() + "~" + "/*null*/~¬/*null*/¬~¬" + vpq.nump.getText();
+                            } else {
+                                varP.setPregunta(vpq.abrt.getText());
+                                todo = varP.getTipo() + "~" + vpq.contador.getText() + "~" + vpq.txtPregunta.getText() + "~/*null*/~" + puntosT + "~" + puntos + "~" + vpq.nump_resp.getText() + "~" + vpq.ab.getText() + "~¬" + vpq.abrt.getText() + "¬~¬" + vpq.nump.getText();
+                            }
+                        } else {
+                            varRe.setRespuesta(vpq.txtRespuesta.getText());
+                            if (vpq.ab.getText().equals("")) {
+                                todo = varP.getTipo() + "~" + vpq.contador.getText() + "~" + vpq.txtPregunta.getText() + "~" + vpq.txtRespuesta.getText() + "~" + puntosT + "~" + puntos + "~" + vpq.nump_resp.getText() + "~/*null*/~¬/*null*/¬~¬" + vpq.nump.getText();
+                            } else {
+                                varP.setPregunta(vpq.abrt.getText());
+                                todo = varP.getTipo() + "~" + vpq.contador.getText() + "~" + vpq.txtPregunta.getText() + "~" + vpq.txtRespuesta.getText() + "~" + puntosT + "~" + puntos + "~" + vpq.nump_resp.getText() + "~" + vpq.ab.getText() + "~¬" + vpq.abrt.getText() + "¬~¬" + vpq.nump.getText();
+                            }
+                        }
+                        guard[moment] = todo;
+                        String[] otro = guard[moment].split("~");
+
+                        if (cons.existeRP(varU.getMatricula(), parte[0], otro[2]) == 1) {
+                            if (otro[3].equals("")) {
+                                if (cons.rPAbiertaMod(varU.getMatricula(), parte[0], otro[2], "/*null*/")); else {
+                                    JOptionPane.showMessageDialog(null, "Error en la conexión.");
+                                    a = false;
+                                }
+                            } else {
+                                if (cons.rPAbiertaMod(varU.getMatricula(), parte[0], otro[2], otro[3])); else {
+                                    JOptionPane.showMessageDialog(null, "Error en la conexión.");
+                                    a = false;
+                                }
+                            }
+                        } else {
+                            if (cons.rPAbierta(varRe)); else {
+                                JOptionPane.showMessageDialog(null, "Error en la conexión.");
+                                a = false;
+                            }
                         }
                     }
-
                     if (a == true) {
                         double ra = 0;
                         double rb = 0;
@@ -165,8 +406,9 @@ public class CtrlPresentarQuizz implements ActionListener {
                         double rf = 0;
                         double rg = 0;
                         double rh = 0;
-                        double acum = 0;
+                        double acum;
                         double puntos = 0;
+                        String va, vb, vc, vd, ve, vf, vg, vh;
                         if (vpq.puntos.getText().equals("")) {
                             puntos += 0;
                         } else {
@@ -177,219 +419,470 @@ public class CtrlPresentarQuizz implements ActionListener {
                             if (vpq.r_a.isSelected()) {
                                 ra = Double.parseDouble(vpq.r_a.getName());
                                 contad = contad + 1;
+                                va = "a~" + vpq.r_a.getName() + "~" + vpq.txtR1.getText();
+                            } else {
+                                va = "0~" + vpq.r_a.getName() + "~" + vpq.txtR1.getText();
                             }
                             if (vpq.r_b.isSelected()) {
                                 rb = Double.parseDouble(vpq.r_b.getName());
                                 contad = contad + 1;
+                                vb = "b~" + vpq.r_b.getName() + "~" + vpq.txtR2.getText();
+                            } else {
+                                vb = "0~" + vpq.r_b.getName() + "~" + vpq.txtR2.getText();
                             }
                             if (vpq.r_c.isSelected()) {
                                 rc = Double.parseDouble(vpq.r_c.getName());
                                 contad = contad + 1;
+                                vc = "c~" + vpq.r_c.getName() + "~" + vpq.txtR3.getText();
+                            } else {
+                                if (vpq.txtR3.getText().equals("")) {
+                                    vc = "nada~nada~nada";
+                                } else {
+                                    vc = "0~" + vpq.r_c.getName() + "~" + vpq.txtR3.getText();
+                                }
                             }
                             if (vpq.r_d.isSelected()) {
                                 rd = Double.parseDouble(vpq.r_d.getName());
                                 contad = contad + 1;
+                                vd = "d~" + vpq.r_d.getName() + "~" + vpq.txtR4.getText();
+                            } else {
+                                if (vpq.txtR4.getText().equals("")) {
+                                    vd = "nada~nada~nada";
+                                } else {
+                                    vd = "0~" + vpq.r_d.getName() + "~" + vpq.txtR4.getText();
+                                }
                             }
                             if (vpq.r_e.isSelected()) {
                                 re = Double.parseDouble(vpq.r_e.getName());
                                 contad = contad + 1;
+                                ve = "e~" + vpq.r_e.getName() + "~" + vpq.txtR5.getText();
+                            } else {
+                                if (vpq.txtR5.getText().equals("")) {
+                                    ve = "nada~nada~nada";
+                                } else {
+                                    ve = "0~" + vpq.r_e.getName() + "~" + vpq.txtR5.getText();
+                                }
                             }
                             if (vpq.r_f.isSelected()) {
                                 rf = Double.parseDouble(vpq.r_f.getName());
                                 contad = contad + 1;
+                                vf = "f~" + vpq.r_f.getName() + "~" + vpq.txtR6.getText();
+                            } else {
+                                if (vpq.txtR6.getText().equals("")) {
+                                    vf = "nada~nada~nada";
+                                } else {
+                                    vf = "0~" + vpq.r_f.getName() + "~" + vpq.txtR6.getText();
+                                }
                             }
                             if (vpq.r_g.isSelected()) {
                                 rg = Double.parseDouble(vpq.r_g.getName());
                                 contad = contad + 1;
+                                vg = "d~" + vpq.r_g.getName() + "~" + vpq.txtR7.getText();
+                            } else {
+                                if (vpq.txtR7.getText().equals("")) {
+                                    vg = "nada~nada~nada";
+                                } else {
+                                    vg = "0~" + vpq.r_g.getName() + "~" + vpq.txtR7.getText();
+                                }
                             }
                             if (vpq.r_h.isSelected()) {
                                 rh = Double.parseDouble(vpq.r_h.getName());
                                 contad = contad + 1;
+                                vh = "h~" + vpq.r_h.getName() + "~" + vpq.txtR8.getText();
+                            } else {
+                                if (vpq.txtR8.getText().equals("")) {
+                                    vh = "nada~nada~nada";
+                                } else {
+                                    vh = "0~" + vpq.r_h.getName() + "~" + vpq.txtR8.getText();
+                                }
                             }
 
-                            //System.out.println("Contad: " + contad + " Puntos: " + puntos);
-                            int nump_resp = Integer.parseInt(varP.getNum_resp());
+                            int nump_resp = Integer.parseInt(vpq.nump_resp.getText());
                             if (contad > nump_resp) {
                                 acum = puntos;
                             } else {
                                 acum = ra + rb + rc + rd + re + rf + rg + rh + puntos;
                             }
+
+                            String ab, abrt;
+
+                            if (vpq.ab.getText().equals("")) {
+                                ab = "/*null*/";
+                                abrt = "/*null*/";
+                            } else {
+                                ab = vpq.ab.getText();
+                                abrt = vpq.abrt.getText();
+                            }
+
                             contad = 0;
-                            //System.out.println("Acum: " + acum);
                             vpq.puntos.setText(acum + "");
+                            double puntosT = Double.parseDouble(vpq.puntosT.getText());
+                            String todo = varP.getTipo() + "~" + vpq.contador.getText() + "~" + vpq.txtPregunta.getText() + "~" + va + "~" + vb + "~" + vc + "~" + vd + "~" + ve + "~" + vf + "~" + vg + "~" + vh + "~" + puntosT + "~" + puntos + "~" + vpq.nump_resp.getText() + "~" + ab + "~¬" + abrt + "¬~¬" + vpq.nump.getText();
+                            guard[moment] = todo;
                         }
 
                         int conta = Integer.parseInt(vpq.contador.getText()) + 1;
                         int com = Integer.parseInt(varPre.getTotales());
 
-                        if (conta <= com) {
-                            ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
-                            Listas mens = new Listas();
-                            String[] lista = new String[8];
-                            String[] temp = mens.listaResp(varP.getId(), varQ.getId());
-
-                            if (conta == com) {
-                                vpq.btnSigTerm.setText("Terminar");
-                            }
-                            vpq.txtPregunta.setText(varP.getPregunta());
-                            vpq.nump.setText(vpq.nump.getText() + "~" + varP.getId());
+                        if (guard[moment + 1] != null) {
+                            moment = moment + 1;
                             vpq.contador.setText(conta + "");
-                            double puntosT = Double.parseDouble(vpq.puntosT.getText());
-                            puntosT += Double.parseDouble(varP.getPuntuacion_total());
-                            vpq.puntosT.setText(puntosT + "");
+                            String[] partir = guard[moment].split("~");
+                            if (partir[0].equals("abierto")) {
+                                ocultar();
+                                vpq.txtPregunta.setText(partir[2]);
+                                if (partir[3].equals("/*null*/")) {
+                                    vpq.txtRespuesta.setText(null);
+                                } else {
+                                    vpq.txtRespuesta.setText(partir[3]);
+                                }
 
-                            vpq.setVisible(true);
-                            vpq.txtRespuesta.setText(null);
-                            vpq.txtR3.setVisible(false);
-                            vpq.txtR4.setVisible(false);
-                            vpq.txtR5.setVisible(false);
-                            vpq.txtR6.setVisible(false);
-                            vpq.txtR7.setVisible(false);
-                            vpq.txtR8.setVisible(false);
-                            vpq.r_c.setVisible(false);
-                            vpq.r_d.setVisible(false);
-                            vpq.r_e.setVisible(false);
-                            vpq.r_f.setVisible(false);
-                            vpq.r_g.setVisible(false);
-                            vpq.r_h.setVisible(false);
+                                String[] div = guard[moment].split("¬");
+                                if (partir[7].equals("/*null*/")) {
+                                    vpq.ab.setText(null);
+                                    vpq.abrt.setText(null);
+                                } else {
+                                    vpq.ab.setText(null);
+                                    vpq.abrt.setText(null);
+                                    vpq.ab.setText(partir[7]);
+                                    vpq.abrt.setText(div[1]);
+                                }
+                                vpq.puntosT.setText(null);
+                                vpq.nump_resp.setText(null);
+                                vpq.puntosT.setText(partir[4]);
+                                vpq.nump_resp.setText(partir[6]);
+                                vpq.nump.setText(null);
+                                vpq.nump.setText(div[3]);
+                                vpq.btnSigTerm.setText("Siguiente");
 
-                            vpq.r_a.setSelected(false);
-                            vpq.r_b.setSelected(false);
-                            vpq.r_c.setSelected(false);
-                            vpq.r_d.setSelected(false);
-                            vpq.r_e.setSelected(false);
-                            vpq.r_f.setSelected(false);
-                            vpq.r_g.setSelected(false);
-                            vpq.r_h.setSelected(false);
+                                if (conta > 1) {
+                                    vpq.btnRegresar.setVisible(true);
+                                } else {
+                                    vpq.btnRegresar.setVisible(false);
+                                }
 
-                            int cont = 0;
-
-                            if (varP.getTipo().equals("abierto")) {
-                                vpq.abierto.setVisible(true);
-                                int contAb = Integer.parseInt(vpq.ab.getText());
-                                vpq.ab.setText((contAb + 1) + "");
-                                vpq.abrt.setText(vpq.abrt.getText() + "~" + varP.getPregunta());
                             } else {
-                                if (varP.getTipo().equals("unico") || varP.getTipo().equals("multiple")) {
-                                    vpq.abierto.setVisible(false);
-                                    for (int i = 0; i < 8; i++) {
-                                        String[] part = temp[i].split("~");
-                                        String parte = part[0];
-                                        if (parte.equals("*/null/*")); else {
-                                            lista[cont] = temp[i];
-                                            cont++;
-                                        }
+                                ocultar();
+                                vpq.abierto.setVisible(false);
+                                vpq.txtR1.setVisible(true);
+                                vpq.txtR2.setVisible(true);
+                                vpq.r_a.setVisible(true);
+                                vpq.r_b.setVisible(true);
+                                vpq.txtPregunta.setText(partir[2]);
+                                if (partir[3].equals("a")) {
+                                    vpq.r_a.setSelected(true);
+                                } else {
+                                    vpq.r_a.setSelected(false);
+                                }
+                                vpq.r_a.setName(partir[4]);
+                                vpq.txtR1.setText(partir[5]);
+                                if (partir[6].equals("b")) {
+                                    vpq.r_b.setSelected(true);
+                                } else {
+                                    vpq.r_b.setSelected(false);
+                                }
+                                vpq.r_b.setName(partir[7]);
+                                vpq.txtR2.setText(partir[8]);
+                                if (partir[9].equals("nada")) {
+                                    vpq.r_c.setVisible(false);
+                                    vpq.txtR3.setVisible(false);
+                                } else {
+                                    vpq.r_c.setVisible(true);
+                                    vpq.txtR3.setVisible(true);
+                                    if (partir[9].equals("c")) {
+                                        vpq.r_c.setSelected(true);
+                                    } else {
+                                        vpq.r_c.setSelected(false);
                                     }
-                                    insertarPreg(cont, lista);
+                                    vpq.r_c.setName(partir[10]);
+                                    vpq.txtR3.setText(partir[11]);
+                                }
+                                if (partir[12].equals("nada")) {
+                                    vpq.r_d.setVisible(false);
+                                    vpq.txtR4.setVisible(false);
+                                } else {
+                                    vpq.r_d.setVisible(true);
+                                    vpq.txtR4.setVisible(true);
+                                    if (partir[12].equals("d")) {
+                                        vpq.r_d.setSelected(true);
+                                    } else {
+                                        vpq.r_d.setSelected(false);
+                                    }
+                                    vpq.r_d.setName(partir[13]);
+                                    vpq.txtR4.setText(partir[14]);
+                                }
+                                if (partir[15].equals("nada")) {
+                                    vpq.r_e.setVisible(false);
+                                    vpq.txtR5.setVisible(false);
+                                } else {
+                                    vpq.r_e.setVisible(true);
+                                    vpq.txtR5.setVisible(true);
+                                    if (partir[15].equals("e")) {
+                                        vpq.r_e.setSelected(true);
+                                    } else {
+                                        vpq.r_e.setSelected(false);
+                                    }
+                                    vpq.r_e.setName(partir[16]);
+                                    vpq.txtR5.setText(partir[17]);
+                                }
+                                if (partir[18].equals("nada")) {
+                                    vpq.r_f.setVisible(false);
+                                    vpq.txtR6.setVisible(false);
+                                } else {
+                                    vpq.r_f.setVisible(true);
+                                    vpq.txtR6.setVisible(true);
+                                    if (partir[18].equals("f")) {
+                                        vpq.r_f.setSelected(true);
+                                    } else {
+                                        vpq.r_f.setSelected(false);
+                                    }
+                                    vpq.r_f.setName(partir[19]);
+                                    vpq.txtR6.setText(partir[20]);
+                                }
+                                if (partir[21].equals("nada")) {
+                                    vpq.r_g.setVisible(false);
+                                    vpq.txtR7.setVisible(false);
+                                } else {
+                                    vpq.r_g.setVisible(true);
+                                    vpq.txtR7.setVisible(true);
+                                    if (partir[21].equals("g")) {
+                                        vpq.r_g.setSelected(true);
+                                    } else {
+                                        vpq.r_g.setSelected(false);
+                                    }
+                                    vpq.r_g.setName(partir[22]);
+                                    vpq.txtR7.setText(partir[23]);
+                                }
+                                if (partir[24].equals("nada")) {
+                                    vpq.r_h.setVisible(false);
+                                    vpq.txtR8.setVisible(false);
+                                } else {
+                                    vpq.r_h.setVisible(true);
+                                    vpq.txtR8.setVisible(true);
+                                    if (partir[24].equals("h")) {
+                                        vpq.r_h.setSelected(true);
+                                    } else {
+                                        vpq.r_h.setSelected(false);
+                                    }
+                                    vpq.r_h.setName(partir[25]);
+                                    vpq.txtR8.setText(partir[26]);
+                                }
+                                vpq.puntosT.setText(null);
+                                vpq.puntosT.setText(partir[27]);
+                                vpq.nump_resp.setText(null);
+                                vpq.nump_resp.setText(partir[29]);
+
+                                String[] div = guard[moment].split("¬");
+                                if (partir[30].equals("/*null*/")) {
+                                    vpq.ab.setText(null);
+                                    vpq.abrt.setText(null);
+                                } else {
+                                    vpq.ab.setText(null);
+                                    vpq.abrt.setText(null);
+                                    vpq.ab.setText(partir[30]);
+                                    vpq.abrt.setText(div[1]);
+                                }
+                                vpq.nump.setText(null);
+                                vpq.nump.setText(div[3]);
+                                vpq.btnSigTerm.setText("Siguiente");
+
+                                if (conta > 1) {
+                                    vpq.btnRegresar.setVisible(true);
+                                } else {
+                                    vpq.btnRegresar.setVisible(false);
                                 }
                             }
-
                         } else {
-                            double puntosT = 0;
-                            if (vpq.puntosT.getText().equals("")); else {
-                                puntosT = Double.parseDouble(vpq.puntosT.getText());
-                            }
-                            if (vpq.puntos.getText().equals("")) {
-                                puntos = 0;
-                            } else {
-                                puntos = Double.parseDouble(vpq.puntos.getText());
-                            }
+                            if (conta <= com) {
+                                ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
+                                Listas mens = new Listas();
+                                String[] lista = new String[8];
+                                String[] temp = mens.listaResp(varP.getId(), varQ.getId());
 
-                            System.out.println("Preguntas abiertas: " + vpq.ab.getText());
-                            System.out.println("Puntos totales: " + (puntosT / (conta - 1)));
-                            System.out.println("Puntos obtenidos: " + (puntos / (conta - 1)));
-                            System.out.println((conta - 1));
-
-                            String partir = vpq.NomQuizz.getText();
-                            String[] parte = partir.split("/");
-                            varPre.setIdent(varU.getMatricula());
-                            varPre.setQuizz(parte[0]);
-
-                            Listas mens = new Listas();
-                            ArrayList<ModVariablesPresentados> list = mens.listaPre(varU.getMatricula(), parte[0]);
-                            ModVariablesPresentados var = new ModVariablesPresentados();
-
-                            if (list.size() > 0) {
-                                for (int i = list.size() - 1; i < list.size(); i++) {
-                                    var = list.get(i);
-                                    int intentosAc = Integer.parseInt(var.getIntento()) + 1;
-
-                                    varPre.setIntento(intentosAc + "");
+                                if (conta == com) {
+                                    vpq.btnSigTerm.setText("Terminar");
                                 }
-                            } else {
-                                varPre.setIntento("1");
-                            }
 
-                            DecimalFormat op = new DecimalFormat("#.00");
-                            String bd = op.format((puntosT / (conta - 1)));
-                            double fin = Double.parseDouble(bd);
-
-                            DecimalFormat op1 = new DecimalFormat("#.00");
-                            String bd1 = op1.format((puntos / (conta - 1)));
-                            double fin1 = Double.parseDouble(bd1);
-                            String que;
-                            double fin2 = 0;
-
-                            if (!vpq.ab.getText().equals("")) {
-                                varPre.setStatus("Por calificar");
-                                que = "Terminó de presentar el Quizz: ''" + parte[0] + "'', se necesita la revision y calificación de la(s) pregunta(s) abierta(s)";
-                                varPre.setAbrt(vpq.abrt.getText());
-                            } else {
-                                DecimalFormat op2 = new DecimalFormat("#.00");
-                                String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
-                                fin2 = Double.parseDouble(bd2);
-                                if (fin2 < 70) {
-                                    que = "Terminó de presentar el Quizz: '" + parte[0] + "' con una puntuación de: " + fin2 + " (Reprobaado).";
-                                    varPre.setStatus("Reprobado");
+                                if (conta > 1) {
+                                    vpq.btnRegresar.setVisible(true);
                                 } else {
-                                    que = "Terminó de presentar el Quizz: '" + parte[0] + "' con una puntuación de: " + fin2 + " (Aprobado).";
-                                    varPre.setStatus("Aprobado");
+                                    vpq.btnRegresar.setVisible(false);
                                 }
-                                varPre.setAbrt("nada");
-                            }
-                            
-                            
-                            varPre.setP_totales(fin + "~100");
-                            varPre.setCalificacion(fin1 + "~" + fin2);
+                                vpq.txtPregunta.setText(varP.getPregunta());
+                                vpq.nump.setText(vpq.nump.getText() + "~" + varP.getId());
+                                vpq.contador.setText(conta + "");
+                                moment = moment + 1;
+                                double puntosT = Double.parseDouble(vpq.puntosT.getText());
+                                puntosT += Double.parseDouble(varP.getPuntuacion_total());
+                                vpq.puntosT.setText(puntosT + "");
 
-                            if (cons.rPresentados(varPre)) {
-                                DecimalFormat op2 = new DecimalFormat("#.00");
-                                String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
-                                fin2 = Double.parseDouble(bd2);
+                                vpq.setVisible(true);
+                                ocultar();
 
-                                ModVariablesReg varReg = new ModVariablesReg();
-                                String tipo = "Administrador";
-                                String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
-                                String cuando = fechaDate.format(date) + " " + horaDate.format(date);
-                                String comp = varU.getMatricula();
-                                if (cons.avisoAA(varReg, tipo, quien, que, cuando, comp));
-                                String status;
-                                if (fin2 < 70) {
-                                    status = "Reprobado";
+                                int cont = 0;
+
+                                if (varP.getTipo().equals("abierto")) {
+                                    vpq.nump_resp.setText("0");
+                                    vpq.txtR1.setVisible(false);
+                                    vpq.txtR2.setVisible(false);
+                                    vpq.abierto.setVisible(true);
                                 } else {
-                                    status = "Aprobado";
+                                    if (varP.getTipo().equals("unico") || varP.getTipo().equals("multiple")) {
+                                        vpq.nump_resp.setText(varP.getNum_resp());
+                                        vpq.txtR1.setVisible(true);
+                                        vpq.txtR2.setVisible(true);
+                                        vpq.r_a.setVisible(true);
+                                        vpq.r_b.setVisible(true);
+                                        vpq.abierto.setVisible(false);
+                                        for (int i = 0; i < 8; i++) {
+                                            String[] part = temp[i].split("~");
+                                            String parte = part[0];
+                                            if (parte.equals("*/null/*")); else {
+                                                lista[cont] = temp[i];
+                                                cont++;
+                                            }
+                                        }
+                                        insertarPreg(cont, lista);
+                                    }
+                                }
+
+                            } else {
+                                double puntosT = 0;
+                                if (vpq.puntosT.getText().equals("")); else {
+                                    puntosT = Double.parseDouble(vpq.puntosT.getText());
                                 }
                                 if (vpq.puntos.getText().equals("")) {
-                                    JOptionPane.showMessageDialog(null, "Quizz terminado, espere que un administrador le califique.");
+                                    puntos = 0;
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Quizz terminado, Puntuación: " + fin2 + ", Status: " + status + ".");
+                                    puntos = Double.parseDouble(vpq.puntos.getText());
                                 }
-                                t.stop();
-                                vpq.setVisible(false);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Error en la conexión.");
-                                t.stop();
-                                vpq.setVisible(false);
+
+                                String partir = vpq.NomQuizz.getText();
+                                String[] parte = partir.split("/");
+                                varPre.setIdent(varU.getMatricula());
+                                varPre.setQuizz(parte[0]);
+
+                                Listas mens = new Listas();
+                                ArrayList<ModVariablesPresentados> list = mens.listaPre(varU.getMatricula(), parte[0]);
+                                ModVariablesPresentados var = new ModVariablesPresentados();
+
+                                if (list.size() > 0) {
+                                    for (int i = list.size() - 1; i < list.size(); i++) {
+                                        var = list.get(i);
+                                        int intentosAc = Integer.parseInt(var.getIntento()) + 1;
+
+                                        varPre.setIntento(intentosAc + "");
+                                    }
+                                } else {
+                                    varPre.setIntento("1");
+                                }
+
+                                DecimalFormat op = new DecimalFormat("#.00");
+                                String bd = op.format((puntosT / (conta - 1)));
+                                double fin = Double.parseDouble(bd);
+
+                                DecimalFormat op1 = new DecimalFormat("#.00");
+                                String bd1 = op1.format((puntos / (conta - 1)));
+                                double fin1 = Double.parseDouble(bd1);
+                                String que;
+                                double fin2 = 0;
+
+                                int contAb;
+                                int contAbTot = 0;
+                                String marca;
+                                if (!vpq.ab.getText().equals("")) {
+                                    varPre.setStatus("Por calificar");
+                                    que = "Terminó de presentar el Quizz: ''" + parte[0] + "'', se necesita la revision y calificación de la(s) pregunta(s) abierta(s)";
+                                    varPre.setAbrt(vpq.abrt.getText());
+                                    contAb = Integer.parseInt(vpq.ab.getText());
+                                    marca = "*";
+                                    contAbTot = Integer.parseInt(vpq.contador.getText());
+                                } else {
+                                    DecimalFormat op2 = new DecimalFormat("#.00");
+                                    String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
+                                    fin2 = Double.parseDouble(bd2);
+                                    if (fin2 < 70) {
+                                        que = "Terminó de presentar el Quizz: '" + parte[0] + "' con una puntuación de: " + fin2 + " (Reprobaado).";
+                                        varPre.setStatus("Reprobado");
+                                    } else {
+                                        que = "Terminó de presentar el Quizz: '" + parte[0] + "' con una puntuación de: " + fin2 + " (Aprobado).";
+                                        varPre.setStatus("Aprobado");
+                                    }
+                                    varPre.setAbrt("nada");
+                                    contAb = 0;
+                                    marca = "~";
+                                }
+
+                                varPre.setP_totales(fin + "~100");
+                                varPre.setCalificacion(fin1 + "~" + fin2 + "~0");
+
+                                if (cons.rPresentados(varPre, contAb, contAbTot, varQ.getMod_calif(), marca)) {
+                                    DecimalFormat op2 = new DecimalFormat("#.00");
+                                    String bd2 = op2.format(((puntos / (conta - 1)) * 100) / (puntosT / (conta - 1)));
+                                    fin2 = Double.parseDouble(bd2);
+
+                                    ModVariablesReg varReg = new ModVariablesReg();
+                                    String tipo = "Administrador";
+                                    String quien = varU.getMatricula() + "/ " + varU.getNombre_completo();
+                                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
+                                    String comp = varU.getMatricula();
+                                    if (cons.avisoAA(varReg, tipo, quien, que, cuando, comp));
+                                    String status;
+                                    if (fin2 < 70) {
+                                        status = "Reprobado";
+                                    } else {
+                                        status = "Aprobado";
+                                    }
+                                    if (vpq.abrt.getText().equals("")) {
+                                        JOptionPane.showMessageDialog(null, "Quizz terminado, Puntuación: " + fin2 + ", Status: " + status + ".");
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Quizz terminado, espere que un administrador le califique.");
+                                    }
+                                    t.stop();
+                                    vpq.setVisible(false);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error en la conexión.");
+                                    t.stop();
+                                    vpq.setVisible(false);
+                                }
                             }
                         }
                     }
-
                 }
             }
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
             vpq.setVisible(false);
         }
+    }
+
+    public void ocultar() {
+        vpq.txtR1.setVisible(false);
+        vpq.txtR2.setVisible(false);
+        vpq.abierto.setVisible(true);
+
+        vpq.txtRespuesta.setText(null);
+        vpq.txtR3.setVisible(false);
+        vpq.txtR4.setVisible(false);
+        vpq.txtR5.setVisible(false);
+        vpq.txtR6.setVisible(false);
+        vpq.txtR7.setVisible(false);
+        vpq.txtR8.setVisible(false);
+        vpq.r_c.setVisible(false);
+        vpq.r_d.setVisible(false);
+        vpq.r_e.setVisible(false);
+        vpq.r_f.setVisible(false);
+        vpq.r_g.setVisible(false);
+        vpq.r_h.setVisible(false);
+
+        vpq.r_a.setSelected(false);
+        vpq.r_b.setSelected(false);
+        vpq.r_c.setSelected(false);
+        vpq.r_d.setSelected(false);
+        vpq.r_e.setSelected(false);
+        vpq.r_f.setSelected(false);
+        vpq.r_g.setSelected(false);
+        vpq.r_h.setSelected(false);
     }
 
     public void insertarPreg(int cont, String lista[]) {
@@ -1004,7 +1497,6 @@ public class CtrlPresentarQuizz implements ActionListener {
                 Tminutos = Integer.parseInt(varPre.getMinuto());
             }
 
-            //JOptionPane.showMessageDialog(null, Thoras + Tminutos);
             cs++;
             if (cs == 100) {
                 cs = 0;
@@ -1020,8 +1512,8 @@ public class CtrlPresentarQuizz implements ActionListener {
             }
             if (cs == 0 && s == 0 && h == Thoras && m == Tminutos) {
                 t.stop();
-                //vpq.cronometro.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Tiempo agotado.");
+                vpq.setVisible(false);
             }
             actualizarLabel();
 

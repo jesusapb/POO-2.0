@@ -9,6 +9,7 @@ import Controlador.CtrlMensajes.CtrlBandejadEntrada;
 import Controlador.Empleado.CtrlLeerDocs;
 import Controlador.Empleado.CtrlPerfil;
 import Controlador.Empleado.CtrlSelectQuizz;
+import Modelo.Listas;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;
 import Modelo.ModVariablesMensaje;
@@ -27,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,9 +81,16 @@ public class CtrlEmpleado implements ActionListener {
         ve.txtNombre.setText(var.getNombre_completo());
         ve.txtMatricula.setText(var.getMatricula());
         ve.txtTipo.setText(var.getTipo());
-        ModConsultasSQL.tablaConectados(ve.tablaConectados);
+        ModConsultasSQL.tablaConectados(ve.tablaConectados, ve.txtMatricula.getText());
         ModVariablesAvisos varA = new ModVariablesAvisos();
         ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
+        Listas mens = new Listas();
+        ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+        if (list.isEmpty()) {
+            ve.btnLTodo.setVisible(false);
+        } else {
+            ve.btnLTodo.setVisible(true);
+        }
     }
 
     @Override
@@ -132,7 +141,7 @@ public class CtrlEmpleado implements ActionListener {
 
                     if (preg == 0) {
                         t.stop();
-                        ve.setVisible(false);
+                        System.exit(0);
                     }
                 }
 
@@ -169,6 +178,19 @@ public class CtrlEmpleado implements ActionListener {
                     CtrlSelectQuizz ctrlP = new CtrlSelectQuizz(cons, var, vsq, varQ, varP);
                     ctrlP.iniciar();
                     vsq.setVisible(true);
+                }
+
+                if (e.getSource() == ve.btnLTodo) {
+                    ModVariablesAvisos varA = new ModVariablesAvisos();
+                    ModConsultasSQL.LeerTodo(varA, var.getMatricula());
+                    ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
+                    Listas mens = new Listas();
+                    ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+                    if (list.isEmpty()) {
+                        ve.btnLTodo.setVisible(false);
+                    } else {
+                        ve.btnLTodo.setVisible(true);
+                    }
                 }
             }
         } else {
@@ -221,11 +243,18 @@ public class CtrlEmpleado implements ActionListener {
                 ++s;
             }
             if (cs == 0 && (s % 2 == 0)) {
-                ModConsultasSQL.tablaConectados(ve.tablaConectados);
+                ModConsultasSQL.tablaConectados(ve.tablaConectados, ve.txtMatricula.getText());
                 ModConsultasSQL.recarga(var);
 
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
+                Listas mens = new Listas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+                if (list.isEmpty()) {
+                    ve.btnLTodo.setVisible(false);
+                } else {
+                    ve.btnLTodo.setVisible(true);
+                }
 
                 ModVariablesMensaje varM = new ModVariablesMensaje();
                 if (cons.ENVisto(varM, var.getMatricula()) == 1) {

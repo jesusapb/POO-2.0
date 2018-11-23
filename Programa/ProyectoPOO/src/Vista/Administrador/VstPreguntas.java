@@ -40,6 +40,7 @@ public class VstPreguntas extends javax.swing.JFrame {
         id.setVisible(false);
         actual.setVisible(false);
         modPre.setVisible(false);
+        pregunt.setVisible(false);
 
         CtrlPreguntas.inicio(r2, r3, r4, false, txtR1, txtR2, txtR3, txtR4, R1, R2, R3, R4, txtD1, txtD2, txtD3, txtD4);
         t = new Timer(10, acciones);

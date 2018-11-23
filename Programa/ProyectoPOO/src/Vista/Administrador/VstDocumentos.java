@@ -35,15 +35,6 @@ public class VstDocumentos extends javax.swing.JFrame {
 
     public VstDocumentos() {
         initComponents();
-//        setTitle("Documentos.");
-//        setLocationRelativeTo(null);
-//        tpdf.visualizar(tablaDocumentos);
-//        activar_boton(false, false, false, false);
-//        txtNombre.setEnabled(false);
-//        txtDescripcion.setEnabled(false);
-//        btnSi.setVisible(false);
-//        btnNo.setVisible(false);
-
         t = new Timer(10, acciones);
         t.start();
         stat.setVisible(false); 

@@ -62,7 +62,7 @@ public class CtrlPreguntas implements ActionListener {
         vp.matricula.setText(varU.getMatricula());
         ModConsultasSQL.tablaPreg(vp.tablaPreguntas, var, id);
 
-        int acum = Integer.parseInt(vq.p_totales.getText()) - 1;
+        int acum = Integer.parseInt(vq.p_totales.getText());
         if (acum < 1) {
             vp.p_totales.setText("Mínimo de preguntas cumplido.");
             vq.p_totales.setText(acum + "");
@@ -1338,6 +1338,14 @@ public class CtrlPreguntas implements ActionListener {
                             ps.execute();
 
                             JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la pregunta.");
+                            int acum = Integer.parseInt(vq.p_totales.getText()) + 1;
+                            if (acum < 1) {
+                                vp.p_totales.setText("Mínimo de preguntas cumplido.");
+                                vq.p_totales.setText(acum + "");
+                            } else {
+                                vp.p_totales.setText(acum + "");
+                                vq.p_totales.setText(acum + "");
+                            }
                             vp.actual.setText(num + "");
                             vq.actual.setText(num + "");
                             ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);

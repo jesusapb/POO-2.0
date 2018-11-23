@@ -9,7 +9,6 @@ import Modelo.Listas;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
-import Modelo.ModVariablesRespuestas;
 import Modelo.ModVariablesUsr;
 import Modelo.ModvariablesPreguntas;
 import Vista.Empleado.VstPresentarQuizz;

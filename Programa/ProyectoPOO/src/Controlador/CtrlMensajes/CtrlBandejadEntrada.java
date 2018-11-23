@@ -12,6 +12,7 @@ import Modelo.ModVariablesUsr;
 import Vista.Mensajes.VstBandejadEntrada;
 import Vista.Mensajes.VstEnviados;
 import Vista.Mensajes.VstEnviar;
+import Vista.Mensajes.VstMultiple;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
@@ -38,6 +39,7 @@ public class CtrlBandejadEntrada implements ActionListener {
 
         this.vbe.btnEnviados.addActionListener(this);
         this.vbe.btnNuevo.addActionListener(this);
+        this.vbe.btnMensajeMul.addActionListener(this);
     }
 
     public void iniciar() {
@@ -47,10 +49,16 @@ public class CtrlBandejadEntrada implements ActionListener {
         t.start();
         vbe.matricula.setText(var.getMatricula());
         ModVariablesReg varR = new ModVariablesReg();
-        ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR);
+        ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR, vbe.matricula.getText());
         ModVariablesMensaje varM = new ModVariablesMensaje();
         ModConsultasSQL.recibidos(vbe.tablaBandejaEntrada, varM, var);
         vbe.btnNuevo.setVisible(false);
+        vbe.btnMensajeMul.setVisible(false);
+        
+        vbe.LMat.setVisible(false);
+        vbe.LNom.setVisible(false);
+        vbe.txtMatricula.setVisible(false);
+        vbe.txtNombre.setVisible(false);
     }
 
     @Override
@@ -87,6 +95,15 @@ public class CtrlBandejadEntrada implements ActionListener {
                     ctrlE.iniciar();
                     ve.setVisible(true);
                 }
+                if (e.getSource() ==  vbe.btnMensajeMul) {
+                    VstMultiple vm = new VstMultiple();
+                    ModVariablesMensaje varM = new ModVariablesMensaje();
+                    CtrlMultiple ctrlM = new CtrlMultiple(cons, var, varM, vm);
+                    ctrlM.iniciar();
+                    vm.setVisible(true);
+                    vm.txtCantidad.setText("1");
+                    vm.txtPara.setText(vbe.txtMatricula.getText() + "/" + vbe.txtNombre.getText() + "~");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
@@ -119,7 +136,7 @@ public class CtrlBandejadEntrada implements ActionListener {
             }
             if (cs == 0 && (s % 5 == 0)) {
                 ModVariablesReg varR = new ModVariablesReg();
-                ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR);
+                ModConsultasSQL.tablaTEmp(vbe.tablaTUsuarios, varR, vbe.matricula.getText());
                 ModVariablesMensaje varM = new ModVariablesMensaje();
                 ModConsultasSQL.recibidos(vbe.tablaBandejaEntrada, varM, var);
             }

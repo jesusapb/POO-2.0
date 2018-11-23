@@ -27,7 +27,6 @@ public class CtrlEnviar implements ActionListener {
     private ModVariablesUsr var;
     private ModVariablesMensaje varM;
     private VstEnviar ve;
-    private VstBandejadEntrada vbe;
 
     public CtrlEnviar(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstEnviar ve) {
         this.con = con;

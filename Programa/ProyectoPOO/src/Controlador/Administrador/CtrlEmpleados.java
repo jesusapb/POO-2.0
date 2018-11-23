@@ -7,8 +7,10 @@ package Controlador.Administrador;
 
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesReg;
 import Modelo.ModVariablesUsr;
+import Vista.Administrador.VstAvances;
 import Vista.Administrador.VstEmpleados;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -387,7 +389,6 @@ public class CtrlEmpleados implements ActionListener {
 
                     String mat = ve.txtMatricula.getText();
                     var.setMatricula(mat);
-                    //Elimino de la tabla de avances??
                 }
             }
 
@@ -426,7 +427,12 @@ public class CtrlEmpleados implements ActionListener {
                     ve.setVisible(false);
                     variables();
                 } else {
-                    
+                    VstAvances va = new VstAvances();
+                    ModVariablesPresentados varP = new ModVariablesPresentados();
+                    CtrlAvances ctrlA = new CtrlAvances(cons, var, varU, varP, ve, va);
+                    va.txtNombre.setText(ve.txtMatricula.getText() + "/" + ve.txtNombre.getText() + " " + ve.txtApPat.getText() + " " + ve.txtApMat.getText());
+                    ctrlA.iniciar();
+                    va.setVisible(true);
                 }
             }
 

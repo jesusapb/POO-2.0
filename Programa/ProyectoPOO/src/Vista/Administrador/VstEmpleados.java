@@ -69,7 +69,6 @@ public class VstEmpleados extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
         btnReestablecer = new javax.swing.JButton();
         btnAvances = new javax.swing.JButton();
         checkCorreo = new javax.swing.JCheckBox();
@@ -185,7 +184,6 @@ public class VstEmpleados extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("@gmail.com");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, -1, -1));
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 200, -1));
 
         btnReestablecer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Change_User_30px.png"))); // NOI18N
         btnReestablecer.setText("<html>Atrás");
@@ -195,11 +193,11 @@ public class VstEmpleados extends javax.swing.JFrame {
         jPanel1.add(btnReestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 150, -1));
 
         btnAvances.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Advance_30px.png"))); // NOI18N
-        btnAvances.setText("Avances del empleado");
+        btnAvances.setText("Info de Quizzes presentados");
         btnAvances.setBorder(null);
         btnAvances.setContentAreaFilled(false);
         btnAvances.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnAvances, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
+        jPanel1.add(btnAvances, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
 
         checkCorreo.setText("Modificar correo electrónico");
         checkCorreo.setContentAreaFilled(false);
@@ -255,16 +253,7 @@ public class VstEmpleados extends javax.swing.JFrame {
                 checkCorreo.setSelected(false);
                 txtCorreo.setEnabled(false);
 
-//                if ("Permanente".equals(rs.getString(7))) {
-//                    btnDar.setVisible(true);
-//                    btnQuitar.setVisible(false);
-//                } else {
-//                    btnQuitar.setVisible(true);
-//                    btnDar.setVisible(false);
-//                }
-
                 btnAvances.setVisible(true);
-                //btnUpdate.setVisible(true);
                 btnAgregar.setVisible(false);
                 btnGenerar.setVisible(false);
                 btnReestablecer.setVisible(true);
@@ -279,7 +268,6 @@ public class VstEmpleados extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(VstEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Abrir tabla de avances
     }//GEN-LAST:event_tablaRegistradosMouseClicked
 
     private void checkCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCorreoActionPerformed
@@ -377,7 +365,6 @@ public class VstEmpleados extends javax.swing.JFrame {
     public javax.swing.JTable tablaRegistrados;
     public javax.swing.JTextField txtApMat;
     public javax.swing.JTextField txtApPat;
-    public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtCorreo;
     public javax.swing.JTextField txtMatricula;
     public javax.swing.JTextField txtNombre;

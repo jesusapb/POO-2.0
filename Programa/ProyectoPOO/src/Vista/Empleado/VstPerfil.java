@@ -5,16 +5,6 @@
  */
 package Vista.Empleado;
 
-import Modelo.ModConsultasSQL;
-import Modelo.ModVariablesAvisos;
-import Modelo.ModVariablesUsr;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.Timer;
-
 /**
  *
  * @author Antonio
@@ -26,6 +16,8 @@ public class VstPerfil extends javax.swing.JFrame {
      */
     public VstPerfil() {
         initComponents();
+        nomQuizz.setVisible(false);
+        txtIntento.setVisible(false);
     }
 
     /**
@@ -37,6 +29,22 @@ public class VstPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ver = new javax.swing.JPanel();
+        txtRespuesta = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtPregunta = new javax.swing.JTextField();
+        txtComentario = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtCalificacion = new javax.swing.JTextField();
+        txtPuntuacion = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        nomQuizz = new javax.swing.JTextField();
+        txtIntento = new javax.swing.JTextField();
         cambio = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -65,10 +73,72 @@ public class VstPerfil extends javax.swing.JFrame {
         tablaRegistro = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         btncambioContr = new javax.swing.JButton();
+        btnVer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ver.setBackground(new java.awt.Color(255, 255, 255));
+        ver.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtRespuesta.setEditable(false);
+        txtRespuesta.setBackground(new java.awt.Color(255, 255, 255));
+        ver.add(txtRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 300, 60));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Respuesta:");
+        ver.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Pregunta:");
+        ver.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        txtPregunta.setEditable(false);
+        txtPregunta.setBackground(new java.awt.Color(255, 255, 255));
+        ver.add(txtPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 300, 60));
+        ver.add(txtComentario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 60));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Comentario o retroalimentación:");
+        ver.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 290, -1));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Califición asignada:");
+        ver.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 150, -1));
+
+        txtCalificacion.setEditable(false);
+        txtCalificacion.setBackground(new java.awt.Color(255, 255, 255));
+        ver.add(txtCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 230, 30));
+
+        txtPuntuacion.setEditable(false);
+        txtPuntuacion.setBackground(new java.awt.Color(255, 255, 255));
+        ver.add(txtPuntuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, 30));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("<html>Puntuación de la pregunta:");
+        ver.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
+
+        btnCerrar.setText("Cerrar");
+        ver.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+
+        btnAtras.setText("Atras");
+        ver.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+
+        btnSiguiente.setText("Siguiente");
+        ver.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
+
+        nomQuizz.setEditable(false);
+        nomQuizz.setBackground(new java.awt.Color(255, 255, 255));
+        nomQuizz.setBorder(null);
+        ver.add(nomQuizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 70, 20));
+
+        txtIntento.setEditable(false);
+        txtIntento.setBackground(new java.awt.Color(255, 255, 255));
+        txtIntento.setBorder(null);
+        ver.add(txtIntento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 70, 20));
+
+        getContentPane().add(ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 370));
 
         cambio.setBackground(new java.awt.Color(255, 255, 255));
         cambio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -192,6 +262,11 @@ public class VstPerfil extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaRegistroMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaRegistro);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 430, 320));
@@ -201,12 +276,33 @@ public class VstPerfil extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         btncambioContr.setText("Cambio de contraseña");
-        jPanel1.add(btncambioContr, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+        btncambioContr.setBorder(null);
+        btncambioContr.setContentAreaFilled(false);
+        btncambioContr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btncambioContr, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+
+        btnVer.setText("Ver");
+        btnVer.setContentAreaFilled(false);
+        btnVer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
+        int row = evt.getY() / tablaRegistro.getRowHeight();
+        String quizz = "" + tablaRegistro.getValueAt(row, 0);
+        String intento = "" + tablaRegistro.getValueAt(row, 1);
+        String p_abiertas = "" + tablaRegistro.getValueAt(row, 4);
+        int m = Integer.parseInt(p_abiertas);
+        if (m > 0) {
+            nomQuizz.setText(quizz);
+            txtIntento.setText(intento);
+            btnVer.setVisible(true);
+        }
+    }//GEN-LAST:event_tablaRegistroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -247,6 +343,10 @@ public class VstPerfil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField apMat;
     public javax.swing.JTextField apPat;
+    public javax.swing.JButton btnAtras;
+    public javax.swing.JButton btnCerrar;
+    public javax.swing.JButton btnSiguiente;
+    public javax.swing.JButton btnVer;
     public javax.swing.JButton btncambioContr;
     public javax.swing.JButton btncancelar;
     public javax.swing.JButton btnguardar;
@@ -259,6 +359,11 @@ public class VstPerfil extends javax.swing.JFrame {
     public javax.swing.JTextField correo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -271,7 +376,15 @@ public class VstPerfil extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTextField matricula;
+    public javax.swing.JTextField nomQuizz;
     public javax.swing.JTextField nombre;
     public javax.swing.JTable tablaRegistro;
+    public javax.swing.JTextField txtCalificacion;
+    public javax.swing.JTextField txtComentario;
+    public javax.swing.JTextField txtIntento;
+    public javax.swing.JTextField txtPregunta;
+    public javax.swing.JTextField txtPuntuacion;
+    public javax.swing.JTextField txtRespuesta;
+    public javax.swing.JPanel ver;
     // End of variables declaration//GEN-END:variables
 }

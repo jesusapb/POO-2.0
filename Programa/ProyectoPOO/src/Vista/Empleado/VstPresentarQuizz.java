@@ -35,50 +35,49 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         abierto = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         txtRespuesta = new javax.swing.JTextPane();
-        jPanel1 = new javax.swing.JPanel();
+        ab = new javax.swing.JTextField();
+        abrt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPregunta = new javax.swing.JTextPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtR1 = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtR2 = new javax.swing.JTextPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txtR3 = new javax.swing.JTextPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        txtR4 = new javax.swing.JTextPane();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        txtR5 = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtR6 = new javax.swing.JTextPane();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        txtR7 = new javax.swing.JTextPane();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txtR8 = new javax.swing.JTextPane();
         contador = new javax.swing.JTextField();
-        r_a = new javax.swing.JCheckBox();
-        r_b = new javax.swing.JCheckBox();
-        r_c = new javax.swing.JCheckBox();
-        r_d = new javax.swing.JCheckBox();
-        r_e = new javax.swing.JCheckBox();
-        r_f = new javax.swing.JCheckBox();
-        r_g = new javax.swing.JCheckBox();
-        r_h = new javax.swing.JCheckBox();
         cronometro = new javax.swing.JLabel();
         btnSigTerm = new javax.swing.JButton();
+        btnSig = new javax.swing.JButton();
         NomQuizz = new javax.swing.JTextField();
-        puntosT = new javax.swing.JTextField();
-        ab = new javax.swing.JTextField();
-        nump = new javax.swing.JTextField();
-        abrt = new javax.swing.JTextField();
-        puntos = new javax.swing.JTextField();
         nump_resp = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
+        r_h = new javax.swing.JCheckBox();
+        txtR8 = new javax.swing.JTextField();
+        txtR7 = new javax.swing.JTextField();
+        r_g = new javax.swing.JCheckBox();
+        r_f = new javax.swing.JCheckBox();
+        txtR6 = new javax.swing.JTextField();
+        txtR5 = new javax.swing.JTextField();
+        r_e = new javax.swing.JCheckBox();
+        r_d = new javax.swing.JCheckBox();
+        txtR4 = new javax.swing.JTextField();
+        txtR3 = new javax.swing.JTextField();
+        r_c = new javax.swing.JCheckBox();
+        r_b = new javax.swing.JCheckBox();
+        txtR2 = new javax.swing.JTextField();
+        txtR1 = new javax.swing.JTextField();
+        r_a = new javax.swing.JCheckBox();
+        nump = new javax.swing.JTextField();
+        puntos = new javax.swing.JTextField();
+        puntosT = new javax.swing.JTextField();
+        btnMini = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         abierto.setBackground(new java.awt.Color(255, 255, 255));
         abierto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,10 +86,17 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
 
         abierto.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 410, 370));
 
-        getContentPane().add(abierto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 450, 400));
+        ab.setEditable(false);
+        ab.setBackground(new java.awt.Color(255, 255, 255));
+        ab.setBorder(null);
+        abierto.add(ab, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 230, 20));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        abrt.setEditable(false);
+        abrt.setBackground(new java.awt.Color(255, 255, 255));
+        abrt.setBorder(null);
+        abierto.add(abrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 230, 20));
+
+        jPanel1.add(abierto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 450, 420));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setEnabled(false);
@@ -101,138 +107,144 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 340, 90));
 
-        txtR1.setEditable(false);
-        jScrollPane3.setViewportView(txtR1);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 300, 40));
-
-        txtR2.setEditable(false);
-        jScrollPane4.setViewportView(txtR2);
-
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 300, 40));
-
-        txtR3.setEditable(false);
-        jScrollPane5.setViewportView(txtR3);
-
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 300, 40));
-
-        txtR4.setEditable(false);
-        jScrollPane6.setViewportView(txtR4);
-
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 300, 40));
-
-        txtR5.setEditable(false);
-        jScrollPane7.setViewportView(txtR5);
-
-        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 300, 40));
-
-        txtR6.setEditable(false);
-        jScrollPane2.setViewportView(txtR6);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 300, 40));
-
-        txtR7.setEditable(false);
-        jScrollPane9.setViewportView(txtR7);
-
-        jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 300, 40));
-
-        txtR8.setEditable(false);
-        jScrollPane8.setViewportView(txtR8);
-
-        jPanel1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 300, 40));
-
         contador.setEditable(false);
         contador.setBackground(new java.awt.Color(255, 255, 255));
         contador.setBorder(null);
         jPanel1.add(contador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 60, -1));
 
-        r_a.setText("A)");
-        r_a.setContentAreaFilled(false);
-        r_a.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 70, -1));
-
-        r_b.setText("B)");
-        r_b.setContentAreaFilled(false);
-        r_b.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 70, -1));
-
-        r_c.setText("C)");
-        r_c.setContentAreaFilled(false);
-        r_c.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 70, -1));
-
-        r_d.setText("D)");
-        r_d.setContentAreaFilled(false);
-        r_d.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 70, -1));
-
-        r_e.setText("E)");
-        r_e.setContentAreaFilled(false);
-        r_e.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_e, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 70, -1));
-
-        r_f.setText("F)");
-        r_f.setContentAreaFilled(false);
-        r_f.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 70, -1));
-
-        r_g.setText("G)");
-        r_g.setContentAreaFilled(false);
-        r_g.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_g, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 70, -1));
-
-        r_h.setText("H)");
-        r_h.setContentAreaFilled(false);
-        r_h.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(r_h, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 70, -1));
-
         cronometro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cronometro.setText("00:00:00");
-        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 110, -1));
+        jPanel1.add(cronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 110, -1));
 
         btnSigTerm.setText("Siguente");
         btnSigTerm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnSigTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 100, -1));
 
+        btnSig.setText("Siguente");
+        btnSig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(btnSig, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 100, -1));
+
         NomQuizz.setEditable(false);
         NomQuizz.setBackground(new java.awt.Color(255, 255, 255));
         NomQuizz.setBorder(null);
-        jPanel1.add(NomQuizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 120, -1));
-
-        puntosT.setEditable(false);
-        puntosT.setBackground(new java.awt.Color(255, 255, 255));
-        puntosT.setBorder(null);
-        jPanel1.add(puntosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 110, -1));
-
-        ab.setEditable(false);
-        ab.setBackground(new java.awt.Color(255, 255, 255));
-        ab.setBorder(null);
-        jPanel1.add(ab, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 60, -1));
-
-        nump.setEditable(false);
-        nump.setBackground(new java.awt.Color(255, 255, 255));
-        nump.setBorder(null);
-        jPanel1.add(nump, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 30, -1));
-
-        abrt.setEditable(false);
-        abrt.setBackground(new java.awt.Color(255, 255, 255));
-        abrt.setBorder(null);
-        jPanel1.add(abrt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, -1));
-
-        puntos.setEditable(false);
-        puntos.setBackground(new java.awt.Color(255, 255, 255));
-        puntos.setBorder(null);
-        jPanel1.add(puntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 110, -1));
+        jPanel1.add(NomQuizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 120, -1));
 
         nump_resp.setEditable(false);
         nump_resp.setBackground(new java.awt.Color(255, 255, 255));
         nump_resp.setBorder(null);
-        jPanel1.add(nump_resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
+        jPanel1.add(nump_resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 20));
+
+        btnRegresar.setText("Regresar");
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+
+        r_h.setText("H)");
+        r_h.setContentAreaFilled(false);
+        jPanel1.add(r_h, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+
+        txtR8.setEditable(false);
+        txtR8.setBackground(new java.awt.Color(255, 255, 255));
+        txtR8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 340, 30));
+
+        txtR7.setEditable(false);
+        txtR7.setBackground(new java.awt.Color(255, 255, 255));
+        txtR7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 340, 30));
+
+        r_g.setText("G)");
+        r_g.setContentAreaFilled(false);
+        jPanel1.add(r_g, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+
+        r_f.setText("F)");
+        r_f.setContentAreaFilled(false);
+        jPanel1.add(r_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+
+        txtR6.setEditable(false);
+        txtR6.setBackground(new java.awt.Color(255, 255, 255));
+        txtR6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 340, 30));
+
+        txtR5.setEditable(false);
+        txtR5.setBackground(new java.awt.Color(255, 255, 255));
+        txtR5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 340, 30));
+
+        r_e.setText("E)");
+        r_e.setContentAreaFilled(false);
+        jPanel1.add(r_e, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        r_d.setText("D)");
+        r_d.setContentAreaFilled(false);
+        jPanel1.add(r_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
+        txtR4.setEditable(false);
+        txtR4.setBackground(new java.awt.Color(255, 255, 255));
+        txtR4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 340, 30));
+
+        txtR3.setEditable(false);
+        txtR3.setBackground(new java.awt.Color(255, 255, 255));
+        txtR3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 340, 30));
+
+        r_c.setText("C)");
+        r_c.setContentAreaFilled(false);
+        jPanel1.add(r_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        r_b.setText("B)");
+        r_b.setContentAreaFilled(false);
+        jPanel1.add(r_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        txtR2.setEditable(false);
+        txtR2.setBackground(new java.awt.Color(255, 255, 255));
+        txtR2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 340, 30));
+
+        txtR1.setEditable(false);
+        txtR1.setBackground(new java.awt.Color(255, 255, 255));
+        txtR1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(txtR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 340, 30));
+
+        r_a.setText("A)");
+        r_a.setContentAreaFilled(false);
+        jPanel1.add(r_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        nump.setEditable(false);
+        nump.setBackground(new java.awt.Color(255, 255, 255));
+        nump.setBorder(null);
+        jPanel1.add(nump, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, 230, 20));
+
+        puntos.setEditable(false);
+        puntos.setBackground(new java.awt.Color(255, 255, 255));
+        puntos.setBorder(null);
+        jPanel1.add(puntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 30, -1));
+
+        puntosT.setEditable(false);
+        puntosT.setBackground(new java.awt.Color(255, 255, 255));
+        puntosT.setBorder(null);
+        jPanel1.add(puntosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 30, -1));
+
+        btnMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Minimize_Window_20px.png"))); // NOI18N
+        btnMini.setToolTipText("Minimizar");
+        btnMini.setActionCommand("Minimizar");
+        btnMini.setBorder(null);
+        btnMini.setContentAreaFilled(false);
+        btnMini.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMini.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMiniActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMiniActionPerformed
+        setState(VstPresentarQuizz.ICONIFIED);
+    }//GEN-LAST:event_btnMiniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,20 +287,15 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
     public javax.swing.JTextField ab;
     public javax.swing.JPanel abierto;
     public javax.swing.JTextField abrt;
+    public javax.swing.JButton btnMini;
+    public javax.swing.JButton btnRegresar;
+    public javax.swing.JButton btnSig;
     public javax.swing.JButton btnSigTerm;
     public javax.swing.JTextField contador;
     public javax.swing.JLabel cronometro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     public javax.swing.JTextField nump;
     public javax.swing.JTextField nump_resp;
     public javax.swing.JTextField puntos;
@@ -302,14 +309,14 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
     public javax.swing.JCheckBox r_g;
     public javax.swing.JCheckBox r_h;
     public javax.swing.JTextPane txtPregunta;
-    public javax.swing.JTextPane txtR1;
-    public javax.swing.JTextPane txtR2;
-    public javax.swing.JTextPane txtR3;
-    public javax.swing.JTextPane txtR4;
-    public javax.swing.JTextPane txtR5;
-    public javax.swing.JTextPane txtR6;
-    public javax.swing.JTextPane txtR7;
-    public javax.swing.JTextPane txtR8;
+    public javax.swing.JTextField txtR1;
+    public javax.swing.JTextField txtR2;
+    public javax.swing.JTextField txtR3;
+    public javax.swing.JTextField txtR4;
+    public javax.swing.JTextField txtR5;
+    public javax.swing.JTextField txtR6;
+    public javax.swing.JTextField txtR7;
+    public javax.swing.JTextField txtR8;
     public javax.swing.JTextPane txtRespuesta;
     // End of variables declaration//GEN-END:variables
 }

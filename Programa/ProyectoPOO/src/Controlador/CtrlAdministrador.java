@@ -10,6 +10,7 @@ import Controlador.Administrador.CtrlEmpleados;
 import Controlador.Administrador.CtrlPerfil;
 import Controlador.Administrador.CtrlQuizzes;
 import Controlador.CtrlMensajes.CtrlBandejadEntrada;
+import Modelo.Listas;
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesAvisos;
@@ -24,6 +25,7 @@ import Vista.Administrador.VstPerfil;
 import Vista.Administrador.VstQuizzes;
 import Vista.Mensajes.VstBandejadEntrada;
 import Vista.VstAdministrador;
+import Vista.VstBuscador;
 import Vista.VstLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,6 +70,8 @@ public class CtrlAdministrador implements ActionListener {
         this.va.btnDDesactivar.addActionListener(this);
         this.va.btnQDesactivar.addActionListener(this);
         this.va.btnLTodo.addActionListener(this);
+        
+        this.va.btnBuscar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -89,13 +93,20 @@ public class CtrlAdministrador implements ActionListener {
         va.txtMatricula.setText(var.getMatricula());
         va.txtTipo.setText(var.getTipo());
         va.setLocationRelativeTo(null);
-        ModConsultasSQL.tablaConectados(va.tablaConectados);
+        ModConsultasSQL.tablaConectados(va.tablaConectados, va.txtMatricula.getText());
         ModVariablesQuizzes varQ = new ModVariablesQuizzes();
         ModVariablesDoc varD = new ModVariablesDoc();
         ModConsultasSQL.DocsAct(va.tablaADocumentos, varD);
         ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
         ModVariablesAvisos varA = new ModVariablesAvisos();
         ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
+        Listas mens = new Listas();
+        ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+        if (list.isEmpty()) {
+            va.btnLTodo.setVisible(false);
+        } else {
+            va.btnLTodo.setVisible(true);
+        }
         va.btnQDesactivar.setVisible(false);
         va.btnDDesactivar.setVisible(false);
         va.docs.setVisible(false);
@@ -271,15 +282,23 @@ public class CtrlAdministrador implements ActionListener {
                 }
 
                 if (e.getSource() == va.btnLTodo) {
-                    ModVariablesReg varR = new ModVariablesReg();
-                    String tipo = "Administrador";
-                    String quien = var.getMatricula() + "/ " + var.getNombre_completo();
-                    String que = "Dio click al botón Leer Todo";
-                    String cuando = fechaDate.format(date) + " " + horaDate.format(date);
-                    String comp = var.getMatricula();
-                    if (cons.avisoAA(varR, tipo, quien, que, cuando, comp));
+                    ModVariablesAvisos varA = new ModVariablesAvisos();
+                    ModConsultasSQL.LeerTodo(varA, var.getMatricula());
+                    ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
+                    Listas mens = new Listas();
+                    ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+                    if (list.isEmpty()) {
+                        va.btnLTodo.setVisible(false);
+                    } else {
+                        va.btnLTodo.setVisible(true);
+                    }
                 }
-
+                if (e.getSource() == va.btnBuscar) {
+                    VstBuscador vb = new VstBuscador();
+                    CtrlBuscador ctrlB = new CtrlBuscador(cons, var, vb);
+                    ctrlB.iniciar();
+                    vb.setVisible(true);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
@@ -334,13 +353,20 @@ public class CtrlAdministrador implements ActionListener {
                 ++s;
             }
             if (cs == 0 && (s % 2 == 0)) {
-                ModConsultasSQL.tablaConectados(va.tablaConectados);
+                ModConsultasSQL.tablaConectados(va.tablaConectados, va.txtMatricula.getText());
                 ModConsultasSQL.recarga(var);
                 ModConsultasSQL.DocsAct(va.tablaADocumentos, varD);
                 ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
 
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
+                Listas mens = new Listas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
+                if (list.isEmpty()) {
+                    va.btnLTodo.setVisible(false);
+                } else {
+                    va.btnLTodo.setVisible(true);
+                }
 
                 ModVariablesMensaje varM = new ModVariablesMensaje();
                 if (cons.ENVisto(varM, var.getMatricula()) == 1) {

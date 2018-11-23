@@ -53,6 +53,9 @@ public class ProyectoPOO {
 
                 if (conf == JOptionPane.YES_OPTION) {
                     String pass = JOptionPane.showInputDialog(null, "Introduzca la contraseña.", "Validar contraseña.", JOptionPane.WARNING_MESSAGE);
+                    if (pass == null) {
+                        System.exit(0);
+                    }
                     if (pass.equals(var.getContraseña())) {
 
                         if ("Administrador".equals(var.getTipo())) {
@@ -73,12 +76,17 @@ public class ProyectoPOO {
                         }
 
                     } else {
+                        boolean band = true;
                         int intento = JOptionPane.showConfirmDialog(null, "La contraseña es incorrecta.\n ¿Desea volver intentar?", "Contraseña incorrecta.", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
                         while (intento == JOptionPane.YES_OPTION) {
                             pass = JOptionPane.showInputDialog(null, "Introduzca la contraseña.", "Validar contraseña.", JOptionPane.WARNING_MESSAGE);
+                            if (pass == null) {
+                                System.exit(0);
+                            }
                             if (pass.equals(var.getContraseña())) {
                                 intento = JOptionPane.NO_OPTION;
+                                band = false;
 
                                 if ("Administrador".equals(var.getTipo())) {
                                     JOptionPane.showMessageDialog(null, "Bienvenido Administrador:\n " + var.getNombre_completo() + ".");
@@ -100,6 +108,10 @@ public class ProyectoPOO {
                             } else {
                                 intento = JOptionPane.showConfirmDialog(null, "La contraseña es incorrecta.\n ¿Desea volver intentar?", "Contraseña incorrecta.", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                             }
+                        }
+
+                        if (intento == JOptionPane.NO_OPTION && band == true) {
+                            System.exit(0);
                         }
                     }
                 } else {

@@ -18,9 +18,45 @@ public class ModVariablesPresentados {
     private String calificacion;
     private String status;
     private String abrt;
+    private String abrtNum;
+    private String mod_calif;
+    private String marca;
     private String hora;
     private String minuto;
     private String totales;
+    private String abrtTot;
+
+    public String getAbrtNum() {
+        return abrtNum;
+    }
+
+    public void setAbrtNum(String abrtNum) {
+        this.abrtNum = abrtNum;
+    }
+
+    public String getMod_calif() {
+        return mod_calif;
+    }
+
+    public void setMod_calif(String mod_calif) {
+        this.mod_calif = mod_calif;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getAbrtTot() {
+        return abrtTot;
+    }
+
+    public void setAbrtTot(String abrtTot) {
+        this.abrtTot = abrtTot;
+    }
 
     public int getId() {
         return id;

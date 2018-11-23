@@ -21,7 +21,6 @@ public class VstAdministrador extends javax.swing.JFrame {
     public VstAdministrador() {
         initComponents();
         setDefaultCloseOperation(0);
-        btnLTodo.setVisible(false);
     }
 
     /**
@@ -71,6 +70,7 @@ public class VstAdministrador extends javax.swing.JFrame {
         txtAviso = new javax.swing.JTextPane();
         btnCerrar = new javax.swing.JButton();
         btnMini = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -356,7 +356,6 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, -1));
         btnCerrar.getAccessibleContext().setAccessibleName("Cerrar");
-        btnCerrar.getAccessibleContext().setAccessibleDescription("Cerrar");
 
         btnMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Minimize_Window_20px.png"))); // NOI18N
         btnMini.setToolTipText("Minimizar");
@@ -365,6 +364,9 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnMini.setContentAreaFilled(false);
         btnMini.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
+
+        btnBuscar.setText("Buscar");
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 550));
 
@@ -450,6 +452,7 @@ public class VstAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnCerrarSesion;
     public javax.swing.JButton btnDDesactivar;

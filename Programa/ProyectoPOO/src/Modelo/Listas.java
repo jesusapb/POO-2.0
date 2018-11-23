@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -98,6 +96,7 @@ public class Listas {
                 var.setId(rs.getInt(1));
                 var.setNombre(rs.getString(2));
                 var.setStatus(rs.getString(3));
+                var.setDescripcion(rs.getString(4));
                 list.add(var);
             }
 
@@ -133,6 +132,44 @@ public class Listas {
                 var.setTiempo(rs.getString(9));
                 var.setF_registro(rs.getString(10));
                 var.setF_activacion(rs.getString(11));
+                list.add(var);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<ModVariablesUsr> listaUs() {
+        ArrayList<ModVariablesUsr> list = new ArrayList<ModVariablesUsr>();
+        ModConexion con = new ModConexion();
+        String sql = "SELECT * FROM usuarios";
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.getConexion().prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ModVariablesUsr var = new ModVariablesUsr();
+                var.setId(rs.getInt(1));
+                var.setNombre(rs.getString(2));
+                var.setAp_pat(rs.getString(3));
+                var.setAp_mat(rs.getString(4));
+                var.setTipo(rs.getString(5));
+                var.setMatricula(rs.getString(6));
+                var.setContraseña(rs.getString(7));
+                var.setCorreo(rs.getString(8));
+                var.setStatus(rs.getString(11));
+                var.setIp(rs.getString(12));
+                var.setEquipo(rs.getString(13));
+                var.setComando(rs.getString(14));
+                var.setCodigo(rs.getString(15));
+                var.setNombre_completo(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
                 list.add(var);
             }
 
@@ -224,7 +261,6 @@ public class Listas {
                     list.add(var);
                 }
             }
-            System.out.println("A desde raíz: " + a);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
@@ -232,7 +268,6 @@ public class Listas {
         }
         return list;
     }
-    //**************************************************************************
 
     public String[] listaResp(int id, int quizz) {
         String[] list = new String[12];
@@ -270,7 +305,6 @@ public class Listas {
 
         return list;
     }
-    //**************************************************************************
 
     public ArrayList<ModVariablesReg> listaT(String tipo, String comp) {
         ArrayList<ModVariablesReg> list = new ArrayList<ModVariablesReg>();
@@ -320,6 +354,37 @@ public class Listas {
                 var.setDescripcion(rs.getString(4));
                 var.setArchivo(rs.getBytes(5));
                 list.add(var);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<ModVariablesDoc> Listar_PdfMod(String nombre) {
+        ArrayList<ModVariablesDoc> list = new ArrayList<ModVariablesDoc>();
+        ModConexion con = new ModConexion();
+        String sql = "SELECT * FROM documentos";
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.getConexion().prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ModVariablesDoc var = new ModVariablesDoc();
+                if (rs.getString(2).equals(nombre)) {
+                    var.setId(rs.getInt(1));
+                    var.setNombre(rs.getString(2));
+                    var.setStatus(rs.getString(3));
+                    var.setDescripcion(rs.getString(4));
+                    var.setArchivo(rs.getBytes(5));
+                    list.add(var);
+                }
             }
 
         } catch (SQLException ex) {
@@ -462,7 +527,11 @@ public class Listas {
                     var.setP_totales(rs.getString(5));
                     var.setCalificacion(rs.getString(6));
                     var.setStatus(rs.getString(7));
-                    var.setAbrt(rs.getString(8));
+                    var.setAbrtNum(rs.getString(8));
+                    var.setAbrtTot(rs.getString(9));
+                    var.setAbrt(rs.getString(10));
+                    var.setMod_calif(rs.getString(11));
+                    var.setMarca(rs.getString(12));
                     list.add(var);
                 }
             }

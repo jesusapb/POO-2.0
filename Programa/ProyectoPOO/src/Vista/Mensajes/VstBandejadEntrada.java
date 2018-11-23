@@ -45,6 +45,9 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         txtMatricula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
+        LNom = new javax.swing.JLabel();
+        LMat = new javax.swing.JLabel();
+        btnMensajeMul = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -54,7 +57,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 50, 600));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 50, 660));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -96,7 +99,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
             tablaBandejaEntrada.getColumnModel().getColumn(3).setPreferredWidth(110);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 630, 540));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 630, 600));
 
         tablaTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,23 +137,25 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
             tablaTUsuarios.getColumnModel().getColumn(1).setPreferredWidth(10);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 430));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 420));
 
         btnNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnNuevo.setText("Nuevo mensaje");
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, -1, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, -1, -1));
 
         btnEnviados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEnviados.setText("Mensajes enviados");
-        jPanel1.add(btnEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, -1, -1));
+        jPanel1.add(btnEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, -1, -1));
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 220, -1));
+        txtNombre.setBorder(null);
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 220, 20));
 
         txtMatricula.setEditable(false);
         txtMatricula.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 140, -1));
+        txtMatricula.setBorder(null);
+        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 140, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Mensajes:");
@@ -161,7 +166,17 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         matricula.setBorder(null);
         jPanel1.add(matricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 160, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+        LNom.setText("Nombre del usuario:");
+        jPanel1.add(LNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
+
+        LMat.setText("Matricula del usuario:");
+        jPanel1.add(LMat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
+
+        btnMensajeMul.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMensajeMul.setText("Nuevo mensaje (Múltiple)");
+        jPanel1.add(btnMensajeMul, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,6 +184,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     private void tablaTUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTUsuariosMouseClicked
         int row = evt.getY() / tablaTUsuarios.getRowHeight();
         btnNuevo.setVisible(true);
+        btnMensajeMul.setVisible(true);
 
         String ident = "" + tablaTUsuarios.getValueAt(row, 0);
         String[] part = ident.split("/");
@@ -177,6 +193,11 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
 
         txtMatricula.setText(part1);
         txtNombre.setText(part2);
+        
+        LMat.setVisible(true);
+        LNom.setVisible(true);
+        txtMatricula.setVisible(true);
+        txtNombre.setVisible(true);
 
     }//GEN-LAST:event_tablaTUsuariosMouseClicked
 
@@ -242,7 +263,10 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel LMat;
+    public javax.swing.JLabel LNom;
     public javax.swing.JButton btnEnviados;
+    public javax.swing.JButton btnMensajeMul;
     public javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
