@@ -27,12 +27,16 @@ CREATE TABLE `presentados` (
   `ident` varchar(100) NOT NULL,
   `quizz` varchar(40) NOT NULL,
   `intento` varchar(10) NOT NULL,
-  `p_totales` varchar(10) NOT NULL,
-  `calificacion` varchar(10) NOT NULL,
+  `p_totales` varchar(15) NOT NULL,
+  `calificacion` varchar(25) NOT NULL,
   `status` varchar(15) NOT NULL,
-  `abrt` tinytext NOT NULL,
+  `abrtNum` int(11) NOT NULL,
+  `abrtTot` int(11) NOT NULL,
+  `abrt` longtext NOT NULL,
+  `mod_calif` varchar(45) NOT NULL,
+  `marca` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +45,6 @@ CREATE TABLE `presentados` (
 
 LOCK TABLES `presentados` WRITE;
 /*!40000 ALTER TABLE `presentados` DISABLE KEYS */;
-INSERT INTO `presentados` VALUES (1,'ACP123456','numeración','1','45.0','25.0','Reprobado','nada'),(2,'ACP123456','numeración','1','28.75','18.75','Reprobado','nada'),(3,'ACP123456','numeración','1','45.0','63.33','Aprobado','nada'),(4,'ACP123456','numeración','1','66.67','66.67','Aprobado','nada'),(5,'ACP123456','numeración','1','51.67','51.67','Aprobado','nada');
 /*!40000 ALTER TABLE `presentados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-09 12:39:21
+-- Dump completed on 2018-11-23 12:23:20

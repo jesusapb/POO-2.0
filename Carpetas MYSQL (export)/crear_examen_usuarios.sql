@@ -39,7 +39,7 @@ CREATE TABLE `usuarios` (
   `comando` varchar(20) NOT NULL,
   `codigo` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'ANTONIO','CETZAL','PATRON','Administrador','A14000516','Rfmb5851','tonicp97@gmail.com','08/11/2018','21:30:26','Desconectado','192.168.1.142','LAPTOP-4T4LV7H9','Deshabilitado','4a0c5bdb-1e36-4e89-aa26-703e2b648de1'),(3,'POO','ACOMPAÑAMIENTO','PROYECTO','Administrador','PAP123456','Rfmb5851','poo.acompanamiento@gmail.com','23/10/2018','15:27:00','Desconectado','192.168.1.142','LAPTOP-4T4LV7H9','Deshabilitado','Nuevo27887436'),(4,'JESSICA','GONZÁLEZ','BAUTISTA','Administrador','JGB342917','12345678','jessicabautista1698@gmail.com','19/10/2018','14:39:26','Desconectado','148.209.74.25','LAPTOP-4T4LV7H9','Deshabilitado','Nuevo68066997'),(5,'KARINA','CARMONA','VARGAS','Empleado','KCV84890','@NUEVO8266','karina240898@gmail.com','Nuevo','Nuevo','Desconectado','Nuevo','Nuevo','Deshabilitado','Nuevo37581113'),(9,'ANTONIO','CETZAL','PATRON','Empleado','ACP123456','Rfmb5851','tonicp97@gmail.com','06/11/2018','17:02:05','Desconectado','192.168.1.142','LAPTOP-4T4LV7H9','Deshabilitado','Nuevo54334435'),(10,'OTRO','OTRO','OTRO','Empleado','OOO420766','@NUEVO2509','no_tiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo57890456'),(11,'OTRO','MAS','PRUEBA','Empleado','OMP766898','@NUEVO6889','no_tiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo28241659'),(17,'HBJH','KJBNKJ','YGBJYV','Empleado','HKY699031','@NUEVO6873','no_tiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo73484501'),(19,'A','B','C','Empleado','ABC389275','@NUEVO4181','no_tiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo73995724'),(20,'A','A','A','Empleado','AAA599853','@NUEVO5964','no_tiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo299889'),(21,'AA','A','A','Empleado','AAA718393','@NUEVO8776','notiene@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo45652923'),(22,'P','PRUEBA','PRUEBA','Empleado','PPP635933','@NUEVO9093','ntien@gmail.com','Nuevo','Nuevo','Permanente','Nuevo','Nuevo','Deshabilitado','Nuevo85732652'),(23,'HOLA','OLA','LA','Empleado','HOL696250','@NUEVO5795','ntia@gmail.com','Nuevo','Nuevo','Desconectado','Nuevo','Nuevo','Deshabilitado','Nuevo41471454'),(24,'HJBS<X','DSJINK','JHBSJCH','Empleado','HDJ264080','@NUEVO2910','qwerty@gmail.com','Nuevo','Nuevo','Desconectado','Nuevo','Nuevo','Deshabilitado','Nuevo88353238');
+INSERT INTO `usuarios` VALUES (1,'ANTONIO','CETZAL','PATRON','Administrador','A14000516','Rfmb5851','tonicp97@gmail.com','23/11/2018','02:44:17','Conectado','192.168.1.70','LAPTOP-4T4LV7H9','Deshabilitado','4a0c5bdb-1e36-4e89-aa26-703e2b648de1'),(3,'POO','ACOMPAÑAMIENTO','PROYECTO','Administrador','PAP123456','Rfmb5851','poo.acompanamiento@gmail.com','15/11/2018','23:22:57','Desconectado','192.168.1.70','LAPTOP-4T4LV7H9','Deshabilitado','6aa6b94c-a348-4f5d-b110-d4bcadab19a3'),(4,'JESSICA','GONZÁLEZ','BAUTISTA','Administrador','JGB342917','12345678','jessicabautista1698@gmail.com','13/11/2018','14:30:47','Desconectado','192.168.1.70','LAPTOP-4T4LV7H9','Deshabilitado','Nuevo68066997'),(5,'KARINA','CARMONA','VARGAS','Empleado','KCV84890','karinacarmona2','karina240898@gmail.com','18/11/2018','15:16:37','Desconectado','192.168.1.70','LAPTOP-4T4LV7H9','Deshabilitado','8f1e9963-e2fb-4ee4-ad3f-f1ed64c53a48'),(9,'ANTONIO','CETZAL','PATRON','Empleado','ACP123456','Rfmb5851','tonicp@gmail.com','22/11/2018','21:28:33','Desconectado','192.168.1.70','LAPTOP-4T4LV7H9','Deshabilitado','Nuevo54334435');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-09 12:39:15
+-- Dump completed on 2018-11-23 12:23:05
