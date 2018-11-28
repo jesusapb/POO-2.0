@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
 import Modelo.ModVariablesReg;
@@ -85,7 +86,8 @@ public class CtrlPresentarQuizz implements ActionListener {
             int b = 0;
             ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
             String[] lista = new String[8];
-            String[] temp = cons.listaResp(varP.getId(), varQ.getId());
+            ModListas mens = new ModListas();
+            String[] temp = mens.listaResp(varP.getId(), varQ.getId());
 
             vpq.txtPregunta.setText(varP.getPregunta());
             vpq.nump.setText(varP.getId() + "");
@@ -387,8 +389,9 @@ public class CtrlPresentarQuizz implements ActionListener {
                             }
                         }
                     } else {
+                        ModListas mens = new ModListas();
                         String intento = "";
-                        ArrayList<ModVariablesPresentados> list = cons.listaPre(varU.getMatricula(), parte[0]);
+                        ArrayList<ModVariablesPresentados> list = mens.listaPre(varU.getMatricula(), parte[0]);
                         ModVariablesPresentados var = new ModVariablesPresentados();
 
                         if (list.size() > 0) {
@@ -708,7 +711,8 @@ public class CtrlPresentarQuizz implements ActionListener {
                         if (conta <= com) {
                             ModConsultasSQL.obtenerPreg(varP, varQ.getId(), vpq.nump.getText(), b);
                             String[] lista = new String[8];
-                            String[] temp = cons.listaResp(varP.getId(), varQ.getId());
+                            ModListas mens = new ModListas();
+                            String[] temp = mens.listaResp(varP.getId(), varQ.getId());
 
                             if (conta == com) {
                                 vpq.btnSigTerm.setText("Terminar");
@@ -773,7 +777,8 @@ public class CtrlPresentarQuizz implements ActionListener {
                             varPre.setIdent(varU.getMatricula());
                             varPre.setQuizz(parte[0]);
 
-                            ArrayList<ModVariablesPresentados> list = cons.listaPre(varU.getMatricula(), parte[0]);
+                            ModListas mens = new ModListas();
+                            ArrayList<ModVariablesPresentados> list = mens.listaPre(varU.getMatricula(), parte[0]);
                             ModVariablesPresentados var = new ModVariablesPresentados();
 
                             if (list.size() > 0) {
@@ -1565,7 +1570,8 @@ public class CtrlPresentarQuizz implements ActionListener {
                     varPre.setIdent(varU.getMatricula());
                     varPre.setQuizz(parte[0]);
 
-                    ArrayList<ModVariablesPresentados> list = cons.listaPre(varU.getMatricula(), parte[0]);
+                    ModListas mens = new ModListas();
+                    ArrayList<ModVariablesPresentados> list = mens.listaPre(varU.getMatricula(), parte[0]);
                     ModVariablesPresentados var = new ModVariablesPresentados();
 
                     if (list.size() > 0) {

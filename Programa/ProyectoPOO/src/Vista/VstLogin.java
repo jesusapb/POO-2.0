@@ -112,10 +112,13 @@ public class VstLogin extends javax.swing.JFrame {
         btnConfiguración.setBorder(null);
         btnConfiguración.setContentAreaFilled(false);
         btnConfiguración.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfiguración.setLabel("");
+        btnConfiguración.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguraciónActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnConfiguración, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
         btnConfiguración.getAccessibleContext().setAccessibleName("Configuración");
-        btnConfiguración.getAccessibleContext().setAccessibleDescription("Configuración");
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 350));
 
@@ -124,11 +127,16 @@ public class VstLogin extends javax.swing.JFrame {
 
     private void checkContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkContraseñaActionPerformed
         if (checkContraseña.isSelected() == true) {
-            txtPass.setEchoChar((char)0);
+            txtPass.setEchoChar((char) 0);
         } else {
             txtPass.setEchoChar('*');
         }
     }//GEN-LAST:event_checkContraseñaActionPerformed
+
+    private void btnConfiguraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguraciónActionPerformed
+        VstConfiguracion vc = new VstConfiguracion();
+        vc.setVisible(true);
+    }//GEN-LAST:event_btnConfiguraciónActionPerformed
 
     /**
      * @param args the command line arguments

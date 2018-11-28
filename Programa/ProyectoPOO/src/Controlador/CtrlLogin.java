@@ -38,7 +38,6 @@ public class CtrlLogin implements ActionListener {
         vl.btnAcceder.addActionListener(this);
         vl.btnOlvido.addActionListener(this);
         vl.btnValidar.addActionListener(this);
-        vl.btnConfiguración.addActionListener(this);
     }
 
     public void iniciar() throws UnknownHostException {
@@ -144,9 +143,5 @@ public class CtrlLogin implements ActionListener {
             vo.setVisible(true);
         }
 
-        if (e.getSource() == vl.btnConfiguración) {
-            VstConfiguracion vc = new VstConfiguracion();
-            vc.setVisible(true);
-        }
     }
 }

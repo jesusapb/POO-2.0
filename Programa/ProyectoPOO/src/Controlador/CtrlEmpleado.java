@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesAvisos;
 import Modelo.ModVariablesMensaje;
 import Modelo.ModVariablesPresentados;
@@ -79,7 +80,8 @@ public class CtrlEmpleado implements ActionListener {
         ModConsultasSQL.tablaConectados(var, ve.tablaConectados, ve.txtMatricula.getText());
         ModVariablesAvisos varA = new ModVariablesAvisos();
         ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
-        ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+        ModListas mens = new ModListas();
+        ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
         if (list.isEmpty()) {
             ve.btnLTodo.setVisible(false);
         } else {
@@ -163,7 +165,8 @@ public class CtrlEmpleado implements ActionListener {
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.LeerTodo(varA, var.getMatricula());
                 ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
-                ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+                ModListas mens = new ModListas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
                 if (list.isEmpty()) {
                     ve.btnLTodo.setVisible(false);
                 } else {
@@ -225,7 +228,8 @@ public class CtrlEmpleado implements ActionListener {
 
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.tablaAvisos(ve.tablaAvisos, varA, var.getMatricula());
-                ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+                ModListas mens = new ModListas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
                 if (list.isEmpty()) {
                     ve.btnLTodo.setVisible(false);
                 } else {

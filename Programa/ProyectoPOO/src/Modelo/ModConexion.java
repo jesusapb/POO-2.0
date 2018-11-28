@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 import java.sql.Connection;
@@ -24,10 +19,6 @@ public class ModConexion {
     public String username = "";
     public String password = "";
     Connection con = null;
-    
-//    public static final String urlLocal = "jdbc:mysql://localhost:3306/crear_examen";
-//    public static final String usernameLocal = "root";
-//    public static final String passwordLocal = "Rfmb5851";
 
     public Connection getConexion() {
         ModConsultasSQL cons = new ModConsultasSQL();

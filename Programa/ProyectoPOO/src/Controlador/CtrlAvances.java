@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesAbierto;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
@@ -226,7 +227,8 @@ public class CtrlAvances implements ActionListener {
                                 cuando = fechaDate.format(date) + " " + horaDate.format(date);
                                 if (cons.aviso(varR, quien, que, cuando, matricula[0]));
 
-                                ArrayList<ModVariablesQuizzes> list = cons.listaQuizz();
+                                ModListas mens = new ModListas();
+                                ArrayList<ModVariablesQuizzes> list = mens.listaQuizz();
 
                                 if (list.size() > 0) {
                                     for (int i = 0; i < list.size(); i++) {

@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesAvisos;
 import Modelo.ModVariablesDoc;
 import Modelo.ModVariablesMensaje;
@@ -94,7 +95,8 @@ public class CtrlAdministrador implements ActionListener {
         ModConsultasSQL.QuizzAct(va.tablaAQuizzes, varQ);
         ModVariablesAvisos varA = new ModVariablesAvisos();
         ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
-        ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+        ModListas mens = new ModListas();
+        ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
         if (list.isEmpty()) {
             va.btnLTodo.setVisible(false);
         } else {
@@ -263,7 +265,8 @@ public class CtrlAdministrador implements ActionListener {
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.LeerTodo(varA, var.getMatricula());
                 ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
-                ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+                ModListas mens = new ModListas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
                 if (list.isEmpty()) {
                     va.btnLTodo.setVisible(false);
                 } else {
@@ -336,7 +339,8 @@ public class CtrlAdministrador implements ActionListener {
 
                 ModVariablesAvisos varA = new ModVariablesAvisos();
                 ModConsultasSQL.tablaAvisos(va.tablaAvisos, varA, var.getMatricula());
-                ArrayList<ModVariablesAvisos> list = cons.listaAv(var.getMatricula());
+                ModListas mens = new ModListas();
+                ArrayList<ModVariablesAvisos> list = mens.listaAv(var.getMatricula());
                 if (list.isEmpty()) {
                     va.btnLTodo.setVisible(false);
                 } else {

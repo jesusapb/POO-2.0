@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesCalif;
 import Modelo.ModVariablesPresentados;
 import Modelo.ModVariablesQuizzes;
@@ -88,7 +89,8 @@ public class CtrlSelectQuizz implements ActionListener {
                     varPre.setMinuto(minuto);
                     ModConsultasSQL.obtenerQuizz(varQ, varPre.getQuizz());
 
-                    ArrayList<ModVariablesCalif> list = cons.listaCalif(varU.getMatricula(), partNom);
+                    ModListas mens = new ModListas();
+                    ArrayList<ModVariablesCalif> list = mens.listaCalif(varU.getMatricula(), partNom);
                     ModVariablesCalif var = new ModVariablesCalif();
 
                     if (list.size() > 0) {

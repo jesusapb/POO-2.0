@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectopoo;
 
 import Controlador.CtrlAdministrador;
@@ -11,6 +6,7 @@ import Controlador.CtrlEmpleados;
 import Controlador.CtrlLogin;
 import Modelo.ModConexion;
 import Modelo.ModConsultasSQL;
+import Modelo.ModListas;
 import Modelo.ModVariablesUsr;
 import Vista.VstAdministrador;
 import Vista.VstEmpleado;
@@ -36,12 +32,12 @@ public class ProyectoPOO {
      * @throws java.net.UnknownHostException
      */
     public static void main(String[] args) throws UnknownHostException {
-        // TODO code application logic here
         ModVariablesUsr var = new ModVariablesUsr();
         ModConsultasSQL cons = new ModConsultasSQL();
         VstLogin vl = new VstLogin();
-
-        ArrayList<ModVariablesUsr> list = cons.listaUsr(InetAddress.getLocalHost().getHostName());
+        
+        ModListas mens = new ModListas();
+        ArrayList<ModVariablesUsr> list = mens.listaUsr(InetAddress.getLocalHost().getHostName());
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
