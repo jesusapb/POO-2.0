@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.ModConsultasSQL;
 import Modelo.ModVariablesUsr;
 import Vista.VstAdministrador;
-import Vista.VstConfiguracion;
 import Vista.VstEmpleado;
 import Vista.VstLogin;
 import Vista.VstOlvido;
@@ -21,8 +15,11 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Esta es la clase de logeo, aqui ocurre la gestion de la ventana que se
+ * presenta para logear.
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlLogin implements ActionListener {
 
@@ -30,6 +27,15 @@ public class CtrlLogin implements ActionListener {
     private ModVariablesUsr var;
     private VstLogin vl;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param cons es la clase donde están almacenadas las funciones de
+     * consulta.
+     * @param var es la clase que contiene las variables utilizadas para el
+     * usuario que inicia la sesión y para que sus datos sean almacenados.
+     * @param vl es la interfaz grafica del logeo.
+     */
     public CtrlLogin(ModConsultasSQL cons, ModVariablesUsr var, VstLogin vl) {
         this.cons = cons;
         this.var = var;
@@ -40,11 +46,24 @@ public class CtrlLogin implements ActionListener {
         vl.btnValidar.addActionListener(this);
     }
 
+    /**
+     * Constructor encargado en dar el nombre a la ventana y asignarle la
+     * posición donde se va a generar al ser visible.
+     *
+     * @throws UnknownHostException
+     */
     public void iniciar() throws UnknownHostException {
         vl.setTitle("Inicio de sesión.");
         vl.setLocationRelativeTo(null);
     }
 
+    /**
+     * Es el constructor encargado en recibir y ejecutar la acciones
+     * correspondiente a lo que va ocurriendo en la vista de logeo.
+     *
+     * @param e variable encargada de recibir cada acción de los botónes de la
+     * interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();

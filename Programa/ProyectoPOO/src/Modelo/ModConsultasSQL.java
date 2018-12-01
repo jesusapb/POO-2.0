@@ -48,8 +48,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class ModConsultasSQL extends ModConexion {
 
@@ -81,6 +81,7 @@ public class ModConsultasSQL extends ModConexion {
                                     + "lo tanto, se va a habilitar únicamente el campo de\n "
                                     + "ingreso de la contraseña, ahí deberá de ingresar su\n"
                                     + "nueva contraseña y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+                            var.setMensaje("Detección de cambio de contraseña.");
                             return false;
                         } else {
                             JOptionPane.showMessageDialog(null, "Código de seguridad incorrecto,\n favor de verificarlo.");
@@ -93,6 +94,7 @@ public class ModConsultasSQL extends ModConexion {
                                 + "Se le habilitara únicamente el campo de ingreso de la\n "
                                 + "contraseña, ahi deberá de ingresar su nueva contraseña\n"
                                 + "y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+                        var.setMensaje("Detección de nuevo usuario.");
                         return false;
                     } else if (var.getContraseña().equals(varU.getContraseña())) {
                         try {
@@ -136,7 +138,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public boolean emailVal(ModVariablesUsr var) {
         ModVariablesUsr varU = new ModVariablesUsr();
         ModListas mens = new ModListas();
@@ -234,7 +236,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public boolean loginNuevo(ModVariablesUsr var) {
         ModVariablesUsr varU = new ModVariablesUsr();
         ModListas mens = new ModListas();
@@ -302,7 +304,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public static void recarga(ModVariablesUsr var) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -340,7 +342,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void status(ModVariablesUsr var) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -364,7 +366,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public boolean cerrar(ModVariablesUsr var) {
         ModVariablesUsr varU = new ModVariablesUsr();
         ModListas mens = new ModListas();
@@ -394,7 +396,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public int existeUsr(String usuario) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -415,7 +417,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public int existeCorreo(String usuario) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -436,7 +438,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public boolean registrar(ModVariablesReg var) {
 
         PreparedStatement ps = null;
@@ -473,7 +475,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public boolean email(ModVariablesUsr varU, ModVariablesReg varR) {
         try {
             Properties props = new Properties();
@@ -512,7 +514,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public static void tablaEmp(JTable tablaRegistrados) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
@@ -554,7 +556,7 @@ public class ModConsultasSQL extends ModConexion {
             System.err.println(e.toString());
         }
     }
-    
+
     public static void tablaConectados(ModVariablesUsr var, JTable tablaConectados, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -589,7 +591,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void tablaAva(JTable TablaAvances, VstEmpleados vce) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
@@ -632,7 +634,7 @@ public class ModConsultasSQL extends ModConexion {
             System.err.println(e.toString());
         }
     }
-    
+
     public int existequizz(String quizz) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -653,7 +655,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public boolean Rquizzes(ModVariablesQuizzes var) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -679,7 +681,7 @@ public class ModConsultasSQL extends ModConexion {
             return false;
         }
     }
-    
+
     public static void tablaQuizz(JTable tablaQuizzes) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
@@ -724,7 +726,7 @@ public class ModConsultasSQL extends ModConexion {
             System.err.println(e.toString());
         }
     }
-    
+
     public static void tablaDocs(JTable tablaDocs) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
@@ -765,7 +767,7 @@ public class ModConsultasSQL extends ModConexion {
             System.err.println(e.toString());
         }
     }
-    
+
     public static void tablaTEmp(JTable tablaTUsuarios, ModVariablesReg var, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -794,7 +796,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void recibidos(JTable tablaBandejaEntrada, ModVariablesMensaje var, ModVariablesUsr varU) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -830,7 +832,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public int ENVisto(ModVariablesMensaje var, String matricula) {
         ModListas mens = new ModListas();
         ArrayList<ModVariablesMensaje> list = mens.listaMR();
@@ -847,7 +849,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return 0;
     }
-    
+
     public static void leer(String a, String b, VstRecibido vr, ModVariablesMensaje var) {
         try {
             //a: id, b: status.
@@ -885,7 +887,7 @@ public class ModConsultasSQL extends ModConexion {
         vr.txtMensaje.setText(var.getMensaje());
         vr.id.setText(var.getId() + "");
     }
-    
+
     public boolean enviar(ModVariablesMensaje var) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -909,7 +911,7 @@ public class ModConsultasSQL extends ModConexion {
             return false;
         }
     }
-    
+
     public static void enviados(JTable tablaEnviados, ModVariablesMensaje var, ModVariablesUsr varU) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -941,7 +943,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void mensaje(String a, VstEnviados ve, ModVariablesMensaje var) {
         try {
             //a: id, b: status.
@@ -972,7 +974,7 @@ public class ModConsultasSQL extends ModConexion {
         ve.txtMensaje.setText(var.getMensaje());
         ve.id.setText(var.getId() + "");
     }
-    
+
     public static void DocsAct(JTable tablaADocumentos, ModVariablesDoc var) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1000,7 +1002,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void QuizzAct(JTable tablaAQuizzes, ModVariablesQuizzes var) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1030,7 +1032,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public boolean rPreguntas(ModvariablesPreguntas var) {
 
         PreparedStatement ps = null;
@@ -1069,7 +1071,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public boolean mPreguntas(ModvariablesPreguntas var) {
 
         PreparedStatement ps = null;
@@ -1107,7 +1109,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public static void tablaPreg(JTable tablaPreguntas, ModvariablesPreguntas var, String id) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1139,7 +1141,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public boolean ElimPregunta(ModvariablesPreguntas var) {
         PreparedStatement ps = null;
 
@@ -1156,7 +1158,7 @@ public class ModConsultasSQL extends ModConexion {
             return false;
         }
     }
-    
+
     public boolean avisoAA(ModVariablesReg var, String tipo, String quien, String que, String cuando, String comp) {
         ModListas mens = new ModListas();
         ArrayList<ModVariablesReg> list = mens.listaT(tipo, comp);
@@ -1187,7 +1189,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return false;
     }
-    
+
     public boolean aviso(ModVariablesReg var, String quien, String que, String cuando, String para) {
 
         try {
@@ -1210,7 +1212,7 @@ public class ModConsultasSQL extends ModConexion {
 
         return false;
     }
-    
+
     public void agregarD(ModVariablesDoc var) {
         ModConexion con = new ModConexion();
         String sql = "INSERT INTO documentos (id, nombre, status, descripcion, archivo) VALUES(?,?,?,?,?)";
@@ -1229,7 +1231,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void modificarD(ModVariablesDoc var) {
         ModConexion con = new ModConexion();
         String sql = "UPDATE documentos SET nombre = ?, descripcion = ?, archivo = ? WHERE id = ?";
@@ -1248,7 +1250,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void modificarNomD(ModVariablesDoc var) {
         ModConexion con = new ModConexion();
         String sql = "UPDATE documentos SET nombre = ?, descripcion = ? WHERE id = ?";
@@ -1266,7 +1268,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void eliminarD(ModVariablesDoc var) {
         ModConexion con = new ModConexion();
         String sql = "DELETE FROM documentos WHERE id = ?";
@@ -1281,7 +1283,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void abrirD(int id) {
         ModConexion con = new ModConexion();
         PreparedStatement ps = null;
@@ -1313,7 +1315,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println("Error al abrir archivo PDF " + ex.getMessage());
         }
     }
-    
+
     public int auto_incremento(String sql) {
         int id = 1;
         PreparedStatement ps = null;
@@ -1332,7 +1334,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return id;
     }
-    
+
     public void visualizar(JTable tabla) {
         tabla.setDefaultRenderer(Object.class, new ModFunTabla());
         DefaultTableModel dt = new DefaultTableModel() {
@@ -1375,7 +1377,7 @@ public class ModConsultasSQL extends ModConexion {
             tabla.setRowHeight(32); //Da el tamaño a la tabla (Cada celda)
         }
     }
-    
+
     public void visualizarMod(JTable tabla, String nombre) {
         tabla.setDefaultRenderer(Object.class, new ModFunTabla());
         DefaultTableModel dt = new DefaultTableModel() {
@@ -1418,7 +1420,7 @@ public class ModConsultasSQL extends ModConexion {
             tabla.setRowHeight(32); //Da el tamaño a la tabla (Cada celda)
         }
     }
-    
+
     public void visualizarPE(JTable tabla) {
         tabla.setDefaultRenderer(Object.class, new ModFunTabla());
         DefaultTableModel dt = new DefaultTableModel() {
@@ -1462,7 +1464,7 @@ public class ModConsultasSQL extends ModConexion {
             tabla.setRowHeight(32); //Da el tamaño a la tabla (Cada celda)
         }
     }
-    
+
     public Image get_Image(String ruta) {
         try {
             ImageIcon imageIcon = new ImageIcon(getClass().getResource(ruta));
@@ -1472,7 +1474,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return null;
     }
-    
+
     public static void tablaAvisos(JTable tablaAvisos, ModVariablesAvisos var, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1498,7 +1500,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void LeerTodo(ModVariablesAvisos var, String matricula) {
         ModListas mens = new ModListas();
         ArrayList<ModVariablesAvisos> list = mens.listaAv(matricula);
@@ -1556,7 +1558,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void obtenerPreg(ModvariablesPreguntas varP, int quizz, String todos, int contador) {
         ModvariablesPreguntas var;
         ModListas mens = new ModListas();
@@ -1637,7 +1639,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void obtenerQuizz(ModVariablesQuizzes varQ, String nombre) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -1667,7 +1669,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public int existePre(String pregunta) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -1688,7 +1690,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public boolean rPresentados(ModVariablesPresentados var, int num, int tot, String mod_calif, String marca) {
 
         PreparedStatement ps = null;
@@ -1721,7 +1723,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public boolean rPAbierta(ModVariablesRespuestas var, String intento) {
 
         PreparedStatement ps = null;
@@ -1752,7 +1754,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public boolean rPAbiertaMod(String matricula, String quizz, String pregunta, String respDef) {
 
         PreparedStatement ps = null;
@@ -1775,7 +1777,7 @@ public class ModConsultasSQL extends ModConexion {
         }
 
     }
-    
+
     public int existeRP(String matricula, String quizz, String pregunta) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -1799,7 +1801,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public static void tablaRegistro(JTable tablaRegistro, ModVariablesPresentados var, String matricula, String tipo) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1841,7 +1843,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static void tablaCalif(JTable tablaRegistro, ModVariablesCalif var, String matricula) {
         DefaultTableModel modelo = new DefaultTableModel() {
             @Override
@@ -1873,7 +1875,7 @@ public class ModConsultasSQL extends ModConexion {
             }
         }
     }
-    
+
     public static String Encriptar(String texto) {
 
         String secretKey = "qualityinfosolutions"; //llave para encriptar datos
@@ -1898,7 +1900,7 @@ public class ModConsultasSQL extends ModConexion {
         }
         return base64EncryptedString;
     }
-    
+
     public static String Desencriptar(String textoEncriptado) throws Exception {
 
         String secretKey = "qualityinfosolutions"; //llave para encriptar datos
@@ -1922,13 +1924,13 @@ public class ModConsultasSQL extends ModConexion {
         }
         return base64EncryptedString;
     }
-    
+
     File archivo = new File("texto.txt");
 
     public void Enc() {
         crearArchivo();
     }
-    
+
     void crearArchivo() {
         try {
             if (archivo.exists()) {
@@ -1939,7 +1941,7 @@ public class ModConsultasSQL extends ModConexion {
         } catch (Exception e) {
         }
     }
-    
+
     public void encriptar(Vista.VstConfiguracion.Texto texto) {
         try {
             ObjectOutputStream escribir = new ObjectOutputStream(new FileOutputStream(archivo));
@@ -1948,7 +1950,7 @@ public class ModConsultasSQL extends ModConexion {
         } catch (Exception e) {
         }
     }
-    
+
     public Texto desencriptar() {
         try {
             ObjectInputStream leer = new ObjectInputStream(new FileInputStream(archivo));
@@ -1959,7 +1961,7 @@ public class ModConsultasSQL extends ModConexion {
             return null;
         }
     }
-    
+
     public static void obtenerResp(ModVariablesPresentados var, String matricula, String intento, String quizz) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -1988,7 +1990,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void llenarResp(VstAvances va, ModVariablesAbierto var, String matricula, String quizz, String pregunta, String intento) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -2026,7 +2028,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void llenarRespMod(VstPerfilEmp vp, ModVariablesAbierto var, String matricula, String quizz, String pregunta) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -2064,7 +2066,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void calificar(String matricula, String intento, String quizz, String puntos, String comentario) {
         ModConexion con = new ModConexion();
         String sql = "UPDATE abierto SET status = ?, p_asignada = ?, retro = ? WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND pregunta = '" + intento + "')";
@@ -2082,7 +2084,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public int existeCalif(String matricula, String quizz, String mod) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -2105,7 +2107,7 @@ public class ModConsultasSQL extends ModConexion {
             return 1;
         }
     }
-    
+
     public String Ptotales(String matricula, String quizz, String mod) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -2168,7 +2170,7 @@ public class ModConsultasSQL extends ModConexion {
             Logger.getLogger(ModConsultasSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void updCalif(String puntos, String status, String intentos, String Tpuntos, String matricula, String quizz, String mod) {
         ModConexion con = new ModConexion();
         String sql = "UPDATE calificaciones SET intentos = ?, puntos = ?, status = ?, Tpuntos = ? WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND mod_calif = '" + mod + "')";
@@ -2187,7 +2189,7 @@ public class ModConsultasSQL extends ModConexion {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void camMarca(String matricula, String quizz, String intento) {
         ModConexion con = new ModConexion();
         String sql = "UPDATE presentados SET marca = ? WHERE (ident = '" + matricula + "' AND quizz = '" + quizz + "' AND intento = '" + intento + "')";
