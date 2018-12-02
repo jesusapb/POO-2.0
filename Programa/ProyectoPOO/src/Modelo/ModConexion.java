@@ -2,13 +2,14 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class ModConexion {
 
@@ -39,7 +40,7 @@ public class ModConexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, username, password);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e);
             JOptionPane.showMessageDialog(null, "Sin conexión.");
         }
