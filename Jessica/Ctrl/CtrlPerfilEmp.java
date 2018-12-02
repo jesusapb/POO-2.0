@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -47,7 +47,7 @@ public class CtrlPerfilEm implements ActionListener {
     private int acum = 0;
 
     /**
-    *Constructozs de la clase 
+    *Constructor de la clase 
     *
     * @param cons es la clase donde están almacenadas las funciones de consulta.
     * @param var es la clase que contiene las variables utilizadas para elusuario que inicia sesion y para que sus datos
