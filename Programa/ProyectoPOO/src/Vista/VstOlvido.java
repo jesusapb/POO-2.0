@@ -4,16 +4,22 @@
  * and open the template in the editor.
  */
 package Vista;
-
 /**
+ * Es la clase encargada de ser el controlador de la clase vista olvido
+ *de los mensajes
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstOlvido extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VstOlvido
-     */
+  /**
+ * constructor de la clase vista olvido
+ *de los mensajes
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public VstOlvido() {
         initComponents();
         //setDefaultCloseOperation(0);
@@ -54,8 +60,11 @@ public class VstOlvido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
-     */
+ * Es el main de la clase vista enviar
+ *ahora el castel debannpa nc gpgcvzjegabdi ibfd
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

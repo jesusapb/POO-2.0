@@ -5,15 +5,36 @@
  */
 package Vista;
 
+
+
 /**
+ * Es la clase encargada de ser la vista de login
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
+
+
+
 public class VstLogin extends javax.swing.JFrame {
 
+ /**
+ * es el constructor de la clasee,vmos wtraer e
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
     /**
-     * Creates new form VstLogin
-     */
+ * Es la clase encargada de ser login de de los mensajes enviados
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
     public VstLogin() {
         initComponents();
         btnValidar.setVisible(false);
@@ -138,9 +159,14 @@ public class VstLogin extends javax.swing.JFrame {
         vc.setVisible(true);
     }//GEN-LAST:event_btnConfiguraciónActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   /**
+ *min de ser la vista de los mensajes enviados
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

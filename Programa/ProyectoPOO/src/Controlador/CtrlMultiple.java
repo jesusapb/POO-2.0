@@ -19,9 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
+ * Esta es la clase de controlador multiple, aqui ocurre la gestion 
+ * de la ventana que se presenta para la vista multiple
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class CtrlMultiple implements ActionListener {
 
     private ModConsultasSQL con;
@@ -30,6 +34,12 @@ public class CtrlMultiple implements ActionListener {
     private VstMultiple vm;
     private Timer t;
 
+ /**
+ * constructor de la clase multiples
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public CtrlMultiple(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstMultiple vm) {
         this.con = con;
         this.var = var;
@@ -41,6 +51,8 @@ public class CtrlMultiple implements ActionListener {
         this.vm.btnVaciar.addActionListener(this);
     }
 
+    
+    
     public void iniciar() {
         vm.setTitle("Mensaje múltiple.");
         vm.setLocationRelativeTo(null);
@@ -51,6 +63,15 @@ public class CtrlMultiple implements ActionListener {
         vm.btnAgregar.setVisible(false);
     }
 
+     /**
+     * Es el constructor encargado en recibir y ejecutar la acciones
+     * correspondiente a lo que va ocurriendo en la vista de multiples.
+     *
+     * @param e variable encargada de recibir cada acción de los botónes de la
+     * interfaz gráfica.
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -106,7 +127,13 @@ public class CtrlMultiple implements ActionListener {
             vm.setVisible(false);
         }
     }
-
+/**
+ * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+ * segun se requiera
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public void limpiar() {
         vm.txtAsunto.setText(null);
         vm.txtMensaje.setText(null);
@@ -114,6 +141,15 @@ public class CtrlMultiple implements ActionListener {
 
     private int h, m, s, cs;
 
+/**
+* Es el constructor encargado en recibir y ejecutar la acciones
+* correspondiente a lo que va ocurriendo en la vista de multiples.
+*
+* @param e variable encargada de recibir cada acción de los botónes de la
+* interfaz gráfica.
+* @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+* @version 29/11/2018/ProyectoPoo_Acompañamiento 
+*/
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {

@@ -14,6 +14,11 @@ public class VstMultiple extends javax.swing.JFrame {
     /**
      * Creates new form VstMultiple
      */
+    
+    
+    
+    
+    
     public VstMultiple() {
         initComponents();
     }

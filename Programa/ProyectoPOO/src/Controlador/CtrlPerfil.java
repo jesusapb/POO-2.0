@@ -23,8 +23,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Esta es la clase controlador de perfil, aqui ocurre la gestion de la ventana
+ * perfil
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPerfil implements ActionListener {
 
@@ -33,6 +36,13 @@ public class CtrlPerfil implements ActionListener {
     private VstPerfil vp;
     private VstAdministrador va;
 
+ /**
+ * constructor de la clase perfil
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
     public CtrlPerfil(ModConsultasSQL cons, ModVariablesUsr var, VstPerfil vp, VstAdministrador va) {
         this.cons = cons;
         this.var = var;
@@ -44,6 +54,24 @@ public class CtrlPerfil implements ActionListener {
         this.vp.btnInfo.addActionListener(this);
     }
 
+ /**
+ * metodo iniciar
+ *se encarga de establescer los atributos del usuario en null
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */  
+    
+    
+    
+ /* metodo inicial, dando inicinio ,
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */  
+     
+    
+    
     public void iniciar() {
         vp.setTitle("Perfil");
         vp.setLocationRelativeTo(null);
@@ -54,7 +82,6 @@ public class CtrlPerfil implements ActionListener {
         String[] part = correo.split("@");
         String part1 = part[0];
         vp.correo.setText(part1);
-
         vp.nombre.setEditable(false);
         vp.ap_pat.setEditable(false);
         vp.ap_mat.setEditable(false);
@@ -64,6 +91,16 @@ public class CtrlPerfil implements ActionListener {
         vp.btnGuardar.setEnabled(false);
         vp.btnValidar.setEnabled(false);
     }
+    
+    /**
+     * Es el constructor encargado en recibir y ejecutar la acciones
+     * correspondiente a lo que va ocurriendo en la vista de mensjes.
+     *
+     * @param e variable encargada de recibir cada acción de los botónes de la
+     * interfaz gráfica.
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento 
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -76,7 +113,19 @@ public class CtrlPerfil implements ActionListener {
         var.setHora(horaDate.format(date));
         ModConsultasSQL.recarga(var);
         ModConsultasSQL.status(var);
-
+    /**
+     * Es el constructor encargado en recibir y ejecutar la acciones
+     * correspondiente a lo que va ocurriendo en la vista de perfil
+     *
+     * @param e variable encargada de recibir cada acción de los botónes de la
+     * interfaz gráfica.
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento 
+     */
+        
+        
+        
+        
         if (cons.existeUsr(var.getMatricula()) == 1) {
             if (e.getSource() == vp.btnInfo) {
                 JOptionPane.showMessageDialog(null, "Para poder modificar la información:\n"
@@ -243,7 +292,13 @@ public class CtrlPerfil implements ActionListener {
             variables();
         }
     }
-
+/**
+ * metodo encargado de establescer los atributos de la clase correspondientes
+ * al usuario en null
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -254,7 +309,13 @@ public class CtrlPerfil implements ActionListener {
         var.setStatus(null);
         var.setCorreo(null);
     }
-
+/**
+ * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+ * segun se requiera
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */ 
     public void limpiar() {
         vp.matricula.setText(null);
         vp.contraseña.setText(null);

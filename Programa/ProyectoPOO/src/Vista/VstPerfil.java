@@ -4,16 +4,27 @@
  * and open the template in the editor.
  */
 package Vista;
-
 /**
+ * Es la clase encargada de ser el controlador de la clase vista olvido
+ *de los mensajes
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstPerfil extends javax.swing.JFrame {
 
     /**
      * Creates new form VstPerfil
      */
+     /**
+ * constructor de la clase vista olvido
+ *de los mensajes
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
     public VstPerfil() {
         initComponents();
     }
@@ -114,7 +125,13 @@ public class VstPerfil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * el controlador de la clase vista olvido
+ *de los mensajes menos te ban a 7xr
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     private void cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioActionPerformed
         if (cambio.isSelected() == true) {
             btnValidar.setEnabled(true);
@@ -154,10 +171,13 @@ public class VstPerfil extends javax.swing.JFrame {
             correo.setEditable(true);
         }
     }//GEN-LAST:event_ed_correoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+/**
+ * el main del controlador,  controlador de la clase vista olvido
+ *de los mensajes, no enruqcerla es ?
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

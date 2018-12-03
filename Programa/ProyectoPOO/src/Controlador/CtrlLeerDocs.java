@@ -19,24 +19,56 @@ import javax.swing.JOptionPane;
  *
  * @author Antonio
  */
+/**
+ * Es la clase encargada de ser el controlador de la clase vista leer documentos
+ * la cual muestra los documentos disponibles para leectura
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+
+
 public class CtrlLeerDocs implements MouseListener {
 
     private ModConsultasSQL con;
     private ModVariablesUsr var;
     private VstLeerDocs vld;
 
+/**
+ * constructor de la clase enviar
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */      
+    
     public CtrlLeerDocs(ModConsultasSQL con, ModVariablesUsr var, VstLeerDocs vld) {
         this.con = con;
         this.var = var;
         this.vld = vld;
     }
 
+/**
+ * metodo encargado de iniciar la variable title
+ * como "leer documentos"
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
     public void iniciar() {
         vld.setTitle("Leer documentos.");
         vld.setLocationRelativeTo(null);
         con.visualizarPE(vld.tablaDocumentos);
     }
 
+/**
+ * Es el constructor encargado en recibir y ejecutar la acciones
+ * correspondiente a lo que va ocurriendo en la vista vista leer documentos
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */    
+    
     @Override
     public void mouseClicked(MouseEvent me) {
         Date date = new Date();

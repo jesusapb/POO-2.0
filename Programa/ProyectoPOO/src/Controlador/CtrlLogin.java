@@ -35,6 +35,8 @@ public class CtrlLogin implements ActionListener {
      * @param var es la clase que contiene las variables utilizadas para el
      * usuario que inicia la sesión y para que sus datos sean almacenados.
      * @param vl es la interfaz grafica del logeo.
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento
      */
     public CtrlLogin(ModConsultasSQL cons, ModVariablesUsr var, VstLogin vl) {
         this.cons = cons;
@@ -47,10 +49,12 @@ public class CtrlLogin implements ActionListener {
     }
 
     /**
-     * Constructor encargado en dar el nombre a la ventana y asignarle la
+     * metodo encargado en dar el nombre a la ventana y asignarle la
      * posición donde se va a generar al ser visible.
      *
      * @throws UnknownHostException
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento
      */
     public void iniciar() throws UnknownHostException {
         vl.setTitle("Inicio de sesión.");
@@ -59,11 +63,19 @@ public class CtrlLogin implements ActionListener {
 
     /**
      * Es el constructor encargado en recibir y ejecutar la acciones
-     * correspondiente a lo que va ocurriendo en la vista de logeo.
+     * correspondiente a lo que va ocurriendo en la vista de mensjes.
      *
      * @param e variable encargada de recibir cada acción de los botónes de la
      * interfaz gráfica.
-     */
+     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento  Es el constructor encargado en recibir y ejecutar la acciones
+ * correspondiente a lo que va ocurriendo en la vista enviar
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();

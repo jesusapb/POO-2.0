@@ -18,8 +18,11 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Es la clase encargada de ser el controlador de la clase vista enviados
  *
- * @author Antonio
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlEnviados implements ActionListener {
 
@@ -29,6 +32,13 @@ public class CtrlEnviados implements ActionListener {
     private VstEnviados ve;
     private VstBandejadEntrada vbe;
 
+ /**
+ * constructor de la clase enviados
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
     public CtrlEnviados(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstEnviados ve, VstBandejadEntrada vbe) {
         this.con = con;
         this.var = var;
@@ -38,7 +48,13 @@ public class CtrlEnviados implements ActionListener {
 
         this.ve.btnReenviar.addActionListener(this);
     }
-
+ /**
+ * metodo encargado de iniciar 
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
     public void iniciar() {
         ve.setTitle("Mensajes enviados.");
         ve.setLocationRelativeTo(null);
@@ -48,6 +64,13 @@ public class CtrlEnviados implements ActionListener {
         ve.btnReenviar.setVisible(false);
     }
 
+ /**
+  * Es el constructor encargado en recibir y ejecutar la acciones
+  * correspondiente a lo que va ocurriendo en la vista enviados
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -96,7 +119,12 @@ public class CtrlEnviados implements ActionListener {
             variables();
         }
     }
-
+/**
+ * metodo encargado de contener los atributos del empleado
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -107,12 +135,18 @@ public class CtrlEnviados implements ActionListener {
         var.setStatus(null);
         var.setCorreo(null);
     }
-
+    
+ /**
+ * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+ * segun se requiera
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public void limpiar() {
         ve.txtAsunto.setText(null);
         ve.txtMensaje.setText(null);
         ve.txtPara.setText(null);
-
         ve.btnReenviar.setVisible(false);
     }
 }

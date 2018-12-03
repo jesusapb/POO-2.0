@@ -13,14 +13,21 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 /**
+ * Es la clase encargada de ser la vista de los mensajes enviados
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstEnviados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VstEnviados
-     */
+
+ /**
+ * contructor de la clase vista enviados.
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public VstEnviados() {
         initComponents();
         id.setVisible(false);
@@ -29,7 +36,20 @@ public class VstEnviados extends javax.swing.JFrame {
         t = new Timer(10, acciones);
         t.start();
     }
-
+/**
+ * metodo encargado de detectar los movimientos de raton en la tabla de mensajes enviados
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,6 +188,12 @@ public class VstEnviados extends javax.swing.JFrame {
         checkEditar.setVisible(true);
     }//GEN-LAST:event_tablaEnviadosMouseClicked
 
+ /**
+ * metodo encargado de detecar cambos en editar
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */   
     private void checkEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEditarActionPerformed
         if (checkEditar.isSelected() == false) {
             txtMensaje.setEditable(false);
@@ -182,6 +208,14 @@ public class VstEnviados extends javax.swing.JFrame {
     private Timer t;
     private int h, m, s, cs;
 
+ /**
+ * metodo encargado de presentar los resultados de la conexion con modconsultas 
+ *
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */   
+    
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -213,6 +247,13 @@ public class VstEnviados extends javax.swing.JFrame {
 //        cronometro.setText(tiempo);
 //    }
 
+ /**
+ * main de la clase enviados.
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
