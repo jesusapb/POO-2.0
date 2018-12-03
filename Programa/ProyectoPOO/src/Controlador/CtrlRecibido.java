@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -25,8 +21,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ *Es la clase encargada de recibir los mensajes de otros usuarios 
+ * y poder visualizarlos 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González Bautista y Jesús Pacheco
+ * @version 29/11s/2018/Proyecto_Poo_Acompañamiento
  */
 public class CtrlRecibido implements ActionListener {
 
@@ -35,6 +33,17 @@ public class CtrlRecibido implements ActionListener {
     private ModVariablesMensaje varM;
     private VstRecibido vr;
     private VstBandejadEntrada vbe;
+    
+    /**
+    * Método de la clase 
+    * @param con es la clase donde esan almacenadas las funciones de consulta
+    * @param var es la clase que contiene las variables utilizadas para el usuario que inicia
+    * sesion y para que sus datos sean almacenados 
+    * @param varM es la clase que contiene las variables utilizadas para los mensajes y para
+    * que sus datos sean almacenados. 
+    * @param vr es la interfaz gráfica del mensaje recibido. 
+    * @param vbe es la interfaz gráfica de la bandeja de entrada del usuario.  
+    */
 
     public CtrlRecibido(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstRecibido vr, VstBandejadEntrada vbe) {
         this.con = con;
@@ -47,10 +56,20 @@ public class CtrlRecibido implements ActionListener {
         this.vr.btnEliminar.addActionListener(this);
     }
 
+    /**
+    *Constructor en mostrar la interfaz
+    */
+
     public void iniciar() {
         vr.setTitle("Mensaje.");
         vr.setLocationRelativeTo(null);
     }
+
+    /**
+    *Constructor encargado en recibir y ejecutar las acciones correspondientes
+    * a lo que va ocurriendo en la vista de Recibido
+    * @param e es la variable encargada de recibir cada acción de los botones de la vista.
+    */
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -72,7 +91,6 @@ public class CtrlRecibido implements ActionListener {
                 ve.setVisible(true);
                 ve.txtPara.setText(vr.ident.getText());
             }
-
             if (e.getSource() == vr.btnEliminar) {
                 try {
                     PreparedStatement ps = null;

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConsultasSQL;
@@ -16,13 +12,15 @@ import java.util.Date;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Es la interfaz para que el empleado seleccione el quiz a realizar. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstSelectQuizz extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstSelectQuizz
+     * Creando forma de la vista SelectQuizz
      */
     public VstSelectQuizz() {
         initComponents();
@@ -123,6 +121,11 @@ public class VstSelectQuizz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para la interacción de la tabla y seleccionar el quiz a presentar.
+     * @param evt variable  que mantiene a la espera de una interacción con la 
+     * tabla. Ayuda a extraer los datos mostrados en la tabla.
+     */
     private void tablaSelectQuizzMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSelectQuizzMouseClicked
         int row = evt.getY() / tablaSelectQuizz.getRowHeight();
         String quizz = "" + tablaSelectQuizz.getValueAt(row, 0);
@@ -136,6 +139,38 @@ public class VstSelectQuizz extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VstSelectQuizz().setVisible(true);
+            }
+        });
+    }
     
     private Timer t;
     private int h, m, s, cs;
@@ -169,46 +204,9 @@ public class VstSelectQuizz extends javax.swing.JFrame {
                 m = 0;
                 ++h;
             }
-//            actualizarLabel();
         }
     };
 
-//    private void actualizarLabel() {
-//        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
-//        cronometro.setText(tiempo);
-//    }
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VstSelectQuizz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VstSelectQuizz().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField Quizz;

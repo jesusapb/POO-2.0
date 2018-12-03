@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.ModConexion;
@@ -29,8 +24,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
+ * Esta es la clase de Preguntas (al haber seleccionado Agregar preguntas de
+ * Quizzes)
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPreguntas implements ActionListener {
 
@@ -41,6 +39,19 @@ public class CtrlPreguntas implements ActionListener {
     private VstPreguntas vp;
     private VstQuizzes vq;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param con es la clase donde estan almacenadas las funciones de consulta.
+     * @param var es la clase que contiene las variables utilizadas en Preguntas
+     * y para que los datos sean almacenados.
+     * @param varQ es la clase que contiene las variables utilizadas en Quizzes
+     * y para que los datos sean almacenados.
+     * @param varU es la clase que contiene las variables utilizadas para el
+     * usuario y para que sus datos sean almacenados.
+     * @param vp es la interfaz de preguntas.
+     * @param vq es la interfaz de quizzes.
+     */
     public CtrlPreguntas(ModConsultasSQL con, ModvariablesPreguntas var, ModVariablesQuizzes varQ, ModVariablesUsr varU, VstPreguntas vp, VstQuizzes vq) {
         this.con = con;
         this.var = var;
@@ -55,6 +66,9 @@ public class CtrlPreguntas implements ActionListener {
         this.vp.btnReestablecer.addActionListener(this);
     }
 
+    /**
+     * Método para visualizar la pantalla de Preguntas.
+     */
     public void iniciar() {
         vp.setTitle("Agregar preguntas.");
         vp.setLocationRelativeTo(null);
@@ -72,6 +86,13 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones
+     * correspondientes a lo que va ocurriendo en la vista de Preguntas.
+     *
+     * @param e es la variable encargada de recibir cada acciones de los botones
+     * de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -85,6 +106,10 @@ public class CtrlPreguntas implements ActionListener {
         ModConsultasSQL.status(varU);
 
         if (con.existeUsr(varU.getMatricula()) == 1) {
+            /**
+             * Método que al seleccionar guardar y no esta lleno algún campo no
+             * dejará proceder.
+             */
             if (e.getSource() == vp.btnGuardar) {
                 if (vp.txtPreguntas.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Debe de ingresar la pregunta.");
@@ -429,6 +454,19 @@ public class CtrlPreguntas implements ActionListener {
                                                                     JOptionPane.showMessageDialog(null, "Error al agregar la pregunta.");
                                                                 }
                                                             } else {
+                                                                /**
+                                                                 * Cuando al
+                                                                 * haber
+                                                                 * ingresado el
+                                                                 * puntaje de la
+                                                                 * pregunta y no
+                                                                 * coincide con
+                                                                 * la suma de
+                                                                 * las
+                                                                 * respuestas
+                                                                 * correctas
+                                                                 * entonces....
+                                                                 */
                                                                 JOptionPane.showMessageDialog(null, "La suma de la puntuacion de cada respuesta debe\n"
                                                                         + "debe de ser igual a los puntos totales de la pregunta.");
                                                             }
@@ -1393,6 +1431,10 @@ public class CtrlPreguntas implements ActionListener {
                         ps.setInt(1, num);
                         ps.execute();
 
+                        /**
+                         * Cuando se elimina una pregunta, acum se suma 1, ya
+                         * que acum es el número de preguntas mínimas.
+                         */
                         JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la pregunta.");
                         int acum = Integer.parseInt(vq.p_totales.getText()) + 1;
                         if (acum < 1) {
@@ -1447,6 +1489,13 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Método que identifica si el valor que se ingreso en la puntuación es un
+     * número (double)
+     *
+     * @param cadena cadena extraida de la interfaz gráfica para su validación
+     * @return true si la cadena es un double y false si no lo es.
+     */
     public static boolean trueDouble(String cadena) {
         boolean resultado;
 
@@ -1458,6 +1507,9 @@ public class CtrlPreguntas implements ActionListener {
         }
         return resultado;
     }
+    /**
+     * Método que limpia la interfaz gráfica. 
+     */
 
     public void limpiar() {
         vp.modPre.setVisible(false);
@@ -1486,17 +1538,13 @@ public class CtrlPreguntas implements ActionListener {
                 vp.R3, vp.R4, vp.txtD1, vp.txtD2, vp.txtD3, vp.txtD4);
     }
 
-    public void variables() {
-        varU.setNombre(null);
-        varU.setAp_pat(null);
-        varU.setAp_mat(null);
-        varU.setTipo(null);
-        varU.setMatricula(null);
-        varU.setContraseña(null);
-        varU.setStatus(null);
-        varU.setCorreo(null);
-    }
-
+    /**
+     * Método que toma el valor de la puntuación y si detecta que tiene más de 2
+     * decimales, se aplica el redondeo.
+     *
+     * @param cadena es la puntuación convertida en un string
+     * @return devuelve el valor redondeado
+     */
     public double cambio(String cadena) {
         DecimalFormat op = new DecimalFormat("#.00");
         double db = Double.parseDouble(cadena);
@@ -1506,6 +1554,27 @@ public class CtrlPreguntas implements ActionListener {
         return fin;
     }
 
+    /**
+     * Método que muestra los campos que deben llenarse (interfaz de Preguntas)
+     *
+     * @param r2 desactiva la interacción del checkBox
+     * @param r3 desactiva la interacción del checkBox
+     * @param r4 desactiva la interacción del checkBox
+     * @param a Sirve para mostrar u ocultar los componentes presentados en la
+     * ventana.
+     * @param txtR1 desactiva la interacción de escritura y borra el contenido
+     * @param txtR2 desactiva la interacción de escritura y borra el contenido
+     * @param txtR3 desactiva la interacción de escritura y borra el contenido
+     * @param txtR4 desactiva la interacción de escritura y borra el contenido
+     * @param txtD1 desactiva la interacción de escritura y borra el contenido
+     * @param txtD2 desactiva la interacción de escritura y borra el contenido
+     * @param txtD3 desactiva la interacción de escritura y borra el contenido
+     * @param txtD4 desactiva la interacción de escritura y borra el contenido
+     * @param R1 desactiva la interacción de escritura y borra el contenido
+     * @param R2 desactiva la interacción de escritura y borra el contenido
+     * @param R3 desactiva la interacción de escritura y borra el contenido
+     * @param R4 desactiva la interacción de escritura y borra el contenido
+     */
     public static void inicio(JCheckBox r2, JCheckBox r3, JCheckBox r4, boolean a,
             JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
@@ -1544,6 +1613,30 @@ public class CtrlPreguntas implements ActionListener {
         txtD4.setText(null);
     }
 
+    /**
+     * Método si el tipo de respuesta es unico realiza lo siguiente
+     *
+     * @param unico se ha seleccionado "Unico"
+     * @param r2 se desactiva el checkBox
+     * @param r3 se desactiva el checkBox
+     * @param r4 se desactiva el checkBox
+     * @param a sirve para ocultar los componentes presentados en la ventana.
+     * @param b sirve para hacer visibles los componentes presentados en la
+     * ventana.
+     * @param txtR1 se activa la escritura
+     * @param txtR2 se desactiva la escritura
+     * @param txtR3 se desactiva la escritura
+     * @param txtR4 se desactiva la escritura
+     * @param txtD1 se activa la escritura
+     * @param txtD2 se activa la escritura
+     * @param txtD3 se activa la escritura
+     * @param txtD4 se activa la escritura
+     * @param R1 se desactiva la escritura
+     * @param R2 se desactiva la escritura
+     * @param R3 se desactiva la escritura
+     * @param R4 se desactiva la escritura
+     *
+     */
     public static void unico(JCheckBox unico, JCheckBox r2, JCheckBox r3, JCheckBox r4, boolean a, boolean b,
             JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
@@ -1584,6 +1677,29 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Método si al seleccionar el tipo de pregunta es múltiple
+     *
+     * @param multiple se ha seleccionado "Multiple"
+     * @param r2 se activa la interacción del checkBox
+     * @param r3 se activa la interacción del checkBox
+     * @param r4 se activa la interacción del checkBox
+     * @param a deshabilitador de interacción
+     * @param b habilitador de interacción
+     * @param txtR1 desactiva la interacción
+     * @param txtR2 desactiva la interacción
+     * @param txtR3 desactiva la interacción
+     * @param txtR4 desactiva la interacción
+     * @param txtD1 desactiva la interacción
+     * @param txtD2 desactiva la interacción
+     * @param txtD3 desactiva la interacción
+     * @param txtD4 desactiva la interacción
+     * @param R1 desactiva la interacción
+     * @param R2 desactiva la interacción
+     * @param R3 desactiva la interacción
+     * @param R4 desactiva la interacción
+     *
+     */
     public static void multiple(JCheckBox multiple, JCheckBox r2, JCheckBox r3, JCheckBox r4, boolean a, boolean b,
             JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
@@ -1631,6 +1747,26 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Método que activa los campos necesarios para el registro de una pregunta
+     * múltiple con 2 respuestas correctas.
+     *
+     * @param r2 cuando se ha seleccionado el checkBox
+     * @param a deshabilitador de interacción
+     * @param b habilitador de interacción
+     * @param txtR1 se habilita la escritura
+     * @param txtR2 se habilita la escritura
+     * @param txtR3 se deshabilita la escritura
+     * @param txtR4 se deshabilita la escritura
+     * @param R1 se habilita la escritura
+     * @param R2 se habilita la escritura
+     * @param R3 se deshabilita la escritura
+     * @param R4 se deshabilita la escritura
+     * @param txtD1 se habilita la escritura
+     * @param txtD2 se habilita la escritura
+     * @param txtD3 se habilita la escritura
+     * @param txtD4 se habilita la escritura
+     */
     public static void r2(JCheckBox r2, boolean a, boolean b, JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
             JTextField txtD1, JTextField txtD2, JTextField txtD3, JTextField txtD4) {
@@ -1663,6 +1799,26 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Método que activa los campos necesarios para el registro de una pregunta
+     * múltiple con 3 respuestas correctas.
+     *
+     * @param r3 cuando se ha seleccionado el checkBox
+     * @param a deshabilitador de interacción
+     * @param b habilitador de interacción
+     * @param txtR1 se habilita la escritura
+     * @param txtR2 se habilita la escritura
+     * @param txtR3 se habilita la escritura
+     * @param txtR4 se deshabilita la escritura
+     * @param R1 se habilita la escritura
+     * @param R2 se habilita la escritura
+     * @param R3 se habilita la escritura
+     * @param R4 se deshabilita la escritura
+     * @param txtD1 se habilita la escritura
+     * @param txtD2 se habilita la escritura
+     * @param txtD3 se habilita la escritura
+     * @param txtD4 se habilita la escritura
+     */
     public static void r3(JCheckBox r3, boolean a, boolean b, JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
             JTextField txtD1, JTextField txtD2, JTextField txtD3, JTextField txtD4) {
@@ -1695,6 +1851,26 @@ public class CtrlPreguntas implements ActionListener {
         }
     }
 
+    /**
+     * Método que activa los campos necesarios para el registro de una pregunta
+     * múltiple con 4 respuestas correctas.
+     *
+     * @param r4 cuando se ha seleccionado el checkBox
+     * @param a deshabilitador de interacción
+     * @param b habilitador de interacción
+     * @param txtR1 se habilita la escritura
+     * @param txtR2 se habilita la escritura
+     * @param txtR3 se habilita la escritura
+     * @param txtR4 se habilita la escritura
+     * @param R1 se habilita la escritura
+     * @param R2 se habilita la escritura
+     * @param R3 se habilita la escritura
+     * @param R4 se habilita la escritura
+     * @param txtD1 se habilita la escritura
+     * @param txtD2 se habilita la escritura
+     * @param txtD3 se habilita la escritura
+     * @param txtD4 se habilita la escritura
+     */
     public static void r4(JCheckBox r4, boolean a, boolean b, JTextField txtR1, JTextField txtR2, JTextField txtR3, JTextField txtR4,
             JTextField R1, JTextField R2, JTextField R3, JTextField R4,
             JTextField txtD1, JTextField txtD2, JTextField txtD3, JTextField txtD4) {

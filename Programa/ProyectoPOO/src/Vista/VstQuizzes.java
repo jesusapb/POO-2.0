@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Controlador.CtrlQuizzes;
@@ -26,13 +22,17 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Es la interfaz de Quizzes en donde se puede agregar quizzes, agregar preguntas con sus resepctivas respuestas, 
+ * se muestra una tabla de los quizzes registrados con el número de preguntas, 
+ * si esta habilitado o no, número de intentos y realizar sus respectivas modificaciones. 
+ * @author Karina Carmona, Antonio Ctzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento 
  */
+
 public class VstQuizzes extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstQuizzes
+     * Creando la forma de la vista Quizzes
      */
     public VstQuizzes() {
         initComponents();
@@ -252,12 +252,23 @@ public class VstQuizzes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que va cambiando los comboBox acorde a los intentos que el administrador
+     * selecciona. 
+     * @param evt variable que se mantiene a la espera para realizar un cambio
+     * en las opciones del comboBox que señala el modo de calificación del quiz. 
+     */
     private void comboIntentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIntentosActionPerformed
         CtrlQuizzes.modo(comboModCalf, comboIntentos);
     }//GEN-LAST:event_comboIntentosActionPerformed
 
     ModVariablesQuizzes varQ = new ModVariablesQuizzes();
 
+    /**
+     * Método que extrae los datos mostrados en la tabla. 
+     * @param evt variable que mantiene a la espera de una interacción con la 
+     * tabla. Ayuda a extraer los datos mostrados en la tabla .
+     */
     private void tablaQuizzesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaQuizzesMouseClicked
         try {
             PreparedStatement ps = null;
@@ -329,6 +340,12 @@ public class VstQuizzes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaQuizzesMouseClicked
 
+    /**
+     * Método para activar o desactivar el modo de visualización del quiz
+     * para el empleado. 
+     * @param evt  variable que mantiene a la espera de una interacción con la
+     * activación del quiz.
+     */
     private void checkActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActivarActionPerformed
         Date date = new Date();
         DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
@@ -418,6 +435,11 @@ public class VstQuizzes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkActivarActionPerformed
 
+    /**
+     * Método para activar el cambio de nombre del quiz. 
+     * @param evt variable que mantiene la espera de una interacción del cambio
+     * de nombre.
+     */
     private void checkCamNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCamNameActionPerformed
         if (checkCamName.isSelected() == false) {
             txtNombre.setEditable(false);
@@ -426,10 +448,7 @@ public class VstQuizzes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkCamNameActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    private Timer t;
+     private Timer t;
     private int h, m, s, cs;
 
     private ActionListener acciones = new ActionListener() {
@@ -451,14 +470,14 @@ public class VstQuizzes extends javax.swing.JFrame {
                 m = 0;
                 ++h;
             }
-//            actualizarLabel();
+
         }
     };
-
-//    private void actualizarLabel() {
-//        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
-//        cronometro.setText(tiempo);
-//    }
+    
+    /**
+     * @param args the command line arguments
+     */
+   
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

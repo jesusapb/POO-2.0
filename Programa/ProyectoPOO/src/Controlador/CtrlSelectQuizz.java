@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -23,8 +19,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ * Esta clase muestra en una tabla los quizzes habilitados y su función es que el usuario 
+ * seleccione el quiz a realizar. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco. 
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlSelectQuizz implements ActionListener {
 
@@ -33,6 +31,18 @@ public class CtrlSelectQuizz implements ActionListener {
     private VstSelectQuizz vsq;
     private ModVariablesQuizzes varQ;
     private ModvariablesPreguntas varP;
+
+    /**
+    * Constructor de la clase 
+    * @param cons es la clse donde están almacenadas las funciones de consulta.
+    * @param varU es la clase que contiene las variables utilizadas para el usuario que 
+    * que inicia la sesión y para que sus datos sean almacenados. 
+    * @param vsq es la interfaz gráfica de SelectQuizz 
+    * @param varQ es la clase que contiene las variables utilizadas para los quizzes
+    * y sean mostrados. 
+    * @param varP es la clase que contiene las variable utilizadas para las preguntas 
+    * y sean mostrados. 
+    */
 
     public CtrlSelectQuizz(ModConsultasSQL cons, ModVariablesUsr varU, VstSelectQuizz vsq, ModVariablesQuizzes varQ, ModvariablesPreguntas varP) {
         this.cons = cons;
@@ -44,6 +54,10 @@ public class CtrlSelectQuizz implements ActionListener {
         this.vsq.btnPresentar.addActionListener(this);
     }
 
+    /**
+    *Método para mostrar la tabla de los quizzes habilitados. 
+    */
+
     public void iniciar() {
         vsq.setTitle("Seleccionar Quizz.");
         vsq.setLocationRelativeTo(null);
@@ -51,6 +65,13 @@ public class CtrlSelectQuizz implements ActionListener {
         ModConsultasSQL.tablaSelectQuiz(vsq.tablaSelectQuizz, varQ);
         vsq.matricula.setText(varU.getMatricula());
     }
+
+    /**
+    * Es el contructor encargado en recibir y ejecutar las acciones 
+    * correspondientes a lo que va ocurriendo en la vista de SelectQuizz
+    * @param e es la variable encargada de recibir cada acción de los botones
+    * de la interfaz gráfica. 
+    */
 
     @Override
     public void actionPerformed(ActionEvent e) {

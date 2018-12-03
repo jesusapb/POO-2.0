@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -29,8 +25,11 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de quizzes, aquí ocurre la gestion de la ventana para
+ * agregar quizzes, agregar preguntas y sus respuestas, activar o desactivar quizzes
+ * entre otras funciones. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29s/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlQuizzes implements ActionListener {
 
@@ -38,6 +37,15 @@ public class CtrlQuizzes implements ActionListener {
     private ModVariablesQuizzes var;
     private ModVariablesUsr varU;
     private VstQuizzes vq;
+
+    /**
+    * Es el contructor de la clase.
+    * @param con es la clase donde estan almacenadas las funciones de consulta.
+    * @param var es la clase donde estan almacenadas las variables de quizzes y para que sus datos sean almacenados.
+    * @param varU es la clase que contiene las varibables utilizadas para el usuario que inicia la sesión y para que sus
+    * datos sean almacenados. 
+    * @param vq es la interfaz gráfica de quizzes. 
+    */
 
     public CtrlQuizzes(ModConsultasSQL con, ModVariablesQuizzes var, ModVariablesUsr varU, VstQuizzes vq) {
         this.con = con;
@@ -52,6 +60,10 @@ public class CtrlQuizzes implements ActionListener {
         this.vq.btnAgrPreg.addActionListener(this);
     }
 
+    /**
+    * Es el método que muestra la interfaz de quizzes con su respectiva tabla. 
+    */ 
+
     public void iniciar() {
         vq.setTitle("Quizzes");
         ModConsultasSQL.tablaQuizz(vq.tablaQuizzes);
@@ -59,6 +71,13 @@ public class CtrlQuizzes implements ActionListener {
         vq.matricula.setText(varU.getMatricula());
         limpiar();
     }
+
+    /**
+    * Constructor encargado de recibir y ejecutar las acciones correspondientes 
+    * a lo que va ocurriendo en la vista de Quizzes.
+    * @param e es la variable encargada de recibir cada acción de los botones de la
+    * interfaz gráfica. 
+    */
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -123,6 +142,10 @@ public class CtrlQuizzes implements ActionListener {
                 }
             }
 
+            /**
+            * Cuando el administrador selecciona modificar, no debe dejar ningun campo nulo.  
+             */
+
             if (e.getSource() == vq.btnModificar) {
                 if (vq.txtNombre.getText().equals("") || vq.txtDescripcion.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Completa los campos de escritura.");
@@ -136,6 +159,9 @@ public class CtrlQuizzes implements ActionListener {
                             if (vq.checkCamName.isSelected() == false) {
                                 PreparedStatement ps = null;
                                 try {
+                                    /**
+                                    * Para la actualización de los cambios realizados por el administrador. 
+                                    */
 
                                     ModConexion objCon = new ModConexion();
                                     Connection conn = objCon.getConexion();
@@ -224,11 +250,20 @@ public class CtrlQuizzes implements ActionListener {
                 }
             }
 
+            /**
+            * Cuando se selecciona un quiz de la tabla y posteriormente eliminar. 
+            */
+
             if (e.getSource() == vq.btnEliminar) {
                 PreparedStatement ps = null, ps1 = null;
                 ResultSet rs = null;
 
                 try {
+
+                    /**
+                    * Para eliminar de la base de datos el quiz que se haya seleccionado. 
+                    */
+
                     ModConexion objCon = new ModConexion();
                     Connection conn = objCon.getConexion();
 
@@ -242,6 +277,9 @@ public class CtrlQuizzes implements ActionListener {
                     ResultSetMetaData rsMd = rs.getMetaData();
                     int cantidadColumnas = rsMd.getColumnCount();
 
+                    /**
+                    * Para eliminar todas las preguntas almacenadas en el quiz. 
+                    */
                     while (rs.next()) {
                         for (int i = 0; i < cantidadColumnas; i++) {
                             String sql1 = "DELETE FROM preguntas WHERE quizz = ?";
@@ -271,10 +309,19 @@ public class CtrlQuizzes implements ActionListener {
                 }
             }
 
+            /**
+            * Limpiar los campos e ingresar datos para agregar un nuevo quiz.
+            */
+
             if (e.getSource() == vq.btnNuevo) {
                 vq.p_totales.setText("0");
                 limpiar();
             }
+
+            /**
+            * Agregar preguntar al haber seleccionado de la tabla el quiz, y para poder realizar esta 
+            * función la pregunta debe de estar desactivada. 
+            */
 
             if (e.getSource() == vq.btnAgrPreg) {
                 if (vq.checkActivar.isSelected() == true) {
@@ -296,7 +343,6 @@ public class CtrlQuizzes implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
             vq.setVisible(false);
-            variables();
         }
     }
 
@@ -318,6 +364,14 @@ public class CtrlQuizzes implements ActionListener {
         vq.btnEliminar.setVisible(false);
         vq.btnAgrPreg.setVisible(false);
     }
+    
+    /**
+     * Método para seleccionar cuantas horas o minutos tendrá el empleado para realizar el quiz. 
+     * @param ComboLimTimeAgrQuizz variable la cual se utiliza para grabar las opciones en el 
+     * comboBox (horas)
+     * @param ComboTimeAgrQuizz variable la cual se utiliza para grabar las opciones en el 
+     * comboBox (minutos)
+     */
 
     public static void tiempo(JComboBox ComboLimTimeAgrQuizz, JComboBox ComboTimeAgrQuizz) {
         ComboLimTimeAgrQuizz.removeAllItems();
@@ -410,6 +464,10 @@ public class CtrlQuizzes implements ActionListener {
         ComboTimeAgrQuizz.addItem("58");
         ComboTimeAgrQuizz.addItem("59");
     }
+    /**
+     * Método para grabar en el comboBox las opciones de los años. 
+     * @param ComboAñoAgrQuizz graba las opciones en el comboBox (años)
+     */
 
     public static void Año(JComboBox ComboAñoAgrQuizz) {
         ComboAñoAgrQuizz.addItem("Año:");
@@ -421,6 +479,10 @@ public class CtrlQuizzes implements ActionListener {
         ComboAñoAgrQuizz.addItem("2023");
         ComboAñoAgrQuizz.addItem("2024");
     }
+    /**
+     * Método para grabar en el comboBox las opciones de los meses.
+     * @param ComboMesAgrQuizz graba las opciones en el comboBox (meses)
+     */
 
     public static void Mes(JComboBox ComboMesAgrQuizz) {
         ComboMesAgrQuizz.addItem("Mes:");
@@ -438,6 +500,16 @@ public class CtrlQuizzes implements ActionListener {
         ComboMesAgrQuizz.addItem("12");
     }
 
+  
+    /**
+     * Método para la visualización del calendario. 
+     * @param ComboAñoAgrQuizz variable que da orden a grabar las opciones
+     * de los meses en el comboBox. 
+     * @param ComboMesAgrQuizz variable que da orden a grabar las opciones
+     * de los días en el comboBox. 
+     * @param ComboDiaAgrQuizz variable que graba las opciones acorde al 
+     * año y mes seleccionado. 
+     */
     public static void Fecha(JComboBox ComboAñoAgrQuizz, JComboBox ComboMesAgrQuizz, JComboBox ComboDiaAgrQuizz) {
         ComboDiaAgrQuizz.removeAllItems();
         if (ComboAñoAgrQuizz.getSelectedItem().toString().equals("2018") || ComboAñoAgrQuizz.getSelectedItem().toString().equals("2019")
@@ -588,6 +660,14 @@ public class CtrlQuizzes implements ActionListener {
             }
         }
     }
+    
+    /**
+     * Método que despliega las opciones señaladas por un comboBox anterior
+     * @param comboModCalf variable que da referencia al comboBox donde se van
+     * a grabar las opciones. 
+     * @param comboIntentos variable del comboBox que da la orden a grabar las
+     * opciones del comboBox anterior. 
+     */
 
     public static void modo(JComboBox comboModCalf, JComboBox comboIntentos) {
         comboModCalf.removeAllItems();
@@ -599,23 +679,15 @@ public class CtrlQuizzes implements ActionListener {
             comboModCalf.setEnabled(true);
         }
     }
-
+    /**
+     * @param comboIntentos variable que da referencia al comboBox donde se 
+     * van a grabar las opciones. 
+     */
     public static void intentos(JComboBox comboIntentos) {
         comboIntentos.addItem("1");
         comboIntentos.addItem("2");
         comboIntentos.addItem("3");
         comboIntentos.addItem("4");
         comboIntentos.addItem("5");
-    }
-
-    public void variables() {
-        varU.setNombre(null);
-        varU.setAp_pat(null);
-        varU.setAp_mat(null);
-        varU.setTipo(null);
-        varU.setMatricula(null);
-        varU.setContraseña(null);
-        varU.setStatus(null);
-        varU.setCorreo(null);
     }
 }

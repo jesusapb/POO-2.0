@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
@@ -260,6 +256,7 @@ public class VstPerfilEmp extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+            
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
@@ -303,6 +300,12 @@ public class VstPerfilEmp extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Método que extrae los datos mostrados en la tabla.
+     * @param evt variable que se mantiene a la espera de una interacciòn con la
+     * tabla. Ayuda a extraer los datos mostrados en la tabla para su uso.
+     */
 
     private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
         if (btncambioTab.getText().equals("Tabla de calificaciones")) {

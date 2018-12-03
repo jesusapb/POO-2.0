@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -25,8 +21,10 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de Presentar quiz, aqui ocurre la realización del quiz que se haya
+ * seleccionado en la tabla por el empleado. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPresentarQuizz implements ActionListener {
 
@@ -45,6 +43,20 @@ public class CtrlPresentarQuizz implements ActionListener {
     private int cnt = 0;
     private double pts = 0;
 
+    /**
+    * Constructor de la clase
+    * @param cons es la clase donde estan almacenadas las funciones de consulta.
+    * @param varU es la clase que contiene las variables utilizadas por el usuario y 
+    * para que los datos sean almacenados. 
+    * @param varQ es la clase que contiene las variables utilizados por los quizzes y 
+    * para que los datos sean almacenados. 
+    * @param varP es la clase que contiene las varuiables utilizados por las preguntas y 
+    * para que los datos sean almacenados. 
+    * @param varPre es la clase que contiene las variables utilizados por los quizzes 
+    * presentados y hacer la verificación de si aún puede realizar el quiz (intentos).
+    * @param vpq es la interfaz gráfica de PresentarQuiz.
+    */ 
+
     public CtrlPresentarQuizz(ModConsultasSQL cons, ModVariablesUsr varU, ModVariablesQuizzes varQ, ModvariablesPreguntas varP, ModVariablesPresentados varPre, VstPresentarQuizz vpq) {
         this.cons = cons;
         this.varU = varU;
@@ -56,6 +68,10 @@ public class CtrlPresentarQuizz implements ActionListener {
         this.vpq.btnSigTerm.addActionListener(this);
         this.vpq.btnRegresar.addActionListener(this);
     }
+
+    /**
+    * Método para mostrar la interfaz gráfica. 
+    */ 
 
     public void iniciar() {
         vpq.setTitle("Presentar Quizz");
@@ -121,6 +137,12 @@ public class CtrlPresentarQuizz implements ActionListener {
             }
         }
     }
+
+    /**
+    *  Es el constructor encargado de recibir y ejecutar las acciones correspondientes
+    * a lo que va ocurriendo en la vista de Presentar quiz. 
+    * @param e es la variable encargada de recibir cada acción de la interfaz gráfica. 
+    */ 
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -935,6 +957,11 @@ public class CtrlPresentarQuizz implements ActionListener {
         vpq.r_g.setSelected(false);
         vpq.r_h.setSelected(false);
     }
+    /**
+    * Método que selecciona preguntas del quiz de manera aleatoria 
+    * @param cont variable 
+    * @param lista[] id de la pregunta almacenada
+    */
 
     public void insertarPreg(int cont, String lista[]) {
         if (cont == 2) {
@@ -1529,9 +1556,16 @@ public class CtrlPresentarQuizz implements ActionListener {
         }
     }
 
+
     private int h, m, s, cs;
     private final ActionListener acciones = new ActionListener() {
         @Override
+        /**
+        * Método que toma en cuenta el tiempo asignado al quiz. Al realizar el quiz, empieza a correr el tiempo,
+        *cuando este finaliza, guarda la puntuación hasta la pregunta anterior. 
+        @param ae variable encargada en recibir el tiempo límite y llevar a cabo
+        * su conteo. 
+        */ 
 
         public void actionPerformed(ActionEvent ae) {
             int Thoras, Tminutos;

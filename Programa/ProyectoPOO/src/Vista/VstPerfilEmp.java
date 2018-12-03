@@ -1,18 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
+ * Esta es la interfaz del perfil del empleado, el cual podemos visualizar una
+ * tabla de los quizzes realizados y una tabla de sus calificaciones. Tambien se
+ * tiene la función de cambiar la contraseña.
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañaiento
  */
 public class VstPerfilEmp extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstPerfil
+     * Creando forma de la vista PerfilEmpleado
      */
     public VstPerfilEmp() {
         initComponents();
@@ -301,6 +301,11 @@ public class VstPerfilEmp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que extrae los datos mostrados en la tabla.
+     * @param evt variable que se mantiene a la espera de una interacciòn con la
+     * tabla. Ayuda a extraer los datos mostrados en la tabla para su uso.
+     */
     private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
         if (btncambioTab.getText().equals("Tabla de calificaciones")) {
             int row = evt.getY() / tablaRegistro.getRowHeight();
