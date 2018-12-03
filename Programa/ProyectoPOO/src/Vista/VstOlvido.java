@@ -5,17 +5,18 @@
  */
 package Vista;
 /**
- * Es la clase encargada de ser el controlador de la clase vista olvido
- *de los mensajes
+ * Es clase vista olvido
+ * encargada de recibir el correo o matricula 
+ * para la recuperacion de la contraseña y con ello de la cuenta
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstOlvido extends javax.swing.JFrame {
 
   /**
  * constructor de la clase vista olvido
- *de los mensajes
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento

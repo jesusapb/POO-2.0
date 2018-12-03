@@ -4,21 +4,23 @@
  * and open the template in the editor.
  */
 package Vista;
-
 /**
+ * Es clase vista multiples
+ * encargada de enviar mensajes a multiples usuario a administradores
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstMultiple extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VstMultiple
-     */
-    
-    
-    
-    
-    
+
+ /**
+ * constructor de la clase vista Multiples
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     public VstMultiple() {
         initComponents();
     }

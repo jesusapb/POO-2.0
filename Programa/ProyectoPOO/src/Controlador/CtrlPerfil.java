@@ -113,19 +113,8 @@ public class CtrlPerfil implements ActionListener {
         var.setHora(horaDate.format(date));
         ModConsultasSQL.recarga(var);
         ModConsultasSQL.status(var);
-    /**
-     * Es el constructor encargado en recibir y ejecutar la acciones
-     * correspondiente a lo que va ocurriendo en la vista de perfil
-     *
-     * @param e variable encargada de recibir cada acción de los botónes de la
-     * interfaz gráfica.
-     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
-     * @version 29/11/2018/ProyectoPoo_Acompañamiento 
-     */
-        
-        
-        
-        
+    
+           
         if (cons.existeUsr(var.getMatricula()) == 1) {
             if (e.getSource() == vp.btnInfo) {
                 JOptionPane.showMessageDialog(null, "Para poder modificar la información:\n"

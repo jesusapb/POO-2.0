@@ -9,31 +9,22 @@ package Vista;
 
 /**
  * Es la clase encargada de ser la vista de login
- *
- * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
- */
-
-
-
-
-public class VstLogin extends javax.swing.JFrame {
-
- /**
- * es el constructor de la clasee,vmos wtraer e
+ *la primer vista que se muestra al iniciar el programa
  * 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
+public class VstLogin extends javax.swing.JFrame {
+
+ 
     
-    
-    /**
- * Es la clase encargada de ser login de de los mensajes enviados
+ /**
+ * es el constructor de la clase Vista Login
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
-    
     
     public VstLogin() {
         initComponents();
@@ -159,8 +150,8 @@ public class VstLogin extends javax.swing.JFrame {
         vc.setVisible(true);
     }//GEN-LAST:event_btnConfiguraciónActionPerformed
 
-   /**
- *min de ser la vista de los mensajes enviados
+ /**
+ *main de ser la vista de los mensajes enviados
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
