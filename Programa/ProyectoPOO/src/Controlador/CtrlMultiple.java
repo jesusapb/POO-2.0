@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -19,9 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
+ * Esta es la clase de controlador multiple, aqui ocurre la gestion 
+ * de la ventana que se presenta para la vista multiple
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class CtrlMultiple implements ActionListener {
 
     private ModConsultasSQL con;
@@ -29,7 +29,12 @@ public class CtrlMultiple implements ActionListener {
     private ModVariablesMensaje varM;
     private VstMultiple vm;
     private Timer t;
-
+/**
+ * constructor de la clase multiples
+ * @param con parametro que contiene el resultado de las consultas sql
+ * @param var parametro con las variables de mensajes
+ * @param vm parametro que funciona como conexion con la vista multiples
+ */
     public CtrlMultiple(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstMultiple vm) {
         this.con = con;
         this.var = var;
@@ -40,7 +45,9 @@ public class CtrlMultiple implements ActionListener {
         this.vm.btnAgregar.addActionListener(this);
         this.vm.btnVaciar.addActionListener(this);
     }
-
+ /**
+ * metodo de la clase multiples
+ */
     public void iniciar() {
         vm.setTitle("Mensaje múltiple.");
         vm.setLocationRelativeTo(null);
@@ -50,7 +57,13 @@ public class CtrlMultiple implements ActionListener {
         ModConsultasSQL.tablaTEmp(vm.tablaTUsuarios, varR, var.getMatricula());
         vm.btnAgregar.setVisible(false);
     }
-
+/**
+* Es el constructor encargado en recibir y ejecutar la acciones
+* correspondiente a lo que va ocurriendo en la vista de multiples.
+*
+* @param e variable encargada de recibir cada acción de los botónes de la
+* interfaz gráfica.
+*/
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -114,6 +127,13 @@ public class CtrlMultiple implements ActionListener {
 
     private int h, m, s, cs;
 
+/**
+* Es el metodo encargado en recibir y ejecutar la acciones
+* correspondiente a lo que va ocurriendo en la vista de multiples.
+*
+* @param e variable encargada de recibir cada acción de los botónes de la
+* interfaz gráfica
+*/
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {

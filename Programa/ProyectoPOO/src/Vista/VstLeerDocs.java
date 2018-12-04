@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConsultasSQL;
@@ -16,9 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
+ * Es la clase encargada de ser la vista de leer documentos
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstLeerDocs extends javax.swing.JFrame {
 
     /**
@@ -27,7 +26,12 @@ public class VstLeerDocs extends javax.swing.JFrame {
     ModConsultasSQL tpdf = new ModConsultasSQL();
     String ruta_archivo = "";
     int id = -1;
-
+   
+    /** 
+     * constructor de la clase leer documentos
+     * 
+     */
+    
     public VstLeerDocs() {
         initComponents();
 
@@ -103,6 +107,17 @@ public class VstLeerDocs extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**     
+     * metodo encargado de refrecar la tabla con los ducumentos disponibles para leectura
+     *y presentar advertencias en caso de errores
+     * 
+     * @param evt capta los eventos  en la tabla 
+     */
+    
+    
+    
+    
     private void tablaDocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDocumentosMouseClicked
 
         int column = tablaDocumentos.getColumnModel().getColumnIndexAtX(evt.getX());//Posicion donde se da "click" el la columna
@@ -130,9 +145,7 @@ public class VstLeerDocs extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaDocumentosMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+   
     private Timer t;
     private int h, m, s, cs;
 

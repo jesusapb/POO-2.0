@@ -1,19 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
- *
- * @author Antonio
+ * Es la clase encargada de ser la vista de login
+ *la primer vista que se muestra al iniciar el programa
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VstLogin
-     */
+  /**
+ * es el constructor de la clase Vista Login
+ */
+    
     public VstLogin() {
         initComponents();
         btnValidar.setVisible(false);
@@ -125,6 +126,15 @@ public class VstLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**     
+    * metodo encargado de recibir las interecciones del usario en 
+    * el check box: "checkcontraseña" con la etiqueta: "hacer visible la contraseña " 
+    * hace visible el contenido txtPass
+    * @param evt varible encargada de recibir los eventos sobre el check box
+     */
+    
+    
     private void checkContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkContraseñaActionPerformed
         if (checkContraseña.isSelected() == true) {
             txtPass.setEchoChar((char) 0);
@@ -133,13 +143,21 @@ public class VstLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkContraseñaActionPerformed
 
+ /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * con el "jButton" que tiene como etiqueta 
+ * activa la visibilidad de la vista configuracion
+ */
+       
     private void btnConfiguraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguraciónActionPerformed
         VstConfiguracion vc = new VstConfiguracion();
         vc.setVisible(true);
     }//GEN-LAST:event_btnConfiguraciónActionPerformed
 
     /**
-     * @param args the command line arguments
+     *main de la clase login, responsable de dar acceso o
+     * no a los usuario y administradores
+     * 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

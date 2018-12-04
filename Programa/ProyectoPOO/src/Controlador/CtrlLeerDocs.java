@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -16,15 +12,24 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Es la clase encargada de ser el controlador de la clase vista leer documentos
+ * la cual muestra los documentos disponibles para leectura
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class CtrlLeerDocs implements MouseListener {
 
     private ModConsultasSQL con;
     private ModVariablesUsr var;
     private VstLeerDocs vld;
-
+    /**     
+     * constructor de la clase leer documentos
+     * @param con parametro con los resultados de la conexion con la base de datos sql
+     * @param var parametro con las variables de los usuarios
+     * @param vld paramtro que funciona como conexion con la vista leer documentos
+     */
     public CtrlLeerDocs(ModConsultasSQL con, ModVariablesUsr var, VstLeerDocs vld) {
         this.con = con;
         this.var = var;

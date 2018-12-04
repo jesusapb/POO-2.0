@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * presenta para logear.
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlLogin implements ActionListener {
 

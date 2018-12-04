@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -23,8 +19,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Esta es la clase controlador de perfil, aqui ocurre la gestion de la ventana
+ * perfil
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPerfil implements ActionListener {
 
@@ -32,7 +31,14 @@ public class CtrlPerfil implements ActionListener {
     private ModVariablesUsr var;
     private VstPerfil vp;
     private VstAdministrador va;
-
+/**     
+ * 
+ * constructor de la clase controlador perfil
+ * @param cons parametro que contiene el resultado de las consultas sql
+ * @param var parametro con las variables del usuario
+ * @param vp  parametro que funciona como conexion con la vista perfil
+ * @param va  parametro que funciona como conexion con la vista administrador
+ */
     public CtrlPerfil(ModConsultasSQL cons, ModVariablesUsr var, VstPerfil vp, VstAdministrador va) {
         this.cons = cons;
         this.var = var;
@@ -64,7 +70,15 @@ public class CtrlPerfil implements ActionListener {
         vp.btnGuardar.setEnabled(false);
         vp.btnValidar.setEnabled(false);
     }
-
+    
+    /**
+     * Es el constructor encargado en recibir y ejecutar la acciones
+     * correspondiente a lo que va ocurriendo en la vista de mensjes.
+     *
+     * @param e variable encargada de recibir cada acción de los botónes de la
+     * interfaz gráfica.
+     */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -243,7 +257,10 @@ public class CtrlPerfil implements ActionListener {
             variables();
         }
     }
-
+/**
+ * metodo encargado de establescer los atributos de la clase correspondientes
+ * al usuario en null
+ */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -254,14 +271,17 @@ public class CtrlPerfil implements ActionListener {
         var.setStatus(null);
         var.setCorreo(null);
     }
-
+    
+    /**
+    * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+    * segun se requiera
+    */
     public void limpiar() {
         vp.matricula.setText(null);
         vp.contraseña.setText(null);
         vp.ed_nombre.setSelected(false);
         vp.ed_correo.setSelected(false);
         vp.cambio.setSelected(false);
-
         vp.nombre.setEditable(false);
         vp.ap_pat.setEditable(false);
         vp.ap_mat.setEditable(false);

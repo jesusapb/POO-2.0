@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConsultasSQL;
@@ -13,14 +9,19 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 /**
+ * Es la clase encargada de ser la vista de los mensajes enviados
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstEnviados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VstEnviados
-     */
+/**
+ * constructor de la clase vista enviados.
+ *
+ */    
+
     public VstEnviados() {
         initComponents();
         id.setVisible(false);
@@ -152,7 +153,9 @@ public class VstEnviados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * metodo encargado de detectar los movimientos de raton en la tabla de mensajes enviados
+ */
     private void tablaEnviadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEnviadosMouseClicked
         int row = evt.getY() / tablaEnviados.getRowHeight();
         String ident = "" + tablaEnviados.getValueAt(row, 0);
@@ -168,6 +171,13 @@ public class VstEnviados extends javax.swing.JFrame {
         checkEditar.setVisible(true);
     }//GEN-LAST:event_tablaEnviadosMouseClicked
 
+  /**
+ * metodo encargado de detectar cambios en la tabla
+ *
+ */     
+    
+    
+    
     private void checkEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEditarActionPerformed
         if (checkEditar.isSelected() == false) {
             txtMensaje.setEditable(false);
@@ -176,12 +186,12 @@ public class VstEnviados extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkEditarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     private Timer t;
     private int h, m, s, cs;
-
+/**
+ * metodo encargado de presentar los resultados de la conexion con modconsultas 
+ */
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -212,6 +222,11 @@ public class VstEnviados extends javax.swing.JFrame {
 //        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
 //        cronometro.setText(tiempo);
 //    }
+    
+ /**
+ * main de la clase enviados.
+ *
+ */ 
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

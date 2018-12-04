@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -18,9 +14,13 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Es la clase encargada de ser el controlador de la clase vista enviados
  *
- * @author Antonio
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class CtrlEnviados implements ActionListener {
 
     private ModConsultasSQL con;
@@ -29,6 +29,15 @@ public class CtrlEnviados implements ActionListener {
     private VstEnviados ve;
     private VstBandejadEntrada vbe;
 
+/**
+ * constructor de la clase enviados
+ * @param ve es la variable encargada de conectar con la vista enviados
+ * @param con extrae la informacion de modulo consultas
+ * @param  varM contiene las varibles de mensajes
+ * @param var contiene las variables del usuario
+ * @param  vbe variable encargada de conectar con la vista bandeja de entrada
+ *
+ */ 
     public CtrlEnviados(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstEnviados ve, VstBandejadEntrada vbe) {
         this.con = con;
         this.var = var;
@@ -38,7 +47,11 @@ public class CtrlEnviados implements ActionListener {
 
         this.ve.btnReenviar.addActionListener(this);
     }
-
+ /**
+ * metodo encargado de iniciar 
+ *
+ */
+    
     public void iniciar() {
         ve.setTitle("Mensajes enviados.");
         ve.setLocationRelativeTo(null);
@@ -47,7 +60,11 @@ public class CtrlEnviados implements ActionListener {
         ModConsultasSQL.enviados(ve.tablaEnviados, varM, var);
         ve.btnReenviar.setVisible(false);
     }
-
+/**
+  * Es el metodo encargado en recibir y ejecutar la acciones
+  * correspondiente a lo que va ocurriendo en la vista enviados
+ * @param e parametro que recibe los eventos en la vista enviar
+ */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -97,6 +114,10 @@ public class CtrlEnviados implements ActionListener {
         }
     }
 
+    
+ /**
+ * metodo encargado de contener los atributos del empleado
+ */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -107,7 +128,10 @@ public class CtrlEnviados implements ActionListener {
         var.setStatus(null);
         var.setCorreo(null);
     }
-
+/**
+ * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+ * segun se requiera
+ */
     public void limpiar() {
         ve.txtAsunto.setText(null);
         ve.txtMensaje.setText(null);

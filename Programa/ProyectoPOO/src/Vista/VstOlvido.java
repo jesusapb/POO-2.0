@@ -1,18 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
+ * Es clase vista olvido
+ * encargada de recibir el correo o matricula 
+ * para la recuperacion de la contraseña y con ello de la cuenta
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstOlvido extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstOlvido
+     * constructor de la clase vista olvido
+     * 
      */
     public VstOlvido() {
         initComponents();
@@ -54,7 +56,7 @@ public class VstOlvido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
+     * main de la clase vista olvido
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -1,18 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
+ * Es clase vista multiples
+ * encargada de enviar mensajes a multiples usuario a administradores
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstMultiple extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstMultiple
+     * constructor de la clase vista Multiple
+     *
      */
     public VstMultiple() {
         initComponents();
@@ -161,6 +162,14 @@ public class VstMultiple extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+ /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * el "jTable" con la etiqueta TablaTUsuarios, al darle clic
+ * muestra los usuarios disponibles y permite selecciar uno dejando
+ * diponible para ser agregado a la lista de destinatarios del mesaje
+ *
+ */
 
     private void tablaTUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTUsuariosMouseClicked
         int row = evt.getY() / tablaTUsuarios.getRowHeight();
@@ -181,7 +190,7 @@ public class VstMultiple extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaTUsuariosMouseClicked
 
     /**
-     * @param args the command line arguments
+     * main de la clase multiples
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

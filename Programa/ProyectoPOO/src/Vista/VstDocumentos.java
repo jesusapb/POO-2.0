@@ -422,12 +422,12 @@ public class VstDocumentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cambioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     private Timer t;
     private int h, m, s, cs;
-
+    /**
+     *metodo encargado funcionar como contador ante los eventos
+     */
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {

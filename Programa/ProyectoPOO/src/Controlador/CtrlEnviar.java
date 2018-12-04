@@ -17,16 +17,27 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Es la clase encargada de ser el controlador de la clase vista enviar
+ *de los mensajes
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class CtrlEnviar implements ActionListener {
 
     private ModConsultasSQL con;
     private ModVariablesUsr var;
     private ModVariablesMensaje varM;
     private VstEnviar ve;
-
+/** 
+ *  constructor de la clase enviar
+ * 
+ * @param con parametro con los resultados de la consulta sql
+ * @param var parametro que contiene las variables del usuario
+ * @param varM parametro con las variables de los mensajes
+ * @param ve paramtro que conecta con la vista
+ */
     public CtrlEnviar(ModConsultasSQL con, ModVariablesUsr var, ModVariablesMensaje varM, VstEnviar ve) {
         this.con = con;
         this.var = var;
@@ -36,11 +47,20 @@ public class CtrlEnviar implements ActionListener {
         this.ve.btnEnviar.addActionListener(this);
     }
 
+    
+    /**
+     * metodo para iniciar la vista enviar
+     */
     public void iniciar() {
         ve.setTitle("Nuevo mensaje.");
         ve.setLocationRelativeTo(null);
     }
-
+    
+    
+    /**     
+     * metodo encargado de interacutuar con el usuario en la vista enviar
+     * @param e parametro que esta escuchando los eventos de la vista enviar
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -87,7 +107,10 @@ public class CtrlEnviar implements ActionListener {
             variables();
         }
     }
-
+/**
+ * metodo encargado de contener los atributos del empleado
+ */
+    
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -99,6 +122,10 @@ public class CtrlEnviar implements ActionListener {
         var.setCorreo(null);
     }
 
+  /**
+ * metodo encargado de limpiar los atributos de la clase, dejandolos en null
+ * segun se requiera
+ */
     public void limpiar() {
         ve.txtAsunto.setText(null);
         ve.txtMensaje.setText(null);
