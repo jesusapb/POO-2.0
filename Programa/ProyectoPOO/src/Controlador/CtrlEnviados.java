@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -34,7 +30,11 @@ public class CtrlEnviados implements ActionListener {
 
  /**
  * constructor de la clase enviados
- * @param ve es la variables encarda de conectar con la vista enviados
+ * @param ve es la variable encargada de conectar con la vista enviados
+ * @param con extrae la informacion de modulo consultas
+ * @param  varM contiene las varibles de mensajes
+ * @param var contiene las variables del usuario
+ * @param  vbe variable encargada de conectar con la vista bandeja de entrada
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */

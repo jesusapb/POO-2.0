@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -51,7 +47,12 @@ public class CtrlMultiple implements ActionListener {
         this.vm.btnVaciar.addActionListener(this);
     }
 
-    
+  /**
+ * metodo de la clase multiples
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     
     public void iniciar() {
         vm.setTitle("Mensaje múltiple.");
@@ -63,15 +64,15 @@ public class CtrlMultiple implements ActionListener {
         vm.btnAgregar.setVisible(false);
     }
 
-     /**
-     * Es el constructor encargado en recibir y ejecutar la acciones
-     * correspondiente a lo que va ocurriendo en la vista de multiples.
-     *
-     * @param e variable encargada de recibir cada acción de los botónes de la
-     * interfaz gráfica.
-     * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
-     * @version 29/11/2018/ProyectoPoo_Acompañamiento 
-     */
+/**
+* Es el constructor encargado en recibir y ejecutar la acciones
+* correspondiente a lo que va ocurriendo en la vista de multiples.
+*
+* @param e variable encargada de recibir cada acción de los botónes de la
+* interfaz gráfica.
+* @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+* @version 29/11/2018/ProyectoPoo_Acompañamiento 
+*/
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();

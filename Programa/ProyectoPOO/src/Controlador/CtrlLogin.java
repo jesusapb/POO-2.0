@@ -68,14 +68,8 @@ public class CtrlLogin implements ActionListener {
      * @param e variable encargada de recibir cada acción de los botónes de la
      * interfaz gráfica.
      * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
-     * @version 29/11/2018/ProyectoPoo_Acompañamiento  Es el constructor encargado en recibir y ejecutar la acciones
- * correspondiente a lo que va ocurriendo en la vista enviar
- * 
- * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
- */
-    
-    
+     * @version 29/11/2018/ProyectoPoo_Acompañamiento  
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
