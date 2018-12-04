@@ -2756,9 +2756,8 @@ public class ModConsultasSQL extends ModConexion {
      * @param textoEncriptado es el texto extraído de un archivo de texto el
      * cual se desea desencriptar.
      * @return devuelve el texto ya desencriptado.
-     * @throws Exception
      */
-    public static String Desencriptar(String textoEncriptado) throws Exception {
+    public static String Desencriptar(String textoEncriptado) {
 
         String secretKey = "qualityinfosolutions";
         String base64EncryptedString = "";

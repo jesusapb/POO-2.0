@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  * de validaciones.
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class ProyectoPOO {
 
@@ -44,13 +44,6 @@ public class ProyectoPOO {
              * Función de la clase ModListas, este es un arreglo con los datos
              * correspondientes del usuario que tiene una sesión activa en la
              * computadora donde se está ejecutando el programa.
-             *
-             * @return datos del usuario que tiene sesión activa en la máquina
-             * correspondiente.
-             * @param String equipo (InetAddress.getLocalHost().getHostName()), le
-             * pide a la maquina el nombre con el cuál está registrada, asi comparar
-             * en la base de datos si hay alguna con el nombre y si lo hay saber si
-             * esta activo o no.
              */
             ArrayList<ModVariablesUsr> list = mens.listaUsr(InetAddress.getLocalHost().getHostName());
             
@@ -61,9 +54,6 @@ public class ProyectoPOO {
                     /**
                      * Si se detecta que el equipo tiene alguna sesión activa le
                      * pregunta al usuario si es el usuario que tiene esa sesión
-                     * activa.
-                     *
-                     * @return YES_OPTION, NO_OPTION
                      */
                     int conf = JOptionPane.showConfirmDialog(null, "¿Desea continuar en la sesión " + var.getMatricula() + "/ " + var.getNombre_completo() + "?", "Detección de sesión abierta.", JOptionPane.YES_NO_OPTION);
                     
@@ -71,8 +61,6 @@ public class ProyectoPOO {
                         /**
                          * Si dice que si es ese usuario le pide la contraseña de
                          * dicha sesión.
-                         *
-                         * @return pass, la contraseña de la sesión.
                          */
                         String pass = JOptionPane.showInputDialog(null, "Introduzca la contraseña.", "Validar contraseña.", JOptionPane.WARNING_MESSAGE);
                         if (pass == null) {
@@ -107,8 +95,6 @@ public class ProyectoPOO {
                             /**
                              * Si la contraseña es erronea, se le pregunta al
                              * usuario si desea ingresar de nuevo la contraseña.
-                             *
-                             * @return YES_OPTION, NO_OPTION
                              */
                             int intento = JOptionPane.showConfirmDialog(null, "La contraseña es incorrecta.\n ¿Desea volver intentar?", "Contraseña incorrecta.", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                             
