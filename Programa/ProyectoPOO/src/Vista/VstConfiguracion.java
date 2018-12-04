@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConsultasSQL;
@@ -10,13 +6,18 @@ import java.io.Serializable;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ *  Esta es la interfaz de Configuración, la cual debemos ingresar el hostname en el
+ * el primer campo, seguido de port,  base de datos (nombre donde esta almacenada
+ * toda la información) usuario y contraseña. De esta forma configuramos tenemo 
+ * acceso a la base de datos. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstConfiguracion extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstConfiguracion
+     * Creates forma de la vista de Configuración
      */
     public VstConfiguracion() {
         initComponents();
@@ -107,6 +108,11 @@ public class VstConfiguracion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para que el usuario ingrese los campos mostrados en la ventana. 
+     * @param evt variable que mantiene a la espera de una interacción con los
+     * campos de hostname, port, user y password. 
+     */ 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ModConsultasSQL cons = new ModConsultasSQL();
         if (database.getText().equals("") || hostname.getText().equals("") || port.getText().equals("") || user.getText().equals("") || pass.getText().equals("")) {

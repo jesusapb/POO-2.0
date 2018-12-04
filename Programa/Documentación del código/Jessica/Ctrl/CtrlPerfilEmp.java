@@ -1,4 +1,4 @@
-
+﻿
 package Controlador;
 
 import Modelo.ModConexion;
@@ -24,13 +24,10 @@ import javax.swing.Timer;
 
 /**
  *
- * Esta es la clase del perfil del empleado. Se muestran sus datos (nombre,
- * apellido paterno, apellido materno, matricula y correo electrónico) y una
- * tabla de registro de los quizzes realizados o calificaciones. Tiene la
- * función de cambiar su contraseña.
- *
+ * Esta es la clase del perfil del empleado. Se muestran sus datos (nombre, apellido paterno, apellido materno, matricula y correo electrónico)
+ * y una tabla de registro de los quizzes realizados o calificaciones. Tiene la función de cambiar su contraseña. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 01/12/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPerfilEm implements ActionListener {
 
@@ -46,17 +43,16 @@ public class CtrlPerfilEm implements ActionListener {
     private int acum = 0;
 
     /**
-     * Constructor de la clase
-     *
-     * @param cons es la clase donde están almacenadas las funciones de
-     * consulta.
-     * @param var es la clase que contiene las variables utilizadas para
-     * elusuario que inicia sesion y para que sus datos sean almacenados.
-     * @param vp es la interfaz del perfil del empleado.
-     * @param ve es la interfaz principal de empleado.
-     * @param varP es el control y manejo de la tabla de los quizzes
-     * registrados.
-     */
+    *Constructor de la clase 
+    *
+    * @param cons es la clase donde están almacenadas las funciones de consulta.
+    * @param var es la clase que contiene las variables utilizadas para elusuario que inicia sesion y para que sus datos
+    * sean almacenados.
+    * @param vp es la interfaz del perfil del empleado.
+    * @param ve es la interfaz principal de empleado. 
+    * @param varP es el control y manejo de la tabla de los quizzes registrados. 
+    */
+
     public CtrlPerfilEm(ModConsultasSQL cons, ModVariablesUsr var, VstPerfilEmp vp, VstEmpleado ve, ModVariablesPresentados varP) {
         this.cons = cons;
         this.var = var;
@@ -77,10 +73,10 @@ public class CtrlPerfilEm implements ActionListener {
     }
 
     /**
-     * Método encargado en dar el nombre a la ventana y asignarle la posición
-     * donde se va a generar al ser invisible. Inicia la interfaz de perfl
-     * empleado.
-     */
+    * Método encargado en dar el nombre a la ventana y asignarle la posición donde se va a generar 
+    * al ser invisible. Inicia la interfaz de perfl empleado.
+    */
+
     public void iniciar() {
         vp.setTitle("Perfil");
         vp.setLocationRelativeTo(null);
@@ -103,12 +99,12 @@ public class CtrlPerfilEm implements ActionListener {
     }
 
     /**
-     * Método encargado de recibir y ejecutar la acción correspondiente a lo que
-     * va ocurriendo en la vista de perfil empleado
-     *
-     * @param e variable encargada de recibir cada accion de los botones de la
-     * interfaz gráfica.
-     */
+    *Método encargado de recibir y ejecutar la acción correspondiente a lo que va ocurriendo 
+    en la vista de perfil empleado
+    *
+    *@param e variable encargada de recibir cada accion de los botones de la interfaz gráfica.
+    */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -208,6 +204,10 @@ public class CtrlPerfilEm implements ActionListener {
                     vp.btnAtras.setVisible(true);
                 }
             }
+            /**
+            *Si selecciona cambiar contraseña, se borrará la pantalla y se mostrara los campos correspondientes
+            *para poder realizar el cambio. 
+            */
             if (e.getSource() == vp.btncambioContr) {
                 limpiar();
                 t.stop();
@@ -291,9 +291,9 @@ public class CtrlPerfilEm implements ActionListener {
     }
 
     /**
-     * Método que limpia los campos o interfaz que se muestra para poder
-     * visualizar una nueva.
-     */
+    *Método que limpia los campos o interfaz que se muestra para poder visualizar una nueva. 
+    */
+
     public void limpiar() {
         vp.contra.setText(null);
         vp.contraConf.setText(null);
@@ -310,13 +310,13 @@ public class CtrlPerfilEm implements ActionListener {
     }
 
     /**
-     * Método para el uso del cronómetro
-     *
-     * @param h variable para hora
-     * @param m variable para minutos
-     * @param s variable para segundos
-     * @param cs variale para centésima de segundo
-     */
+    *Método para el uso del cronómetro
+    * @param h variable para hora
+    * @param m variable para minutos
+    * @param s variable para segundos 
+    * @param cs variale para centésima de segundo
+    */
+
     private int h, m, s, cs;
     private final ActionListener acciones = new ActionListener() {
         @Override

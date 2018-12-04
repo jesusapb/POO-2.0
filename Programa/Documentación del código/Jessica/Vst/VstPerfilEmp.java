@@ -2,17 +2,16 @@
 package Vista;
 
 /**
- * Esta es la interfaz del perfil del empleado, el cual podemos visualizar una
- * tabla de los quizzes realizados y una tabla de sus calificaciones. Tambien se
- * tiene la función de cambiar la contraseña.
- *
+ * Esta es la interfaz del perfil del empleado, el cual podemos visualizar una tabla 
+ * de los quizzes realizados y una tabla de sus calificaciones. Tambien se tiene la función de cambiar
+ * la contraseña. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
- * @version 29/11/2018/ProyectoPoo_Acompañaiento
+ * @version 02/12/2018/ProyectoPoo_Acompañaiento
  */
 public class VstPerfilEmp extends javax.swing.JFrame {
 
     /**
-     * Creando forma de la vista PerfilEmpleado
+     * Creates new form VstPerfil
      */
     public VstPerfilEmp() {
         initComponents();
@@ -248,7 +247,7 @@ public class VstPerfilEmp extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Quizzes", "Intentos", "Calificaciónes", "Status"
+                "Quizzes", "Intentos", "Calificaciones", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -257,6 +256,7 @@ public class VstPerfilEmp extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+            
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
@@ -306,6 +306,7 @@ public class VstPerfilEmp extends javax.swing.JFrame {
      * @param evt variable que se mantiene a la espera de una interacciòn con la
      * tabla. Ayuda a extraer los datos mostrados en la tabla para su uso.
      */
+
     private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
         if (btncambioTab.getText().equals("Tabla de calificaciones")) {
             int row = evt.getY() / tablaRegistro.getRowHeight();
@@ -384,7 +385,7 @@ public class VstPerfilEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel1
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -14,13 +14,12 @@ import javax.swing.Timer;
 /**
  * Es la interfaz para que el empleado seleccione el quiz a realizar. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 02/12/2018/ProyectoPoo_Acompañamiento
  */
-
 public class VstSelectQuizz extends javax.swing.JFrame {
 
     /**
-     * Creando forma de la vista SelectQuizz
+     * Creates new form VstSelectQuizz
      */
     public VstSelectQuizz() {
         initComponents();
@@ -121,11 +120,6 @@ public class VstSelectQuizz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Método para la interacción de la tabla y seleccionar el quiz a presentar.
-     * @param evt variable  que mantiene a la espera de una interacción con la 
-     * tabla. Ayuda a extraer los datos mostrados en la tabla.
-     */
     private void tablaSelectQuizzMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSelectQuizzMouseClicked
         int row = evt.getY() / tablaSelectQuizz.getRowHeight();
         String quizz = "" + tablaSelectQuizz.getValueAt(row, 0);
@@ -140,6 +134,45 @@ public class VstSelectQuizz extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
+    private Timer t;
+    private int h, m, s, cs;
+    private ActionListener acciones = new ActionListener() {
+        @Override
+
+        /**
+        * @param ae encargada de recibir cada accion de los botones de la interfaz.
+        */ 
+
+        public void actionPerformed(ActionEvent ae) {
+            ModVariablesUsr var = new ModVariablesUsr();
+            Date date = new Date();
+            DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
+            DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
+
+            var.setMatricula(matricula.getText());
+            var.setDia(fechaDate.format(date));
+            var.setHora(horaDate.format(date));
+
+            cs++;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (cs == 0 && (s % 2 == 0)) {
+                ModVariablesQuizzes varQ = new ModVariablesQuizzes();
+                ModConsultasSQL.tablaSelectQuiz(tablaSelectQuizz, varQ);
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+
+        }
+    };
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -171,42 +204,6 @@ public class VstSelectQuizz extends javax.swing.JFrame {
             }
         });
     }
-    
-    private Timer t;
-    private int h, m, s, cs;
-    private ActionListener acciones = new ActionListener() {
-        @Override
-
-        public void actionPerformed(ActionEvent ae) {
-            ModVariablesUsr var = new ModVariablesUsr();
-            Date date = new Date();
-            DateFormat horaDate = new SimpleDateFormat("HH:mm:ss");
-            DateFormat fechaDate = new SimpleDateFormat("dd/MM/yyyy");
-
-            var.setMatricula(matricula.getText());
-            var.setDia(fechaDate.format(date));
-            var.setHora(horaDate.format(date));
-
-            cs++;
-            if (cs == 100) {
-                cs = 0;
-                ++s;
-            }
-            if (cs == 0 && (s % 2 == 0)) {
-                ModVariablesQuizzes varQ = new ModVariablesQuizzes();
-                ModConsultasSQL.tablaSelectQuiz(tablaSelectQuizz, varQ);
-            }
-            if (s == 60) {
-                s = 0;
-                ++m;
-            }
-            if (m == 60) {
-                m = 0;
-                ++h;
-            }
-        }
-    };
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField Quizz;

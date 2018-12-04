@@ -20,16 +20,18 @@ import javax.swing.Timer;
  * interfaz Quizzes) en donde podemos agregar la pregunta, el tipo de pregunta,
  * cantidad de respuestas, puntuación para cada respuesta y sus respectivas modificaciones. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 02/12/2018/ProyectoPoo_Acompañamiento
  */
 
 public class VstPreguntas extends javax.swing.JFrame {
 
     /**
-     * Creando forma de la vista Preguntas
+     * Creates new form VstPreguntas
      */
     public VstPreguntas() {
         initComponents();
+//        SpinnerNumberModel ptt = new SpinnerNumberModel(000.00, 000.00, 100.00, 000.01);
+//        spinnerPuntos.setModel(ptt);
         btnReestablecer.setVisible(false);
         btnEliminar.setVisible(false);
         btnModificar.setVisible(false);
@@ -368,12 +370,6 @@ public class VstPreguntas extends javax.swing.JFrame {
 
     ModvariablesPreguntas var = new ModvariablesPreguntas();
 
-    /**
-     * Método que extrae los datos mostrados en la tabla. 
-     * @param evt variable  que mantiene a la espera de una interacción con la 
-     * tabla. Ayuda a extraer los datos mostrados en la tabla.
-     */
-    
     private void tablaPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPreguntasMouseClicked
         int row = evt.getY() / tablaPreguntas.getRowHeight();
         //String id = "" + tablaPreguntas.getValueAt(row, 0);
@@ -512,11 +508,6 @@ public class VstPreguntas extends javax.swing.JFrame {
         txtPreguntas.setEditable(false);
     }//GEN-LAST:event_tablaPreguntasMouseClicked
 
-    /**
-     * Método para activar la modificación de la pregunta. 
-     * @param evt variable que mantiene a la espera de una interacción con 
-     * el checkBox de modificar pregunta.  
-     */
     private void modPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modPreActionPerformed
         if (modPre.isSelected() == true) {
             txtPreguntas.setEditable(true);
@@ -525,8 +516,16 @@ public class VstPreguntas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_modPreActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
     private Timer t;
     private int h, m, s, cs;
+
+    /**
+    * Método para el cronómetro.
+    * @param ae encargada de recibir cada accion de los botones de la interfaz.
+    */ 
 
     private ActionListener acciones = new ActionListener() {
         @Override
@@ -548,15 +547,15 @@ public class VstPreguntas extends javax.swing.JFrame {
                 m = 0;
                 ++h;
             }
+//            actualizarLabel();
         }
     };
 
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    
+//    private void actualizarLabel() {
+//        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
+//        cronometro.setText(tiempo);
+//    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

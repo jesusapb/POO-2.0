@@ -1,18 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
- *
- * @author Antonio
+ * Método al haber seleccionado de el quiz de la tabla, donde se mostrarán las preguntas del quiz
+ * y el empleado debe seleccionar las respuestas.Toma el tiempo que se le ha asignado al quiz. 
+ * Al final de terminar el quiz se muestra la calificación y si fue aprobado o no.
+ * En caso de que tenga una pregunta abierta, debe de esperar que un administrador lo
+ * califique y asigne una calificación. 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstPresentarQuizz extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstPresentarQuizz
+     * Creando forma de la vista PresentarQuizz
      */
     public VstPresentarQuizz() {
         initComponents();
@@ -242,6 +244,11 @@ public class VstPresentarQuizz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para minimizar ventana. 
+     * @param evt variable que permanece a la espera de la interacción del 
+     * usuario para realizar la acción de minimizar la ventana. 
+     */
     private void btnMiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMiniActionPerformed
         setState(VstPresentarQuizz.ICONIFIED);
     }//GEN-LAST:event_btnMiniActionPerformed

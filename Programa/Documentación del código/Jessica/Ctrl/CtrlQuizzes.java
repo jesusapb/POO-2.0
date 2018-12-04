@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
  * agregar quizzes, agregar preguntas y sus respuestas, activar o desactivar quizzes
  * entre otras funciones. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
- * @version 29s/11/2018/ProyectoPoo_Acompañamiento
+ * @version 02/12/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlQuizzes implements ActionListener {
 
@@ -343,6 +343,7 @@ public class CtrlQuizzes implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(null, "La sesión actual fue eliminada.");
             vq.setVisible(false);
+            variables();
         }
     }
 
@@ -364,14 +365,10 @@ public class CtrlQuizzes implements ActionListener {
         vq.btnEliminar.setVisible(false);
         vq.btnAgrPreg.setVisible(false);
     }
-    
+
     /**
-     * Método para seleccionar cuantas horas o minutos tendrá el empleado para realizar el quiz. 
-     * @param ComboLimTimeAgrQuizz variable la cual se utiliza para grabar las opciones en el 
-     * comboBox (horas)
-     * @param ComboTimeAgrQuizz variable la cual se utiliza para grabar las opciones en el 
-     * comboBox (minutos)
-     */
+    * Método para seleccionar cuantas horas o minutos tendrá el empleado para realizar el quiz. 
+    */ 
 
     public static void tiempo(JComboBox ComboLimTimeAgrQuizz, JComboBox ComboTimeAgrQuizz) {
         ComboLimTimeAgrQuizz.removeAllItems();
@@ -464,10 +461,6 @@ public class CtrlQuizzes implements ActionListener {
         ComboTimeAgrQuizz.addItem("58");
         ComboTimeAgrQuizz.addItem("59");
     }
-    /**
-     * Método para grabar en el comboBox las opciones de los años. 
-     * @param ComboAñoAgrQuizz graba las opciones en el comboBox (años)
-     */
 
     public static void Año(JComboBox ComboAñoAgrQuizz) {
         ComboAñoAgrQuizz.addItem("Año:");
@@ -479,10 +472,6 @@ public class CtrlQuizzes implements ActionListener {
         ComboAñoAgrQuizz.addItem("2023");
         ComboAñoAgrQuizz.addItem("2024");
     }
-    /**
-     * Método para grabar en el comboBox las opciones de los meses.
-     * @param ComboMesAgrQuizz graba las opciones en el comboBox (meses)
-     */
 
     public static void Mes(JComboBox ComboMesAgrQuizz) {
         ComboMesAgrQuizz.addItem("Mes:");
@@ -500,16 +489,11 @@ public class CtrlQuizzes implements ActionListener {
         ComboMesAgrQuizz.addItem("12");
     }
 
-  
     /**
-     * Método para la visualización del calendario. 
-     * @param ComboAñoAgrQuizz variable que da orden a grabar las opciones
-     * de los meses en el comboBox. 
-     * @param ComboMesAgrQuizz variable que da orden a grabar las opciones
-     * de los días en el comboBox. 
-     * @param ComboDiaAgrQuizz variable que graba las opciones acorde al 
-     * año y mes seleccionado. 
-     */
+    * Método para la visualización del calendario. 
+    */
+
+
     public static void Fecha(JComboBox ComboAñoAgrQuizz, JComboBox ComboMesAgrQuizz, JComboBox ComboDiaAgrQuizz) {
         ComboDiaAgrQuizz.removeAllItems();
         if (ComboAñoAgrQuizz.getSelectedItem().toString().equals("2018") || ComboAñoAgrQuizz.getSelectedItem().toString().equals("2019")
@@ -660,14 +644,10 @@ public class CtrlQuizzes implements ActionListener {
             }
         }
     }
-    
+
     /**
-     * Método que despliega las opciones señaladas por un comboBox anterior
-     * @param comboModCalf variable que da referencia al comboBox donde se van
-     * a grabar las opciones. 
-     * @param comboIntentos variable del comboBox que da la orden a grabar las
-     * opciones del comboBox anterior. 
-     */
+    * Método para seleccionar el tipo de modo de calificación del quiz. 
+    */
 
     public static void modo(JComboBox comboModCalf, JComboBox comboIntentos) {
         comboModCalf.removeAllItems();
@@ -679,15 +659,27 @@ public class CtrlQuizzes implements ActionListener {
             comboModCalf.setEnabled(true);
         }
     }
+
     /**
-     * @param comboIntentos variable que da referencia al comboBox donde se 
-     * van a grabar las opciones. 
-     */
+    * Método para seleccionar el número de intentos del quiz. 
+    */
+
     public static void intentos(JComboBox comboIntentos) {
         comboIntentos.addItem("1");
         comboIntentos.addItem("2");
         comboIntentos.addItem("3");
         comboIntentos.addItem("4");
         comboIntentos.addItem("5");
+    }
+
+    public void variables() {
+        varU.setNombre(null);
+        varU.setAp_pat(null);
+        varU.setAp_mat(null);
+        varU.setTipo(null);
+        varU.setMatricula(null);
+        varU.setContraseña(null);
+        varU.setStatus(null);
+        varU.setCorreo(null);
     }
 }

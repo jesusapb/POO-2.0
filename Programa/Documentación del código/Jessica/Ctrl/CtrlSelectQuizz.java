@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * Esta clase muestra en una tabla los quizzes habilitados y su función es que el usuario 
  * seleccione el quiz a realizar. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco. 
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 01/12/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlSelectQuizz implements ActionListener {
 

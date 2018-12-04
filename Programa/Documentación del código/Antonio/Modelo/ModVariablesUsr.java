@@ -10,37 +10,6 @@ package Modelo;
  */
 public class ModVariablesUsr {
 
-    /**
-     * @param id es la número el cual obtuvo al registrarse a la base de datos.
-     * @param nombre es el nombre con el cuál se registra algún empleado.
-     * @param ap_pat es el apellido paterno con el cuál se registra algún
-     * empleado.
-     * @param ap_mat es el apellido materno con el cuál se registra algún
-     * empleado.
-     * @param tipo es el tipo que corresponde el usuario que se está buscando,
-     * ya sea para enviar mensaje o aviso.
-     * @param matrícula es la matrícula con la cuál se registra algún empleado.
-     * @param contraseña es la contraseña con la cuál se registra algún
-     * empleado.
-     * @param correo es el correo con el cuál es registrado algún empleado.
-     * @param dia es el dia en el cuál fue registrado o el último día que tuvo
-     * una sesión activa el usuario.
-     * @param hora es la hora en la cuál fue registrado o la última hora que
-     * tuvo una sesión activa el usuario.
-     * @param status es el estatus con el cual es registrado algún empleado o el
-     * cuál tiene (nuevo, conectado o desconectado).
-     * @param ip es la ip del equipo donde se ejecuta el programa, esta variable
-     * ya no se usa.
-     * @param equipo es el nombre del equipo donde se ejecuta el programa.
-     * @param comando es el que da la orden al programa para que el identifique
-     * si se solicita algún cambio de contraseña.
-     * @param codigo es el codigo que obtiene el usuario para poder realizar el
-     * cambio de contraseña.
-     * @param nombre_completo es la unión del nombre, apellido paterno y materno
-     * con respectivos separadores.
-     * @param mensaje variable utilizada para el manejo y validaciones.
-     * @param asunto variable utilizada para control y validaciones.
-     */
     private int id;
     private String nombre;
     private String ap_pat;
@@ -60,146 +29,272 @@ public class ModVariablesUsr {
     private String mensaje;
     private String asunto;
 
+    /**
+     * @return devuelve el número el cual obtuvo al ser registrado en la base de
+     * datos (valor numérico único).
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id almacena el número el cual obtuvo al ser registrado en la base
+     * de datos (valor numérico único).
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return devuelve el nombre del usuario registrado en la base de datos.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * @param nombre almacena el nombre del usuario registrado en la base de
+     * datos.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * @return devuelve el apellido paterno del usuario registrado.
+     */
     public String getAp_pat() {
         return ap_pat;
     }
 
+    /**
+     * @param ap_pat almacena el apellido paterno del usuario registrado.
+     */
     public void setAp_pat(String ap_pat) {
         this.ap_pat = ap_pat;
     }
 
+    /**
+     * @return devuelve el apellido materno del usuario registrado.
+     */
     public String getAp_mat() {
         return ap_mat;
     }
 
+    /**
+     * @param ap_mat almacena el apellido materno del usuario registrado.
+     */
     public void setAp_mat(String ap_mat) {
         this.ap_mat = ap_mat;
     }
 
+    /**
+     * @return devuelve el indicador del tipo de usuario al cual pertenece el
+     * usuario que se está extrayendo los datos.
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * @param tipo almacena el indicador del tipo de usuario al cual pertenece
+     * el usuario que se está extrayendo los datos.
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * @return devuelve la matrícula del usuario.
+     */
     public String getMatricula() {
         return matricula;
     }
 
+    /**
+     * @param matricula almacena la matricula del usuario.
+     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
+    /**
+     * @return devuelve la contraseña del usuario.
+     */
     public String getContraseña() {
         return contraseña;
     }
 
+    /**
+     * @param contraseña almacena la contraseña del usuario.
+     */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
+    /**
+     * @return devuelve el correo electrónico del usuario.
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * @param correo almacena el correo electrónico del usuario.
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
+    /**
+     * @return devuelve el día de la última conexión del usuario.
+     */
     public String getDia() {
         return dia;
     }
 
+    /**
+     * @param dia almacena el día de la última conexión del usuario.
+     */
     public void setDia(String dia) {
         this.dia = dia;
     }
 
+    /**
+     * @return devuelve la hora de la última conexión del usuario.
+     */
     public String getHora() {
         return hora;
     }
 
+    /**
+     * @param hora almacena la hora de la última conexión del usuario.
+     */
     public void setHora(String hora) {
         this.hora = hora;
     }
 
+    /**
+     * @return devuelve el status de conexión del usuario.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * @param status almacena el status de conexión del usuario.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * @return devuelve la IP del equipo que utilizó por última vez el usuario.
+     */
     public String getIp() {
         return ip;
     }
 
+    /**
+     * @param ip almacena la IP del equipo que utilizó por última vez el
+     * usuario.
+     */
     public void setIp(String ip) {
         this.ip = ip;
     }
 
+    /**
+     * @return devuelve el nombre del ordenador donde se conectó por última vez
+     * el usuario.
+     */
     public String getEquipo() {
         return equipo;
     }
 
+    /**
+     * @param equipo almacena el nombre del ordenador donde se conectó por
+     * última vez el usuario.
+     */
     public void setEquipo(String equipo) {
         this.equipo = equipo;
     }
 
+    /**
+     * @return almacena el tag de la base de datos el cuál indica que se
+     * solicitó un cambio de contraseña.
+     */
     public String getComando() {
         return comando;
     }
 
+    /**
+     * @param comando almacena el tag de la base de datos el cuál indica que se
+     * solicitó un cambio de contraseña.
+     */
     public void setComando(String comando) {
         this.comando = comando;
     }
 
+    /**
+     * @return devuelve el código que debe de usar el usuario para el cambio de
+     * contraseña.
+     */
     public String getCodigo() {
         return codigo;
     }
 
+    /**
+     * @param codigo almacena el código que debe de usar el usuario para el
+     * cambio de contraseña.
+     */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
+    /**
+     * @return devuelve el nombre completo de usuario, es la unón del nombre con
+     * los 2 apellidos.
+     */
     public String getNombre_completo() {
         return nombre_completo;
     }
 
+    /**
+     * @param nombre_completo almacena el nombre completo de usuario, es la unón
+     * del nombre con los 2 apellidos.
+     */
     public void setNombre_completo(String nombre_completo) {
         this.nombre_completo = nombre_completo;
     }
 
+    /**
+     * @return devuelve el valor de la variable utilizada para el manejo y
+     * validaciones.
+     */
     public String getMensaje() {
         return mensaje;
     }
 
+    /**
+     * @param mensaje almacena el valor de la variable utilizada para el manejo
+     * y validaciones.
+     */
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
 
+    /**
+     * @return devuelve el valor de la variable utilizada para control y
+     * validaciones.
+     */
     public String getAsunto() {
         return asunto;
     }
 
+    /**
+     * @param asunto almacena el valor de la variable utilizada para control y
+     * validaciones.
+     */
     public void setAsunto(String asunto) {
         this.asunto = asunto;
     }

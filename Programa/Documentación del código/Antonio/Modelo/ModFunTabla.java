@@ -25,7 +25,7 @@ public class ModFunTabla extends DefaultTableCellRenderer {
      * @param value es la posición dentro de la tabla donde va a estar asignado
      * el botón.
      * @param isSelected valor de selección en la tabla.
-     * @param hasFocus
+     * @param hasFocus variable usada para saber si es seleccionado.
      * @param row la fila correspondiente de la tabla.
      * @param column columna correspondiente de la tabla.
      * @return la generación del botón en el campo correspondiente.

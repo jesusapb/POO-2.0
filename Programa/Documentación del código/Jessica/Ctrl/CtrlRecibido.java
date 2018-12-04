@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *Es la clase encargada de recibir los mensajes de otros usuarios 
  * y poder visualizarlos 
  * @author Karina Carmona, Antonio Cetzal, Jessica González Bautista y Jesús Pacheco
- * @version 29/11s/2018/Proyecto_Poo_Acompañamiento
+ * @version 01/12/2018/Proyecto_Poo_Acompañamiento
  */
 public class CtrlRecibido implements ActionListener {
 

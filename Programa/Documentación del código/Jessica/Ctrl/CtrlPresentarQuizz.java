@@ -24,7 +24,7 @@ import javax.swing.Timer;
  * Esta es la clase de Presentar quiz, aqui ocurre la realización del quiz que se haya
  * seleccionado en la tabla por el empleado. 
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
- * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 02/12/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlPresentarQuizz implements ActionListener {
 
@@ -50,7 +50,7 @@ public class CtrlPresentarQuizz implements ActionListener {
     * para que los datos sean almacenados. 
     * @param varQ es la clase que contiene las variables utilizados por los quizzes y 
     * para que los datos sean almacenados. 
-    * @param varP es la clase que contiene las varuiables utilizados por las preguntas y 
+    * @param VarP es la clase que contiene las varuiables utilizados por las preguntas y 
     * para que los datos sean almacenados. 
     * @param varPre es la clase que contiene las variables utilizados por los quizzes 
     * presentados y hacer la verificación de si aún puede realizar el quiz (intentos).

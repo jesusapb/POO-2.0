@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de Recibido, donde se visualiza una tabla del mensaje 
+ * que se ha abierto anteriormente (seleccionado de la tabla). 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstRecibido extends javax.swing.JFrame {
 
     /**
-     * Creates new form VstRecibido
+     * Creando la forma de la vista Recibido. 
      */
     public VstRecibido() {
         initComponents();

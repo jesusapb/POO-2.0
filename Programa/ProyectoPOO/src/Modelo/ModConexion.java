@@ -8,8 +8,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Es la clase encargada en hacer la conexión a la base de datos cada vez que se
+ * le requiera.
+ *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
- * @vesion 29/11/2018/ProyectoPoo_Acompañamiento
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class ModConexion {
 
@@ -21,6 +24,13 @@ public class ModConexion {
     public String password = "";
     Connection con = null;
 
+    /**
+     * Constructor que tiene como darea decodificar los datos y extraerlos para
+     * que así pueda hacer una conexión a la base de datos y obtener los
+     * registros.
+     *
+     * @return El acceso a la base de datos.
+     */
     public Connection getConexion() {
         ModConsultasSQL cons = new ModConsultasSQL();
         String texto = "";
@@ -36,7 +46,7 @@ public class ModConexion {
         url = "jdbc:mysql://" + hostname + ":" + port + "/" + databases + "?autoReconnect=true&useSSL=false";
         username = partir[3];
         password = partir[4];
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, username, password);
