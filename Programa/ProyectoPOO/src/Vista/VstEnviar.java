@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
+
 package Vista;
 
 /**
+ * Es la clase encargada de ser la vista de Enviar
+ * mensajes a los administradore u otros usuarios
  *
- * @author Antonio
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
+
 public class VstEnviar extends javax.swing.JFrame {
 
     /**
@@ -84,9 +86,14 @@ public class VstEnviar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+/**
+ * Es el main de la clase vista Enviar
+ * clase responsable de la interfaz grafica para enviar
+ * mensajes a otros usuarios o administradores
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

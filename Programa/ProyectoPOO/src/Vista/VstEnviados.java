@@ -172,7 +172,18 @@ public class VstEnviados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+    /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * el Jtable "tablaEnviados" 
+ * extrae los mensajes enviados, permitiendo seleccionar 
+ * el mensaje para ser editado
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
 
+    
     private void tablaEnviadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEnviadosMouseClicked
         int row = evt.getY() / tablaEnviados.getRowHeight();
         String ident = "" + tablaEnviados.getValueAt(row, 0);
@@ -189,7 +200,7 @@ public class VstEnviados extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaEnviadosMouseClicked
 
  /**
- * metodo encargado de detecar cambos en editar
+ * metodo encargado de detectar cambios en
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento

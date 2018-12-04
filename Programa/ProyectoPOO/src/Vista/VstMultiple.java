@@ -12,9 +12,7 @@ package Vista;
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 
-public class VstMultiple extends javax.swing.JFrame {
-
-
+public class VstMultiple extends javax.swing.JFrame{
  /**
  * constructor de la clase vista Multiples
  *
@@ -169,6 +167,18 @@ public class VstMultiple extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+/**
+ * metodo encargado de recibir las interecciones del usario en 
+ * el "jTable" con la etiqueta TablaTUsuarios, al darle clic
+ * muestra los usuarios disponibles y permite selecciar uno dejando
+ * diponible para ser agregado a la lista de destinatarios del mesaje
+ *
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+
+    
     private void tablaTUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTUsuariosMouseClicked
         int row = evt.getY() / tablaTUsuarios.getRowHeight();
         btnAgregar.setVisible(true);

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 
@@ -137,6 +133,14 @@ public class VstLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * el check box: "checkcontraseña" con la etiqueta: "hacer visible la contraseña " 
+ * hace visible el contenido txtPass
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     private void checkContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkContraseñaActionPerformed
         if (checkContraseña.isSelected() == true) {
             txtPass.setEchoChar((char) 0);
@@ -145,13 +149,24 @@ public class VstLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkContraseñaActionPerformed
 
+   /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * con el "jButton" que tiene como etiqueta 
+ * activa la visibilidad de la vista configuracion
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */ 
+    
+    
     private void btnConfiguraciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguraciónActionPerformed
         VstConfiguracion vc = new VstConfiguracion();
         vc.setVisible(true);
     }//GEN-LAST:event_btnConfiguraciónActionPerformed
 
  /**
- *main de ser la vista de los mensajes enviados
+ *main de la clase login, responsable de dar acceso 
+ *o no a los usuario o administradores
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento

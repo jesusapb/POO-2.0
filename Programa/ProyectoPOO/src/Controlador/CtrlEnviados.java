@@ -34,7 +34,7 @@ public class CtrlEnviados implements ActionListener {
 
  /**
  * constructor de la clase enviados
- *
+ * @param ve es la variables encarda de conectar con la vista enviados
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */

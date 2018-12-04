@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 /**
  * Es clase vista olvido
@@ -98,6 +94,10 @@ public class VstOlvido extends javax.swing.JFrame {
         });
     }
 
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botonValidar;
     private javax.swing.JLabel jLabel5;

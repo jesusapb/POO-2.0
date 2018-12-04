@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 /**
  * Es la clase encargada de ser el controlador de la clase vista olvido
@@ -23,8 +19,6 @@ public class VstPerfil extends javax.swing.JFrame {
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
-    
-    
     public VstPerfil() {
         initComponents();
     }
@@ -126,8 +120,11 @@ public class VstPerfil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
- * el controlador de la clase vista olvido
- *de los mensajes menos te ban a 7xr
+ * metodo encargado de recibir las interecciones del usario en 
+ * el check box: "cambio de contraseña", desactiva la edicion de los 
+ * campos de texto de informacion personal; como nombre y correo, 
+ * para activar la edicion de los campos de texto correspondientes
+ * al cambio de contraseña
  *
  * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
  * @version 29/11/2018/ProyectoPoo_Acompañamiento
@@ -148,6 +145,16 @@ public class VstPerfil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cambioActionPerformed
 
+ /**
+ * metodo encargado de recibir las interecciones del usuario en 
+ * el check box: "ed_nombre" con la etiqueta: "editar"
+ * activa la edicion del nombre del usuario
+ *
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
+    
+    
     private void ed_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ed_nombreActionPerformed
         if (ed_nombre.isSelected() == true) {
             btnValidar.setEnabled(true);
@@ -160,6 +167,17 @@ public class VstPerfil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ed_nombreActionPerformed
 
+ /**
+ * metodo encargado de recibir las interecciones del usario en 
+ * el check box: "ed_correo" con la etiqueta: "editar " 
+ * activa la edicion del correo del usuario
+ * @param evt encargado de recibir las interraciones
+ * del usuario con la interfaz grafica 
+ * 
+ * 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
+ */
     private void ed_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ed_correoActionPerformed
         if (ed_correo.isSelected() == true) {
             btnValidar.setEnabled(true);
