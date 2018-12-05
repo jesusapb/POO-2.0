@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -22,8 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de los mensajes recibidos y enviados por el usuarios.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlBandejadEntrada implements ActionListener {
 
@@ -32,6 +29,12 @@ public class CtrlBandejadEntrada implements ActionListener {
     private VstBandejadEntrada vbe;
     private Timer t;
 
+    /**
+     * Constructor de la clase.
+     * @param cons es la clase donde estan almacenadas las funciones de consulta.
+     * @param var es la clase que contiene las variables utilizadas para el usuario y para que sus datos sean almacenados.
+     * @param vbe es la interfaz grafica de la bandeja de entrada.
+     */
     public CtrlBandejadEntrada(ModConsultasSQL cons, ModVariablesUsr var, VstBandejadEntrada vbe) {
         this.cons = cons;
         this.var = var;
@@ -42,6 +45,9 @@ public class CtrlBandejadEntrada implements ActionListener {
         this.vbe.btnMensajeMul.addActionListener(this);
     }
 
+    /**
+     * Método para visualizar la pantalla de Bandeja de entrada.
+     */
     public void iniciar() {
         vbe.setTitle("Mensajes recibidos.");
         vbe.setLocationRelativeTo(null);
@@ -60,7 +66,11 @@ public class CtrlBandejadEntrada implements ActionListener {
         vbe.txtMatricula.setVisible(false);
         vbe.txtNombre.setVisible(false);
     }
-
+    
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de la bandeja de entrada.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -108,6 +118,9 @@ public class CtrlBandejadEntrada implements ActionListener {
 
     }
 
+    /**
+     * Limpia las variables para ver una nueva interfaz.    
+    */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -119,6 +132,13 @@ public class CtrlBandejadEntrada implements ActionListener {
         var.setCorreo(null);
     }
 
+     /**
+     * Método para el uso del cronómetro
+     * @param h variable para hora
+     * @param m variable para minutos
+     * @param s variable para segundos
+     * @param cs variale para centésima de segundo
+     */
     private int h, m, s, cs;
 
     private ActionListener acciones = new ActionListener() {

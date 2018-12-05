@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConsultasSQL;
@@ -21,8 +17,9 @@ import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de los documentos, las funcionalidades de esto que le tocan al administrador.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstDocumentos extends javax.swing.JFrame {
 
@@ -32,7 +29,10 @@ public class VstDocumentos extends javax.swing.JFrame {
     ModConsultasSQL tpdf = new ModConsultasSQL();
     String ruta_archivo = "";
     int id = -1;
-
+    
+    /**
+     * Ayuda a la visualización de ciertos componentes en la interfaz.
+     */
     public VstDocumentos() {
         initComponents();
         t = new Timer(10, acciones);
@@ -41,7 +41,15 @@ public class VstDocumentos extends javax.swing.JFrame {
         ident.setVisible(false); 
         matricula.setVisible(false); 
     }
-
+    
+    /**
+     * Método que guarda un documento en PDF de tu computadora y manda lo datos para su actualización en la base de datos.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     * @param status para saber si es visible para los empleados o no.
+     * @param descripcion es una breve explicación de cómo o qué es el documento.
+     * @param archivo es nuestro documento es sí que vamos a guardar.
+     */
     public void guardarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
         ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
@@ -59,7 +67,15 @@ public class VstDocumentos extends javax.swing.JFrame {
         }
         pdf.agregarD(var);
     }
-
+    
+     /**
+     * Método que modifica un documento en PDF y manda lo datos para su actualización en la base de datos.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     * @param status para saber si es visible para los empleados o no.
+     * @param descripcion es una breve explicación de cómo o qué es el documento.
+     * @param archivo es nuestro documento es sí que vamos a guardar.
+     */
     public void modificarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
         ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
@@ -78,6 +94,11 @@ public class VstDocumentos extends javax.swing.JFrame {
         pdf.modificarD(var);
     }
 
+    /**
+     * Método que hace el cambio del nombre del archivo.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     */
     public void modificarPDF(int codigo, String nombre) {
         ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
@@ -86,13 +107,20 @@ public class VstDocumentos extends javax.swing.JFrame {
         pdf.modificarNomD(var);
     }
 
+    /**
+     * Método que hace la eliminación de un documento en la base de datos sólo con su id.
+     * @param codigo id del registro del documento en la base de datos.
+     */
     public void eliminarPDF(int codigo) {
         ModConsultasSQL pdf = new ModConsultasSQL();
         ModVariablesDoc var = new ModVariablesDoc();
         var.setId(codigo);
         pdf.eliminarD(var);
     }
-
+    
+    /**
+     * Método que abre una interfaz y te deja seleccionar el archivo PDF que se guardará en la base de datos.
+     */
     public void seleccionarPDF() {
         JFileChooser j = new JFileChooser();
         FileNameExtensionFilter fi = new FileNameExtensionFilter("pdf", "pdf");
@@ -105,6 +133,13 @@ public class VstDocumentos extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que ayuda a la visibilidad de ciertos botones, dependiendo de donde este el usuario.
+     * @param a es para la visualización del botón de guardar.
+     * @param b es para la visualización del botón de modificar.
+     * @param c es para la visualización del botón de eliminar.
+     * @param d es para la visualización del botón de seleccionar.
+     */
     public void activar_boton(boolean a, boolean b, boolean c, boolean d) {
         btnGuardar.setEnabled(a);
         btnModificar.setEnabled(b);
@@ -367,6 +402,10 @@ public class VstDocumentos extends javax.swing.JFrame {
 //        btnNo.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Método que extrae los datos mostrados en la tabla. 
+     * @param evt variable  que mantiene a la espera de una interacción con la tabla. Ayuda a extraer los datos mostrados en la tabla.
+     */
     private void tablaDocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDocumentosMouseClicked
 
         int column = tablaDocumentos.getColumnModel().getColumnIndexAtX(evt.getX());//Posicion donde se da "click" el la columna
@@ -414,6 +453,10 @@ public class VstDocumentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaDocumentosMouseClicked
 
+    /**
+     * Método que hace visible el botón seleccionar si se ha seleccionado el de cambiar.
+     * @param evt es el evento de seleccionar el botón de cambiar.
+     */
     private void cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioActionPerformed
         if (cambio.isSelected() == false) {
             btnSeleccionar.setEnabled(false);

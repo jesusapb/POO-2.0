@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConexion;
@@ -18,8 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de todos los empleados registrados, que ve el administrador. Donde se puede eliminar, modificar, agregar un nuevo empleado 
+ * o simplemente ver sus datos.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstEmpleados extends javax.swing.JFrame {
 
@@ -30,13 +28,10 @@ public class VstEmpleados extends javax.swing.JFrame {
         initComponents();
         btnModificar.setVisible(false);
         btnEliminar.setVisible(false);
-        //btnQuitar.setVisible(false);
-        //btnDar.setVisible(false);
         btnReestablecer.setVisible(false);
         btnAvances.setVisible(false);
         checkCorreo.setVisible(false);
         email.setVisible(false);
-        //setDefaultCloseOperation(0);
 
         t = new Timer(10, acciones);
         t.start();
@@ -225,6 +220,10 @@ public class VstEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que extrae los datos mostrados en la tabla. 
+     * @param evt variable  que mantiene a la espera de una interacción con la tabla. Ayuda a extraer los datos mostrados en la tabla.
+     */
     private void tablaRegistradosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistradosMouseClicked
         try {
             PreparedStatement ps = null;
@@ -270,6 +269,10 @@ public class VstEmpleados extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaRegistradosMouseClicked
 
+    /**
+     * Método que permite hacer el cambio de correo, haciendo visible el botón, tras haber seleccionado el cambio.
+     * @param evt es la interacción de haber seleccionado el botón de modicar el correo.
+     */
     private void checkCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCorreoActionPerformed
         if (checkCorreo.isSelected() == false){
             txtCorreo.setEnabled(false);
@@ -305,10 +308,6 @@ public class VstEmpleados extends javax.swing.JFrame {
         }
     };
 
-//    private void actualizarLabel() {
-//        String tiempo = (h <= 9 ? "0" : "") + h + ":" + (m <= 9 ? "0" : "") + m + ":" + (s <= 9 ? "0" : "") + s + ":" + (cs <= 9 ? "0" : "") + cs;
-//        cronometro.setText(tiempo);
-//    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

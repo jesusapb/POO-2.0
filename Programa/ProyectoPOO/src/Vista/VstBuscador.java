@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConexion;
@@ -14,8 +10,10 @@ import java.sql.ResultSetMetaData;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de Buscador, donde se puede encontrar a cualquier empleado, documento o quizz según el tipo que haya puesto el usuario que 
+ * esta buscando.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstBuscador extends javax.swing.JFrame {
 
@@ -123,7 +121,11 @@ public class VstBuscador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que vslida la opción que haya elegido el usuario del comboBox y lo que haya en el campo de texto, para saber si se hace o no visible
+     * el botón de efectuar la busqueda.
+     * @param evt almacena los datos que se hayan elegido.
+     */
     private void txtFormatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormatKeyReleased
         String format = txtFormat.getText().toUpperCase();
         if (format.equals("ABRIR") || format.equals("BUSCAR")) {
@@ -138,38 +140,57 @@ public class VstBuscador extends javax.swing.JFrame {
 
             if (tipo.getSelectedItem().equals("Documentos")) {
                 tabla.setVisible(true);
-                ModConsultasSQL.tablaDocs(tabla);
+                busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
             }
             if (tipo.getSelectedItem().equals("Quizzes")) {
                 tabla.setVisible(true);
-                ModConsultasSQL.tablaQuizz(tabla);
+                busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
             }
             if (tipo.getSelectedItem().equals("Empleados")) {
                 tabla.setVisible(true);
-                ModConsultasSQL.tablaEmp(tabla);
+                busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
             }
 
         }
     }//GEN-LAST:event_txtFormatKeyReleased
 
+    /**
+     * Método que nos ayuda a la visualización de los botones, dependiendo de la opción que haya elegido el usuario.
+     * @param evt guarda los datos que se ingresaron.
+     */
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         if (tipo.getSelectedItem().equals("Documentos")) {
             tabla.setVisible(true);
-            ModConsultasSQL.tablaDocs(tabla);
             txtFormat.setVisible(true);
             lbFormat.setVisible(true);
+            txtFormat.setText(null);
+            txtNombre.setVisible(false);
+            txtNombre.setText(null);
+            lbNombre.setVisible(false);
+            btnEfectuar.setVisible(false);
+            busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
         }
         if (tipo.getSelectedItem().equals("Quizzes")) {
             tabla.setVisible(true);
-            ModConsultasSQL.tablaQuizz(tabla);
             txtFormat.setVisible(true);
             lbFormat.setVisible(true);
+            txtFormat.setText(null);
+            txtNombre.setVisible(false);
+            txtNombre.setText(null);
+            lbNombre.setVisible(false);
+            btnEfectuar.setVisible(false);
+            busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
         }
         if (tipo.getSelectedItem().equals("Empleados")) {
             tabla.setVisible(true);
-            ModConsultasSQL.tablaEmp(tabla);
             txtFormat.setVisible(true);
             lbFormat.setVisible(true);
+            txtFormat.setText(null);
+            txtNombre.setVisible(false);
+            txtNombre.setText(null);
+            lbNombre.setVisible(false);
+            btnEfectuar.setVisible(false);
+            busqueda(txtNombre.getText(), (String) tipo.getSelectedItem());
         }
         if (tipo.getSelectedItem().equals("Escoger el tipo:")) {
             txtFormat.setVisible(false);
@@ -182,7 +203,10 @@ public class VstBuscador extends javax.swing.JFrame {
             tabla.setVisible(false);
         }
     }//GEN-LAST:event_tipoActionPerformed
-
+    /**
+     * Método que almacena la información del cuadro de texto, y sí tiene algo escrito hace visible el botón de efectuar para que empiece la busqueda.
+     * @param evt guarda los datos del usuario seleccionado para posiblemente enviarle un mensaje.
+     */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         String texto = txtNombre.getText();
         String valor = (String) tipo.getSelectedItem();
@@ -191,7 +215,11 @@ public class VstBuscador extends javax.swing.JFrame {
             btnEfectuar.setVisible(false);
         }
     }//GEN-LAST:event_txtNombreKeyReleased
-
+    
+    /**
+     * Método que hace las comparaciones, lo que ingresa el usuario con los datos ya establecidos. Abre la interfaz correspondiente.
+     * @param evt variable  que mantiene a la espera de una interacción con la tabla. Ayuda a extraer los datos mostrados en la tabla.
+     */
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         int row = evt.getY() / tabla.getRowHeight();
         txtNombre.setText("" + tabla.getValueAt(row, 0));
@@ -212,6 +240,11 @@ public class VstBuscador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaMouseClicked
 
+    /**
+     * Método que hace la busqueda, comparando el texto ingresado y el tipo con los que se tenga en la base de datos.
+     * @param texto es el nombre de lo que se este buscando.
+     * @param tipo es la variable del modelo seleccionado. (Documentos, Quizzes, Empleados)
+     */
     private void busqueda(String texto, String tipo) {
         try {
             if (tipo.equals("Documentos")) {

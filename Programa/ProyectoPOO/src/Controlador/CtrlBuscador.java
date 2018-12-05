@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -29,15 +25,22 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase del buscador.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlBuscador implements ActionListener {
 
     private ModConsultasSQL cons;
     private ModVariablesUsr var;
     private VstBuscador vb;
-
+    
+    /**
+     * Constructo de la clase.
+     * @param cons es la clase donde estan almacenadas las funciones de consulta.
+     * @param var es la clase que contiene las variables utilizadas para el usuario y para que sus datos sean almacenados.
+     * @param vb es la interfaz del buscador.
+     */
     public CtrlBuscador(ModConsultasSQL cons, ModVariablesUsr var, VstBuscador vb) {
         this.cons = cons;
         this.var = var;
@@ -46,11 +49,18 @@ public class CtrlBuscador implements ActionListener {
         this.vb.btnEfectuar.addActionListener(this);
     }
 
+    /**
+     * Método que inicializa y muestra la interfaz de Buscador.
+     */
     public void iniciar() {
         vb.setTitle("Buscador.");
         vb.setLocationRelativeTo(null);
     }
 
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de Buscador.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();

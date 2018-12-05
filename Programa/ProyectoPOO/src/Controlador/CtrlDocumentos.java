@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -28,8 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de controla los documentos.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlDocumentos implements ActionListener {
 
@@ -38,6 +35,13 @@ public class CtrlDocumentos implements ActionListener {
     private ModVariablesUsr varU;
     private VstDocumentos vd;
 
+    /**
+     * Constructor de la clase.
+     * @param con es la clase donde estan almacenadas las funciones de consulta.
+     * @param varD es la clase donde estan almacenadas las variables usadas en los documentos.
+     * @param varU es la clase que contiene las variables utilizadas para el usuario y para que sus datos sean almacenados.
+     * @param vd es la interfaz grafica de los documentos.
+     */
     public CtrlDocumentos(ModConsultasSQL con, ModVariablesDoc varD, ModVariablesUsr varU, VstDocumentos vd) {
         this.con = con;
         this.varD = varD;
@@ -56,6 +60,9 @@ public class CtrlDocumentos implements ActionListener {
 
     String ruta_archivo = "";
 
+     /**
+     * Método para iniciar y visualizar la pantalla de Documentos.
+     */
     public void iniciar() {
         vd.setTitle("Documentos");
         vd.setLocationRelativeTo(null);
@@ -69,7 +76,11 @@ public class CtrlDocumentos implements ActionListener {
         vd.btnNo.setVisible(false);
         vd.cambio.setVisible(false);
     }
-
+    
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de Documentos.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -309,7 +320,15 @@ public class CtrlDocumentos implements ActionListener {
             vd.setVisible(false);
         }
     }
-
+    
+    /**
+     * Método que guarda/selecciona un documento en PDF de tu computadora.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     * @param status para saber si es visible para los empleados o no.
+     * @param descripcion es una breve explicación de cómo o qué es el documento.
+     * @param archivo es nuestro documento es sí que vamos a guardar.
+     */
     public void guardarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
         varD.setId(codigo);
         varD.setNombre(nombre);
@@ -326,6 +345,13 @@ public class CtrlDocumentos implements ActionListener {
         con.agregarD(varD);
     }
 
+    /**
+     * Método para modificar el archivo seleccionado y manda los datos para su actualización.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     * @param descripcion es una breve explicación de cómo o qué es el documento.
+     * @param archivo es nuestro documento es sí que vamos a guardar.
+     */
     public void modificarPDF(int codigo, String nombre, String descripcion, File archivo) {
         varD.setId(codigo);
         varD.setNombre(nombre);
@@ -342,7 +368,12 @@ public class CtrlDocumentos implements ActionListener {
         }
         con.modificarD(varD);
     }
-
+    /**
+     * Modifica unicamente el nombre del archivo.
+     * @param codigo id del registro del documento en la base de datos.
+     * @param nombre es el nombre que se le haya puesto al documento.
+     * @param descripcion es una breve explicación de cómo o qué es el documento.
+     */
     public void modificarPDF(int codigo, String nombre, String descripcion) {
         varD.setId(codigo);
         varD.setNombre(nombre);
@@ -350,11 +381,18 @@ public class CtrlDocumentos implements ActionListener {
         con.modificarNomD(varD);
     }
 
+    /**
+     * Método que elimina un archivo con el codigo.
+     * @param codigo id del registro del documento en la base de datos.
+     */
     public void eliminarPDF(int codigo) {
         varD.setId(codigo);
         con.eliminarD(varD);
     }
-
+    
+    /**
+     * Abre una interfaz y te deja seleccionar el archivo PDF que se guardará en la base de datos.
+     */
     public void seleccionarPDF() {
         JFileChooser j = new JFileChooser();
         FileNameExtensionFilter fi = new FileNameExtensionFilter("pdf", "pdf");
@@ -366,7 +404,14 @@ public class CtrlDocumentos implements ActionListener {
         } else {
         }
     }
-
+    
+    /**
+     * Método que ayuda a la visibilidad de ciertos botones, dependiendo de donde este el usuario.
+     * @param a es para la visualización del botón de guardar.
+     * @param b es para la visualización del botón de modificar.
+     * @param c es para la visualización del botón de eliminar.
+     * @param d es para la visualización del botón de seleccionar.
+     */
     public void activar_boton(boolean a, boolean b, boolean c, boolean d) {
         vd.btnGuardar.setEnabled(a);
         vd.btnModificar.setEnabled(b);

@@ -127,10 +127,13 @@ public class VstConfiguracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+         /**
+         * Función que guarda lo escrito en la interfaz gráfica a un archivo de texto
+         */
     public static class Texto implements Serializable {
 
         private String palabra;
-
+        
         public Texto() {
         }
 

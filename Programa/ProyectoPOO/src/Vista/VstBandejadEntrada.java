@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Controlador.CtrlRecibido;
@@ -11,8 +7,10 @@ import Modelo.ModVariablesMensaje;
 import Modelo.ModVariablesUsr;
 
 /**
- *
- * @author Antonio
+ *  Esta es la interfaz de la bandeja de entrada de los mensajes del usuario que inicio sesión. Se muestran 2 tablas, una con los mensajes resibidos y
+ * una más de los usuarios activos.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstBandejadEntrada extends javax.swing.JFrame {
 
@@ -181,6 +179,10 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que muestra la tabla de los usuarios conectados.
+     * @param evt guarda los datos del usuario seleccionado para posiblemente enviarle un mensaje.
+     */
     private void tablaTUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTUsuariosMouseClicked
         int row = evt.getY() / tablaTUsuarios.getRowHeight();
         btnNuevo.setVisible(true);
@@ -201,10 +203,13 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaTUsuariosMouseClicked
 
+    /**
+     * Método que muestra una tabla de todos los mensajes leidos, o no, del usuario que inició sesión.
+     * @param evt guarda los datos del mensaje seleccionado para poder contestarle, si así lo quiere el usuario.
+     */
     private void tablaBandejaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBandejaEntradaMouseClicked
         int row = evt.getY() / tablaBandejaEntrada.getRowHeight();
         String id = "" + tablaBandejaEntrada.getValueAt(row, 0);
-        String status = "" + tablaBandejaEntrada.getValueAt(row, 4);
         String ident = "" + tablaBandejaEntrada.getValueAt(row, 1);
 
         VstRecibido vr = new VstRecibido();
@@ -216,7 +221,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         ModVariablesMensaje varM = new ModVariablesMensaje();
         CtrlRecibido ctrlR = new CtrlRecibido(con, varU, varM, vr, this);
         ctrlR.iniciar();
-        ModConsultasSQL.leer(id, status, vr, var);
+        ModConsultasSQL.leer(id, vr, var);
         vr.ident.setText(ident);
         ModConsultasSQL.recibidos(tablaBandejaEntrada, var, varU);
     }//GEN-LAST:event_tablaBandejaEntradaMouseClicked

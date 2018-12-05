@@ -136,14 +136,19 @@ public class ModConsultasSQL extends ModConexion {
                          * usuario es nuevo y es su primer inicio de sesión, se
                          * le solicitará el cambio de contraseña.
                          */
-                        JOptionPane.showMessageDialog(null, "Hola " + varU.getNombre_completo() + ".\n"
-                                + "Se ha detectado que es tu primer inicio de sesión, por\n"
-                                + "lo tanto, se le pide el inmediato cambio de contraseña.\n"
-                                + "Se le habilitara únicamente el campo de ingreso de la\n "
-                                + "contraseña, ahi deberá de ingresar su nueva contraseña\n"
-                                + "y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
-                        var.setMensaje("Detección de nuevo usuario.");
-                        return false;
+                        if (var.getContraseña().equals(varU.getContraseña())) {
+                            JOptionPane.showMessageDialog(null, "Hola " + varU.getNombre_completo() + ".\n"
+                                    + "Se ha detectado que es tu primer inicio de sesión, por\n"
+                                    + "lo tanto, se le pide el inmediato cambio de contraseña.\n"
+                                    + "Se le habilitara únicamente el campo de ingreso de la\n "
+                                    + "contraseña, ahi deberá de ingresar su nueva contraseña\n"
+                                    + "y esperar la validación.", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+                            var.setMensaje("Detección de nuevo usuario.");
+                            return false;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Matrícula y/o contraseña inválida.");
+                            return false;
+                        }
                     } else if (var.getContraseña().equals(varU.getContraseña())) {
                         /**
                          * Si no está con sesión activa y no pidio cambio de

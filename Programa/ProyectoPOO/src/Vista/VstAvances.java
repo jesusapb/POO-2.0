@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de la calificación de las preguntas abiertas.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstAvances extends javax.swing.JFrame {
 
@@ -199,6 +196,10 @@ public class VstAvances extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que muestra todos los quizzes presentados por el empleado seleccionado, siempre y cuando tenga acceso para la posible calificación.
+     * @param evt extrae los datos de la tabla de los quizzes presentados por el empleado
+     */
     private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
         int row = evt.getY() / tablaRegistro.getRowHeight();
         String quizz = "" + tablaRegistro.getValueAt(row, 0);

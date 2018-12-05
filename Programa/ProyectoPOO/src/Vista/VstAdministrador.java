@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Modelo.ModConexion;
@@ -10,8 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- *
- * @author Antonio
+ * Esta es la interfaz de las funcionalidades principales del administrador, donde debemos ver 
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class VstAdministrador extends javax.swing.JFrame {
 
@@ -370,7 +367,10 @@ public class VstAdministrador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que obtiene los datos del documento seleccionado. Hace visible el botón de Desactivar.
+     * @param evt se mantiene en espera para la posible desactivación del documento.
+     */
     private void tablaADocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaADocumentosMouseClicked
         int row = evt.getY() / tablaADocumentos.getRowHeight();
         String ident = "" + tablaADocumentos.getValueAt(row, 0);
@@ -378,6 +378,10 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnDDesactivar.setVisible(true);
     }//GEN-LAST:event_tablaADocumentosMouseClicked
 
+    /**
+     * Método que obtiene los datos del quiz seleccionado. Hace visible el botón de Desactivar.
+     * @param evt se mantiene en espera para la posible desactivación del quiz.
+     */
     private void tablaAQuizzesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAQuizzesMouseClicked
         int row = evt.getY() / tablaAQuizzes.getRowHeight();
         String ident = "" + tablaAQuizzes.getValueAt(row, 0);
@@ -385,6 +389,10 @@ public class VstAdministrador extends javax.swing.JFrame {
         btnQDesactivar.setVisible(true);
     }//GEN-LAST:event_tablaAQuizzesMouseClicked
 
+    /**
+     * Método que obtiene todos avisos, modificaciones, que haya hecho algún administrador.
+     * @param evt se mantiene a la espera de la interacción del usuario para obtener los datos. Hace visible el botón de Leer todos los avisos.
+     */
     private void tablaAvisosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAvisosMouseClicked
         int row = evt.getY() / tablaAvisos.getRowHeight();
         String aviso = "" + tablaAvisos.getValueAt(row, 0);
