@@ -210,7 +210,6 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
     private void tablaBandejaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBandejaEntradaMouseClicked
         int row = evt.getY() / tablaBandejaEntrada.getRowHeight();
         String id = "" + tablaBandejaEntrada.getValueAt(row, 0);
-        String status = "" + tablaBandejaEntrada.getValueAt(row, 4);
         String ident = "" + tablaBandejaEntrada.getValueAt(row, 1);
 
         VstRecibido vr = new VstRecibido();
@@ -222,7 +221,7 @@ public class VstBandejadEntrada extends javax.swing.JFrame {
         ModVariablesMensaje varM = new ModVariablesMensaje();
         CtrlRecibido ctrlR = new CtrlRecibido(con, varU, varM, vr, this);
         ctrlR.iniciar();
-        ModConsultasSQL.leer(id, status, vr, var);
+        ModConsultasSQL.leer(id, vr, var);
         vr.ident.setText(ident);
         ModConsultasSQL.recibidos(tablaBandejaEntrada, var, varU);
     }//GEN-LAST:event_tablaBandejaEntradaMouseClicked
