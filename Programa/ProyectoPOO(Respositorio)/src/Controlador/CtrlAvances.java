@@ -225,7 +225,7 @@ public class CtrlAvances implements ActionListener {
                                 que = "Calificó el Quizz: " + va.nomQuizz.getText() + " en el cual,"
                                         + "obtuvo una puntuación de: " + fin;
                                 cuando = fechaDate.format(date) + " " + horaDate.format(date);
-                                if (cons.aviso(varR, quien, que, cuando, matricula[0]));
+                                if (cons.aviso(quien, que, cuando, matricula[0]));
 
                                 ModListas mens = new ModListas();
                                 ArrayList<ModVariablesQuizzes> list = mens.listaQuizz();
