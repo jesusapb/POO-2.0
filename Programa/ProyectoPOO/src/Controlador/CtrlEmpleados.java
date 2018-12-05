@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -26,8 +22,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de las funciones principales de los empleados.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlEmpleados implements ActionListener {
 
@@ -36,6 +33,13 @@ public class CtrlEmpleados implements ActionListener {
     private ModVariablesUsr varU;
     private VstEmpleados ve;
 
+    /**
+     * Constructor de la clase.
+     * @param cons es la clase donde estan almacenadas las funciones de consulta.
+     * @param var es la clase que contiene los datos de los otros usuarios.
+     * @param varU es la clase que contiene las variables utilizadas para el usuario y para que sus datos sean almacenados.
+     * @param ve es la interfaz  principal del Empleado.
+     */
     public CtrlEmpleados(ModConsultasSQL cons, ModVariablesReg var, ModVariablesUsr varU, VstEmpleados ve) {
         this.cons = cons;
         this.var = var;
@@ -50,6 +54,9 @@ public class CtrlEmpleados implements ActionListener {
         this.ve.btnAvances.addActionListener(this);
     }
 
+    /**
+     * Método para visualizar la pantalla de Bandeja de entrada.
+     */
     public void iniciar() {
         ve.setTitle("Empleados.");
         ModConsultasSQL.tablaEmp(ve.tablaRegistrados);
@@ -57,6 +64,10 @@ public class CtrlEmpleados implements ActionListener {
 
     }
 
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de Empleados.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -406,6 +417,9 @@ public class CtrlEmpleados implements ActionListener {
         }
     }
 
+    /**
+     * Método que limpia la interfaz gráfica.
+     */
     public void limpiar() {
         ve.txtNombre.setText(null);
         ve.txtApPat.setText(null);
@@ -424,6 +438,9 @@ public class CtrlEmpleados implements ActionListener {
         ve.checkCorreo.setVisible(false);
     }
 
+    /**
+     * Limpia las variables de la interfaz.
+     */
     public void variables() {
         varU.setNombre(null);
         varU.setAp_pat(null);

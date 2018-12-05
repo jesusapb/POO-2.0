@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConsultasSQL;
@@ -33,8 +29,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase de la creación de un empleado.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco.
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlEmpleado implements ActionListener {
 
@@ -43,6 +40,12 @@ public class CtrlEmpleado implements ActionListener {
     private VstEmpleado ve;
     private Timer t;
 
+    /**
+     * Constructor de la clase.
+     * @param cons es la clase donde estan almacenadas las funciones de consulta.
+     * @param var es la clase que contiene las variables utilizadas para el usuario y para que sus datos sean almacenados.
+     * @param ve es la interfaz del empleado.
+     */
     public CtrlEmpleado(ModConsultasSQL cons, ModVariablesUsr var, VstEmpleado ve) {
         this.cons = cons;
         this.var = var;
@@ -58,6 +61,9 @@ public class CtrlEmpleado implements ActionListener {
         this.ve.btnPerfil.addActionListener(this);
     }
 
+    /**
+     * Método para iniciar y visualizar la pantalla de Empleado.
+     */
     public void iniciar() {
         ve.setTitle("Empleado.");
         ve.setLocationRelativeTo(null);
@@ -89,6 +95,10 @@ public class CtrlEmpleado implements ActionListener {
         }
     }
 
+    /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de Empleado.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -188,6 +198,9 @@ public class CtrlEmpleado implements ActionListener {
         }
     }
 
+    /**
+     * Limpia las variables para ver una nueva interfaz.    
+    */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -200,6 +213,13 @@ public class CtrlEmpleado implements ActionListener {
         var.setEquipo(null);
     }
 
+    /**
+     * Método para el uso del cronómetro
+     * @param h variable para hora
+     * @param m variable para minutos
+     * @param s variable para segundos
+     * @param cs variale para centésima de segundo
+     */
     private int h, m, s, cs;
     private ActionListener acciones = new ActionListener() {
         @Override

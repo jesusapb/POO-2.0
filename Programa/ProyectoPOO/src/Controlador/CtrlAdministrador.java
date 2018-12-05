@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -39,8 +35,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase controlador del administrador, donde realiza todas sus funcionalidades.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlAdministrador implements ActionListener {
 
@@ -48,7 +45,12 @@ public class CtrlAdministrador implements ActionListener {
     private ModVariablesUsr var;
     private VstAdministrador va;
     private Timer t;
-
+    /**
+     * Este es el contructor de la clase.
+     * @param cons parametro que contiene el resultado de las consultas sql
+     * @param var parametro con las variables del usuario
+     * @param va  parametro que funciona como conexion con la vista administrador
+     */
     public CtrlAdministrador(ModConsultasSQL cons, ModVariablesUsr var, VstAdministrador va) {
         this.cons = cons;
         this.var = var;
@@ -68,7 +70,9 @@ public class CtrlAdministrador implements ActionListener {
 
         this.va.btnBuscar.addActionListener(this);
     }
-
+    /**
+     * Método que inicializa las variables y limpia la interfaz.
+     */
     public void iniciar() {
         va.setTitle("Administrador.");
         va.setLocale(null);
@@ -107,7 +111,10 @@ public class CtrlAdministrador implements ActionListener {
         va.docs.setVisible(false);
         va.quizz.setVisible(false);
     }
-
+    /**
+     * Es el constructor encargado en recibir y ejecutar la acciones correspondiente a lo que va ocurriendo en la vista de administrador.
+     * @param e variable encargada de recibir cada acción de los botónes de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -293,7 +300,9 @@ public class CtrlAdministrador implements ActionListener {
             vl.setVisible(true);
         }
     }
-
+ /**
+ * Método encargado de establecer los atributos de la clase correspondiente al usuario en null.
+ */
     public void variables() {
         var.setNombre(null);
         var.setAp_pat(null);
@@ -305,7 +314,15 @@ public class CtrlAdministrador implements ActionListener {
         var.setCorreo(null);
         var.setEquipo(null);
     }
-
+    
+    /**
+     * Método para el uso del cronómetro
+     *
+     * @param h variable para hora
+     * @param m variable para minutos
+     * @param s variable para segundos
+     * @param cs variale para centésima de segundo
+     */
     private int h, m, s, cs;
     private ActionListener acciones = new ActionListener() {
         @Override

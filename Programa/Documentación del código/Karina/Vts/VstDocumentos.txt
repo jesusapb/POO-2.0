@@ -18,8 +18,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Esta es la interfaz de los documentos, las funcionalidades de esto que le tocan al administrador.
- * @author Karina Carmona, Antonio Cetzal, Jessica Gonz√°lez y Jes√∫s Pacheco.
- * @version 29/11/2018/ProyectoPoo_Acompa√±amiento
+ * @author Karina Carmona, Antonio Cetzal, Jessica Gonz·lez y Jes˙s Pacheco.
+ * @version 29/11/2018/ProyectoPoo_AcompaÒamiento
  */
 public class VstDocumentos extends javax.swing.JFrame {
 
@@ -31,7 +31,7 @@ public class VstDocumentos extends javax.swing.JFrame {
     int id = -1;
     
     /**
-     * Ayuda a la visualizaci√≥n de ciertos componentes en la interfaz.
+     * Ayuda a la visualizaciÛn de ciertos componentes en la interfaz.
      */
     public VstDocumentos() {
         initComponents();
@@ -43,12 +43,12 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
     
     /**
-     * M√©todo que guarda un documento en PDF de tu computadora y manda lo datos para su actualizaci√≥n en la base de datos.
+     * MÈtodo que guarda un documento en PDF de tu computadora y manda lo datos para su actualizaciÛn en la base de datos.
      * @param codigo id del registro del documento en la base de datos.
      * @param nombre es el nombre que se le haya puesto al documento.
      * @param status para saber si es visible para los empleados o no.
-     * @param descripcion es una breve explicaci√≥n de c√≥mo o qu√© es el documento.
-     * @param archivo es nuestro documento es s√≠ que vamos a guardar.
+     * @param descripcion es una breve explicaciÛn de cÛmo o quÈ es el documento.
+     * @param archivo es nuestro documento es sÌ que vamos a guardar.
      */
     public void guardarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
         ModConsultasSQL pdf = new ModConsultasSQL();
@@ -69,12 +69,12 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
     
      /**
-     * M√©todo que modifica un documento en PDF y manda lo datos para su actualizaci√≥n en la base de datos.
+     * MÈtodo que modifica un documento en PDF y manda lo datos para su actualizaciÛn en la base de datos.
      * @param codigo id del registro del documento en la base de datos.
      * @param nombre es el nombre que se le haya puesto al documento.
      * @param status para saber si es visible para los empleados o no.
-     * @param descripcion es una breve explicaci√≥n de c√≥mo o qu√© es el documento.
-     * @param archivo es nuestro documento es s√≠ que vamos a guardar.
+     * @param descripcion es una breve explicaciÛn de cÛmo o quÈ es el documento.
+     * @param archivo es nuestro documento es sÌ que vamos a guardar.
      */
     public void modificarPDF(int codigo, String nombre, String status, String descripcion, File archivo) {
         ModConsultasSQL pdf = new ModConsultasSQL();
@@ -95,7 +95,7 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
 
     /**
-     * M√©todo que hace el cambio del nombre del archivo.
+     * MÈtodo que hace el cambio del nombre del archivo.
      * @param codigo id del registro del documento en la base de datos.
      * @param nombre es el nombre que se le haya puesto al documento.
      */
@@ -108,7 +108,7 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
 
     /**
-     * M√©todo que hace la eliminaci√≥n de un documento en la base de datos s√≥lo con su id.
+     * MÈtodo que hace la eliminaciÛn de un documento en la base de datos sÛlo con su id.
      * @param codigo id del registro del documento en la base de datos.
      */
     public void eliminarPDF(int codigo) {
@@ -119,7 +119,7 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
     
     /**
-     * M√©todo que abre una interfaz y te deja seleccionar el archivo PDF que se guardar√° en la base de datos.
+     * MÈtodo que abre una interfaz y te deja seleccionar el archivo PDF que se guardar· en la base de datos.
      */
     public void seleccionarPDF() {
         JFileChooser j = new JFileChooser();
@@ -134,11 +134,11 @@ public class VstDocumentos extends javax.swing.JFrame {
     }
 
     /**
-     * M√©todo que ayuda a la visibilidad de ciertos botones, dependiendo de donde este el usuario.
-     * @param a es para la visualizaci√≥n del bot√≥n de guardar.
-     * @param b es para la visualizaci√≥n del bot√≥n de modificar.
-     * @param c es para la visualizaci√≥n del bot√≥n de eliminar.
-     * @param d es para la visualizaci√≥n del bot√≥n de seleccionar.
+     * MÈtodo que ayuda a la visibilidad de ciertos botones, dependiendo de donde este el usuario.
+     * @param a es para la visualizaciÛn del botÛn de guardar.
+     * @param b es para la visualizaciÛn del botÛn de modificar.
+     * @param c es para la visualizaciÛn del botÛn de eliminar.
+     * @param d es para la visualizaciÛn del botÛn de seleccionar.
      */
     public void activar_boton(boolean a, boolean b, boolean c, boolean d) {
         btnGuardar.setEnabled(a);
@@ -156,7 +156,7 @@ public class VstDocumentos extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -328,22 +328,22 @@ public class VstDocumentos extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 400));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {                                               
 //        seleccionarPDF();
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
+    }                                              
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {                                         
 //        activar_boton(true, false, false, true);
 //        txtNombre.setEnabled(true);
 //        txtDescripcion.setEnabled(true);
 //        btnSi.setVisible(false);
 //        btnNo.setVisible(false);
 //        ruta_archivo = "";
-    }//GEN-LAST:event_btnNuevoActionPerformed
+    }                                        
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                           
 //        String nombre = txtNombre.getText();
 //        String descripcion = txtDescripcion.getText();
 //        sql s = new sql();
@@ -361,9 +361,9 @@ public class VstDocumentos extends javax.swing.JFrame {
 //        } else {
 //            JOptionPane.showMessageDialog(null, "Completa etodos los campos.");
 //        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }                                          
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {                                             
 //        String nombre = txtNombre.getText();
 //        String descripcion = txtDescripcion.getText();
 //        File ruta = new File(ruta_archivo);
@@ -380,9 +380,9 @@ public class VstDocumentos extends javax.swing.JFrame {
 //        txtDescripcion.setEnabled(false);
 //        btnSi.setVisible(false);
 //        btnNo.setVisible(false);
-    }//GEN-LAST:event_btnModificarActionPerformed
+    }                                            
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {                                            
 //        eliminarPDF(id);
 //        tpdf.visualizar(tablaDocumentos);
 //        activar_boton(false, false, false, false);
@@ -391,22 +391,22 @@ public class VstDocumentos extends javax.swing.JFrame {
 //        btnSi.setVisible(false);
 //        btnNo.setVisible(false);
 //        ruta_archivo = "";
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }                                           
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                            
 //        activar_boton(false, false, false, false);
 //        ruta_archivo = "";
 //        txtNombre.setEnabled(false);
 //        txtDescripcion.setEnabled(false);
 //        btnSi.setVisible(false);
 //        btnNo.setVisible(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }                                           
 
     /**
-     * M√©todo que extrae los datos mostrados en la tabla. 
-     * @param evt variable  que mantiene a la espera de una interacci√≥n con la tabla. Ayuda a extraer los datos mostrados en la tabla.
+     * MÈtodo que extrae los datos mostrados en la tabla. 
+     * @param evt variable  que mantiene a la espera de una interacciÛn con la tabla. Ayuda a extraer los datos mostrados en la tabla.
      */
-    private void tablaDocumentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDocumentosMouseClicked
+    private void tablaDocumentosMouseClicked(java.awt.event.MouseEvent evt) {                                             
 
         int column = tablaDocumentos.getColumnModel().getColumnIndexAtX(evt.getX());//Posicion donde se da "click" el la columna
         int row = evt.getY() / tablaDocumentos.getRowHeight();
@@ -451,19 +451,19 @@ public class VstDocumentos extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_tablaDocumentosMouseClicked
+    }                                            
 
     /**
-     * M√©todo que hace visible el bot√≥n seleccionar si se ha seleccionado el de cambiar.
-     * @param evt es el evento de seleccionar el bot√≥n de cambiar.
+     * MÈtodo que hace visible el botÛn seleccionar si se ha seleccionado el de cambiar.
+     * @param evt es el evento de seleccionar el botÛn de cambiar.
      */
-    private void cambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioActionPerformed
+    private void cambioActionPerformed(java.awt.event.ActionEvent evt) {                                       
         if (cambio.isSelected() == false) {
             btnSeleccionar.setEnabled(false);
         } else {
             btnSeleccionar.setEnabled(true);
         }
-    }//GEN-LAST:event_cambioActionPerformed
+    }                                      
 
     
     private Timer t;
@@ -531,7 +531,7 @@ public class VstDocumentos extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
@@ -554,5 +554,5 @@ public class VstDocumentos extends javax.swing.JFrame {
     public javax.swing.JTable tablaDocumentos;
     public javax.swing.JTextPane txtDescripcion;
     public javax.swing.JTextField txtNombre;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

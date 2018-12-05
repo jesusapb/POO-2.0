@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.ModConexion;
@@ -28,8 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
- *
- * @author Antonio
+ * Esta es la clase que controla los avances de los empleados.
+ * @author Karina Carmona, Antonio Cetzal, Jessica González y Jesús Pacheco
+ * @version 29/11/2018/ProyectoPoo_Acompañamiento
  */
 public class CtrlAvances implements ActionListener {
 
@@ -48,6 +45,16 @@ public class CtrlAvances implements ActionListener {
     private int acum = 0;
     private ModVariablesQuizzes varQ;
 
+    /**
+     * Contrusctor de la clase
+     * @param cons es la clase donde están almacenadas las funciones de consulta.
+     * @param var es la clase que contiene las variables utilizadas para el usuario que inicia sesion y para que sus datos sean almacenados.
+     * @param varU parametro con las variables de los usuarios.
+     * @param varP es la clase que contiene las variables utilizadas por los quizzes presentados y hacen la verificación de si aún puede 
+     * realizar el quiz (intentos).
+     * @param ve es la interfaz de la creación del empleado.
+     * @param va es la interfaz de los avances.
+     */
     public CtrlAvances(ModConsultasSQL cons, ModVariablesReg var, ModVariablesUsr varU, ModVariablesPresentados varP, VstEmpleados ve, VstAvances va) {
         this.cons = cons;
         this.var = var;
@@ -61,7 +68,10 @@ public class CtrlAvances implements ActionListener {
         this.va.btnCancelar.addActionListener(this);
         this.va.btnRegresar.addActionListener(this);
     }
-
+    
+    /**
+     * Método para visualizar la interfaz del administrador.
+     */
     public void iniciar() {
         va.setTitle("Avances");
         va.setLocationRelativeTo(null);
@@ -76,6 +86,10 @@ public class CtrlAvances implements ActionListener {
         t.start();
     }
 
+     /**
+     * Es el contructor encargado en recibir y ejecutar las acciones correspondientes a lo que va ocurriendo en la vista de avances.
+     * @param e es la variable encargada de recibir cada acciones de los botones de la interfaz gráfica.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Date date = new Date();
@@ -355,7 +369,11 @@ public class CtrlAvances implements ActionListener {
             va.setVisible(false);
         }
     }
-
+     /**
+     * Método que identifica si el valor que se ingreso en la puntuación es un número (double).
+     * @param cadena cadena extraida de la interfaz gráfica para su validación.
+     * @return true si la cadena es un double y false si no lo es.
+     */
     public static boolean trueDouble(String cadena) {
         boolean resultado;
 
@@ -368,6 +386,11 @@ public class CtrlAvances implements ActionListener {
         return resultado;
     }
 
+     /**
+     * Método que toma el valor de la puntuación y si detecta que tiene más de 2 decimales, se aplica el redondeo.
+     * @param cadena es la puntuación convertida en un string.
+     * @return devuelve el valor redondeado.
+     */
     public double cambio(String cadena) {
         DecimalFormat op = new DecimalFormat("#.00");
         double db = Double.parseDouble(cadena);
@@ -376,7 +399,15 @@ public class CtrlAvances implements ActionListener {
 
         return fin;
     }
-
+    
+     /**
+     * Método para el uso del cronómetro
+     *
+     * @param h variable para hora
+     * @param m variable para minutos
+     * @param s variable para segundos
+     * @param cs variale para centésima de segundo
+     */
     private int h, m, s, cs;
     private final ActionListener acciones = new ActionListener() {
         @Override
