@@ -187,20 +187,22 @@ public class CtrlAvances implements ActionListener {
                                 } else {
                                     punObt = Double.parseDouble(va.calificacion.getText()) / (Integer.parseInt(varP.getAbrtTot()) - 1);
                                 }
-                                double tot = n + punObt;
-                                double punAho = 0;
-                                if (p[1].equals("100")) {
-                                    punAho = (tot * 100) / punTot;
-                                } else {
-                                    double valor = Double.parseDouble(p[1]);
-                                    punAho = (tot * valor) / punTot;
-                                }
-                                String status;
+                                
                                 DecimalFormat op = new DecimalFormat("#.00");
-                                String bd = op.format(punAho);
-                                String ob = op.format(punObt);
+                                double tot = n + punObt;
                                 String to = op.format(tot);
                                 double TOT = Double.parseDouble(to);
+                                
+                                double punAho = 0;
+                                if (p[1].equals("100")) {
+                                    punAho = (TOT * 100) / punTot;
+                                } else {
+                                    double valor = Double.parseDouble(p[1]);
+                                    punAho = (TOT * valor) / punTot;
+                                }
+                                String status;
+                                String bd = op.format(punAho);
+                                String ob = op.format(punObt);
                                 double fin = Double.parseDouble(bd);
                                 double fin2 = Double.parseDouble(ob);
 
